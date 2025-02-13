@@ -10,9 +10,6 @@ HOW TO RUN:
 - then change socket.js, comment out line 6, remove comment from line 9, after the `wss://` add in the link ngrok gives you
 - run `npx ts-node server/server.js` from project folder
 
-for [assets](https://mega.nz/file/AcAk3KhY#vi4osWc_d7nojMF9-1pPCWgikOsPLhBgz6M3XUVS85Y):
-place all folders inside project_directory/assets
-
 known bugs:
 - when a player joins a room with other players, the default direction all players are facing is left [FIXED]
 - displaying only one chat at a time [FIXED]
@@ -39,3 +36,8 @@ features long term:
 - create player
 - proper time out / log out 
 
+
+
+
+for [assets](https://mega.nz/file/AcAk3KhY#vi4osWc_d7nojMF9-1pPCWgikOsPLhBgz6M3XUVS85Y):
+- place all folders inside project_directory/assets
