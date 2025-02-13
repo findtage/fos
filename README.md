@@ -1,4 +1,17 @@
-to run the server `npx ts-node server/server.js`
+HOW TO RUN:
+- install node.js
+- let ur computer know this is a nodejs file run: `npm init`
+- install node modules (packages) run: `npm install`
+- run locally (only on ur computer) run: `npx ts-node server/server.js`
+
+- (optional) run on ngrok (private temporary hosting for development, other players can join w/ link)
+- install ngrok, https://ngrok.com/docs/getting-started/?os=windows
+- run `ngrok http 3000` on cmd
+- then change socket.js, comment out line 6, remove comment from line 9, after the `wss://` add in the link ngrok gives you
+- run `npx ts-node server/server.js` from project folder
+
+
+
 
 known bugs:
 - when a player joins a room with other players, the default direction all players are facing is left [FIXED]
@@ -25,17 +38,4 @@ features long term:
 - login (database) / authentication [ADDED]
 - create player
 - proper time out / log out 
-
-
-HOW TO RUN:
-- install node.js
-- let ur computer know this is a nodejs file run: `npm init`
-- install node modules (packages) run: `npm install`
-- run locally (only on ur computer) run: `npx ts-node server/server.js`
-
-- (optional) run on ngrok (private temporary hosting for development, other players can join w/ link)
-- install ngrok, https://ngrok.com/docs/getting-started/?os=windows
-- run `ngrok http 3000` on cmd
-- then change socket.js, comment out line 3, remove comment from line 6, after the `wss://` add in the link ngrok gives you
-- run `npx ts-node server/server.js` from project folder
 
