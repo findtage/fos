@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/colyseus.js/dist/colyseus.js"></script>
+    
+    <title>2D Virtual World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20%;
+            font-size: 3rem;
+            color: #333;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>2D Virtual World</h1>
+    <input type="text" id="username" placeholder="Enter your username">
+    <input type="password" id="password" placeholder="Enter your password">
+    <p>Click the button below to start the game</p>
+    <button onclick="login()">Start Game</button>
+    
+    <script>
+        async function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch("http://localhost:3000/api/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password }),
+                    credentials: "include" // ✅ Ensures authentication cookies are stored
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    console.log(`✅ Logged in as: ${data.username}`);
+                    window.location.href = "game.html"; // ✅ Redirect to game
+                } else {
+                    console.error("❌ Invalid login", data.message);
+                }
+            } catch (error) {
+                console.error("❌ Login failed:", error);
+            }
+        }
+
+        window.login = login; // ✅ Make `login()` accessible from HTML
+    </script>
+
+</body>
+</html>

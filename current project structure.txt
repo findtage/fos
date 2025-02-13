@@ -1,0 +1,42 @@
+current project structure:
+
+2d-game-remake-main/
+│── client/ (Phaser-based frontend)
+│   ├── network/ (Handles WebSocket communication, client sends to server -> server sends to other clients -> socket.io picks up from server)
+│   │   └── socket.js
+│   ├── scenes/ (Different game world locations + Preloader to load all assets)
+│   ├── world/ (Game mechanics & player-related scripts)
+│   │   ├── UIManager.js (Bottom UI, Chat Logic, Map Logic)
+│   │   ├── animations.js (Handles creating and performing animations)
+│   │   ├── avatar.js (Creates self avatar)
+│   │   ├── inventory.js (Handles clothing changes / Updating to DB [kinda insecure for now])
+│   │   ├── playerManager.js (Handles other user's avatars / movements)
+│   │   ├── playerMovement.js (Movement logic)
+│   │   ├── roomTransition.js (Transitions between scenes)
+│   ├── assets/ 
+│   ├── game.html
+│   ├── game.js
+│   ├── index.html
+│   ├── styles.css
+│
+│── server/ (Colyseus-based backend)
+│   ├── rooms/
+│   │   ├── GameRoom.ts (Handles client requests to server)
+│   ├── schema/
+│   │   ├── PlayerState.ts
+│   │   ├── RoomState.ts
+│   ├── firebase/ (Firebase admin setup, firebase service account key)
+│   ├── routes/ (Communicates with Firebase)
+│   │   ├── auth.js
+│   │   ├── user.js
+│   ├── server.js (Server set up)
+│
+│── .gitattributes
+│── .gitignore
+│── README.md
+│── package.json
+│── package-lock.json
+│── tsconfig.json
+│── project_plans.txt  
+│── current project structure.txt 
+

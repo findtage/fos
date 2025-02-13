@@ -1,0 +1,35 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9fbff; /* Light gray background */
+}
+
+/* Game Container */
+#game-container {
+    width: 800px;
+    height: 520px;
+    border: 0.1in solid rgb(255, 255, 247); /* 0.1-inch gray border */
+    border-radius: 1%;
+    box-shadow: 2px 2px 2px 2px darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    position: relative; /* Ensure it contains the canvas */
+    overflow: hidden; /* Prevent canvas from spilling out */
+}
+
+
+/* Canvas Styling */
+canvas {
+    display: block;
+    margin: 0 auto; /* Ensure the canvas is centered horizontally */
+    position: absolute; /* Align canvas within container */
+    top: 0;
+    left: 0;
+}
