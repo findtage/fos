@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class School extends Phaser.Scene {
     constructor() {
         super({ key: 'School' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 400;
+        this.playerYLocation = data.playerYLocation || 400; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -19,7 +26,8 @@ export class School extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'school_outside').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 400, 400);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -52,6 +60,12 @@ export class SchoolInside extends Phaser.Scene {
         super({ key: 'SchoolInside' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 364;
+        this.playerYLocation = data.playerYLocation || 426; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this)
@@ -61,7 +75,8 @@ export class SchoolInside extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'school_inside').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 364, 426);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -95,6 +110,12 @@ export class MathRoom extends Phaser.Scene {
         super({ key: 'MathRoom' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 449;
+        this.playerYLocation = data.playerYLocation || 416; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this)
         preloadAvatar(this);
@@ -103,7 +124,8 @@ export class MathRoom extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'mathroom').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 449, 416);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -130,6 +152,12 @@ export class EnglishRoom extends Phaser.Scene {
         super({ key: 'EnglishRoom' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 365;
+        this.playerYLocation = data.playerYLocation || 412; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this)
         preloadAvatar(this);
@@ -138,7 +166,8 @@ export class EnglishRoom extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'englishroom').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 365, 412);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -165,6 +194,12 @@ export class SchoolUpstairs extends Phaser.Scene {
         super({ key: 'SchoolUpstairs' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 412;
+        this.playerYLocation = data.playerYLocation || 412; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this)
         preloadAvatar(this);
@@ -173,7 +208,8 @@ export class SchoolUpstairs extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'school_upstairs').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 412, 412);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -203,6 +239,12 @@ export class Cafeteria extends Phaser.Scene {
         super({ key: 'Cafeteria' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 333;
+        this.playerYLocation = data.playerYLocation || 409; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this)
         preloadAvatar(this);
@@ -211,7 +253,8 @@ export class Cafeteria extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'cafeteria').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 333, 409);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -238,6 +281,12 @@ export class Gym extends Phaser.Scene {
         super({ key: 'Gym' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 379;
+        this.playerYLocation = data.playerYLocation || 431; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this)
         preloadAvatar(this);
@@ -246,7 +295,8 @@ export class Gym extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'gym').setOrigin(0, 0);
 
-        this.player = createAvatar(this, 379, 431);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room

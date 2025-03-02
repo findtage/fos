@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Uptown extends Phaser.Scene {
     constructor() {
         super({ key: 'Uptown' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 1436;
+        this.playerYLocation = data.playerYLocation || 407; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Uptown extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
         
-        this.player = createAvatar(this, 1436, 407);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -64,6 +72,12 @@ export class FurnitureShop extends Phaser.Scene {
         super({ key: 'FurnitureShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 506;
+        this.playerYLocation = data.playerYLocation || 331; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -72,7 +86,8 @@ export class FurnitureShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'furnitureshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 506, 331);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'furnitureshop'); 
@@ -99,6 +114,12 @@ export class MyMall extends Phaser.Scene {
         super({ key: 'MyMall' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 401;
+        this.playerYLocation = data.playerYLocation || 405; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -108,7 +129,8 @@ export class MyMall extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'mymall').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 401, 405);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'mymall'); 
@@ -138,6 +160,12 @@ export class IDfoneShop extends Phaser.Scene {
         super({ key: 'IDfoneShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 407;
+        this.playerYLocation = data.playerYLocation || 410; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll();
         preloadMenu(this);
@@ -147,7 +175,8 @@ export class IDfoneShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'idfoneshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 407, 410);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'idfoneshop'); 
@@ -177,6 +206,12 @@ export class Botique extends Phaser.Scene {
         super({ key: 'Botique' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 375;
+        this.playerYLocation = data.playerYLocation || 438; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -186,7 +221,8 @@ export class Botique extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'botique').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 375, 438);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'botique'); 
@@ -216,6 +252,12 @@ export class CostumeShop extends Phaser.Scene {
         super({ key: 'CostumeShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 461;
+        this.playerYLocation = data.playerYLocation || 387; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -224,7 +266,8 @@ export class CostumeShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'costumeshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 461, 387);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'costumeshop'); 
@@ -251,6 +294,12 @@ export class BoardShop extends Phaser.Scene {
         super({ key: 'BoardShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 342;
+        this.playerYLocation = data.playerYLocation || 388; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -259,7 +308,8 @@ export class BoardShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'boardshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 342, 388);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'boardshop'); 
@@ -286,6 +336,12 @@ export class MissionCenter extends Phaser.Scene {
         super({ key: 'MissionCenter' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 955;
+        this.playerYLocation = data.playerYLocation || 273+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -298,7 +354,8 @@ export class MissionCenter extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
         
-        this.player = createAvatar(this, 955, 273);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);

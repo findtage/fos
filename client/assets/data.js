@@ -7889,14 +7889,6 @@ export const avatar_parts = {
                 "splitY": 48
             },
             "eyes8" : {
-                "path" : "avatars/female/new-eyes-8.png",
-                "fitX": 1,
-                "fitY": -101,
-                "type": "sprite",
-                "splitX": 45,
-                "splitY": 48
-            },
-            "eyes9" : {
                 "path" : "avatars/female/new-eyes-9.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7904,7 +7896,7 @@ export const avatar_parts = {
                 "splitX": 45,
                 "splitY": 48
             },
-            "eyes10" : {
+            "eyes9" : {
                 "path" : "avatars/female/new-eyes-10.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7912,7 +7904,7 @@ export const avatar_parts = {
                 "splitX": 45,
                 "splitY": 48
             },
-            "eyes11" : {
+            "eyes10" : {
                 "path" : "avatars/female/new-eyes-11.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7920,7 +7912,7 @@ export const avatar_parts = {
                 "splitX": 45,
                 "splitY": 48
             },
-            "eyes12" : {
+            "eyes11" : {
                 "path" : "avatars/female/new-eyes-12.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7928,7 +7920,7 @@ export const avatar_parts = {
                 "splitX": 45,
                 "splitY": 48
             },
-            "eyes13" : {
+            "eyes12" : {
                 "path" : "avatars/female/new-eyes-13.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7936,7 +7928,7 @@ export const avatar_parts = {
                 "splitX": 45,
                 "splitY": 48
             },
-            "eyes14" : {
+            "eyes13" : {
                 "path" : "avatars/female/new-eyes-14.png",
                 "fitX": 1,
                 "fitY": -101,
@@ -7962,55 +7954,6073 @@ export const bottoms = {
     "bottom": {
         "female": {
             "bottom0": {
-                "path": "closet/bottoms/female/girl-bottom-blackjeans.png",
+                "path": "assets/closet/bottoms/female/2015_04_girl_pant_user_inspired_2.png",
                 "properties": {},
                 "fitX": 0,
-                "fitY": -43,
+                "fitY": -44,
                 "type": "sprite",
                 "splitX": 44,
                 "splitY": 32
             },
             "bottom1": {
-                "path": "closet/bottoms/female/girl-bottom-redgymshorts.png",
+                "path": "assets/closet/bottoms/female/2015_12_girl_pant_holiday_lm_2.png",
                 "properties": {},
                 "fitX": 0,
-                "fitY": -43,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom2": {
+                "path": "assets/closet/bottoms/female/2016_03_girl_pants_rare.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom3": {
+                "path": "assets/closet/bottoms/female/2016_07_girl_pant_training.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom4": {
+                "path": "assets/closet/bottoms/female/2016_09_girl_pant_unicorn_lm1.png",
+                "properties": {},
+                "fitX": 2,
+                "fitY": -42,
+                "type": "sprite",
+                "splitX": 60,
+                "splitY": 32
+            },
+            "bottom5": {
+                "path": "assets/closet/bottoms/female/2017_01_girl_pants_leshop1.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom6": {
+                "path": "assets/closet/bottoms/female/2017_06_girl_pant_anime.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom7": {
+                "path": "assets/closet/bottoms/female/2017_08_girl_pant_bff2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom8": {
+                "path": "assets/closet/bottoms/female/2017_12_girl_pant_crsm_lm_ecm.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom9": {
+                "path": "assets/closet/bottoms/female/2018_01_girl_pant_limited_edition.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom10": {
+                "path": "assets/closet/bottoms/female/2018_02_girl_pant_valentine_lm2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom11": {
+                "path": "assets/closet/bottoms/female/2018_02_girl_pant_valentine_rg1.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom12": {
+                "path": "assets/closet/bottoms/female/female_PANT_yellowstrip_07_2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom13": {
+                "path": "assets/closet/bottoms/female/girl-blackjean-nm-11-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom14": {
+                "path": "assets/closet/bottoms/female/girl-blacklaggings-09-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom15": {
+                "path": "assets/closet/bottoms/female/girl-bot-01-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom16": {
+                "path": "assets/closet/bottoms/female/girl-bot-2011easterskirt-04-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom17": {
+                "path": "assets/closet/bottoms/female/girl-bot-baggyjeans-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom18": {
+                "path": "assets/closet/bottoms/female/girl-bot-bellbottoms-07-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom19": {
+                "path": "assets/closet/bottoms/female/girl-bot-beltedshort-05-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom20": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackleggings-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom21": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackshort-01-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom22": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackskirt-07-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom23": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackskirt-10-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom24": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackstripes-07-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom25": {
+                "path": "assets/closet/bottoms/female/girl-bot-blacktights-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom26": {
+                "path": "assets/closet/bottoms/female/girl-bot-blacktube-12-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom27": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackWithGoldBelt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom28": {
+                "path": "assets/closet/bottoms/female/girl-bot-blackwithjewels-09-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom29": {
+                "path": "assets/closet/bottoms/female/girl-bot-bluejean-10-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom30": {
+                "path": "assets/closet/bottoms/female/girl-bot-blueruffleskirt-06-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom31": {
+                "path": "assets/closet/bottoms/female/girl-bot-blueskirt-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom32": {
+                "path": "assets/closet/bottoms/female/girl-bot-brown-04-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom33": {
+                "path": "assets/closet/bottoms/female/girl-bot-brown-06-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom34": {
+                "path": "assets/closet/bottoms/female/girl-bot-brownshort-11-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom35": {
+                "path": "assets/closet/bottoms/female/girl-bot-browntealpants.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom36": {
+                "path": "assets/closet/bottoms/female/girl-bot-casualpants-10-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom37": {
+                "path": "assets/closet/bottoms/female/girl-bot-checkshort-12-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom38": {
+                "path": "assets/closet/bottoms/female/girl-bot-clown-06-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom39": {
+                "path": "assets/closet/bottoms/female/girl-bot-clownrec-06-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom40": {
+                "path": "assets/closet/bottoms/female/girl-bot-cream-12-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom41": {
+                "path": "assets/closet/bottoms/female/girl-bot-darkblueshorts-07-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom42": {
+                "path": "assets/closet/bottoms/female/girl-bot-darkjean-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom43": {
+                "path": "assets/closet/bottoms/female/girl-bot-dayfiveprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom44": {
+                "path": "assets/closet/bottoms/female/girl-bot-dayfourprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom45": {
+                "path": "assets/closet/bottoms/female/girl-bot-dayoneprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom46": {
+                "path": "assets/closet/bottoms/female/girl-bot-daysevenprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom47": {
+                "path": "assets/closet/bottoms/female/girl-bot-daysixprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom48": {
+                "path": "assets/closet/bottoms/female/girl-bot-daytwoprz-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom49": {
+                "path": "assets/closet/bottoms/female/girl-bot-deepblue-01-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom50": {
+                "path": "assets/closet/bottoms/female/girl-bot-denimskirt-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom51": {
+                "path": "assets/closet/bottoms/female/girl-bot-dotty-12-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom52": {
+                "path": "assets/closet/bottoms/female/girl-bot-easterskitec-04-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom53": {
+                "path": "assets/closet/bottoms/female/girl-bot-flower-11-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom54": {
+                "path": "assets/closet/bottoms/female/girl-bot-furshorts-11-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom55": {
+                "path": "assets/closet/bottoms/female/girl-bot-gothskirt-08-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom56": {
+                "path": "assets/closet/bottoms/female/girl-bot-gothskirt-10-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom57": {
+                "path": "assets/closet/bottoms/female/girl-bot-grassskirt-06-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom58": {
+                "path": "assets/closet/bottoms/female/girl-bot-green-12-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom59": {
+                "path": "assets/closet/bottoms/female/girl-bot-greenskirt-03-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom60": {
+                "path": "assets/closet/bottoms/female/girl-bot-greenstripe-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom61": {
+                "path": "assets/closet/bottoms/female/girl-bot-greeny-01-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom62": {
+                "path": "assets/closet/bottoms/female/girl-bot-gypsyskirt-07-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom63": {
+                "path": "assets/closet/bottoms/female/girl-bot-highwaist-04-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom64": {
+                "path": "assets/closet/bottoms/female/girl-bot-Hotpinkminiskirt-0.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom65": {
+                "path": "assets/closet/bottoms/female/girl-bot-ivorypants-04-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom66": {
+                "path": "assets/closet/bottoms/female/girl-bot-jeans-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom67": {
+                "path": "assets/closet/bottoms/female/girl-bot-jeanshorts-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom68": {
+                "path": "assets/closet/bottoms/female/girl-bot-jeanshorts-07-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom69": {
+                "path": "assets/closet/bottoms/female/girl-bot-jeanskirt-08-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom70": {
+                "path": "assets/closet/bottoms/female/girl-bot-jeanskirt-12-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom71": {
+                "path": "assets/closet/bottoms/female/girl-bot-khaki-03-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom72": {
+                "path": "assets/closet/bottoms/female/girl-bot-khakishort-05-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom73": {
+                "path": "assets/closet/bottoms/female/girl-bot-limitedyellow-07-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom74": {
+                "path": "assets/closet/bottoms/female/girl-bot-litejean-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom75": {
+                "path": "assets/closet/bottoms/female/girl-bot-lmeartha-04-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom76": {
+                "path": "assets/closet/bottoms/female/girl-bot-lmfashionb-06-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom77": {
+                "path": "assets/closet/bottoms/female/girl-bot-lsjean-10-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom78": {
+                "path": "assets/closet/bottoms/female/girl-bot-lsnon-04-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom79": {
+                "path": "assets/closet/bottoms/female/girl-bot-lsnonm-10-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom80": {
+                "path": "assets/closet/bottoms/female/girl-bot-mikuskirt-08-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom81": {
+                "path": "assets/closet/bottoms/female/girl-bot-nmbrown-05-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom82": {
+                "path": "assets/closet/bottoms/female/girl-bot-nmkhakipants-11-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom83": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonblue-03-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom84": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonblue-09-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom85": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonblue-10-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom86": {
+                "path": "assets/closet/bottoms/female/girl-bot-nongreen-07-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom87": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonjean-08-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom88": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmem-01-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom89": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmem-02-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom90": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmem-05-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom91": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmem-06-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom92": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmember-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom93": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmember-05-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom94": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmember-08-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom95": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonmember-12-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom96": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonorange-08-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom97": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonorange-11-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom98": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonpink-03-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom99": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonpink-07-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom100": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonpurple-06-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom101": {
+                "path": "assets/closet/bottoms/female/girl-bot-nonsweat-10-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom102": {
+                "path": "assets/closet/bottoms/female/girl-bot-oceanskirt-06-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom103": {
+                "path": "assets/closet/bottoms/female/girl-bot-oliveskirt-11-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom104": {
+                "path": "assets/closet/bottoms/female/girl-bot-patty2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom105": {
+                "path": "assets/closet/bottoms/female/girl-bot-pearllegs-11-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom106": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkcabanapants-06-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom107": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinknet-06-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom108": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkruffs-02-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom109": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkshortswhiteleggings.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom110": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkskirt-10-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom111": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkstripedpants.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom112": {
+                "path": "assets/closet/bottoms/female/girl-bot-pinkwbelt-09-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom113": {
+                "path": "assets/closet/bottoms/female/girl-bot-plainjeans.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom114": {
+                "path": "assets/closet/bottoms/female/girl-bot-plainwhiteskirt_06.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom115": {
+                "path": "assets/closet/bottoms/female/girl-bot-pleatedorangeskirt2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom116": {
+                "path": "assets/closet/bottoms/female/girl-bot-purplegrey-02-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom117": {
+                "path": "assets/closet/bottoms/female/girl-bot-purpleminiskirt-09-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom118": {
+                "path": "assets/closet/bottoms/female/girl-bot-purpleruffleskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom119": {
+                "path": "assets/closet/bottoms/female/girl-bot-purpskirt-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom120": {
+                "path": "assets/closet/bottoms/female/girl-bot-rareyingyangskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom121": {
+                "path": "assets/closet/bottoms/female/girl-bot-red-05-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom122": {
+                "path": "assets/closet/bottoms/female/girl-bot-redwrappedskirt_06.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom123": {
+                "path": "assets/closet/bottoms/female/girl-bot-rippedshorts-07-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom124": {
+                "path": "assets/closet/bottoms/female/girl-bot-scout-07-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom125": {
+                "path": "assets/closet/bottoms/female/girl-bot-sequinjean-02-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom126": {
+                "path": "assets/closet/bottoms/female/girl-bot-shorties-05-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom127": {
+                "path": "assets/closet/bottoms/female/girl-bot-shortjeans-06-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom128": {
+                "path": "assets/closet/bottoms/female/girl-bot-shortsredbelt-08-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom129": {
+                "path": "assets/closet/bottoms/female/girl-bot-skinny-11-2009.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom130": {
+                "path": "assets/closet/bottoms/female/girl-bot-skirt-05-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom131": {
+                "path": "assets/closet/bottoms/female/girl-bot-springpm-03-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom132": {
+                "path": "assets/closet/bottoms/female/girl-bot-stripesilver-02-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom133": {
+                "path": "assets/closet/bottoms/female/girl-bot-sweatpants-09-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom134": {
+                "path": "assets/closet/bottoms/female/girl-bot-swingskirt-08-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom135": {
+                "path": "assets/closet/bottoms/female/girl-bot-tanshorts-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom136": {
+                "path": "assets/closet/bottoms/female/girl-bot-turquoiseloose-03-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom137": {
+                "path": "assets/closet/bottoms/female/girl-bot-tututights-09-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom138": {
+                "path": "assets/closet/bottoms/female/girl-bot-violet-03-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom139": {
+                "path": "assets/closet/bottoms/female/girl-bot-white-08-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom140": {
+                "path": "assets/closet/bottoms/female/girl-bot-white-skirt-05-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom141": {
+                "path": "assets/closet/bottoms/female/girl-bot-whiteleggings.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom142": {
+                "path": "assets/closet/bottoms/female/girl-bot-whiteshort-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom143": {
+                "path": "assets/closet/bottoms/female/girl-bot-yellow-02-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom144": {
+                "path": "assets/closet/bottoms/female/girl-bot-yelloworange-04-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom145": {
+                "path": "assets/closet/bottoms/female/girl-bot-yellowpant-02-2012.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom146": {
+                "path": "assets/closet/bottoms/female/girl-bot-yellowpants-08-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom147": {
+                "path": "assets/closet/bottoms/female/girl-bottom-blackjeans.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom148": {
+                "path": "assets/closet/bottoms/female/girl-bottom-blueshorts.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom149": {
+                "path": "assets/closet/bottoms/female/girl-bottom-blueskirt-05-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom150": {
+                "path": "assets/closet/bottoms/female/girl-bottom-brownskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom151": {
+                "path": "assets/closet/bottoms/female/girl-bottom-denimcapris.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom152": {
+                "path": "assets/closet/bottoms/female/girl-bottom-denimcapris2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom153": {
+                "path": "assets/closet/bottoms/female/girl-bottom-denimskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom154": {
+                "path": "assets/closet/bottoms/female/girl-bottom-denimskirt2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom155": {
+                "path": "assets/closet/bottoms/female/girl-bottom-greenskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom156": {
+                "path": "assets/closet/bottoms/female/girl-bottom-heartskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom157": {
+                "path": "assets/closet/bottoms/female/girl-bottom-mint-07-2011.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom158": {
+                "path": "assets/closet/bottoms/female/girl-bottom-pinkbunny-01-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom159": {
+                "path": "assets/closet/bottoms/female/girl-bottom-pinkskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom160": {
+                "path": "assets/closet/bottoms/female/girl-bottom-pinkskirtwleggings.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom161": {
+                "path": "assets/closet/bottoms/female/girl-bottom-redgymshorts.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom162": {
+                "path": "assets/closet/bottoms/female/girl-bottom-redjeans.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom163": {
+                "path": "assets/closet/bottoms/female/girl-bottom-redjeans3.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom164": {
+                "path": "assets/closet/bottoms/female/girl-bottom-sailboatskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom165": {
+                "path": "assets/closet/bottoms/female/girl-bottom-sailboatskirt2.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom166": {
+                "path": "assets/closet/bottoms/female/girl-bottom-suede-01-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom167": {
+                "path": "assets/closet/bottoms/female/girl-bottom-suedflwr-04-2010.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom168": {
+                "path": "assets/closet/bottoms/female/girl-bottom-tealskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom169": {
+                "path": "assets/closet/bottoms/female/girl-bottom-tealskirt3.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom170": {
+                "path": "assets/closet/bottoms/female/girl-bottom-violetskirtwleggings.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom171": {
+                "path": "assets/closet/bottoms/female/girl-bottom-yellowpleatedskirt.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom172": {
+                "path": "assets/closet/bottoms/female/girl-nmfurskirt-09-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom173": {
+                "path": "assets/closet/bottoms/female/girl-pink-tulip-skirt-11-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom174": {
+                "path": "assets/closet/bottoms/female/girl-top-bluepleats.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom175": {
+                "path": "assets/closet/bottoms/female/girl-vintagejean-09-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 44,
+                "splitY": 32
+            },
+            "bottom176": {
+                "path": "assets/closet/bottoms/female/girl-xmasskirt-12-2013.png",
+                "properties": {},
+                "fitX": 0,
+                "fitY": -44,
                 "type": "sprite",
                 "splitX": 44,
                 "splitY": 32
             }
-        },
-
-        "male": {}
+        }
     }
-}
+};
 
 export const shoes = {
     "shoe": {
-        "female":{
+        "female": {
             "shoe0": {
-                "path": "closet/shoes/female/girl-shoes-easter-04-2012.png",
+                "path": "assets/closet/shoes/female/2015_05_girl_shoe_summercamp_lm_4.png",
                 "properties": {},
                 "fitX": 1,
-                "fitY": -41,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe1": {
+                "path": "assets/closet/shoes/female/2015_07_girl_shoe_blackout2_lm_1.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe2": {
+                "path": "assets/closet/shoes/female/2016_04_girl_shoes_leshop_nm.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe3": {
+                "path": "assets/closet/shoes/female/2016_06_girl_shoes_vg_tomato_blackstrap.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe4": {
+                "path": "assets/closet/shoes/female/2016_09_girl_shoes_unicorn_lm1.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe5": {
+                "path": "assets/closet/shoes/female/2016_10_girl_shoes_northernlights_lm.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe6": {
+                "path": "assets/closet/shoes/female/2017_03_01_girl_shoe_stpatricks.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe7": {
+                "path": "assets/closet/shoes/female/2017_04_girl_shoes_easter_lm2.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe8": {
+                "path": "assets/closet/shoes/female/2017_06_girl_shoes_anime.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe9": {
+                "path": "assets/closet/shoes/female/2017_08_girl_shoes_bff.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe10": {
+                "path": "assets/closet/shoes/female/2017_08_girl_shoes_limited_edition_diva.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe11": {
+                "path": "assets/closet/shoes/female/2017_09_girl_shoes_leshop1.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe12": {
+                "path": "assets/closet/shoes/female/2017_10_girl_shoes_halloween_lm2.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe13": {
+                "path": "assets/closet/shoes/female/2017_10_girl_shoes_halloween_lm3.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe14": {
+                "path": "assets/closet/shoes/female/2017_11_girl_shoes_le_diamond.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe15": {
+                "path": "assets/closet/shoes/female/2018_01_girl_shoes_limited_edition.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe16": {
+                "path": "assets/closet/shoes/female/2018_01_girl_shoes_newyear_lm.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe17": {
+                "path": "assets/closet/shoes/female/2018_01_girl_shoes_rare.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe18": {
+                "path": "assets/closet/shoes/female/2018_02_girl_shoes_chinese_ny_lm.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe19": {
+                "path": "assets/closet/shoes/female/2018_02_girl_shoes_valentine_lm1.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe20": {
+                "path": "assets/closet/shoes/female/2018_02_girl_shoes_valentine_lm2.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe21": {
+                "path": "assets/closet/shoes/female/2018_02_girl_shoes_valentine_rg1.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe22": {
+                "path": "assets/closet/shoes/female/2018_03_girl_shoes_aurora_lm.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe23": {
+                "path": "assets/closet/shoes/female/2018_04_girl_shoes_le_moana.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe24": {
+                "path": "assets/closet/shoes/female/female-ballet_slipper-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe25": {
+                "path": "assets/closet/shoes/female/female-blackboots-01-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe26": {
+                "path": "assets/closet/shoes/female/female-redlimited-8-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe27": {
+                "path": "assets/closet/shoes/female/female-yellowlimited-8-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe28": {
+                "path": "assets/closet/shoes/female/girl-aliceshoes-05-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe29": {
+                "path": "assets/closet/shoes/female/girl-blackflat-nm-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe30": {
+                "path": "assets/closet/shoes/female/girl-blackribbon-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe31": {
+                "path": "assets/closet/shoes/female/girl-blueshoes-12-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe32": {
+                "path": "assets/closet/shoes/female/girl-furtrimboot-11-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe33": {
+                "path": "assets/closet/shoes/female/girl-gold-ribbon-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe34": {
+                "path": "assets/closet/shoes/female/girl-goldenribbon-10-2009.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe35": {
+                "path": "assets/closet/shoes/female/girl-limited-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe36": {
+                "path": "assets/closet/shoes/female/girl-pink-02-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe37": {
+                "path": "assets/closet/shoes/female/girl-pinkshoe-11-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe38": {
+                "path": "assets/closet/shoes/female/girl-purpleboots-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe39": {
+                "path": "assets/closet/shoes/female/girl-purplesparkle-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe40": {
+                "path": "assets/closet/shoes/female/girl-redpoint-blackhill-11-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe41": {
+                "path": "assets/closet/shoes/female/girl-redshoes-11-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe42": {
+                "path": "assets/closet/shoes/female/girl-shoe-blueribbon-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe43": {
+                "path": "assets/closet/shoes/female/girl-shoe-brownboots-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe44": {
+                "path": "assets/closet/shoes/female/girl-shoe-brownstraps-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe45": {
+                "path": "assets/closet/shoes/female/girl-shoe-bull-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe46": {
+                "path": "assets/closet/shoes/female/girl-shoe-cheetah-05-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe47": {
+                "path": "assets/closet/shoes/female/girl-shoe-clown-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe48": {
+                "path": "assets/closet/shoes/female/girl-shoe-clownrec-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe49": {
+                "path": "assets/closet/shoes/female/girl-shoe-hikingboot-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe50": {
+                "path": "assets/closet/shoes/female/girl-shoe-LIblue-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe51": {
+                "path": "assets/closet/shoes/female/girl-shoe-lma-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe52": {
+                "path": "assets/closet/shoes/female/girl-shoe-lmb-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe53": {
+                "path": "assets/closet/shoes/female/girl-shoe-lmc-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe54": {
+                "path": "assets/closet/shoes/female/girl-shoe-lsblack-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe55": {
+                "path": "assets/closet/shoes/female/girl-shoe-lswhite-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe56": {
+                "path": "assets/closet/shoes/female/girl-shoe-nonmem-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe57": {
+                "path": "assets/closet/shoes/female/girl-shoe-pinkflats-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe58": {
+                "path": "assets/closet/shoes/female/girl-shoe-pinkstraps-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe59": {
+                "path": "assets/closet/shoes/female/girl-shoe-purple-bow-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe60": {
+                "path": "assets/closet/shoes/female/girl-shoe-rainboot-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe61": {
+                "path": "assets/closet/shoes/female/girl-shoe-red-05-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe62": {
+                "path": "assets/closet/shoes/female/girl-shoe-redboot-10-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe63": {
+                "path": "assets/closet/shoes/female/girl-shoe-resboots-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe64": {
+                "path": "assets/closet/shoes/female/girl-shoe-school-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe65": {
+                "path": "assets/closet/shoes/female/girl-shoe-scootboot-05-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe66": {
+                "path": "assets/closet/shoes/female/girl-shoe-uibluesandal-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe67": {
+                "path": "assets/closet/shoes/female/girl-shoes-alice-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe68": {
+                "path": "assets/closet/shoes/female/girl-shoes-allred-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe69": {
+                "path": "assets/closet/shoes/female/girl-shoes-angeljp-04-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe70": {
+                "path": "assets/closet/shoes/female/girl-shoes-animal-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe71": {
+                "path": "assets/closet/shoes/female/girl-shoes-autumnlimit-10-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe72": {
+                "path": "assets/closet/shoes/female/girl-shoes-autumnlimit_02-10-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe73": {
+                "path": "assets/closet/shoes/female/girl-shoes-aviator-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe74": {
+                "path": "assets/closet/shoes/female/girl-shoes-basketball-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe75": {
+                "path": "assets/closet/shoes/female/girl-shoes-bdaya-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe76": {
+                "path": "assets/closet/shoes/female/girl-shoes-bdayb-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe77": {
+                "path": "assets/closet/shoes/female/girl-shoes-bear-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe78": {
+                "path": "assets/closet/shoes/female/girl-shoes-berryboots-05-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe79": {
+                "path": "assets/closet/shoes/female/girl-shoes-bheels-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe80": {
+                "path": "assets/closet/shoes/female/girl-shoes-black-heels-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe81": {
+                "path": "assets/closet/shoes/female/girl-shoes-black-sandals.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe82": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackboots-12-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe83": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackflats-08-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe84": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackheel-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe85": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackheels-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe86": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackheels-10-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe87": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackhighhills.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe88": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackouta-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe89": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackpearl-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe90": {
+                "path": "assets/closet/shoes/female/girl-shoes-blacksandals-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe91": {
+                "path": "assets/closet/shoes/female/girl-shoes-blacksands-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe92": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackstraps-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe93": {
+                "path": "assets/closet/shoes/female/girl-shoes-blackwbuckle-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe94": {
+                "path": "assets/closet/shoes/female/girl-shoes-blue-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe95": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluebootsprize-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe96": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluesandals-06-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe97": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluesands-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe98": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluesneakers-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe99": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluetie-07-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe100": {
+                "path": "assets/closet/shoes/female/girl-shoes-bluewedge-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe101": {
+                "path": "assets/closet/shoes/female/girl-shoes-bootprize-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe102": {
+                "path": "assets/closet/shoes/female/girl-shoes-bootprizerc-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe103": {
+                "path": "assets/closet/shoes/female/girl-shoes-brown-sandal-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe104": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownboots-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe105": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownlongboots-01-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe106": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownspripe-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe107": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownspripery-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe108": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownstraps-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe109": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownsuede-11-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe110": {
+                "path": "assets/closet/shoes/female/girl-shoes-brownthong-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe111": {
+                "path": "assets/closet/shoes/female/girl-shoes-bun-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe112": {
+                "path": "assets/closet/shoes/female/girl-shoes-camp-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe113": {
+                "path": "assets/closet/shoes/female/girl-shoes-camplma-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe114": {
+                "path": "assets/closet/shoes/female/girl-shoes-camplmb-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe115": {
+                "path": "assets/closet/shoes/female/girl-shoes-carna-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe116": {
+                "path": "assets/closet/shoes/female/girl-shoes-carnb-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe117": {
+                "path": "assets/closet/shoes/female/girl-shoes-charityshoe-12-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe118": {
+                "path": "assets/closet/shoes/female/girl-shoes-checkered-10-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe119": {
+                "path": "assets/closet/shoes/female/girl-shoes-cody.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe120": {
+                "path": "assets/closet/shoes/female/girl-shoes-construction-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe121": {
+                "path": "assets/closet/shoes/female/girl-shoes-cruise1-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe122": {
+                "path": "assets/closet/shoes/female/girl-shoes-cruise2-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe123": {
+                "path": "assets/closet/shoes/female/girl-shoes-cruisea-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe124": {
+                "path": "assets/closet/shoes/female/girl-shoes-cruiseb-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe125": {
+                "path": "assets/closet/shoes/female/girl-shoes-cupcake-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe126": {
+                "path": "assets/closet/shoes/female/girl-shoes-dda-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe127": {
+                "path": "assets/closet/shoes/female/girl-shoes-ddb-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe128": {
+                "path": "assets/closet/shoes/female/girl-shoes-desertboots-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe129": {
+                "path": "assets/closet/shoes/female/girl-shoes-drmartin-02-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe130": {
+                "path": "assets/closet/shoes/female/girl-shoes-easter-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe131": {
+                "path": "assets/closet/shoes/female/girl-shoes-eastera-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe132": {
+                "path": "assets/closet/shoes/female/girl-shoes-easterb-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe133": {
+                "path": "assets/closet/shoes/female/girl-shoes-egghunt-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe134": {
+                "path": "assets/closet/shoes/female/girl-shoes-emeraldheels-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe135": {
+                "path": "assets/closet/shoes/female/girl-shoes-fairy-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe136": {
+                "path": "assets/closet/shoes/female/girl-shoes-fairy-11-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe137": {
+                "path": "assets/closet/shoes/female/girl-shoes-finkelstein-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe138": {
+                "path": "assets/closet/shoes/female/girl-shoes-firework-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe139": {
+                "path": "assets/closet/shoes/female/girl-shoes-flashsale-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe140": {
+                "path": "assets/closet/shoes/female/girl-shoes-flipflopa-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe141": {
+                "path": "assets/closet/shoes/female/girl-shoes-flipflopb-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe142": {
+                "path": "assets/closet/shoes/female/girl-shoes-flower-sandle_0609.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe143": {
+                "path": "assets/closet/shoes/female/girl-shoes-foldover-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe144": {
+                "path": "assets/closet/shoes/female/girl-shoes-furry-01-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe145": {
+                "path": "assets/closet/shoes/female/girl-shoes-furugg-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe146": {
+                "path": "assets/closet/shoes/female/girl-shoes-futuristic-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe147": {
+                "path": "assets/closet/shoes/female/girl-shoes-gjshoes-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe148": {
+                "path": "assets/closet/shoes/female/girl-shoes-glowshoes-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe149": {
+                "path": "assets/closet/shoes/female/girl-shoes-gold-wrap-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe150": {
+                "path": "assets/closet/shoes/female/girl-shoes-goldbuckle-02-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe151": {
+                "path": "assets/closet/shoes/female/girl-shoes-golden-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe152": {
+                "path": "assets/closet/shoes/female/girl-shoes-goldsands-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe153": {
+                "path": "assets/closet/shoes/female/girl-shoes-green-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe154": {
+                "path": "assets/closet/shoes/female/girl-shoes-greenflow-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe155": {
+                "path": "assets/closet/shoes/female/girl-shoes-greennie-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe156": {
+                "path": "assets/closet/shoes/female/girl-shoes-greensands-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe157": {
+                "path": "assets/closet/shoes/female/girl-shoes-greyboots-02-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe158": {
+                "path": "assets/closet/shoes/female/girl-shoes-guru-09-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe159": {
+                "path": "assets/closet/shoes/female/girl-shoes-gypsyshoe-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe160": {
+                "path": "assets/closet/shoes/female/girl-shoes-halloweena-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe161": {
+                "path": "assets/closet/shoes/female/girl-shoes-halloweenb-10-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe162": {
+                "path": "assets/closet/shoes/female/girl-shoes-hatter-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe163": {
+                "path": "assets/closet/shoes/female/girl-shoes-hawaiia-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe164": {
+                "path": "assets/closet/shoes/female/girl-shoes-hawaiib-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe165": {
+                "path": "assets/closet/shoes/female/girl-shoes-highsocks-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe166": {
+                "path": "assets/closet/shoes/female/girl-shoes-holidaya-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe167": {
+                "path": "assets/closet/shoes/female/girl-shoes-holidayb-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe168": {
+                "path": "assets/closet/shoes/female/girl-shoes-host-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe169": {
+                "path": "assets/closet/shoes/female/girl-shoes-hotpink-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe170": {
+                "path": "assets/closet/shoes/female/girl-shoes-icecream-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe171": {
+                "path": "assets/closet/shoes/female/girl-shoes-islanda-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe172": {
+                "path": "assets/closet/shoes/female/girl-shoes-islandb-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe173": {
+                "path": "assets/closet/shoes/female/girl-shoes-islea-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe174": {
+                "path": "assets/closet/shoes/female/girl-shoes-isleb-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe175": {
+                "path": "assets/closet/shoes/female/girl-shoes-jackfrost-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe176": {
+                "path": "assets/closet/shoes/female/girl-shoes-kidsa-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe177": {
+                "path": "assets/closet/shoes/female/girl-shoes-kidsb-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe178": {
+                "path": "assets/closet/shoes/female/girl-shoes-kneehighs-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe179": {
+                "path": "assets/closet/shoes/female/girl-shoes-lacetights-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe180": {
+                "path": "assets/closet/shoes/female/girl-shoes-laytexboots-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe181": {
+                "path": "assets/closet/shoes/female/girl-shoes-leatherheel-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe182": {
+                "path": "assets/closet/shoes/female/girl-shoes-leatherwedge-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe183": {
+                "path": "assets/closet/shoes/female/girl-shoes-leopardflat-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe184": {
+                "path": "assets/closet/shoes/female/girl-shoes-lightpinkheel-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe185": {
+                "path": "assets/closet/shoes/female/girl-shoes-limited-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe186": {
+                "path": "assets/closet/shoes/female/girl-shoes-limitedredflat-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe187": {
+                "path": "assets/closet/shoes/female/girl-shoes-LMb-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe188": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmcoola-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe189": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmcoolb-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe190": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmeartha-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe191": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmearthb-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe192": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmfasiona-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe193": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmfasionb-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe194": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmflower-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe195": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmpink-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe196": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmpink-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe197": {
+                "path": "assets/closet/shoes/female/girl-shoes-lmpinkflower-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe198": {
+                "path": "assets/closet/shoes/female/girl-shoes-locked-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe199": {
+                "path": "assets/closet/shoes/female/girl-shoes-longboots-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe200": {
+                "path": "assets/closet/shoes/female/girl-shoes-longboots-04-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe201": {
+                "path": "assets/closet/shoes/female/girl-shoes-longconverse-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe202": {
+                "path": "assets/closet/shoes/female/girl-shoes-lsa-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe203": {
+                "path": "assets/closet/shoes/female/girl-shoes-lsb-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe204": {
+                "path": "assets/closet/shoes/female/girl-shoes-lsc-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe205": {
+                "path": "assets/closet/shoes/female/girl-shoes-maryjane-grn-10-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe206": {
+                "path": "assets/closet/shoes/female/girl-shoes-maryjane-red-02-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe207": {
+                "path": "assets/closet/shoes/female/girl-shoes-mastermind-04-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe208": {
+                "path": "assets/closet/shoes/female/girl-shoes-mda-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe209": {
+                "path": "assets/closet/shoes/female/girl-shoes-mdb-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe210": {
+                "path": "assets/closet/shoes/female/girl-shoes-medievalb-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe211": {
+                "path": "assets/closet/shoes/female/girl-shoes-michelle-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe212": {
+                "path": "assets/closet/shoes/female/girl-shoes-missionnine-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe213": {
+                "path": "assets/closet/shoes/female/girl-shoes-mjrleaguer-09-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe214": {
+                "path": "assets/closet/shoes/female/girl-shoes-monster-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe215": {
+                "path": "assets/closet/shoes/female/girl-shoes-moonstonelimited-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe216": {
+                "path": "assets/closet/shoes/female/girl-shoes-navyheel-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe217": {
+                "path": "assets/closet/shoes/female/girl-shoes-nmtb-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe218": {
+                "path": "assets/closet/shoes/female/girl-shoes-non-white-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe219": {
+                "path": "assets/closet/shoes/female/girl-shoes-nonwhite-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe220": {
+                "path": "assets/closet/shoes/female/girl-shoes-nya-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe221": {
+                "path": "assets/closet/shoes/female/girl-shoes-nyb-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe222": {
+                "path": "assets/closet/shoes/female/girl-shoes-octoshoes-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe223": {
+                "path": "assets/closet/shoes/female/girl-shoes-olive-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe224": {
+                "path": "assets/closet/shoes/female/girl-shoes-olivegreen-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe225": {
+                "path": "assets/closet/shoes/female/girl-shoes-olympiana-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe226": {
+                "path": "assets/closet/shoes/female/girl-shoes-olympianb-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe227": {
+                "path": "assets/closet/shoes/female/girl-shoes-orangeeast-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe228": {
+                "path": "assets/closet/shoes/female/girl-shoes-orangesands-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe229": {
+                "path": "assets/closet/shoes/female/girl-shoes-orangesneakers-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe230": {
+                "path": "assets/closet/shoes/female/girl-shoes-orangewedge-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe231": {
+                "path": "assets/closet/shoes/female/girl-shoes-peachmaple-10-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe232": {
+                "path": "assets/closet/shoes/female/girl-shoes-peteventb-07-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe233": {
+                "path": "assets/closet/shoes/female/girl-shoes-picnica-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe234": {
+                "path": "assets/closet/shoes/female/girl-shoes-picnicb-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe235": {
+                "path": "assets/closet/shoes/female/girl-shoes-pingreen-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe236": {
+                "path": "assets/closet/shoes/female/girl-shoes-pink-02-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe237": {
+                "path": "assets/closet/shoes/female/girl-shoes-pink-flat-06-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe238": {
+                "path": "assets/closet/shoes/female/girl-shoes-pink-strap-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe239": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkbow-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe240": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkcas-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe241": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkconverse-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe242": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkheels-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe243": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkie-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe244": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkies-01-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe245": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinklady-01-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe246": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinksandals-05-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe247": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkslipper-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe248": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinksneak-09-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe249": {
+                "path": "assets/closet/shoes/female/girl-shoes-pinkstrappies-02-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe250": {
+                "path": "assets/closet/shoes/female/girl-shoes-pmtb-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe251": {
+                "path": "assets/closet/shoes/female/girl-shoes-polkadot-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe252": {
+                "path": "assets/closet/shoes/female/girl-shoes-poolflops-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe253": {
+                "path": "assets/closet/shoes/female/girl-shoes-proma-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe254": {
+                "path": "assets/closet/shoes/female/girl-shoes-promb-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe255": {
+                "path": "assets/closet/shoes/female/girl-shoes-puplehill-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe256": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpjester-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe257": {
+                "path": "assets/closet/shoes/female/girl-shoes-purple-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe258": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplebuck-11-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe259": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpledotty-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe260": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpleheel-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe261": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpleheels-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe262": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplepumps-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe263": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplesandal-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe264": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplesandals-02-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe265": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplestrap-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe266": {
+                "path": "assets/closet/shoes/female/girl-shoes-purplrline-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe267": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpsands-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe268": {
+                "path": "assets/closet/shoes/female/girl-shoes-purpsparkle-06-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe269": {
+                "path": "assets/closet/shoes/female/girl-shoes-raggedy-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe270": {
+                "path": "assets/closet/shoes/female/girl-shoes-rainbowstock-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe271": {
+                "path": "assets/closet/shoes/female/girl-shoes-rarecleopatrasandals.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe272": {
+                "path": "assets/closet/shoes/female/girl-shoes-raver-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe273": {
+                "path": "assets/closet/shoes/female/girl-shoes-red-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe274": {
+                "path": "assets/closet/shoes/female/girl-shoes-reddyugg-12-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe275": {
+                "path": "assets/closet/shoes/female/girl-shoes-redflats.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe276": {
+                "path": "assets/closet/shoes/female/girl-shoes-redgoldheels-12-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe277": {
+                "path": "assets/closet/shoes/female/girl-shoes-redheels-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe278": {
+                "path": "assets/closet/shoes/female/girl-shoes-redibon-09-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe279": {
+                "path": "assets/closet/shoes/female/girl-shoes-redprize-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe280": {
+                "path": "assets/closet/shoes/female/girl-shoes-redpumps-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe281": {
+                "path": "assets/closet/shoes/female/girl-shoes-redsandals-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe282": {
+                "path": "assets/closet/shoes/female/girl-shoes-redsandals-08-2009.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe283": {
+                "path": "assets/closet/shoes/female/girl-shoes-redsneak-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe284": {
+                "path": "assets/closet/shoes/female/girl-shoes-redsneakers_0615.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe285": {
+                "path": "assets/closet/shoes/female/girl-shoes-redtboots-01-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe286": {
+                "path": "assets/closet/shoes/female/girl-shoes-ribbonsandals-07-2009.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe287": {
+                "path": "assets/closet/shoes/female/girl-shoes-rollerblade-06-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe288": {
+                "path": "assets/closet/shoes/female/girl-shoes-rollerbladea-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe289": {
+                "path": "assets/closet/shoes/female/girl-shoes-rollerbladeb-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe290": {
+                "path": "assets/closet/shoes/female/girl-shoes-rollerbladec-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe291": {
+                "path": "assets/closet/shoes/female/girl-shoes-royballa-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe292": {
+                "path": "assets/closet/shoes/female/girl-shoes-royballb-04-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe293": {
+                "path": "assets/closet/shoes/female/girl-shoes-ruby.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe294": {
+                "path": "assets/closet/shoes/female/girl-shoes-sandman-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe295": {
+                "path": "assets/closet/shoes/female/girl-shoes-santaboots-12-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe296": {
+                "path": "assets/closet/shoes/female/girl-shoes-schoola-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe297": {
+                "path": "assets/closet/shoes/female/girl-shoes-schoola-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe298": {
+                "path": "assets/closet/shoes/female/girl-shoes-schoolb-09-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe299": {
+                "path": "assets/closet/shoes/female/girl-shoes-schoolb-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe300": {
+                "path": "assets/closet/shoes/female/girl-shoes-schoolgirl.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe301": {
+                "path": "assets/closet/shoes/female/girl-shoes-scout-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe302": {
+                "path": "assets/closet/shoes/female/girl-shoes-scoutleader-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe303": {
+                "path": "assets/closet/shoes/female/girl-shoes-shiningopal-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe304": {
+                "path": "assets/closet/shoes/female/girl-shoes-shinyblack-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe305": {
+                "path": "assets/closet/shoes/female/girl-shoes-shrtbootblk-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe306": {
+                "path": "assets/closet/shoes/female/girl-shoes-shrtbootblu-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe307": {
+                "path": "assets/closet/shoes/female/girl-shoes-shrtbootwht-02-2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe308": {
+                "path": "assets/closet/shoes/female/girl-shoes-simpleblackheel-02-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe309": {
+                "path": "assets/closet/shoes/female/girl-shoes-skates-01-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe310": {
+                "path": "assets/closet/shoes/female/girl-shoes-skullsandals-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe311": {
+                "path": "assets/closet/shoes/female/girl-shoes-skyflat-02-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe312": {
+                "path": "assets/closet/shoes/female/girl-shoes-skysocks-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe313": {
+                "path": "assets/closet/shoes/female/girl-shoes-skyspripe-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe314": {
+                "path": "assets/closet/shoes/female/girl-shoes-slime-10-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe315": {
+                "path": "assets/closet/shoes/female/girl-shoes-snowpatrol-07-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe316": {
+                "path": "assets/closet/shoes/female/girl-shoes-socks-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe317": {
+                "path": "assets/closet/shoes/female/girl-shoes-spacea-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe318": {
+                "path": "assets/closet/shoes/female/girl-shoes-spaceb-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe319": {
+                "path": "assets/closet/shoes/female/girl-shoes-sparkle-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe320": {
+                "path": "assets/closet/shoes/female/girl-shoes-sparkpurple-03-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe321": {
+                "path": "assets/closet/shoes/female/girl-shoes-springa-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe322": {
+                "path": "assets/closet/shoes/female/girl-shoes-springa-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe323": {
+                "path": "assets/closet/shoes/female/girl-shoes-springb-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe324": {
+                "path": "assets/closet/shoes/female/girl-shoes-springb-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe325": {
+                "path": "assets/closet/shoes/female/girl-shoes-springc-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe326": {
+                "path": "assets/closet/shoes/female/girl-shoes-springd-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe327": {
+                "path": "assets/closet/shoes/female/girl-shoes-springlma-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe328": {
+                "path": "assets/closet/shoes/female/girl-shoes-springlmb-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe329": {
+                "path": "assets/closet/shoes/female/girl-shoes-springlmc-03-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe330": {
+                "path": "assets/closet/shoes/female/girl-shoes-stpata-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe331": {
+                "path": "assets/closet/shoes/female/girl-shoes-stpatb-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe332": {
+                "path": "assets/closet/shoes/female/girl-shoes-stpatc-03-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe333": {
+                "path": "assets/closet/shoes/female/girl-shoes-stpatricks-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe334": {
+                "path": "assets/closet/shoes/female/girl-shoes-summera-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe335": {
+                "path": "assets/closet/shoes/female/girl-shoes-summerb-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe336": {
+                "path": "assets/closet/shoes/female/girl-shoes-summerprize-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe337": {
+                "path": "assets/closet/shoes/female/girl-shoes-summersandal-06-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe338": {
+                "path": "assets/closet/shoes/female/girl-shoes-tealheels-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe339": {
+                "path": "assets/closet/shoes/female/girl-shoes-thanksa-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe340": {
+                "path": "assets/closet/shoes/female/girl-shoes-thanksb-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe341": {
+                "path": "assets/closet/shoes/female/girl-shoes-theatera-05-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe342": {
+                "path": "assets/closet/shoes/female/girl-shoes-tomatogirl-11-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe343": {
+                "path": "assets/closet/shoes/female/girl-shoes-uggs-12-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe344": {
+                "path": "assets/closet/shoes/female/girl-shoes-uiblue-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe345": {
+                "path": "assets/closet/shoes/female/girl-shoes-userblackflat-07-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe346": {
+                "path": "assets/closet/shoes/female/girl-shoes-vampire-10-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe347": {
+                "path": "assets/closet/shoes/female/girl-shoes-vda-02-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe348": {
+                "path": "assets/closet/shoes/female/girl-shoes-vdb-02-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe349": {
+                "path": "assets/closet/shoes/female/girl-shoes-violet-12-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe350": {
+                "path": "assets/closet/shoes/female/girl-shoes-warrior-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe351": {
+                "path": "assets/closet/shoes/female/girl-shoes-wbb-01-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe352": {
+                "path": "assets/closet/shoes/female/girl-shoes-weightboots-04-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe353": {
+                "path": "assets/closet/shoes/female/girl-shoes-white-boots-08-2009.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe354": {
+                "path": "assets/closet/shoes/female/girl-shoes-whiteflat-03-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe355": {
+                "path": "assets/closet/shoes/female/girl-shoes-whiteflats.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe356": {
+                "path": "assets/closet/shoes/female/girl-shoes-whiteheels-11-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe357": {
+                "path": "assets/closet/shoes/female/girl-shoes-whitesands-08-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe358": {
+                "path": "assets/closet/shoes/female/girl-shoes-whiteugg-11-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe359": {
+                "path": "assets/closet/shoes/female/girl-shoes-winterboots-12-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe360": {
+                "path": "assets/closet/shoes/female/girl-shoes-wintergreen-12-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe361": {
+                "path": "assets/closet/shoes/female/girl-shoes-winterpink-12-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe362": {
+                "path": "assets/closet/shoes/female/girl-shoes-witch-10-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe363": {
+                "path": "assets/closet/shoes/female/girl-shoes-yellowgreyheel-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe364": {
+                "path": "assets/closet/shoes/female/girl-shoes-yellowheel-08-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe365": {
+                "path": "assets/closet/shoes/female/girl-shoes-yellowheel-11-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe366": {
+                "path": "assets/closet/shoes/female/girl-shoes-yellowheels-05-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe367": {
+                "path": "assets/closet/shoes/female/girl-shoes-yellowMJs.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe368": {
+                "path": "assets/closet/shoes/female/girl-shoes-zebra-09-2010.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe369": {
+                "path": "assets/closet/shoes/female/girl-shoes_winbelle-12-2009.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe370": {
+                "path": "assets/closet/shoes/female/girl-solidpink-03-2011.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe371": {
+                "path": "assets/closet/shoes/female/girl-ugg-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe372": {
+                "path": "assets/closet/shoes/female/girl-white-sneakers-09-2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe373": {
+                "path": "assets/closet/shoes/female/girls-shoes-robot-08-2012.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe374": {
+                "path": "assets/closet/shoes/female/girl_footwear_red-highheels-0515.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe375": {
+                "path": "assets/closet/shoes/female/girl_shoes_bluehellyshoe_07_2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe376": {
+                "path": "assets/closet/shoes/female/girl_shoes_kaiju_05_2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe377": {
+                "path": "assets/closet/shoes/female/girl_shoes_orangestripshoe_07_2013.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 34
+            },
+            "shoe378": {
+                "path": "assets/closet/shoes/female/girl_shoes_trophy_05_2014.png",
+                "properties": {},
+                "fitX": 1,
+                "fitY": -43,
                 "type": "sprite",
                 "splitX": 42,
                 "splitY": 34
             }
-        },
-
-        "male": {}
+        }
     }
-}
+};
 
 export const boards = {
     "board": {
         "board0" : {
-            "path": "closet/boards/sky_blue_board.png",
+            "path": "closet/boards/singleframe/2015_02_board_nm_1.png",
             "properties": {},
             "type": "image",
-            "fitX": -1,
-            "fitY": -64
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board1" : {
+            "path": "closet/boards/singleframe/2016_02_board_valentinesday_prize_1.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board2" : {
+            "path": "closet/boards/singleframe/2016_02_board_valentinesday_prize_2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board3" : {
+            "path": "closet/boards/singleframe/2016_03_board_rare.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board4" : {
+            "path": "closet/boards/singleframe/2016_05_board_may_nm.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board5" : {
+            "path": "closet/boards/singleframe/2016_06_board_pizzaparty_reward.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board6" : {
+            "path": "closet/boards/singleframe/2017_04_board_loco3.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board7" : {
+            "path": "closet/boards/singleframe/2017_04_board_prom_rg2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board8" : {
+            "path": "closet/boards/singleframe/2017_11_board_loco1.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board9" : {
+            "path": "closet/boards/singleframe/2017_12_board_cookiejar.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board10" : {
+            "path": "closet/boards/singleframe/board-aceofspade-07-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board11" : {
+            "path": "closet/boards/singleframe/board-bee-11-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board12" : {
+            "path": "closet/boards/singleframe/board-bellcookie-12-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board13" : {
+            "path": "closet/boards/singleframe/board-bigstar-02-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board14" : {
+            "path": "closet/boards/singleframe/board-brown-11-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board15" : {
+            "path": "closet/boards/singleframe/board-candycorn-10-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board16" : {
+            "path": "closet/boards/singleframe/board-carnigame-04-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board17" : {
+            "path": "closet/boards/singleframe/board-checker-10-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board18" : {
+            "path": "closet/boards/singleframe/board-cheeseburger-01-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board19" : {
+            "path": "closet/boards/singleframe/board-chocolate-02-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board20" : {
+            "path": "closet/boards/singleframe/board-circuspodium-3-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board21" : {
+            "path": "closet/boards/singleframe/board-coconut-07-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board22" : {
+            "path": "closet/boards/singleframe/board-crown-09-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board23" : {
+            "path": "closet/boards/singleframe/board-cruisenmboard-07-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board24" : {
+            "path": "closet/boards/singleframe/board-cruisesurfboard-07-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board25" : {
+            "path": "closet/boards/singleframe/board-cruisesurfboarda-07-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board26" : {
+            "path": "closet/boards/singleframe/board-green-10-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board27" : {
+            "path": "closet/boards/singleframe/board-greentoothbrush-08-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board28" : {
+            "path": "closet/boards/singleframe/board-hattercheck-07-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board29" : {
+            "path": "closet/boards/singleframe/board-horn-10-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board30" : {
+            "path": "closet/boards/singleframe/board-hotsparksurfboard.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board31" : {
+            "path": "closet/boards/singleframe/board-icy-06-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board32" : {
+            "path": "closet/boards/singleframe/board-kidsnm-03-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board33" : {
+            "path": "closet/boards/singleframe/board-lunchtray-11-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board34" : {
+            "path": "closet/boards/singleframe/board-lunchtrayrc-11-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board35" : {
+            "path": "closet/boards/singleframe/board-mini-04-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board36" : {
+            "path": "closet/boards/singleframe/board-nonblueorange-2-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board37" : {
+            "path": "closet/boards/singleframe/board-nonbluestar-02-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board38" : {
+            "path": "closet/boards/singleframe/board-nonm-07-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board39" : {
+            "path": "closet/boards/singleframe/board-nonmem-01-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board40" : {
+            "path": "closet/boards/singleframe/board-nonmem-01-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board41" : {
+            "path": "closet/boards/singleframe/board-nonmem-02-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board42" : {
+            "path": "closet/boards/singleframe/board-nonmem-03-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board43" : {
+            "path": "closet/boards/singleframe/board-nonmem-03-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board44" : {
+            "path": "closet/boards/singleframe/board-nonmem-04-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board45" : {
+            "path": "closet/boards/singleframe/board-nonmem-05-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board46" : {
+            "path": "closet/boards/singleframe/board-nonmem-05-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board47" : {
+            "path": "closet/boards/singleframe/board-nonmem-06-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board48" : {
+            "path": "closet/boards/singleframe/board-nonmem-06-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board49" : {
+            "path": "closet/boards/singleframe/board-nonmem-07-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board50" : {
+            "path": "closet/boards/singleframe/board-nonmem-07-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board51" : {
+            "path": "closet/boards/singleframe/board-nonmem-08-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board52" : {
+            "path": "closet/boards/singleframe/board-nonmem-08-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board53" : {
+            "path": "closet/boards/singleframe/board-nonmem-08-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board54" : {
+            "path": "closet/boards/singleframe/board-nonmem-09-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board55" : {
+            "path": "closet/boards/singleframe/board-nonmem-09-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board56" : {
+            "path": "closet/boards/singleframe/board-nonmem-10-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board57" : {
+            "path": "closet/boards/singleframe/board-nonmem-10-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board58" : {
+            "path": "closet/boards/singleframe/board-nonmem-10-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board59" : {
+            "path": "closet/boards/singleframe/board-nonmem-11-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board60" : {
+            "path": "closet/boards/singleframe/board-nonmem-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board61" : {
+            "path": "closet/boards/singleframe/board-nonmem-12-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board62" : {
+            "path": "closet/boards/singleframe/board-nonmember-04-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board63" : {
+            "path": "closet/boards/singleframe/board-nonmemcircus-03-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board64" : {
+            "path": "closet/boards/singleframe/board-nonmemgp-03-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board65" : {
+            "path": "closet/boards/singleframe/board-nonmemgreen-09-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board66" : {
+            "path": "closet/boards/singleframe/board-nonmsnowman-01-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board67" : {
+            "path": "closet/boards/singleframe/board-nons-12-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board68" : {
+            "path": "closet/boards/singleframe/board-oceanicsurfboard.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board69" : {
+            "path": "closet/boards/singleframe/board-orange-08-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board70" : {
+            "path": "closet/boards/singleframe/board-pattern-07-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board71" : {
+            "path": "closet/boards/singleframe/board-peppermint-12-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board72" : {
+            "path": "closet/boards/singleframe/board-piano-09-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board73" : {
+            "path": "closet/boards/singleframe/board-picnichunt-05-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board74" : {
+            "path": "closet/boards/singleframe/board-pinkcake-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board75" : {
+            "path": "closet/boards/singleframe/board-pinkfloralsurf-06-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board76" : {
+            "path": "closet/boards/singleframe/board-plainorange-05-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board77" : {
+            "path": "closet/boards/singleframe/board-platform-08-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board78" : {
+            "path": "closet/boards/singleframe/board-pumpkin-10-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board79" : {
+            "path": "closet/boards/singleframe/board-purpflamesurf-06-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board80" : {
+            "path": "closet/boards/singleframe/board-purplepump-05-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board81" : {
+            "path": "closet/boards/singleframe/board-red-11-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board82" : {
+            "path": "closet/boards/singleframe/board-redbluespeed-08-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board83" : {
+            "path": "closet/boards/singleframe/board-risingsunsurfboard.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board84" : {
+            "path": "closet/boards/singleframe/board-sharksurf-06-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board85" : {
+            "path": "closet/boards/singleframe/board-simplebw-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board86" : {
+            "path": "closet/boards/singleframe/board-skyblue-04-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board87" : {
+            "path": "closet/boards/singleframe/board-smileyface-05-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board88" : {
+            "path": "closet/boards/singleframe/board-sock-10-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board89" : {
+            "path": "closet/boards/singleframe/board-springgreen-04-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board90" : {
+            "path": "closet/boards/singleframe/board-star-12-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board91" : {
+            "path": "closet/boards/singleframe/board-starcookie-12-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board92" : {
+            "path": "closet/boards/singleframe/board-stpatricksyellow-03-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board93" : {
+            "path": "closet/boards/singleframe/board-toothbrush-08-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board94" : {
+            "path": "closet/boards/singleframe/board-trafficnonmember-06-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board95" : {
+            "path": "closet/boards/singleframe/board-treasurechest-01-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board96" : {
+            "path": "closet/boards/singleframe/board-treasurechestgr-01-2011.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board97" : {
+            "path": "closet/boards/singleframe/board-turkey-11-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board98" : {
+            "path": "closet/boards/singleframe/board-turkey-ecoins-11-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board99" : {
+            "path": "closet/boards/singleframe/board-turqouisesurf-06-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board100" : {
+            "path": "closet/boards/singleframe/board-vday-02-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board101" : {
+            "path": "closet/boards/singleframe/board-wafer-08-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board102" : {
+            "path": "closet/boards/singleframe/board-waffle-06-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board103" : {
+            "path": "closet/boards/singleframe/board-wand-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board104" : {
+            "path": "closet/boards/singleframe/board-watermelon-05-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board105" : {
+            "path": "closet/boards/singleframe/board-woodfloor-12-2013.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board106" : {
+            "path": "closet/boards/singleframe/board-woodtoy-11-2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board107" : {
+            "path": "closet/boards/singleframe/board_Violetbatwing.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board108" : {
+            "path": "closet/boards/singleframe/board_blackblue2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board109" : {
+            "path": "closet/boards/singleframe/board_blackred2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board110" : {
+            "path": "closet/boards/singleframe/board_bluecraft.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board111" : {
+            "path": "closet/boards/singleframe/board_blueufo.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board112" : {
+            "path": "closet/boards/singleframe/board_bluewhite2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board113" : {
+            "path": "closet/boards/singleframe/board_bubble2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board114" : {
+            "path": "closet/boards/singleframe/board_clover-03-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board115" : {
+            "path": "closet/boards/singleframe/board_dance_08_2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board116" : {
+            "path": "closet/boards/singleframe/board_donut.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board117" : {
+            "path": "closet/boards/singleframe/board_empty_09_2014.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board118" : {
+            "path": "closet/boards/singleframe/board_feather.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board119" : {
+            "path": "closet/boards/singleframe/board_giantclove-03-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board120" : {
+            "path": "closet/boards/singleframe/board_gold_0615.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board121" : {
+            "path": "closet/boards/singleframe/board_greendisk.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board122" : {
+            "path": "closet/boards/singleframe/board_guitar.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board123" : {
+            "path": "closet/boards/singleframe/board_heart2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board124" : {
+            "path": "closet/boards/singleframe/board_ice.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board125" : {
+            "path": "closet/boards/singleframe/board_ice2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board126" : {
+            "path": "closet/boards/singleframe/board_jump2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board127" : {
+            "path": "closet/boards/singleframe/board_lotus_leef_board.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board128" : {
+            "path": "closet/boards/singleframe/board_paperairplane.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board129" : {
+            "path": "closet/boards/singleframe/board_patty2009.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board130" : {
+            "path": "closet/boards/singleframe/board_pinkcraft.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board131" : {
+            "path": "closet/boards/singleframe/board_pinkufo.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board132" : {
+            "path": "closet/boards/singleframe/board_pizza.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board133" : {
+            "path": "closet/boards/singleframe/board_rareblackguitar.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board134" : {
+            "path": "closet/boards/singleframe/board_rarepinata.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board135" : {
+            "path": "closet/boards/singleframe/board_snowflake-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board136" : {
+            "path": "closet/boards/singleframe/board_snowflakesale-12-2010.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board137" : {
+            "path": "closet/boards/singleframe/board_snowing-11-2012.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board138" : {
+            "path": "closet/boards/singleframe/board_spaceship.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board139" : {
+            "path": "closet/boards/singleframe/board_speedy_rare_0515.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board140" : {
+            "path": "closet/boards/singleframe/board_startop.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board141" : {
+            "path": "closet/boards/singleframe/board_strawberystar.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board142" : {
+            "path": "closet/boards/singleframe/board_sunshine2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board143" : {
+            "path": "closet/boards/singleframe/board_turtle.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board144" : {
+            "path": "closet/boards/singleframe/board_violetgold2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board145" : {
+            "path": "closet/boards/singleframe/board_watermelon.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board146" : {
+            "path": "closet/boards/singleframe/board_whiteorange2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board147" : {
+            "path": "closet/boards/singleframe/board_wooden.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
+        },
+        "board148" : {
+            "path": "closet/boards/singleframe/board_yellowblue2.png",
+            "properties": {},
+            "type": "image",
+            "fitX": 17,
+            "fitY": -15
         }
+    }
+}
+
+export const homes = {
+    'home0' : {
+        "path": 'assets/homes/default',
+        "rooms": '2',
+        "name": 'Simple Cottage',
+        "cost": '0',
     }
 }

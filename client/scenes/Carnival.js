@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Carnival extends Phaser.Scene {
     constructor() {
         super({ key: 'Carnival' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 707;
+        this.playerYLocation = data.playerYLocation || 421; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Carnival extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 707, 421);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -57,6 +65,12 @@ export class Arcade extends Phaser.Scene {
         super({ key: 'Arcade' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 362;
+        this.playerYLocation = data.playerYLocation || 410; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -66,7 +80,8 @@ export class Arcade extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'arcade').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 362, 410);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'arcade'); 

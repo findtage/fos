@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Island extends Phaser.Scene {
     constructor() {
         super({ key: 'Island' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 206;
+        this.playerYLocation = data.playerYLocation || 334; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Island extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 206, 334);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -60,6 +68,12 @@ export class Spa extends Phaser.Scene {
         super({ key: 'Spa' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 229;
+        this.playerYLocation = data.playerYLocation || 407; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -69,7 +83,8 @@ export class Spa extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'spa').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 229, 407);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'spa'); 
@@ -99,6 +114,12 @@ export class Resort extends Phaser.Scene {
         super({ key: 'Resort' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 466;
+        this.playerYLocation = data.playerYLocation || 420; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -108,7 +129,8 @@ export class Resort extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'resort').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 466, 420);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'resort'); 
@@ -138,6 +160,12 @@ export class IslandStore extends Phaser.Scene {
         super({ key: 'IslandStore' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 400;
+        this.playerYLocation = data.playerYLocation || 368; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -147,7 +175,8 @@ export class IslandStore extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'islandstore').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 400, 368);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'islandstore'); 

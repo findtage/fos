@@ -4,12 +4,18 @@ import { preloadAvatar, createAvatar} from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
-import { createAvatarAnimations, createHairAnimation } from '../world/animations.js';
+import { createAvatarAnimations, performIdles } from '../world/animations.js';
 import { getPlayerAvatarData } from '../game.js';
 
 export class Downtown extends Phaser.Scene {
     constructor() {
         super({ key: 'Downtown' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 908;
+        this.playerYLocation = data.playerYLocation || 410; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -31,16 +37,9 @@ export class Downtown extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 908, 410);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
         createAvatarAnimations(this, this.player);
-        
-        /*
-        console.log(this.player.hair.texture.key);
-        if (assets['hair']?.["female"]?.[this.player.hair.texture.key]?.["type"] == "sprite") {
-            createHairAnimation(this, this.player);
-            this.player.hair.play('animateHair');
-        }
-        */
+        performIdles(this.player);
 
         this.cameras.main.startFollow(this.player);
 
@@ -84,6 +83,12 @@ export class StarCafe extends Phaser.Scene {
         super({ key: 'StarCafe' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 281;
+        this.playerYLocation = data.playerYLocation || 345; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -92,8 +97,9 @@ export class StarCafe extends Phaser.Scene {
 
     async create() {
         this.add.image(0, 0, 'starcafe').setOrigin(0, 0);
-        
-        this.player = createAvatar(this, 281, 345);
+
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'starcafe'); 
@@ -124,6 +130,12 @@ export class LeShop extends Phaser.Scene {
         super({ key: 'Leshop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 370;
+        this.playerYLocation = data.playerYLocation || 432; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -132,7 +144,8 @@ export class LeShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'leshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 370, 432);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'leshop'); 
@@ -160,6 +173,12 @@ export class Salon extends Phaser.Scene {
         super({ key: 'Salon' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 352;
+        this.playerYLocation = data.playerYLocation || 310; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -168,7 +187,8 @@ export class Salon extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'salon').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 352, 310);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'salon'); 
@@ -201,10 +221,17 @@ export class TopModel extends Phaser.Scene {
         preloadAvatar(this);
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 420;
+        this.playerYLocation = data.playerYLocation || 434; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     async create() {
         this.add.image(0, 0, 'topmodel').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 420, 434);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'topmodel'); 
@@ -241,13 +268,20 @@ export class TopModelVIP extends Phaser.Scene {
         preloadAvatar(this); // Preload the player's avatar
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 1071;
+        this.playerYLocation = data.playerYLocation || 255; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     async create() {
         const bg = this.add.image(0, 0, 'topmodelvip').setOrigin(0, 0);
         bg.setScrollFactor(1); // Make sure it scrolls with the camera
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 1071, 255);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);

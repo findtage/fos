@@ -1,3 +1,5 @@
+import { assets } from "../assets/data.js";
+
 export function createAvatarAnimations(scene, player) {
     // Function to create animations dynamically per player
     function createAnimation(key, texture, frames, frameRate = 2.5) {
@@ -12,6 +14,19 @@ export function createAvatarAnimations(scene, player) {
             });
         }
     }
+
+    if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
+        const hairanimationKey = `idle-${player.hair.texture.key}`;
+
+        if (!scene.anims.exists(hairanimationKey)) { // Prevent duplicate animations
+            scene.anims.create({
+                key: hairanimationKey,
+                frames: scene.anims.generateFrameNumbers(player.hair.texture.key, { frames: [0, 1, 2, 3] }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        }
+    }  
 
     // Get unique asset names for this player
     const bodyTexture = player.base.texture.key;
@@ -233,12 +248,8 @@ export function performWink(player) {
     player.eyes.play(`wink-${player.eyes.texture.key}`);
 }
 
-
-export function createHairAnimation(scene, player){
-    scene.anims.create({
-        key: 'animateHair',
-        frames: scene.anims.generateFrameNumbers(player.hair.texture.key, { frames: [0, 1, 2, 3] }),
-        frameRate: 2.5,
-        repeat: -1,
-    });
+export function performIdles(player) {
+    if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
+        player.hair.play(`idle-${player.hair.texture.key}`);
+    }
 }

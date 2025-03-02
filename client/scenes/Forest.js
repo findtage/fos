@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Forest extends Phaser.Scene {
     constructor() {
         super({ key: 'Forest' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 328;
+        this.playerYLocation = data.playerYLocation || 446; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Forest extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 328, 386+60);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -60,6 +68,12 @@ export class Wizard extends Phaser.Scene {
         super({ key: 'Wizard' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 454;
+        this.playerYLocation = data.playerYLocation || 365; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -69,7 +83,8 @@ export class Wizard extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'wizard').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 454, 365, 345);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'wizard'); 
@@ -99,6 +114,12 @@ export class Grotto extends Phaser.Scene {
         super({ key: 'Grotto' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 410;
+        this.playerYLocation = data.playerYLocation || 253+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -107,7 +128,8 @@ export class Grotto extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'grotto').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 410, 253);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'grotto'); 
@@ -135,6 +157,12 @@ export class GrottoSecretOne extends Phaser.Scene {
         super({ key: 'GrottoSecretOne' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 292;
+        this.playerYLocation = data.playerYLocation || 317+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this); // Preload the player's avatar
@@ -146,7 +174,8 @@ export class GrottoSecretOne extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 292, 317);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -177,6 +206,12 @@ export class GrottoSecretTwo extends Phaser.Scene {
         super({ key: 'GrottoSecretTwo' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 145;
+        this.playerYLocation = data.playerYLocation || 288+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this); // Preload the player's avatar
@@ -188,7 +223,8 @@ export class GrottoSecretTwo extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 145, 288);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -218,6 +254,12 @@ export class CreatureArea extends Phaser.Scene {
         super({ key: 'CreatureArea' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 561;
+        this.playerYLocation = data.playerYLocation || 290+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -230,7 +272,8 @@ export class CreatureArea extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 561, 290);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -266,6 +309,12 @@ export class CreatureShop extends Phaser.Scene {
         super({ key: 'CreatureShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 352;
+        this.playerYLocation = data.playerYLocation || 270+60; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -274,7 +323,8 @@ export class CreatureShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'creatureshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 352, 270);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'creatureshop'); 

@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Mountain extends Phaser.Scene {
     constructor() {
         super({ key: 'Mountain' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 955;
+        this.playerYLocation = data.playerYLocation || 402; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Mountain extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 955, 402);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -57,6 +65,12 @@ export class Cabin extends Phaser.Scene {
         super({ key: 'Cabin' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 250;
+        this.playerYLocation = data.playerYLocation || 403; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -65,7 +79,8 @@ export class Cabin extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'cabin').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 250, 403);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'cabin'); 

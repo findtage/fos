@@ -1,16 +1,15 @@
-import { assets, tops } from "../assets/data.js";
+import { assets, tops, bottoms, shoes, boards } from "../assets/data.js";
 import { getPlayerAvatarData, showConnectionLostMessage, resetConnectionCheck } from "../game.js";
 
 const { Client } = window.Colyseus;
-
 const client = new Client('ws://localhost:3000'); // Ensure this matches your server address
 
 // Private hosting
-//const client = new Client("wss://");
+//const client = new Client("wss://c99a-98-14-219-221.ngrok-free.app");
 
 let currentRoom = null;
 let switchingRooms = false;
-import { performWave, performJump, performCry, performWink, createAvatarAnimations } from "../world/animations.js";
+import { performWave, performJump, performCry, performWink, performIdles, createAvatarAnimations } from "../world/animations.js";
 import { displayChatBubble } from "../world/UIManager.js";
 /**
  * Join a Colyseus room dynamically.
@@ -135,13 +134,12 @@ export async function joinRoom(scene, roomName) {
                 }
         
                 // Add new hair in the correct layer
-                otherPlayer.hair = scene.add.image(
+                otherPlayer.hair = scene.add.sprite(
                     assets['hair']?.["female"]?.[data.hairKey]?.["fitX"], 
                     assets['hair']?.["female"]?.[data.hairKey]?.["fitY"], 
-                    data.hairKey
+                    data.hairKey, 0
                 ).setOrigin(0.5, 0.5);
                 
-                console.log("Hair is being added at index", hairIndex);
                 otherPlayer.addAt(otherPlayer.hair, hairIndex); // Add new hair at the correct index
 
                 let topIndex = otherPlayer.getIndex(otherPlayer.top); // Get the layer index
@@ -158,9 +156,99 @@ export async function joinRoom(scene, roomName) {
                     data.topKey, 0
                 ).setOrigin(0.5, 0.5);
                 
-                console.log("Top is being added at index", topIndex);
-                otherPlayer.addAt(otherPlayer.top, topIndex); // Add new hair at the correct index
+                otherPlayer.addAt(otherPlayer.top, topIndex); // Add new top at the correct index
+
+                let bottomIndex = otherPlayer.getIndex(otherPlayer.bottom); // Get the layer index
+
+                // Remove old top
+                if (otherPlayer.bottom) {
+                    otherPlayer.bottom.destroy();
+                }
+            
+                // Add new top in the correct layer
+                otherPlayer.bottom = scene.add.sprite(
+                    bottoms['bottom']?.["female"]?.[data.bottomKey]?.["fitX"], 
+                    bottoms['bottom']?.["female"]?.[data.bottomKey]?.["fitY"], 
+                    data.bottomKey, 0
+                ).setOrigin(0.5, 0.5);
+                
+                otherPlayer.addAt(otherPlayer.bottom, bottomIndex); // Add new bottom at the correct index
+
+                let shoeIndex = otherPlayer.getIndex(otherPlayer.shoes); // Get the layer index
+
+                // Remove old top
+                if (otherPlayer.shoes) {
+                    otherPlayer.shoes.destroy();
+                }
+            
+                // Add new top in the correct layer
+                otherPlayer.shoes = scene.add.sprite(
+                    shoes['shoe']?.["female"]?.[data.shoeKey]?.["fitX"], 
+                    shoes['shoe']?.["female"]?.[data.shoeKey]?.["fitY"], 
+                    data.shoeKey, 0
+                ).setOrigin(0.5, 0.5);
+                
+                otherPlayer.addAt(otherPlayer.shoes, shoeIndex); // Add new shoes at the correct index
+
+
+                let boardIndex = otherPlayer.getIndex(otherPlayer.board); // Get the layer index
+
+                // Remove old top
+                if (otherPlayer.board) {
+                    otherPlayer.board.destroy();
+                }
+            
+                // Add new top in the correct layer
+                otherPlayer.board = scene.add.image(
+                    boards['board']?.[data.boardKey]?.["fitX"], 
+                    boards['board']?.[data.boardKey]?.["fitY"], 
+                    data.boardKey
+                ).setOrigin(0.5, 0.5);
+                
+                otherPlayer.addAt(otherPlayer.board, boardIndex); // Add new shoes at the correct index
+
+                // Create animations for the new avatar
                 createAvatarAnimations(scene, otherPlayer);
+                performIdles(otherPlayer);
+            }
+        });
+
+        currentRoom.onMessage("appearanceChange", (data) => {
+            const otherPlayer = scene.otherPlayers[data.playerId]; // Get the affected player
+
+            if (otherPlayer) {
+                let eyesIndex = otherPlayer.getIndex(otherPlayer.eyes); // Get the layer index
+                if (otherPlayer.eyes) {
+                    otherPlayer.eyes.destroy();
+                }
+                otherPlayer.eyes = scene.add.sprite(1, -101,
+                data.eyesKey, 0
+                ).setOrigin(0.5, 0.5);
+                otherPlayer.addAt(otherPlayer.eyes, eyesIndex);
+
+                let headIndex = otherPlayer.getIndex(otherPlayer.head); // Get the layer index
+                if (otherPlayer.head) {
+                    otherPlayer.head.destroy();
+                }
+                otherPlayer.head = scene.add.image(1, -100,
+                data.headKey,
+                ).setOrigin(0.5, 0.5);
+                otherPlayer.addAt(otherPlayer.head, headIndex);
+
+                let bodyIndex = otherPlayer.getIndex(otherPlayer.base); // Get the layer index
+                let playerDirection = otherPlayer.base.direction;
+                if (otherPlayer.base) {
+                    otherPlayer.base.destroy();
+                }
+                otherPlayer.base = scene.add.sprite(7, -72,
+                data.bodyKey, 0
+                ).setOrigin(0.5, 0.5);
+                otherPlayer.base.setData('direction', playerDirection);
+                otherPlayer.addAt(otherPlayer.base, bodyIndex);
+
+                // Create animations for the new avatar
+                createAvatarAnimations(scene, otherPlayer);
+                performIdles(otherPlayer);
             }
         });
         

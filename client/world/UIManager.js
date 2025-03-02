@@ -14,6 +14,7 @@ export function createMenu(scene, player, room) {
     { name: 'email', x: 689, y: 9, screenX: 689, screenY: height - 50, callback: () => console.log('Open Email') },
     { name: 'settings', x: 750, y: 9, screenX: 750, screenY: height - 50, callback: () => console.log('Open Settings') },
     { name: 'emote', x: 257, y: 14, screenX: 257, screenY: height - 45, boxWidth: 31, boxHeight: 30, callback: () => console.log('Click animations') },
+    { name: 'enterButton', x: 567, y: 14, screenX: 567, screenY: height - 45, boxWidth: 40, boxHeight: 30, callback: () => console.log("Clicked send chat")}
   ];
 
   // Add the PNG as the background UI
@@ -45,18 +46,22 @@ export function createMenu(scene, player, room) {
       }
 
       if (name == "home"){
-        /*
-        const hairIndex = player.getIndex(player.hair);
-        console.log(hairIndex);
-        //console.log("trying to change hair, current hair is:", player.hair);
-        player.hair.destroy();
-        player.hair = scene.add.image(-1, -64, 'hair4').setOrigin(0.5, 0.5);
-        player.addAt(player.hair, hairIndex);
-        */
+        scene.scene.start('Home')
       }
 
       if (name == "inventory"){
         openInventory(scene, player, room);
+      }
+
+      if (name == 'enterButton'){
+        if (isTyping == true){
+          if (fullText.trim()) {
+            sendChatMessage(scene, player, room, fullText.trim()); // Send the chat message
+            fullText = ''; // Clear input
+            textOffset = 0;
+            inputField.setText('');
+          }
+        }
       }
 
     });
@@ -69,21 +74,6 @@ export function createMenu(scene, player, room) {
       button.setFillStyle(0xffffff, 0); // Remove highlight
     });
   });
-
-  // Adjust on window resize
-  /*
-  scene.scale.on('resize', (gameSize) => {
-    const { height } = gameSize;
-    uiImage.setY(height); // Move the UI image to the new bottom
-    buttonConfigs.forEach(({ screenX }, index) => {
-      const button = scene.children.list.find(
-        (child) => child instanceof Phaser.GameObjects.Rectangle && child.x === screenX
-      );
-      if (button) {
-        button.setY(height - 50);
-      }
-    });
-  });*/
 
   // CHAT UI
   const maxCharacters = 100;
@@ -105,9 +95,9 @@ export function createMenu(scene, player, room) {
 
   // Create the input field as a Phaser.Text object
   const inputField = scene.add.text(width / 2 - 110, height - 40, placeholderText, {
-    fontSize: '13px',
+    fontSize: '14px',
     color: '#FFFFFF',
-    fontFamily: 'Roboto',
+    fontFamily: 'Arial',
     backgroundColor: 'rgba(82, 81, 77, 0.0)', // Semi-transparent yellow
     padding: { x: 8, y: 5 },
   }).setOrigin(0, 0).setInteractive().setScrollFactor(0);
@@ -133,8 +123,7 @@ export function createMenu(scene, player, room) {
           sendChatMessage(scene, player, room, fullText.trim()); // Send the chat message
           fullText = ''; // Clear input
           textOffset = 0;
-          inputField.setText(placeholderText);
-          isTyping = false; // Stop typing mode
+          inputField.setText('');
         }
       } else if (event.key === 'Backspace') {
         // Handle backspace: Remove the last character
@@ -161,7 +150,8 @@ export function preloadMenu(scene) {
   scene.load.image('ui', '../assets/ui/menu_bar.png');
   scene.load.image('map', '../assets/ui/map-1.png');
   scene.load.image('actionmenu', '../assets/ui/actions_menu.png')
-  scene.load.image('inventorybg', '../assets/ui/inventory.png')
+  scene.load.image('inventorybg', '../assets/ui/inventory_2018.png')
+  scene.load.image('clothSelectionSideBar', '../assets/ui/clothing_selections.png');
 }
 
 function openMapPopup(scene) {
@@ -268,7 +258,7 @@ export function displayChatBubble(scene, player, message) {
 
     const bubble = scene.add.text(player.x, player.y - 140, message, {
     fontSize: '14px',
-    fontFamily: 'Roboto',
+    fontFamily: 'Arial',
     color: '#000000',
     backgroundColor: 'rgba(231, 230, 226, 0)',
     padding: { x: 10, y: 5 },

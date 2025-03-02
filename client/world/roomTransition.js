@@ -89,7 +89,6 @@ export function createRoomTransitionUI(scene, player, targetScene, roomName, x, 
                     // Transition to the target scene
                     console.log(`Transitioning to scene: ${targetScene}`);
                     scene.scene.start(targetScene);
-                    //scene.scene.start("Preloader", { nextScene: targetScene });
                 }
             },
         });
@@ -99,7 +98,6 @@ export function createRoomTransitionUI(scene, player, targetScene, roomName, x, 
 export function mapTransition(scene, targetScene) {
     console.log(`Transitioning to scene: ${targetScene}`);
     scene.scene.start(targetScene);
-    //scene.scene.start("Preloader", { nextScene: targetScene });
 }
 
 

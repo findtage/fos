@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+        input {
+            padding: 10px;
+            width: 250px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        input:focus {
+            border-color: #007BFF;
+        }
+        .warning-icon {
+            display: none;
+            position: absolute;
+            right: 10px;
+            color: red;
+            font-size: 18px;
+            cursor: help;
+        }
+        .tooltip {
+            visibility: hidden;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 4px;
+            position: absolute;
+            bottom: -25px;
+            right: 0;
+            white-space: nowrap;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .input-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .input-container .warning-icon:hover + .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #signup-message {
+            margin-top: 10px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sign Up</h2>
+    <form id="signup-form">
+        <div class="input-container">
+            <input type="text" id="signup-username" placeholder="Username (3-14 chars, numbers, _ only)" required>
+            <span class="warning-icon">⚠</span>
+            <span class="tooltip" id="username-tooltip"></span>
+        </div>
+        
+        <div class="input-container">
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <span class="warning-icon">⚠</span>
+            <span class="tooltip" id="email-tooltip"></span>
+        </div>
+
+        <div class="input-container">
+            <input type="password" id="signup-password" placeholder="Password (6+ characters)" required>
+            <span class="warning-icon">⚠</span>
+            <span class="tooltip" id="password-tooltip"></span>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <p>By signing up you have agreed to the</p>
+            <p style="align-items: center;"><a href="/terms.html">Terms and Conditions</a></p>
+        </div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+    <p id="signup-message"></p>
+
+    <p>Already have an account? <a href="/index.html">Log In</a></p>
+    <p>*Currently only female avatars are supported</p>
+
+    <script>
+        const usernameInput = document.getElementById("signup-username");
+        const usernameTooltip = document.getElementById("username-tooltip");
+        const emailInput = document.getElementById("signup-email");
+        const emailTooltip = document.getElementById("email-tooltip");
+        const passwordInput = document.getElementById("signup-password");
+        const passwordTooltip = document.getElementById("password-tooltip");
+        const signupMessage = document.getElementById("signup-message");
+
+        const usernameRegex = /^[a-z0-9_]{3,14}$/;
+
+        // ✅ Remove Errors on Input Change
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("input", () => {
+                hideWarning(input);
+                signupMessage.innerText = "";
+            });
+        });
+
+        // ✅ Real-Time Username Checking
+        usernameInput.addEventListener("input", async () => {
+            const username = usernameInput.value.trim();
+            if (!usernameRegex.test(username)) {
+                showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 letters, numbers, _ only.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/auth/check-username/${username}`);
+                const result = await response.json();
+
+                if (result.available) {
+                    hideWarning(usernameInput);
+                } else {
+                    showWarning(usernameInput, usernameTooltip, "Username is already taken.");
+                }
+            } catch (error) {
+                console.error("Error checking username:", error);
+            }
+        });
+
+        // ✅ Validate Email
+        emailInput.addEventListener("input", () => {
+            if (!emailInput.value.includes("@") || !emailInput.value.includes(".")) {
+                showWarning(emailInput, emailTooltip, "Enter a valid email address.");
+            } else {
+                hideWarning(emailInput);
+            }
+        });
+
+        // ✅ Validate Password
+        passwordInput.addEventListener("input", () => {
+            if (passwordInput.value.length < 6) {
+                showWarning(passwordInput, passwordTooltip, "Password must be at least 6 characters.");
+            } else {
+                hideWarning(passwordInput);
+            }
+        });
+
+        document.getElementById("signup-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const username = usernameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!usernameRegex.test(username)) {
+                showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 letters, numbers, _ only.");
+                return;
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                showWarning(emailInput, emailTooltip, "Enter a valid email address.");
+                return;
+            }
+
+            if (password.length < 6) {
+                showWarning(passwordInput, passwordTooltip, "Password must be at least 6 characters.");
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/auth/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    signupMessage.innerText = "Account created! Redirecting...";
+                    setTimeout(() => {
+                        window.location.href = "/index.html";
+                    }, 2000);
+                } else {
+                    if (result.message.includes("Username is already taken")) {
+                        showWarning(usernameInput, usernameTooltip, "This username is already taken.");
+                    } else if (result.message.includes("Email is already in use")) {
+                        showWarning(emailInput, emailTooltip, "This email is already registered.");
+                    } else {
+                        signupMessage.innerText = `Error: ${result.message}`;
+                    }
+                }
+            } catch (error) {
+                signupMessage.innerText = `Error: ${error.message}`;
+            }
+        });
+
+        function showWarning(inputField, tooltip, message) {
+            tooltip.innerText = message;
+            inputField.nextElementSibling.style.display = "inline"; // Show warning icon
+        }
+
+        function hideWarning(inputField) {
+            const warningIcon = inputField.nextElementSibling;
+            const tooltip = warningIcon ? warningIcon.nextElementSibling : null;
+
+            if (warningIcon) {
+                warningIcon.style.display = "none"; // Hide warning icon
+            }
+
+            if (tooltip) {
+                tooltip.innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -55,7 +55,6 @@ router.post("/update", authenticateToken, async (req, res) => {
         const userRef = db.ref(`users/${req.uid}`);
         await userRef.update(req.body);
 
-        console.log(`✅ User ${req.uid} outfit updated:`, req.body);
         res.json({ success: true, message: "User data updated successfully" });
 
     } catch (error) {

@@ -12,7 +12,9 @@
   "description": "",
   "dependencies": {
     "@types/node": "^22.10.6",
+    "buffer": "^6.0.3",
     "colyseus": "^0.15.57",
+    "colyseus.js": "^0.16.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

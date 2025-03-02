@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Oasis extends Phaser.Scene {
     constructor() {
         super({ key: 'Oasis' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 900;
+        this.playerYLocation = data.playerYLocation || 335; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Oasis extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 900, 335);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -52,6 +60,12 @@ export class Dock extends Phaser.Scene {
         super({ key: 'Dock' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 404;
+        this.playerYLocation = data.playerYLocation || 259; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -61,7 +75,8 @@ export class Dock extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'dock').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 404, 259);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'dock'); 

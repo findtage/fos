@@ -6,7 +6,7 @@ import { getPlayerAvatarData } from '../game.js';
 
 export function preloadAvatar(scene) {}
 
-export function createAvatar(scene, startX=300, startY=400) {
+export function createAvatar(scene, startX=300, startY=400, playerDirection = 'left') {
     // Get the player's avatar data from db
     const playerData = getPlayerAvatarData();
     if (!playerData) {
@@ -27,7 +27,7 @@ export function createAvatar(scene, startX=300, startY=400) {
     }).setOrigin(0.5, 0.5);
 
     const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
-    base.setData('direction', 'left'); // Add direction data to track facing
+    base.setData('direction', playerDirection); // Add direction data to track facing
 
     const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
     const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
@@ -54,9 +54,9 @@ export function createAvatar(scene, startX=300, startY=400) {
     ).setOrigin(0.5, 0.5);
     
     const shoe = scene.add.sprite(
-        shoes['shoe']?.[playerData.gender]?.[playerData.shoe]?.["fitX"],
-        shoes['shoe']?.[playerData.gender]?.[playerData.shoe]?.["fitY"], 
-        playerData.shoe, 0
+        shoes['shoe']?.[playerData.gender]?.[playerData.shoes]?.["fitX"],
+        shoes['shoe']?.[playerData.gender]?.[playerData.shoes]?.["fitY"], 
+        playerData.shoes, 0
     ).setOrigin(0.5, 0.5);
 
     const board = scene.add.image(
@@ -65,7 +65,7 @@ export function createAvatar(scene, startX=300, startY=400) {
     playerData.board).setOrigin(0.5, 0.5);
     
     // Add the avatar to the center of the scene
-    avatar.add([tag, nameTag, board, head, eyes, lips, brows, hair, base, bottom, shoe, top]);
+    avatar.add([tag, board, head, eyes, lips, brows, hair, base, bottom, shoe, top, nameTag]);
 
     avatar.base = base; // Store reference to the base
     avatar.nameTag = nameTag;
@@ -79,6 +79,23 @@ export function createAvatar(scene, startX=300, startY=400) {
     avatar.hair = hair;
     avatar.board = board;
 
+    avatar.base.setInteractive();
+    avatar.head.setInteractive();
+
+    avatar.base.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation(); 
+        console.log(playerData.username, "has been clicked")
+    });
+
+    avatar.head.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation(); 
+        console.log(playerData.username, "has been clicked")
+    });
+
+    if (playerDirection == 'right'){
+        avatar.setScale(-1, 1);
+        avatar.nameTag.setScale(-1, 1);
+    }
 
     return avatar;
 }

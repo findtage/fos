@@ -1,43 +1,49 @@
 HOW TO RUN:
-- install node.js
-- let ur computer know this is a nodejs file run: `npm init`
-- install node modules (packages) run: `npm install`
-- run locally (only on ur computer) run: `npx ts-node server/server.js`
+- install node.js (remember to add it into path)
+- install node modules (packages) run in project folder: `npm install`
 
+- (firebase setup): create a project on firebase
+- enable authentication and realtime database
+- go to project settings, service account, select nodejs and generate a new private key
+- rename the json file as 'firebaseServiceAccount.json' and add it to your server/firebase
+- go to realtime database, copy the reference link and add it to your firebaseAdmin.js in database url
+
+- run locally (only on ur computer) run in project folder: `npx ts-node server/server.js`
+
+[I suggest only do this if you have programming experience]
 - (optional) run on ngrok (private temporary hosting for development, other players can join w/ link)
-- install ngrok, https://ngrok.com/docs/getting-started/?os=windows
-- run `ngrok http 3000` on cmd
-- then change socket.js, comment out line 6, remove comment from line 9, after the `wss://` add in the link ngrok gives you
+- install ngrok, https://ngrok.com/docs/getting-started
+- run `ngrok http 3000` in terminal
+- then change all localhost:3000 in the code to the link from ngrok
 - run `npx ts-node server/server.js` from project folder
 
+
+- MAKE SURE U STICK TO COLYSEUS V0.15.26 I LITERALLY WANTED TO DIE
+
 known bugs:
-- when a player joins a room with other players, the default direction all players are facing is left [FIXED]
-- displaying only one chat at a time [FIXED]
+- any pass is working rn (make login client sided)
 - chat bubble is on a lower level than chat text, so other players chat text collides
-- player chat still stays after they leave room, but destroyed within 8 sec [FIXED]
-- chat will disappear for local payer after 8 seconds on screen, if switches away, seconds will pause (but for server, it will disppear after 8 sec)
-- when zooming in or out of the page, button positions changes for animation buttons [FIXED]
 - non recurring: console.log displayed message could not be send, chat UI froze, retested hasnt happened since. Dont know why it occured
 
 features missing from things that are kinda complete:
 - movement, player with the lower y value (lower on screen) should appear above other players in terms of layering
-- a bunch of bgs from map r missing (comet, pet town, carnival) [ADDED] (check doc for missing bgs)
-- attach rooms [DONE]
+- a bunch of bgs from map r missing (comet, music room, hall of fame, qblast, photobooth) (check doc for missing bgs)
+- some hair placements + additional hairs, shirts, shoes, boards
+- outfits, costumes
+- other 6 anims 
+- put clothing items in containers and resize it so its aligned and not overlapping
+- several depth fixes
 
 missing features to work on soon:
-- figure out a way to store assets [DONE]
-- inventory (w/ database) [DONE] - hairs + tops
-- clothing change (multiplayer) [DONE] - hairs + tops
-- mini games
-
-features long term:
-- animations (jump/cry/etc) [ADDED]
-- login (database) / authentication [ADDED]
-- create player
+- fashion show
+- idfones
+- mini games [Added Type Boo, Mouse Out]
+- shops [Finished Sun Block]
+- homes + furniture
+- currency
+- buddies
 - proper time out / log out 
 
 
 
 
-for [assets](https://mega.nz/file/AcAk3KhY#vi4osWc_d7nojMF9-1pPCWgikOsPLhBgz6M3XUVS85Y):
-- place all folders inside project_directory/assets

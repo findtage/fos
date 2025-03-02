@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class PetTown extends Phaser.Scene {
     constructor() {
         super({ key: 'PetTown' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 308;
+        this.playerYLocation = data.playerYLocation || 410; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class PetTown extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 308, 410);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -58,6 +66,12 @@ export class PetShop extends Phaser.Scene {
         super({ key: 'PetShop' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 388;
+        this.playerYLocation = data.playerYLocation || 310; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -66,7 +80,8 @@ export class PetShop extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'petshop').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 388, 310);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petshop');
@@ -92,6 +107,12 @@ export class PetSchool extends Phaser.Scene {
         super({ key: 'PetSchool' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 234;
+        this.playerYLocation = data.playerYLocation || 392; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -100,7 +121,8 @@ export class PetSchool extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'petschool').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 234, 392);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petschool');
@@ -127,6 +149,12 @@ export class PetClass extends Phaser.Scene {
         super({ key: 'PetClass' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 653;
+        this.playerYLocation = data.playerYLocation || 269; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -135,7 +163,8 @@ export class PetClass extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'petclass').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 653, 269);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petclass');

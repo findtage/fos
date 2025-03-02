@@ -4,10 +4,17 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { performIdles } from '../world/animations.js';
 
 export class Lighthouse extends Phaser.Scene {
     constructor() {
         super({ key: 'Lighthouse' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 300;
+        this.playerYLocation = data.playerYLocation || 400; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +29,8 @@ export class Lighthouse extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -57,6 +65,12 @@ export class LighthouseInside extends Phaser.Scene {
         super({ key: 'LighthouseInside' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 218;
+        this.playerYLocation = data.playerYLocation || 387; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this);
@@ -65,7 +79,8 @@ export class LighthouseInside extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'lighthouse_inside').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 218, 387);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'lighthouse_inside'); 
@@ -93,6 +108,12 @@ export class LighthouseRoof extends Phaser.Scene {
         super({ key: 'LighthouseRoof' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 508;
+        this.playerYLocation = data.playerYLocation || 310; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         preloadMenu(this);
         preloadAvatar(this); // Preload the player's avatar
@@ -104,7 +125,8 @@ export class LighthouseRoof extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 508, 310);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);

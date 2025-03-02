@@ -13,6 +13,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
+//app.use(cors({ origin: "https://c99a-98-14-219-221.ngrok-free.app", credentials: true }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/auth", authRoutes);
@@ -98,6 +99,10 @@ gameServer.define('islandstore', GameRoom).enableRealtimeListing();
 
 gameServer.define('dock', GameRoom).enableRealtimeListing();
 gameServer.define('oasis', GameRoom).enableRealtimeListing();
+
+gameServer.define('minigame', GameRoom).enableRealtimeListing();
+
+gameServer.define('home', GameRoom).enableRealtimeListing();
 
 
 // Start the server

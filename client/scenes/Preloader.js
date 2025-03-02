@@ -1,4 +1,4 @@
-import { assets, tops, body, heads, avatar_parts, bottoms, shoes, boards } from '../assets/data.js';
+import { assets, tops, body, heads, avatar_parts, bottoms, shoes, boards, homes } from '../assets/data.js';
 
 export class Preloader extends Phaser.Scene {
     constructor() {
@@ -50,6 +50,9 @@ export class Preloader extends Phaser.Scene {
     }
 
     loadAssets() {
+        // UI Related assets
+        this.load.image('shopIcon', '../assets/ui/shop_icon.png')
+
         // Load all Downtown related Assets
         this.load.image('downtown', '../assets/backgrounds/Downtown/downtown_winter.png');
         this.load.image('starcafe', '../assets/backgrounds/Downtown/star_cafe_winter.png');
@@ -203,12 +206,12 @@ export class Preloader extends Phaser.Scene {
             const bottomPath = bottoms.bottom.female[bottomKey].path;
             // Load static bottoms
             if (bottoms['bottom']?.["female"]?.[bottomKey]?.["type"] == "image") {
-                this.load.image(`bottom${index}`, 'assets/'+bottomPath);
+                this.load.image(`bottom${index}`, bottomPath);
             // Load bottoms with actions
             } else if (bottoms['bottom']?.["female"]?.[bottomKey]?.["type"] == "sprite") {
                 this.load.spritesheet(
                     `bottom${index}`, 
-                    'assets/'+bottomPath,
+                    bottomPath,
                     {
                         frameWidth: bottoms['bottom']?.["female"]?.[bottomKey]?.["splitX"], 
                         frameHeight: bottoms['bottom']?.["female"]?.[bottomKey]?.["splitY"]
@@ -224,12 +227,12 @@ export class Preloader extends Phaser.Scene {
             const shoePath = shoes.shoe.female[shoeKey].path;
             // Load static shoes
             if (shoes['shoe']?.["female"]?.[shoeKey]?.["type"] == "image") {
-                this.load.image(`shoe${index}`, 'assets/'+shoePath);
+                this.load.image(`shoe${index}`, shoePath);
             // Load shoes with actions
             } else if (shoes['shoe']?.["female"]?.[shoeKey]?.["type"] == "sprite") {
                 this.load.spritesheet(
                     `shoe${index}`, 
-                    'assets/'+shoePath,
+                    shoePath,
                     {
                         frameWidth: shoes['shoe']?.["female"]?.[shoeKey]?.["splitX"], 
                         frameHeight: shoes['shoe']?.["female"]?.[shoeKey]?.["splitY"]
@@ -323,6 +326,19 @@ export class Preloader extends Phaser.Scene {
             }*/
             
             index++;
+        });
+
+        Object.entries(homes).forEach(([key, home]) => {
+            const { path, rooms } = home;
+            const homeKey = path.split('/').pop();
+            
+            // Load home icon
+            this.load.image(`${homeKey}_home_icon`, `${path}0.png`); // Loaded as default_home_icon
+            
+            // Load individual room textures
+            for (let i = 1; i <= rooms; i++) {
+                this.load.image(`${homeKey}_home${i}`, `${path}${i}.png`); // Loaded as default_home1 ... default_home2
+            }
         });
 
     }

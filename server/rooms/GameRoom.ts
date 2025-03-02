@@ -49,7 +49,23 @@ export class GameRoom extends Room<RoomState> {
                 this.broadcast("outfitChange", {
                     playerId: client.sessionId,
                     hairKey: data.hairKey,
-                    topKey: data.topKey
+                    topKey: data.topKey,
+                    bottomKey: data.bottomKey,
+                    shoeKey: data.shoeKey,
+                    boardKey: data.boardKey
+                });
+            }
+        });
+
+        this.onMessage("appearanceChange", (client, data) => {
+            const player = this.state.players.get(client.sessionId);
+            if (player) {
+                // Broadcast the hair update to all clients
+                this.broadcast("appearanceChange", {
+                    playerId: client.sessionId,
+                    eyesKey: data.eyesKey,
+                    bodyKey: data.bodyKey,
+                    headKey: data.headKey
                 });
             }
         });
@@ -59,23 +75,9 @@ export class GameRoom extends Room<RoomState> {
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.roomName || 'default'; // Assign the room from options or default
         this.state.players.set(client.sessionId, newPlayer);
-        //this.state.players.set(client.sessionId, new PlayerState(options));
-
 
         console.log(`Player ${client.sessionId} joined room: ${newPlayer.room}`);
 
-        // Send the current state of players in the same room to the new player
-        /*
-        const playersInRoom = Array.from(this.state.players.entries())
-            .filter(([_, player]) => player.room === newPlayer.room)
-            .map(([id, player]) => ({
-                id,
-                x: player.x,
-                y: player.y,
-                room: player.room,
-                direction: player.direction,
-            }));
-        */
         const playersInRoom = Array.from(this.state.players.entries())
             .filter(([_, player]) => player.room === newPlayer.room)
             .map(([id, player]) => ({
@@ -88,7 +90,6 @@ export class GameRoom extends Room<RoomState> {
 
         // Notify other players in the same room about the new player
         
-        //this.broadcastToRoom(newPlayer.room, 'newPlayer', { id: client.sessionId, room: newPlayer.room }, client);
         this.broadcastToRoom(newPlayer.room, 'newPlayer', { id: client.sessionId, ...options });
 
     }

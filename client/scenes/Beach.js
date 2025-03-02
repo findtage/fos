@@ -4,10 +4,19 @@ import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
+import { createAvatarAnimations, performIdles } from '../world/animations.js';
+
+import { sunBlockLogic, preloadSunBlockAssets } from '../world/sunBlock.js';
 
 export class Beach extends Phaser.Scene {
     constructor() {
         super({ key: 'Beach' });
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 1045;
+        this.playerYLocation = data.playerYLocation || 404; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     preload() {
@@ -22,7 +31,8 @@ export class Beach extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
-        this.player = createAvatar(this, 1045, 344+60);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -60,6 +70,12 @@ export class DanceClub extends Phaser.Scene {
         super({ key: 'DanceClub' });
     }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 400;
+        this.playerYLocation = data.playerYLocation || 351; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
     preload() {
         this.sound.stopAll(); 
         preloadMenu(this);
@@ -69,7 +85,8 @@ export class DanceClub extends Phaser.Scene {
     async create() {
         this.add.image(0, 0, 'danceclub').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 400, 351);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'danceclub'); 
@@ -103,12 +120,21 @@ export class TanStore extends Phaser.Scene {
         this.sound.stopAll(); 
         preloadMenu(this);
         preloadAvatar(this);
+        preloadSunBlockAssets(this);
+    }
+
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 215;
+        this.playerYLocation = data.playerYLocation || 323; 
+        this.playerDirection = data.playerDirection || 'left';
     }
 
     async create() {
         this.add.image(0, 0, 'tanstore').setOrigin(0, 0);
         
-        this.player = createAvatar(this, 215, 323);
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        createAvatarAnimations(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'tanstore'); 
@@ -116,6 +142,7 @@ export class TanStore extends Phaser.Scene {
         createRoomTransitionUI(this, this.player, 'Beach', 'Beach', 168, 167, 114, 179);
 
         createMenu(this, this.player, this.room);
+        sunBlockLogic(this, this.player, this.room);
         
         this.updateMovement = setupMovement(this, this.player, 200);
 
