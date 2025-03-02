@@ -10,7 +10,7 @@ HOW TO RUN:
 
 - run locally (only on ur computer) run in project folder: `npx ts-node server/server.js`
 
-[I suggest only do this if you have programming experience]
+[FOR HOSTING I suggest only do this if you have programming experience]
 - (optional) run on ngrok (private temporary hosting for development, other players can join w/ link)
 - install ngrok, https://ngrok.com/docs/getting-started
 - run `ngrok http 3000` in terminal
@@ -18,7 +18,6 @@ HOW TO RUN:
 - run `npx ts-node server/server.js` from project folder
 
 
-- MAKE SURE U STICK TO COLYSEUS V0.15.26 I LITERALLY WANTED TO DIE
 
 known bugs:
 - any pass is working rn (make login client sided)
