@@ -58,27 +58,28 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
 
     const head = scene.add.image(1, -100, genderPrefix + playerData.head).setOrigin(0.5, 0.5);
     
+    // Temp default to female to let male avatars somewhat "wear" female clothes 💀
     const hair = scene.add.sprite(
-        assets['hair']?.[playerData.gender]?.[playerData.hair]?.["fitX"],
-        assets['hair']?.[playerData.gender]?.[playerData.hair]?.["fitY"],
+        assets['hair']?.['female']?.[playerData.hair]?.["fitX"],
+        assets['hair']?.['female']?.[playerData.hair]?.["fitY"],
         playerData.hair,
         0
     ).setOrigin(0.5, 0.5);
 
     const top = scene.add.sprite(
-        tops['top']?.[playerData.gender]?.[playerData.top]?.["fitX"],
-        tops['top']?.[playerData.gender]?.[playerData.top]?.["fitY"], 
+        tops['top']?.['female']?.[playerData.top]?.["fitX"],
+        tops['top']?.['female']?.[playerData.top]?.["fitY"], 
     playerData.top, 0).setOrigin(0.5, 0.5);
 
     const bottom = scene.add.sprite(
-        bottoms['bottom']?.[playerData.gender]?.[playerData.bottom]?.["fitX"],
-        bottoms['bottom']?.[playerData.gender]?.[playerData.bottom]?.["fitY"], 
+        bottoms['bottom']?.['female']?.[playerData.bottom]?.["fitX"],
+        bottoms['bottom']?.['female']?.[playerData.bottom]?.["fitY"], 
         playerData.bottom, 0
     ).setOrigin(0.5, 0.5);
     
     const shoe = scene.add.sprite(
-        shoes['shoe']?.[playerData.gender]?.[playerData.shoes]?.["fitX"],
-        shoes['shoe']?.[playerData.gender]?.[playerData.shoes]?.["fitY"], 
+        shoes['shoe']?.['female']?.[playerData.shoes]?.["fitX"],
+        shoes['shoe']?.['female']?.[playerData.shoes]?.["fitY"], 
         playerData.shoes, 0
     ).setOrigin(0.5, 0.5);
 
