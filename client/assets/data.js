@@ -7748,12 +7748,51 @@ export const body = {
                 "fitY": -72,
                 "type": "sprite",
                 "splitX": 58,
-                "splitY": 89
+                "splitY": 96
             },
         },
             
         "male":{
-
+            "body1": {
+                "path": "avatars/male/body-1.png",
+                "fitX": 4,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "body2": {
+                "path": "avatars/male/body-2.png",
+                "fitX": 4,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "body3": {
+                "path": "avatars/male/body-3.png",
+                "fitX": 4,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "body4": {
+                "path": "avatars/male/body-4.png",
+                "fitX": 4,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "body5": {
+                "path": "avatars/male/body-5.png",
+                "fitX": 4,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
         }
     }
 }
@@ -7798,9 +7837,37 @@ export const heads = {
                 "fitY": -100
             },
         },
-            
         "male":{
-
+            "head1": {
+                "path": "avatars/male/face-1.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "head2": {
+                "path": "avatars/male/face-2.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "head3": {
+                "path": "avatars/male/face-3.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "head4": {
+                "path": "avatars/male/face-4.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "head5": {
+                "path": "avatars/male/face-5.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
         }
     }
 }
@@ -7940,7 +8007,40 @@ export const avatar_parts = {
     },
 
     "male": {
-
+        "lips" : {
+            "path" : "avatars/male/lips-0.png",
+            "fitX": 2,
+            "fitY": -100,
+            "type": "sprite",
+            "splitX": 47,
+            "splitY": 48
+        },
+        "brows" : {
+            "path" : "avatars/female/brow-0.png",
+            "fitX": 1,
+            "fitY": -100,
+            "type": "sprite",
+            "splitX": 45,
+            "splitY": 48
+        },
+        "eyes" : {
+            "eyes5" : {
+                "path" : "avatars/male/new-eyes-5.png",
+                "fitX": 2,
+                "fitY": -101,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "eyes13" : {
+                "path" : "avatars/male/new-eyes-13.png",
+                "fitX": 2,
+                "fitY": -101,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+        }
     },
 
     "shadow": {
