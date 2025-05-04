@@ -26,38 +26,12 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
         align: 'center'
     }).setOrigin(0.5, 0.5);
 
-    const genderPrefix = playerData.gender == "male" ? "m-" : "f-";
+    const { base, eyes, lips, brows, head } = createGenderedParts(
+        scene, 
+        playerData, 
+        playerDirection
+    );
 
-    const base = scene.add.sprite(
-            body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"], 
-            body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
-            genderPrefix + playerData.body,
-            0
-        ).setOrigin(0.5, 0.5);
-    base.setData('direction', playerDirection); // Add direction data to track facing
-
-    const eyes = scene.add.sprite(
-        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitX"], 
-        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitY"], 
-        genderPrefix + playerData.eyes,
-        0
-    ).setOrigin(0.5, 0.5);
-    const lips = scene.add.sprite(
-        avatar_parts[playerData.gender]?.['lips']["fitX"], 
-        avatar_parts[playerData.gender]?.['lips']["fitY"], 
-        genderPrefix + 'lips',
-        0
-    ).setOrigin(0.5, 0.5);
-    
-    const brows = scene.add.sprite(
-        avatar_parts[playerData.gender]?.['brows']["fitX"], 
-        avatar_parts[playerData.gender]?.['brows']["fitY"], 
-        genderPrefix + 'brows',
-        0
-    ).setOrigin(0.5, 0.5);
-
-    const head = scene.add.image(1, -100, genderPrefix + playerData.head).setOrigin(0.5, 0.5);
-    
     // Temp default to female to let male avatars somewhat "wear" female clothes 💀
     const hair = scene.add.sprite(
         assets['hair']?.['female']?.[playerData.hair]?.["fitX"],
@@ -123,4 +97,47 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     }
 
     return avatar;
+}
+
+export function createGenderedParts(scene, playerData, playerDirection = 'left') {
+    const genderPrefix = playerData.gender == "male" ? "m-" : "f-";
+    console.log("creating gendered parts...");
+    const base = scene.add.sprite(
+        body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"], 
+        body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
+        genderPrefix + playerData.body,
+        0
+    ).setOrigin(0.5, 0.5);
+    base.setData('direction', playerDirection); // Add direction data to track facing
+
+    console.log(base);
+    const eyes = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitX"], 
+        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitY"], 
+        genderPrefix + playerData.eyes,
+        0
+    ).setOrigin(0.5, 0.5);
+    const lips = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['lips']["fitX"], 
+        avatar_parts[playerData.gender]?.['lips']["fitY"], 
+        genderPrefix + 'lips',
+        0
+    ).setOrigin(0.5, 0.5);
+
+    const brows = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['brows']["fitX"], 
+        avatar_parts[playerData.gender]?.['brows']["fitY"], 
+        genderPrefix + 'brows',
+        0
+    ).setOrigin(0.5, 0.5);
+
+    const head = scene.add.image(1, -100, genderPrefix + playerData.head).setOrigin(0.5, 0.5);
+
+    return {
+        base,
+        eyes,
+        lips,
+        brows,
+        head
+    };
 }

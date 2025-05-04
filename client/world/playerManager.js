@@ -1,5 +1,6 @@
 import { assets, tops, bottoms, shoes, boards } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
+import { createGenderedParts } from './avatar.js';
 
 export function initializePlayerManager(scene) {
     scene.otherPlayers = {}; // Store other players
@@ -21,11 +22,12 @@ export function initializePlayerManager(scene) {
                 align: 'center'
             }).setOrigin(0.5, 0.5);
 
-            const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
-            const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);
-            const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
-            const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
-            const brows = scene.add.sprite(1, -100, 'brows', 0).setOrigin(0.5, 0.5);
+
+            const { base, eyes, lips, brows, head } = createGenderedParts(
+                scene, 
+                playerData, 
+                playerData.direction
+            );
 
             // Temp default to female to let male avatars somewhat "wear" female clothes
             const hair = scene.add.sprite(
