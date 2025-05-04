@@ -154,9 +154,10 @@ export class Preloader extends Phaser.Scene {
 
         // Parts that don't change
         this.load.image("shadow", avatar_parts.shadow.path);
-        this.load.spritesheet("brows", 'assets/'+avatar_parts.female.brows.path, {frameWidth: avatar_parts.female.brows.splitX, frameHeight: avatar_parts.female.brows.splitY});
-        this.load.spritesheet("lips", 'assets/'+avatar_parts.female.lips.path, {frameWidth: avatar_parts.female.lips.splitX, frameHeight: avatar_parts.female.lips.splitY});
-
+        this.load.spritesheet("f-brows", 'assets/'+avatar_parts.female.brows.path, {frameWidth: avatar_parts.female.brows.splitX, frameHeight: avatar_parts.female.brows.splitY});
+        this.load.spritesheet("m-brows", 'assets/'+avatar_parts.male.brows.path, {frameWidth: avatar_parts.male.brows.splitX, frameHeight: avatar_parts.male.brows.splitY});
+        this.load.spritesheet("f-lips", 'assets/'+avatar_parts.female.lips.path, {frameWidth: avatar_parts.female.lips.splitX, frameHeight: avatar_parts.female.lips.splitY});
+        this.load.spritesheet("m-lips", 'assets/'+avatar_parts.male.lips.path, {frameWidth: avatar_parts.male.lips.splitX, frameHeight: avatar_parts.male.lips.splitY});
 
         //Loading all hairs from hair0
         let index = 0; // Start numbering from 0
@@ -243,67 +244,81 @@ export class Preloader extends Phaser.Scene {
         });
 
         // Loading all heads
-        index = 0;
-        Object.keys(heads.head.female).forEach((headKey) => {
-            const headPath = heads.head.female[headKey].path;
-            // Load static heads
-            if (heads['head']?.["female"]?.[headKey]?.["type"] == "image") {
-                this.load.image(`head${index}`, 'assets/'+headPath);
-            // Load heads with actions
-            } else if (heads['head']?.["female"]?.[headKey]?.["type"] == "sprite") {
-                this.load.spritesheet(
-                    `head${index}`, 
-                    'assets/'+headPath,
-                    {
-                        frameWidth: heads['head']?.["female"]?.[headKey]?.["splitX"], 
-                        frameHeight: heads['head']?.["female"]?.[headKey]?.["splitY"]
-                    }
-                );
-            }
-            index++;
-        });
+        const loadHeads = (gender, prefix) => {
+            Object.keys(heads.head[gender]).forEach((headKey) => {
+                const headData = heads.head[gender][headKey];
+                const headPath = headData.path;
+        
+                // Load static heads
+                if (headData.type === "image") {
+                    this.load.image(`${prefix}${headKey}`, 'assets/' + headPath);
+                // Load heads with actions
+                } else if (headData.type === "sprite") {
+                    this.load.spritesheet(
+                        `${prefix}=${headKey}`,
+                        'assets/' + headPath,
+                        {
+                            frameWidth: headData.splitX,
+                            frameHeight: headData.splitY
+                        }
+                    );
+                }
+            });
+        };
+
+        loadHeads('female', 'f-');
+        loadHeads('male', 'm-');
 
         // Loading all body types
-        index = 0;
-        Object.keys(body.body.female).forEach((bodyKey) => {
-            const bodyPath = body.body.female[bodyKey].path;
-            // Load static body images
-            if (body['body']?.["female"]?.[bodyKey]?.["type"] == "image") {
-                this.load.image(`body${index}`, 'assets/'+bodyPath);
-            // Load body spritesheets
-            } else if (body['body']?.["female"]?.[bodyKey]?.["type"] == "sprite") {
-                this.load.spritesheet(
-                    `body${index}`, 
-                    'assets/'+bodyPath,
-                    {
-                        frameWidth: body['body']?.["female"]?.[bodyKey]?.["splitX"], 
-                        frameHeight: body['body']?.["female"]?.[bodyKey]?.["splitY"]
-                    }
-                );
-            }
-            index++;
-        });
+        const loadBodies = (gender, prefix) => {
+            Object.keys(body.body[gender]).forEach((bodyKey) => {
+                const bodyData = body.body[gender][bodyKey];
+                const bodyPath = bodyData.path;
+        
+                // Load static body images
+                if (bodyData.type === "image") {
+                    this.load.image(`${prefix}${bodyKey}`, 'assets/' + bodyPath);
+                }
+                // Load body spritesheets
+                else if (bodyData.type === "sprite") {
+                    this.load.spritesheet(
+                        `${prefix}${bodyKey}`,
+                        'assets/' + bodyPath,
+                        {
+                            frameWidth: bodyData.splitX,
+                            frameHeight: bodyData.splitY
+                        }
+                    );
+                }
+            });
+        };
+        
+        loadBodies('female', 'f-');
+        loadBodies('male', 'm-');
 
-        // Loading all female eyes
-        index = 0;
-        Object.keys(avatar_parts.female.eyes).forEach((eyeKey) => {
-            const eyePath = avatar_parts.female.eyes[eyeKey].path;
-            // Load eyes as sprites
-            if (avatar_parts.female.eyes[eyeKey].type === "sprite") {
-                this.load.spritesheet(
-                    `eyes${index}`, 
-                    'assets/'+eyePath,
-                    {
-                        frameWidth: avatar_parts.female.eyes[eyeKey].splitX, 
-                        frameHeight: avatar_parts.female.eyes[eyeKey].splitY
-                    }
-                );
-            } else if (avatar_parts.female.eyes[eyeKey].type === "image") {
-                this.load.image(`eyes${index}`, 'assets/'+eyePath);
-            }
-            index++;
-        });
+        // Loading all eyes
+        const loadEyes = (gender, prefix) => {
+            Object.keys(avatar_parts[gender].eyes).forEach((eyeKey) => {
+                const eyeData = avatar_parts[gender].eyes[eyeKey];
+                const eyePath = eyeData.path;
 
+                if (eyeData.type === "sprite") {
+                    this.load.spritesheet(
+                        `${prefix}${eyeKey}`,
+                        'assets/' + eyePath,
+                        {
+                            frameWidth: eyeData.splitX,
+                            frameHeight: eyeData.splitY
+                        }
+                    );
+                } else if (eyeData.type === "image") {
+                    this.load.image(`${prefix}${eyeKey}`, 'assets/' + eyePath);
+                }
+            });
+        };
+
+        loadEyes('female', 'f-');
+        loadEyes('male', 'm-');
 
         // Loading all boards
         index = 0;

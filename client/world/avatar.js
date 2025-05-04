@@ -1,6 +1,6 @@
 
 import { assets } from '../assets/data.js';
-import { tops, bottoms, shoes, boards } from '../assets/data.js';
+import { body, avatar_parts,tops, bottoms, shoes, boards } from '../assets/data.js';
 import { getPlayerAvatarData } from '../game.js';
 
 
@@ -26,14 +26,37 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
         align: 'center'
     }).setOrigin(0.5, 0.5);
 
-    const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
+    const genderPrefix = playerData.gender == "male" ? "m-" : "f-";
+
+    const base = scene.add.sprite(
+            body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"], 
+            body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
+            genderPrefix + playerData.body,
+            0
+        ).setOrigin(0.5, 0.5);
     base.setData('direction', playerDirection); // Add direction data to track facing
 
-    const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
-    const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
-    const brows = scene.add.sprite(1, -100, 'brows', 0).setOrigin(0.5, 0.5);
+    const eyes = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitX"], 
+        avatar_parts[playerData.gender]?.['eyes'][playerData.eyes]?.["fitY"], 
+        genderPrefix + playerData.eyes,
+        0
+    ).setOrigin(0.5, 0.5);
+    const lips = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['lips']["fitX"], 
+        avatar_parts[playerData.gender]?.['lips']["fitY"], 
+        genderPrefix + 'lips',
+        0
+    ).setOrigin(0.5, 0.5);
+    
+    const brows = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['brows']["fitX"], 
+        avatar_parts[playerData.gender]?.['brows']["fitY"], 
+        genderPrefix + 'brows',
+        0
+    ).setOrigin(0.5, 0.5);
 
-    const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);
+    const head = scene.add.image(1, -100, genderPrefix + playerData.head).setOrigin(0.5, 0.5);
     
     const hair = scene.add.sprite(
         assets['hair']?.[playerData.gender]?.[playerData.hair]?.["fitX"],

@@ -37,6 +37,11 @@
             width: 100%;
             margin-bottom: 25px;
         }
+        .gender-options {
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* Optional: adds a little space between options */
+        }
         input {
             padding: 10px;
             width: 250px;
@@ -121,6 +126,16 @@
             <span class="tooltip" id="password-tooltip"></span>
         </div>
 
+        <div class="input-container">
+            <label>Gender:</label>
+            <div class="gender-options">
+                <input type="radio" id="gender-male" name="gender" value="male">
+                <span>Male</span><br>
+                <input type="radio" id="gender-female" name="gender" value="female" checked>
+                <span>Female</span>
+            </div>
+        </div>
+
         <div style="margin-bottom: 15px;">
             <p>By signing up you have agreed to the</p>
             <p style="align-items: center;"><a href="/terms.html">Terms and Conditions</a></p>
@@ -141,6 +156,7 @@
         const passwordInput = document.getElementById("signup-password");
         const passwordTooltip = document.getElementById("password-tooltip");
         const signupMessage = document.getElementById("signup-message");
+        const maleRadio = document.getElementById('gender-male');
 
         const usernameRegex = /^[a-z0-9_]{3,14}$/;
 
@@ -194,10 +210,11 @@
 
         document.getElementById("signup-form").addEventListener("submit", async (e) => {
             e.preventDefault();
-
+            
             const username = usernameInput.value.trim();
             const email = emailInput.value.trim();
             const password = passwordInput.value;
+            const gender = maleRadio.checked ? "male" : "female";
 
             if (!usernameRegex.test(username)) {
                 showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 letters, numbers, _ only.");
@@ -220,7 +237,7 @@
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ username, email, password }),
+                    body: JSON.stringify({ username, email, password, gender }),
                 });
 
                 const result = await response.json();
