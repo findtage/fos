@@ -1,4 +1,5 @@
 import { saveOutfitChangesToDB } from "./inventory.js";
+import { avatar_parts, heads,body } from '../assets/data.js';
 
 export function sunBlockLogic(scene, player, room){
     // Store Logic
@@ -106,11 +107,11 @@ function sunBlockMenu(scene, player, room){
             headKey: player.head.texture.key
         });
 
-        let updatedData = { 
-            eyes: player.eyes.texture.key, 
-            body: player.base.texture.key,
-            head: player.head.texture.key,
-        };
+        const stripPrefix = (key) => key.replace(/^[^-\s]+-/, '');
+        let updatedData = {};
+        ['eyes', 'base', 'head'].forEach(part => {
+            updatedData[part] = stripPrefix(player[part].texture.key);
+        });
         
         // ✅ Check if the outfit was changed before saving
         if (JSON.stringify(updatedData) !== JSON.stringify(initialAvatarData)) {
@@ -154,8 +155,10 @@ class EyeSelection {
         this.eyesPerPage = 8; // 4 rows × 2 columns
         this.columns = 4;
         this.rows = 2;
-        this.eyeKeys = Array.from({ length: 14 }, (_, i) => `eyes${i}`); // Fake list of 14 eyes
-
+        this.eyeKeys = Object.keys(avatar_parts[player.gender].eyes);
+        // Method below would cause issues for missing eye assets (boys)..
+        // this.eyeKeys = Array.from({ length: 14 }, (_, i) => `eyes${i}`); // Fake list of 14 eyes
+        this.genderPrefix = player.gender == "male" ? "m-" : "f-";
         this.container = this.scene.add.container(112, 279);
         this.displayEyes();
         this.createNavigationButtons();
@@ -171,12 +174,12 @@ class EyeSelection {
         let x = 0, y = 0;
         let spacingX = 122; // Adjust spacing
         let spacingY = 110;
-
+        
         pageItems.forEach((eyeKey, index) => {
             let shopBlock = this.scene.add.image(x, y, 'sunBlockContainer').setOrigin(0.5, 0.5);
-            let face = this.scene.add.image(x, y - 18, 'head0').setOrigin(0.5, 0.5);
-            let hair = this.scene.add.image(x, y - 9, 'hair23').setOrigin(0.5, 0.5);
-            let eyes = this.scene.add.image(x, y - 19, eyeKey).setInteractive().setOrigin(0.5, 0.5);
+            let face = this.scene.add.image(x, y - 18, this.player.head.texture.key).setOrigin(0.5, 0.5);
+            let hair = this.scene.add.image(x, y - 9, this.player.gender === 'male' ? 'hair23' : 'hair23').setOrigin(0.5, 0.5);
+            let eyes = this.scene.add.image(x, y - 19, this.genderPrefix + eyeKey).setInteractive().setOrigin(0.5, 0.5);
 
             // Handle click to select hair
             eyes.on('pointerdown', () => {
@@ -240,7 +243,7 @@ class EyeSelection {
             }
         
             // Create new hair sprite
-            this.previewPlayer.eyes = this.scene.add.sprite(1, -101, eyeKey, 0
+            this.previewPlayer.eyes = this.scene.add.sprite(1, -101, this.genderPrefix + eyeKey, 0
             ).setOrigin(0.5, 0.5);
     
             
@@ -264,7 +267,8 @@ class SkinSelection {
         this.eyesPerPage = 8; // 4 rows × 2 columns
         this.columns = 4;
         this.rows = 2;
-        this.eyeKeys = Array.from({ length: 6 }, (_, i) => `head${i}`); 
+        this.headKeys = Object.keys(avatar_parts[player.gender].head);
+        this.genderPrefix = player.gender == "male" ? "m-" : "f-";
 
         this.container = this.scene.add.container(112, 279);
         this.displayEyes();
@@ -276,26 +280,26 @@ class SkinSelection {
 
         // Get current page's items
         const startIndex = this.page * this.eyesPerPage;
-        const pageItems = this.eyeKeys.slice(startIndex, startIndex + this.eyesPerPage);
+        const pageItems = this.headKeys.slice(startIndex, startIndex + this.eyesPerPage);
 
         let x = 0, y = 0;
         let spacingX = 122; // Adjust spacing
         let spacingY = 110;
 
-        pageItems.forEach((eyeKey, index) => {
+        pageItems.forEach((headKey, index) => {
             let shopBlock = this.scene.add.image(x, y, 'sunBlockContainer').setOrigin(0.5, 0.5);
-            let eyes = this.scene.add.image(x, y - 18, eyeKey).setInteractive().setOrigin(0.5, 0.5);
+            let head = this.scene.add.image(x, y - 18, this.genderPrefix + headKey).setInteractive().setOrigin(0.5, 0.5);
             let hair = this.scene.add.image(x, y - 9, 'hair23').setOrigin(0.5, 0.5);
 
-            // Handle click to select hair
-            eyes.on('pointerdown', () => {
-                this.selectEyes(eyeKey, index);
+            // Handle click to select skintone
+            head.on('pointerdown', () => {
+                this.selectEyes(headKey, index);
             });
-            eyes.on('pointerup', (pointer, localX, localY, event) => {
+            head.on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             });
 
-            this.container.add([shopBlock, eyes, hair]);
+            this.container.add([shopBlock, head, hair]);
             this.container.setDepth(2);
 
             // Arrange in rows/columns

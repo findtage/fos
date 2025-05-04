@@ -60,6 +60,7 @@ export function initializePlayerManager(scene) {
 
             avatar.setData('direction', direction);
 
+            avatar.gender = playerData.gender;
             avatar.base = base; // Store reference to the base
             avatar.nameTag = nameTag;
             avatar.top = top;

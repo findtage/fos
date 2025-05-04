@@ -90,6 +90,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     // Add the avatar to the center of the scene
     avatar.add([tag, board, head, eyes, lips, brows, hair, base, bottom, shoe, top, nameTag]);
 
+    avatar.gender = playerData.gender;
     avatar.base = base; // Store reference to the base
     avatar.nameTag = nameTag;
     avatar.top = top;
