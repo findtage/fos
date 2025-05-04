@@ -1,5 +1,5 @@
 import { saveOutfitChangesToDB } from "./inventory.js";
-import { avatar_parts, heads,body } from '../assets/data.js';
+import { avatar_parts, heads, body } from '../assets/data.js';
 
 export function sunBlockLogic(scene, player, room){
     // Store Logic
@@ -108,10 +108,18 @@ function sunBlockMenu(scene, player, room){
         });
 
         const stripPrefix = (key) => key.replace(/^[^-\s]+-/, '');
-        let updatedData = {};
-        ['eyes', 'base', 'head'].forEach(part => {
-            updatedData[part] = stripPrefix(player[part].texture.key);
-        });
+
+        const partMap = {
+            eyes: 'eyes',
+            body: 'base',
+            head: 'head'
+        };
+
+        const updatedData = Object.fromEntries(
+            Object.entries(partMap).map(([key, playerProp]) => 
+                [key, stripPrefix(player[playerProp].texture.key)]
+            )
+        );
         
         // ✅ Check if the outfit was changed before saving
         if (JSON.stringify(updatedData) !== JSON.stringify(initialAvatarData)) {
@@ -243,9 +251,12 @@ class EyeSelection {
             }
         
             // Create new hair sprite
-            this.previewPlayer.eyes = this.scene.add.sprite(1, -101, this.genderPrefix + eyeKey, 0
+            this.previewPlayer.eyes = this.scene.add.sprite(
+                avatar_parts[this.player.gender]?.['eyes'][eyeKey]?.["fitX"], 
+                avatar_parts[this.player.gender]?.['eyes'][eyeKey]?.["fitY"], 
+                this.genderPrefix + eyeKey, 
+                0
             ).setOrigin(0.5, 0.5);
-    
             
             // Add new hair to previewPlayer
             this.previewPlayer.addAt(this.previewPlayer.eyes, eyeIndex);
@@ -267,15 +278,15 @@ class SkinSelection {
         this.eyesPerPage = 8; // 4 rows × 2 columns
         this.columns = 4;
         this.rows = 2;
-        this.headKeys = Object.keys(avatar_parts[player.gender].head);
+        this.headKeys = Object.keys(heads['head'][player.gender]);
         this.genderPrefix = player.gender == "male" ? "m-" : "f-";
 
         this.container = this.scene.add.container(112, 279);
-        this.displayEyes();
+        this.displaySkin();
         this.createNavigationButtons();
     }
 
-    displayEyes() {
+    displaySkin() {
         this.container.removeAll(true); // Clear previous page
 
         // Get current page's items
@@ -293,7 +304,7 @@ class SkinSelection {
 
             // Handle click to select skintone
             head.on('pointerdown', () => {
-                this.selectEyes(headKey, index);
+                this.selectSkin(headKey);
             });
             head.on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
@@ -342,12 +353,17 @@ class SkinSelection {
         this.displayEyes();
     }
 
-    selectEyes(eyeKey, index) {
-            console.log("Head selected:", eyeKey);
+    selectSkin(headKey) {
+            console.log("Head selected:", headKey);
 
-            let bodyKey = "body"+index;
+            const getHeadNumber = (headStr) => {
+                const match = headStr.match(/\d+$/);
+                return match ? parseInt(match[0], 10) : null;
+            };
 
-            const eyeIndex = this.previewPlayer.getIndex(this.previewPlayer.head);
+            let bodyKey = "body" + getHeadNumber(headKey);
+
+            const headIndex = this.previewPlayer.getIndex(this.previewPlayer.head);
             const bodyIndex = this.previewPlayer.getIndex(this.previewPlayer.base);
     
             // Remove previous hair sprite from preview player
@@ -360,14 +376,19 @@ class SkinSelection {
             }
         
             // Create new hair sprite
-            this.previewPlayer.head = this.scene.add.image(1, -100, eyeKey
+            this.previewPlayer.head = this.scene.add.image(1, -100, this.genderPrefix + headKey
             ).setOrigin(0.5, 0.5);
-    
-            this.previewPlayer.base = this.scene.add.sprite(7, -72, bodyKey, 0).setOrigin(0.5, 0.5);
+
+            this.previewPlayer.base = this.scene.add.sprite(
+                body['body']?.[this.player.gender]?.[bodyKey]?.["fitX"], 
+                body['body']?.[this.player.gender]?.[bodyKey]?.["fitY"], 
+                this.genderPrefix + bodyKey, 
+                0
+            ).setOrigin(0.5, 0.5);
             this.previewPlayer.base.setData('direction', this.player.base.direction); // Add direction data to track facing
 
             // Add new hair to previewPlayer
-            this.previewPlayer.addAt(this.previewPlayer.head, eyeIndex);
+            this.previewPlayer.addAt(this.previewPlayer.head, headIndex);
             this.previewPlayer.addAt(this.previewPlayer.base, bodyIndex);
         }
 

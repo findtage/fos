@@ -7748,7 +7748,7 @@ export const body = {
                 "fitY": -72,
                 "type": "sprite",
                 "splitX": 58,
-                "splitY": 96
+                "splitY": 89
             },
         },
             
