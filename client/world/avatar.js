@@ -28,7 +28,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
 
     const { base, eyes, lips, brows, head } = createGenderedParts(
         scene, 
-        playerData, 
+        playerData,
         playerDirection
     );
 
@@ -99,7 +99,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     return avatar;
 }
 
-export function createGenderedParts(scene, playerData, playerDirection = 'left') {
+export function createGenderedParts(scene, playerData, playerDirection) {
     const genderPrefix = playerData.gender == "male" ? "m-" : "f-";
     console.log("creating gendered parts...");
     const base = scene.add.sprite(

@@ -26,7 +26,7 @@ export function initializePlayerManager(scene) {
             const { base, eyes, lips, brows, head } = createGenderedParts(
                 scene, 
                 playerData, 
-                playerData.direction
+                direction
             );
 
             // Temp default to female to let male avatars somewhat "wear" female clothes
