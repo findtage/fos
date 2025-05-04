@@ -66,7 +66,7 @@ router.post("/signup", async (req, res) => {
         return res.status(400).json({ success: false, message: "Sign-ups are currently closed. Maximum number of accounts reached." });
     }
 
-    const { username, email, password } = req.body;
+    const { username, email, password, gender } = req.body;
 
     if (!username || !email || !password) {
         return res.status(400).json({ success: false, message: "Username, email, and password are required." });
@@ -113,16 +113,16 @@ router.post("/signup", async (req, res) => {
         await db.ref(`users/${uid}`).set({
             username: username,
             board: "board0",
-            body: "body0",
+            body: gender === 'male' ? "body1" : "body0",
             body_acc: "none",
             bottom: "bottom0",
             costume: "none",
-            eyes: "eyes0",
+            eyes: gender === 'male' ? "eyes5" : "eyes0",
             face_acc: "none",
-            gender: "female",
+            gender: gender,
             hair: "hair0",
             hair_acc: "none",
-            head: "head0",
+            head: gender === 'male' ? "head1" : "head0",
             home: "home0",
             outfit: "none",
             shoes: "shoe0",
