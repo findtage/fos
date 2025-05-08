@@ -11,7 +11,13 @@ export function setupMovement(scene) {
         if (player.isJumping || player.isCrying) return;
         scene.playersTargetPosition[scene.room.sessionId] = { x: pointer.worldX, y: pointer.worldY }; // Store target position
         if (scene.room) {
-            scene.room.send('move', { x: pointer.worldX, y: pointer.worldY, direction: player.direction}); //direction: player.base.getData('direction') 
+            // Determine direction initially. Quick n dirty fix but *shrug*
+            const targetPosition = scene.playersTargetPosition[scene.room.sessionId];
+            const angle = Phaser.Math.Angle.Between(player.x, player.y, targetPosition.x, targetPosition.y);
+            const velocityX = Math.cos(angle);
+            const direction = velocityX > 0 ? 'right' : 'left';
+
+            scene.room.send('move', { x: pointer.worldX, y: pointer.worldY, direction}); //direction: player.base.getData('direction') 
         }
     });
 }
