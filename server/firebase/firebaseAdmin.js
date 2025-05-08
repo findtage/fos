@@ -7,7 +7,7 @@ dotenv.config();
 // ✅ Initialize Firebase Admin SDK
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "", // This should match your Firebase Realtime Database URL
+    databaseURL: process.env.DB_URL, // This should match your Firebase Realtime Database URL
 });
 
 const db = admin.database();
