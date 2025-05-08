@@ -10,22 +10,24 @@ export class GameRoom extends Room<RoomState> {
         this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
+                //TODO: update so it tracks player lerping. Not a high priority for now.
                 player.x = data.x;
                 player.y = data.y;
                 player.direction = data.direction;
 
                 // Broadcast movement updates only to players in the same room
                 this.broadcastToRoom(player.room, 'playerMoved', { id: client.sessionId, x: player.x, y: player.y, direction: player.direction }, client);
+                //console.log("Player movement detected, new coords x: "+player.x+", y: "+player.y)
             }
         });
 
         this.onMessage("chat", (client, message) => {
             console.log(`Received chat message from ${client.sessionId}: ${message.message}`);
-      
+    
             // Broadcast the chat message to all players in the room
             this.broadcast("chat", {
-              id: client.sessionId,
-              message: message.message,
+                id: client.sessionId,
+                message: message.message,
             });
         });
 
@@ -74,6 +76,9 @@ export class GameRoom extends Room<RoomState> {
     onJoin(client: Client, options: any): void {
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.roomName || 'default'; // Assign the room from options or default
+        newPlayer.x = options.x;
+        newPlayer.y = options.y;
+        newPlayer.direction = options.playerDirection;
         this.state.players.set(client.sessionId, newPlayer);
 
         console.log(`Player ${client.sessionId} joined room: ${newPlayer.room}`);
@@ -85,7 +90,6 @@ export class GameRoom extends Room<RoomState> {
                 ...player
         }));
         
-
         client.send('currentPlayers', playersInRoom);
 
         // Notify other players in the same room about the new player

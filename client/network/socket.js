@@ -28,6 +28,10 @@ export async function joinRoom(scene, roomName) {
     console.log(`Attempting to join room: ${roomName}`);
     try {
         let playerAvatarData = getPlayerAvatarData(); // Get the player's avatar data
+        playerAvatarData.x = scene.playerXLocation;
+        playerAvatarData.y = scene.playerYLocation;
+        playerAvatarData.playerDirection = scene.playerDirection;
+
         if (!playerAvatarData) {
             console.error("❌ No avatar data found!");
             return;
@@ -37,7 +41,7 @@ export async function joinRoom(scene, roomName) {
         
         resetConnectionCheck(); // Reset the connection check
         console.log(`Successfully joined room: ${roomName}`);
-
+        
         currentRoom.onLeave(() => {
             if (!switchingRooms) {
                 console.error("❌ Lost connection to the game server!");
@@ -91,7 +95,7 @@ export async function joinRoom(scene, roomName) {
 
             // Find the player associated with the message
             const sender = id === scene.player.id ? scene.player : scene.otherPlayers[id];
-          
+        
             // Display the message for the corresponding player
             if (sender) {
                 displayChatBubble(scene, sender, message);
@@ -252,7 +256,6 @@ export async function joinRoom(scene, roomName) {
             }
         });
         
-
         return currentRoom;
     } catch (error) {
         console.error(`Failed to join room: ${roomName}`, error);
@@ -267,6 +270,7 @@ export async function joinRoom(scene, roomName) {
  * @param {number} y - The player's y-coordinate.
  */
 export function sendPlayerMove(room, x, y, direction) {
+    //SEND CLICK
     if (room) {
         room.send('move', { x, y, direction });
     }

@@ -3,6 +3,7 @@ import { createAvatarAnimations, performIdles } from './animations.js';
 
 export function initializePlayerManager(scene) {
     scene.otherPlayers = {}; // Store other players
+    scene.playersTargetPosition = {}; // Store click positions of players to lerp movement.
 
     scene.addOtherPlayer = (id, playerData, direction) => {
         if (!scene.otherPlayers[id]) {
@@ -78,6 +79,7 @@ export function initializePlayerManager(scene) {
             
             const otherPlayer = avatar;
             //otherPlayer.room = room; // Track the player's room
+            otherPlayer.setPosition(playerData.x, playerData.y);
             scene.otherPlayers[id] = otherPlayer;
             createAvatarAnimations(scene, otherPlayer);
             performIdles(otherPlayer);
@@ -87,8 +89,9 @@ export function initializePlayerManager(scene) {
     // Update an existing player's position
     scene.updateOtherPlayer = (id, x, y, direction) => {
         if (scene.otherPlayers[id]) {
+            scene.playersTargetPosition[id] = {x, y};
             const otherPlayer = scene.otherPlayers[id];
-            otherPlayer.setPosition(x, y);
+            //console.log("Other player to coords: "+x+", "+y+" from "+otherPlayer.x+", "+otherPlayer.y);
     
             // Update facing direction
             if (direction === 'left') {
