@@ -1,1 +1,3 @@
 /node_modules
+server/firebase/firebaseServiceAccount.json
+.env
