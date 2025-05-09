@@ -2,9 +2,11 @@ import { assets, tops, bottoms, shoes, boards } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
 import { getPlayerAvatarData, updateLocalAvatarData } from "../game.js";
 
+const BASE_DEPTH = 16535;
+
 export function openInventory(scene, player, room){
     //const { width, height } = scene.cameras.main;
-    const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(2);
+    const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(BASE_DEPTH+2);
 
     // Store initial outfit for comparison
     const initialAvatarData = { 
@@ -20,7 +22,7 @@ export function openInventory(scene, player, room){
     });
 
     // Create closet avatar
-    const previewPlayer = scene.add.container(694, 350).setDepth(2).setScrollFactor(0);
+    const previewPlayer = scene.add.container(694, 350).setDepth(BASE_DEPTH+2).setScrollFactor(0);
 
     let previewParts = [];
     let previewHair = null; // Store hair separately
@@ -35,7 +37,7 @@ export function openInventory(scene, player, room){
             let clonedPart = scene.add.image(part.x, part.y, part.texture.key)
                 .setOrigin(part.originX, part.originY)
                 .setScale(part.scaleX, part.scaleY)
-                .setDepth(3);
+                .setDepth(BASE_DEPTH+3);
             if (clonedPart) {
                 previewParts.push(clonedPart);
                 previewPlayer.add(clonedPart);
@@ -63,7 +65,7 @@ export function openInventory(scene, player, room){
     previewPlayer.board = previewBoard;
     
     // Create a close button
-    const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2);
+    const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2);
 
     closeInventory.on('pointerup', async (pointer, localX, localY, event) => {
         // Save hair
@@ -171,7 +173,7 @@ export function openInventory(scene, player, room){
     });
 
     // Create switch to hairs button
-    const switchToHairs = scene.add.rectangle(46, 73, 72, 29, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
+    const switchToHairs = scene.add.rectangle(46, 73, 72, 29, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
 
     switchToHairs.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
@@ -196,7 +198,7 @@ export function openInventory(scene, player, room){
     });
 
     // Create switch to tops button
-    const switchToClothes = scene.add.rectangle(139, 73, 104, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
+    const switchToClothes = scene.add.rectangle(139, 73, 104, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
 
     switchToClothes.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
@@ -220,12 +222,12 @@ export function openInventory(scene, player, room){
         switchToClothes.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
-    const switchToTops = scene.add.rectangle(98, 97, 33, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
-    const switchToBottoms = scene.add.rectangle(165, 97, 60, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToTops = scene.add.rectangle(98, 97, 33, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToBottoms = scene.add.rectangle(165, 97, 60, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
     
-    //const switchToOutfits = scene.add.rectangle(244, 97, 55, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
-    //const switchToCostumes = scene.add.rectangle(331, 97, 70, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
-    const switchToShoes = scene.add.rectangle(413, 97, 45, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    //const switchToOutfits = scene.add.rectangle(244, 97, 55, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
+    //const switchToCostumes = scene.add.rectangle(331, 97, 70, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToShoes = scene.add.rectangle(413, 97, 45, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
     
     switchToTops.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
@@ -279,7 +281,7 @@ export function openInventory(scene, player, room){
     });
 
 
-    const switchToBoards = scene.add.rectangle(235, 73, 90, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
+    const switchToBoards = scene.add.rectangle(235, 73, 90, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
     switchToBoards.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
         if (currentPage != "boards"){
@@ -305,7 +307,7 @@ export function openInventory(scene, player, room){
     // Start inventory at hairs
     let clothingSelection = new HairSelection(scene, player, previewPlayer);
     let currentPage = "hair";
-    let sideBar = scene.add.image(400, 96, 'clothSelectionSideBar').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(2).setVisible(false);
+    let sideBar = scene.add.image(400, 96, 'clothSelectionSideBar').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(BASE_DEPTH+2).setVisible(false);
 }
 
 class HairSelection {
@@ -342,7 +344,7 @@ class HairSelection {
                 var hairSprite = this.scene.add.sprite(x+5, y, hairKey, 0).setInteractive().setScrollFactor(0).setScale(.8, .8);
             }
             this.container.add(hairSprite);
-            this.container.setDepth(2);
+            this.container.setDepth(BASE_DEPTH+2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -372,7 +374,7 @@ class HairSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -383,7 +385,7 @@ class HairSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -467,7 +469,7 @@ class TopSelection {
                 var topSprite = this.scene.add.sprite(x, y, topKey, 0).setInteractive().setScrollFactor(0).setScale(1, 1);
             }
             this.container.add(topSprite);
-            this.container.setDepth(2);
+            this.container.setDepth(BASE_DEPTH+2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -497,7 +499,7 @@ class TopSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -508,7 +510,7 @@ class TopSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -602,7 +604,7 @@ class BottomSelection {
             }
 
             this.container.add(bottomSprite);
-            this.container.setDepth(2);
+            this.container.setDepth(BASE_DEPTH+2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -632,7 +634,7 @@ class BottomSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -643,7 +645,7 @@ class BottomSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -733,7 +735,7 @@ class ShoeSelection {
             }
 
             this.container.add(shoeSprite);
-            this.container.setDepth(2);
+            this.container.setDepth(BASE_DEPTH+2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -763,7 +765,7 @@ class ShoeSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -774,7 +776,7 @@ class ShoeSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -853,7 +855,7 @@ class BoardSelection {
                 var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0);
             }
             this.container.add(hairSprite);
-            this.container.setDepth(2);
+            this.container.setDepth(BASE_DEPTH+2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -883,7 +885,7 @@ class BoardSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -894,7 +896,7 @@ class BoardSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(2);
+            .setDepth(BASE_DEPTH+2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);

@@ -1,5 +1,7 @@
 import { assets } from "../assets/data.js";
 
+const BASE_DEPTH = 16535;
+
 export function createAvatarAnimations(scene, player) {
     // Function to create animations dynamically per player
     function createAnimation(key, texture, frames, frameRate = 2.5) {
@@ -70,8 +72,7 @@ export function toggleEmotePopup(scene, player, room) {
            
     } else {
         // Create the popup image
-        emotePopup = scene.add.image(257, 376, 'actionmenu').setOrigin(0.5, 0.5).setScrollFactor(0);
-        emotePopup.setDepth(2); // Ensure it's above other UI elements
+        emotePopup = scene.add.image(257, 376, 'actionmenu').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(BASE_DEPTH);
 
         const buttonConfigs = [
             { name: 'wave', x: 238, y: 301, width: 30, height: 30 },
