@@ -1,5 +1,5 @@
-import { setupMovement } from '../world/playerMovement.js';
-import { joinRoom, sendPlayerMove } from '../network/socket.js';
+import { stepMovementUpdates, setupMovement } from '../world/playerMovement.js';
+import { joinRoom } from '../network/socket.js';
 import { preloadAvatar, createAvatar} from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
@@ -38,6 +38,7 @@ export class Downtown extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        
         createAvatarAnimations(this, this.player);
         performIdles(this.player);
 
@@ -61,7 +62,7 @@ export class Downtown extends Phaser.Scene {
 
         createMenu(this, this.player, this.room);
 
-        this.updateMovement = setupMovement(this, this.player, 200);
+        this.updateMovement = setupMovement(this);
 
         this.downtown_music = this.sound.add('downtown_music', { loop: true, volume: 0.5 });
         this.downtown_music.play();
@@ -69,10 +70,8 @@ export class Downtown extends Phaser.Scene {
 
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
 
 }
@@ -116,10 +115,8 @@ export class StarCafe extends Phaser.Scene {
     
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
 
 }
@@ -159,10 +156,8 @@ export class LeShop extends Phaser.Scene {
     
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
 
 }
@@ -202,10 +197,8 @@ export class Salon extends Phaser.Scene {
     
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
 
 }
@@ -249,10 +242,8 @@ export class TopModel extends Phaser.Scene {
     
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
 
 }
@@ -302,10 +293,8 @@ export class TopModelVIP extends Phaser.Scene {
 
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
-        
-        if (this.room && this.player && this.room.connection.isOpen) {
-            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
-        }
+
+        stepMovementUpdates(this, delta);
     }
     
 }

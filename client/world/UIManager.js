@@ -2,6 +2,8 @@ import { mapTransition } from "./roomTransition.js";
 import { toggleEmotePopup } from "./animations.js";
 import { openInventory } from "./inventory.js";
 
+const BASE_DEPTH = 16535;
+
 export function createMenu(scene, player, room) {
   const { width, height } = scene.cameras.main;
 
@@ -18,7 +20,7 @@ export function createMenu(scene, player, room) {
   ];
 
   // Add the PNG as the background UI
-  const uiImage = scene.add.image(0, height, 'ui').setOrigin(0, 1).setScrollFactor(0);
+  const uiImage = scene.add.image(0, height, 'ui').setOrigin(0, 1).setScrollFactor(0).setDepth(BASE_DEPTH);
 
   // Add buttons using interactive rectangles over the specified areas
   buttonConfigs.forEach(({ name, x, y, screenX, screenY, boxWidth=39, boxHeight=37, callback }) => {
@@ -87,7 +89,7 @@ export function createMenu(scene, player, room) {
     24, // Height of the text box
     'rgba(82, 81, 77, 0.3)', // Semi-transparent yellow
     0.5 // Full opacity
-  ).setOrigin(0, 0).setInteractive().setScrollFactor(0);
+  ).setOrigin(0, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH-2);
 
   inputBackground.on('pointerup', (pointer, localX, localY, event) => {
     event.stopPropagation();
@@ -100,7 +102,7 @@ export function createMenu(scene, player, room) {
     fontFamily: 'Arial',
     backgroundColor: 'rgba(82, 81, 77, 0.0)', // Semi-transparent yellow
     padding: { x: 8, y: 5 },
-  }).setOrigin(0, 0).setInteractive().setScrollFactor(0);
+  }).setOrigin(0, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH-1);
   
   let isTyping = false;
   let fullText = ''; // The full input text
@@ -169,7 +171,7 @@ function openMapPopup(scene) {
 
   // Add the map image at the center of the screen
   const map = scene.add.image(mapX, mapY, 'map').setOrigin(0.5, 0.5).setScrollFactor(0).setInteractive();
-  map.setDepth(2);
+  map.setDepth(BASE_DEPTH);
   map.on('pointerup', (pointer, localX, localY, event) => {
     event.stopPropagation();
 });
@@ -205,7 +207,7 @@ function openMapPopup(scene) {
       .setInteractive()
       .setScrollFactor(0); // Fix to the camera view
 
-    button.setDepth(2)
+    button.setDepth(BASE_DEPTH)
 
       // Add pointerdown event
     button.on('pointerdown', (pointer, localX, localY, event) => {
@@ -303,8 +305,8 @@ export function displayChatBubble(scene, player, message) {
   const updateBubblePosition = () => {
     bubbleContainer.setPosition(player.x, player.y - 130);
     bubble.setPosition(player.x, player.y - 140);
-    bubble.setDepth(1); // Ensure text is rendered above the graphics
-    bubbleContainer.setDepth(0); // Ensure graphics are below the text
+    bubble.setDepth(player.depth+1); // Ensure text is rendered above the graphics
+    bubbleContainer.setDepth(player.depth); // Ensure graphics are below the text
   };
   scene.events.on('update', updateBubblePosition);
 
