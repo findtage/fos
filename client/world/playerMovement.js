@@ -80,7 +80,8 @@ function lerpMovement(scene, id, player, targetPosition, delta) {
 
             player.x += velocityX;
             player.y += velocityY;
-
+            player.depth = player.y;
+            // We set the z to the y for z-layer ordering
             
         }
     }

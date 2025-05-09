@@ -80,6 +80,7 @@ export function initializePlayerManager(scene) {
             const otherPlayer = avatar;
             //otherPlayer.room = room; // Track the player's room
             otherPlayer.setPosition(playerData.x, playerData.y);
+            otherPlayer.depth = otherPlayer.y;
             scene.otherPlayers[id] = otherPlayer;
             createAvatarAnimations(scene, otherPlayer);
             performIdles(otherPlayer);
