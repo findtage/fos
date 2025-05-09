@@ -94,7 +94,7 @@ export function toggleEmotePopup(scene, player, room) {
             .setInteractive()
             .setScrollFactor(0); // Fix to the camera view
         
-            button.setDepth(2)
+            button.setDepth(BASE_DEPTH)
         
             // Add pointerdown event
             button.on('pointerdown', (pointer, x, y, event) => {
