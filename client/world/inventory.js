@@ -1,20 +1,22 @@
-import { assets, tops, bottoms, shoes, boards } from '../assets/data.js';
+import { assets, tops, bottoms, shoes, outfits, boards, face_acc, body_acc } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
 import { getPlayerAvatarData, updateLocalAvatarData } from "../game.js";
-
-const BASE_DEPTH = 16535;
+import { publicURL } from '../env.js';
 
 export function openInventory(scene, player, room){
     //const { width, height } = scene.cameras.main;
-    const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(BASE_DEPTH+2);
+    const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(2);
 
     // Store initial outfit for comparison
     const initialAvatarData = { 
         hair: player.hair.texture.key, 
-        top: player.top.texture.key,
-        bottom: player.bottom.texture.key,
+        top: player.top.visible ? player.top.texture.key : "none",
+        bottom: player.bottom.visible ? player.bottom.texture.key : "none",
         shoes: player.shoes.texture.key,
-        board: player.board.texture.key
+        board: player.board.texture.key,
+        outfit: player.outfit.visible ? player.outfit.texture.key : "none",
+        face_acc: player.faceacc.texture.key,
+        body_acc: player.bodyacc.texture.key
     };
 
     inventory.on('pointerup', (pointer, localX, localY, event) => {
@@ -22,14 +24,17 @@ export function openInventory(scene, player, room){
     });
 
     // Create closet avatar
-    const previewPlayer = scene.add.container(694, 350).setDepth(BASE_DEPTH+2).setScrollFactor(0);
+    const previewPlayer = scene.add.container(694, 350).setDepth(2).setScrollFactor(0);
 
     let previewParts = [];
     let previewHair = null; // Store hair separately
     let previewTop = null; // Store top separately
     let previewBottom = null; // Store bottom separately
     let previewShoes = null; // Store shoes separately
-    let previewBoard = null; // // Store board separately
+    let previewBoard = null; // Store board separately
+    let previewOutfit = null; // Store outfit separately
+    let previewFaceAcc = null; // Store face_acc separately
+    let previewBodyAcc = null; // Store body_acc seperately
 
     // Make a preview character for inventory
     player.list.forEach(part => {
@@ -37,10 +42,16 @@ export function openInventory(scene, player, room){
             let clonedPart = scene.add.image(part.x, part.y, part.texture.key)
                 .setOrigin(part.originX, part.originY)
                 .setScale(part.scaleX, part.scaleY)
-                .setDepth(BASE_DEPTH+3);
+                .setDepth(3);
+                
             if (clonedPart) {
                 previewParts.push(clonedPart);
                 previewPlayer.add(clonedPart);
+            }
+
+            if (!part.visible){
+
+                clonedPart.setVisible(false);
             }
 
             // If this part is the hair, store it separately
@@ -54,6 +65,12 @@ export function openInventory(scene, player, room){
                 previewShoes = clonedPart;
             } else if (part == player.board){
                 previewBoard = clonedPart;
+            } else if (part == player.outfit){
+                previewOutfit = clonedPart;
+            } else if (part == player.faceacc){
+                previewFaceAcc = clonedPart;
+            } else if (part == player.bodyacc){
+                previewBodyAcc = clonedPart;
             }
         }
     });
@@ -62,10 +79,13 @@ export function openInventory(scene, player, room){
     previewPlayer.top = previewTop; // Store reference to initial top
     previewPlayer.bottom = previewBottom; // Store reference to initial bottom
     previewPlayer.shoes = previewShoes; // Store reference to initial shoes
-    previewPlayer.board = previewBoard;
+    previewPlayer.board = previewBoard; // Store reference to initial board
+    previewPlayer.outfit = previewOutfit; // Store reference to initial outfit
+    previewPlayer.faceacc = previewFaceAcc; // Store reference to initial faceacc
+    previewPlayer.bodyacc = previewBodyAcc; // Store reference to initial bodyacc
     
     // Create a close button
-    const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2);
+    const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2);
 
     closeInventory.on('pointerup', async (pointer, localX, localY, event) => {
         // Save hair
@@ -77,25 +97,68 @@ export function openInventory(scene, player, room){
         previewPlayer.hair.texture.key, 0).setOrigin(0.5, 0.5);
         player.addAt(player.hair, hairIndex);
 
-        // Save top
-        let topIndex = player.getIndex(player.top); // Get the layer index of the top
-        player.top.destroy();
-        player.top = scene.add.sprite(
-        tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitX"], 
-        tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitY"],
-        previewPlayer.top.texture.key,
-        0).setOrigin(0.5, 0.5);
-        player.addAt(player.top, topIndex);
+        
+        if (previewPlayer.top && previewPlayer.top.visible){
+            // Save top
+            let topIndex = player.getIndex(player.top); // Get the layer index of the top
+            player.top.destroy();
+            player.top = scene.add.sprite(
+            tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitX"], 
+            tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitY"],
+            previewPlayer.top.texture.key,
+            0).setOrigin(0.5, 0.5);
+            player.addAt(player.top, topIndex);
 
-        // Save bottom
-        let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
-        player.bottom.destroy();
-        player.bottom = scene.add.sprite(
-        bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitX"], 
-        bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitY"],
-        previewPlayer.bottom.texture.key,
-        0).setOrigin(0.5, 0.5);
-        player.addAt(player.bottom, bottomIndex);
+            // Save bottom
+            let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
+            player.bottom.destroy();
+            player.bottom = scene.add.sprite(
+            bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitX"], 
+            bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitY"],
+            previewPlayer.bottom.texture.key,
+            0).setOrigin(0.5, 0.5);
+            player.addAt(player.bottom, bottomIndex);
+            
+            // Invisible Outfit
+            let outfitIndex = player.getIndex(player.outfit);
+            player.outfit.destroy();
+            player.outfit = scene.add.sprite(
+                outfits?.["female"]?.["outfit0"]?.["fitX"], 
+                outfits?.["female"]?.["outfit0"]?.["fitY"],
+                "outfit0",
+                0).setOrigin(0.5, 0.5).setVisible(false);
+            player.addAt(player.outfit, outfitIndex);
+        } else {
+            // Save Outfit
+            let outfitIndex = player.getIndex(player.outfit);
+            player.outfit.destroy();
+            player.outfit = scene.add.sprite(
+                outfits?.["female"]?.[previewPlayer.outfit.texture.key]?.["fitX"], 
+                outfits?.["female"]?.[previewPlayer.outfit.texture.key]?.["fitY"],
+                previewPlayer.outfit.texture.key,
+                0).setOrigin(0.5, 0.5);
+            player.addAt(player.outfit, outfitIndex);
+
+            // Invisible Top / Bottom
+            let topIndex = player.getIndex(player.top); // Get the layer index of the top
+            player.top.destroy();
+            player.top = scene.add.sprite(
+            tops['top']?.["female"]?.["top0"]?.["fitX"], 
+            tops['top']?.["female"]?.["top0"]?.["fitY"],
+            "top0",
+            0).setOrigin(0.5, 0.5).setVisible(false);
+            player.addAt(player.top, topIndex);
+
+            // Save bottom
+            let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
+            player.bottom.destroy();
+            player.bottom = scene.add.sprite(
+            bottoms['bottom']?.["female"]?.["bottom0"]?.["fitX"], 
+            bottoms['bottom']?.["female"]?.["bottom0"]?.["fitY"],
+            previewPlayer.bottom.texture.key,
+            0).setOrigin(0.5, 0.5).setVisible(false);
+            player.addAt(player.bottom, bottomIndex);
+        }
 
         // Save shoes
         let shoeIndex = player.getIndex(player.shoes); // Get the layer index of the shoes
@@ -117,27 +180,63 @@ export function openInventory(scene, player, room){
         0).setOrigin(0.5, 0.5);
         player.addAt(player.board, boardIndex);
 
+        // Save face acc
+        let faceAccIndex = player.getIndex(player.faceacc);
+        player.faceacc.destroy();
+        player.faceacc = scene.add.image(
+            face_acc['female']?.[previewPlayer.faceacc.texture.key]?.["fitX"], 
+            face_acc['female']?.[previewPlayer.faceacc.texture.key]?.["fitY"], 
+            previewPlayer.faceacc.texture.key,
+        0).setOrigin(0.5, 0.5);
+        player.addAt(player.faceacc, faceAccIndex);
+
+        // Save body acc
+        let bodyAccIndex = player.getIndex(player.bodyacc);
+        player.bodyacc.destroy();
+        if (previewPlayer.bodyacc.texture.key != "baccEmpty"){
+            player.bodyacc = scene.add.sprite(
+                body_acc['female']?.[previewPlayer.bodyacc.texture.key]?.["fitX"], 
+                body_acc['female']?.[previewPlayer.bodyacc.texture.key]?.["fitY"],
+                previewPlayer.bodyacc.texture.key,
+            0).setOrigin(0.5, 0.5);
+            player.addAt(player.bodyacc, bodyAccIndex);
+        } else {
+            player.bodyacc = scene.add.image(
+                0, 0,
+                previewPlayer.bodyacc.texture.key).setOrigin(0.5, 0.5);
+            player.addAt(player.bodyacc, bodyAccIndex);
+        }
+        
+
         // Notify other players about outfit change
         room.send("outfitChange", {playerId: player.id, 
             hairKey: player.hair.texture.key, 
-            topKey: player.top.texture.key, 
-            bottomKey: player.bottom.texture.key,
+            topKey: player.top.visible ? player.top.texture.key : "none",
+            bottomKey: player.bottom.visible ? player.bottom.texture.key : "none",
+            outfitKey: player.outfit.visible ? player.outfit.texture.key : "none",
             shoeKey: player.shoes.texture.key,
-            boardKey: player.board.texture.key
+            boardKey: player.board.texture.key,
+            faceAccKey: player.faceacc.texture.key,
+            bodyAccKey: player.bodyacc.texture.key
         });
         event.stopPropagation();
 
         let updatedData = { 
             hair: player.hair.texture.key, 
-            top: player.top.texture.key, 
-            bottom: player.bottom.texture.key,
+            top: player.top.visible ? player.top.texture.key : "none",
+            bottom: player.bottom.visible ? player.bottom.texture.key : "none",
             shoes: player.shoes.texture.key,
-            board: player.board.texture.key
+            board: player.board.texture.key,
+            outfit: player.outfit.visible ? player.outfit.texture.key : "none",
+            face_acc: player.faceacc.texture.key != "faccEmpty" ? player.faceacc.texture.key : "none",
+            body_acc: player.bodyacc.texture.key != "baccEmpty" ? player.bodyacc.texture.key : "none"
         };
         
         // ✅ Check if the outfit was changed before saving
         if (JSON.stringify(updatedData) !== JSON.stringify(initialAvatarData)) {
-            console.log("📝 Outfit changed! Saving...");
+
+            console.log("Here is updated data:", JSON.stringify(updatedData), "\nHere is inital Data:", JSON.stringify(initialAvatarData),
+            "\n📝 Outfit changed! Saving...");
             await saveOutfitChangesToDB(updatedData);
 
             const avatarData = getPlayerAvatarData();
@@ -152,12 +251,20 @@ export function openInventory(scene, player, room){
         inventory.destroy();
         closeInventory.destroy();
         sideBar.destroy();
+        accSideBar.destroy();
         switchToHairs.destroy();
         switchToClothes.destroy();
         switchToTops.destroy();
         switchToBottoms.destroy();
+        switchToOutfits.destroy();
         switchToShoes.destroy();
         switchToBoards.destroy();
+        switchToAcc.destroy();
+        switchToBodyAcc.destroy();
+        switchToEarrings.destroy();
+        switchToMoodies.destroy();
+        switchToHairAcc.destroy();
+        switchToFaceAcc.destroy();
         clothingSelection.destroy();
         previewPlayer.destroy();
 
@@ -172,8 +279,8 @@ export function openInventory(scene, player, room){
       closeInventory.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
-    // Create switch to hairs button
-    const switchToHairs = scene.add.rectangle(46, 73, 72, 29, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
+    // Handle Hair Button
+    const switchToHairs = scene.add.rectangle(46, 73, 72, 29, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
 
     switchToHairs.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
@@ -183,7 +290,14 @@ export function openInventory(scene, player, room){
             sideBar.setVisible(false);
             switchToTops.setVisible(false);
             switchToBottoms.setVisible(false);
+            switchToOutfits.setVisible(false);
             switchToShoes.setVisible(false);
+            accSideBar.setVisible(false);
+            switchToBodyAcc.setVisible(false);
+            switchToEarrings.setVisible(false);
+            switchToMoodies.setVisible(false);
+            switchToHairAcc.setVisible(false);
+            switchToFaceAcc.setVisible(false);
 
             clothingSelection = new HairSelection(scene, player, previewPlayer); // Store instance
             currentPage = "hair";
@@ -197,8 +311,8 @@ export function openInventory(scene, player, room){
         switchToHairs.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
-    // Create switch to tops button
-    const switchToClothes = scene.add.rectangle(139, 73, 104, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
+    // Handle Clothing Button
+    const switchToClothes = scene.add.rectangle(139, 73, 104, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
 
     switchToClothes.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
@@ -210,6 +324,13 @@ export function openInventory(scene, player, room){
             switchToTops.setVisible(true);
             switchToBottoms.setVisible(true);
             switchToShoes.setVisible(true);
+            switchToOutfits.setVisible(true);
+            accSideBar.setVisible(false);
+            switchToBodyAcc.setVisible(false);
+            switchToEarrings.setVisible(false);
+            switchToMoodies.setVisible(false);
+            switchToHairAcc.setVisible(false);
+            switchToFaceAcc.setVisible(false);
 
             currentPage = "tops";
         } 
@@ -222,18 +343,18 @@ export function openInventory(scene, player, room){
         switchToClothes.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
-    const switchToTops = scene.add.rectangle(98, 97, 33, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
-    const switchToBottoms = scene.add.rectangle(165, 97, 60, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
+    // Clothing sub category buttons
+    const switchToTops = scene.add.rectangle(98, 97, 33, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToBottoms = scene.add.rectangle(165, 97, 60, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToOutfits = scene.add.rectangle(244, 97, 55, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    //const switchToCostumes = scene.add.rectangle(331, 97, 70, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
+    const switchToShoes = scene.add.rectangle(413, 97, 45, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(3).setOrigin(0.5, 0.5).setVisible(false);
     
-    //const switchToOutfits = scene.add.rectangle(244, 97, 55, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
-    //const switchToCostumes = scene.add.rectangle(331, 97, 70, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
-    const switchToShoes = scene.add.rectangle(413, 97, 45, 15, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+3).setOrigin(0.5, 0.5).setVisible(false);
-    
+    // Handle Tops Button
     switchToTops.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
         if (currentPage != "tops"){
             clothingSelection.destroy();
-            // wtf is this shit make it all the same variable since it needs to be fucking destroyed anyway? 
             clothingSelection = new TopSelection(scene, player, previewPlayer); // Store instance
             currentPage = "tops";
         } 
@@ -246,6 +367,7 @@ export function openInventory(scene, player, room){
         switchToTops.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
+    // Handle Bottoms Button
     switchToBottoms.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
         if (currentPage != "bottoms"){
@@ -263,6 +385,25 @@ export function openInventory(scene, player, room){
         switchToBottoms.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
+    // Handle Outfit Button
+    switchToOutfits.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation(); 
+        if (currentPage != "outfits"){
+            clothingSelection.destroy();
+            clothingSelection = new OutfitSelection(scene, player, previewPlayer); // Store instance
+            currentPage = "outfits";
+        } 
+        
+    });
+    switchToOutfits.on('pointerover', () => {
+        switchToOutfits.setFillStyle(0x275A8C, 0.1); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+    });
+    switchToOutfits.on('pointerout', () => {
+        switchToOutfits.setFillStyle(0xffffff, 0); // Remove highlight
+    });
+
+
+    // Handle Shoe Button
     switchToShoes.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
         if (currentPage != "shoes"){
@@ -280,8 +421,8 @@ export function openInventory(scene, player, room){
         switchToShoes.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
-
-    const switchToBoards = scene.add.rectangle(235, 73, 90, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH+2).setOrigin(0.5, 0.5);
+    // Handle Board Button
+    const switchToBoards = scene.add.rectangle(235, 73, 90, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
     switchToBoards.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation(); 
         if (currentPage != "boards"){
@@ -292,6 +433,13 @@ export function openInventory(scene, player, room){
             switchToTops.setVisible(false);
             switchToBottoms.setVisible(false);
             switchToShoes.setVisible(false);
+            switchToOutfits.setVisible(false);
+            accSideBar.setVisible(false);
+            switchToBodyAcc.setVisible(false);
+            switchToEarrings.setVisible(false);
+            switchToMoodies.setVisible(false);
+            switchToHairAcc.setVisible(false);
+            switchToFaceAcc.setVisible(false);
 
             currentPage = "boards";
         } 
@@ -304,10 +452,135 @@ export function openInventory(scene, player, room){
         switchToBoards.setFillStyle(0xffffff, 0); // Remove highlight
     });
 
+    // Handle Accessory Button
+    const switchToAcc = scene.add.rectangle(343, 73, 125, 28, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2).setOrigin(0.5, 0.5);
+    switchToAcc.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation();
+        if (currentPage != "bodyacc" && currentPage != "faceacc" && currentPage != "hairacc" && currentPage != "moodies" && currentPage != "earrings"){
+            clothingSelection.destroy();
+            clothingSelection = new BodyAccSelection(scene, player, previewPlayer); // Store instance
+
+            sideBar.setVisible(false);
+            switchToTops.setVisible(false);
+            switchToBottoms.setVisible(false);
+            switchToShoes.setVisible(false);
+            switchToOutfits.setVisible(false);
+            accSideBar.setVisible(true);
+            switchToBodyAcc.setVisible(true);
+            switchToEarrings.setVisible(true);
+            switchToMoodies.setVisible(true);
+            switchToHairAcc.setVisible(true);
+            switchToFaceAcc.setVisible(true);
+
+            currentPage = "bodyacc";
+            switchToBodyAcc.setStyle({"color": "#203E80"});
+            switchToFaceAcc.setStyle({"color": "#A8D8FC"});
+            switchToEarrings.setStyle({"color": "#A8D8FC"});
+            switchToMoodies.setStyle({"color": "#A8D8FC"});
+            switchToHairAcc.setStyle({"color": "#A8D8FC"});
+        } 
+    });
+    switchToAcc.on('pointerover', () => {
+        switchToAcc.setFillStyle(0x808080, 0.15); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+      });
+    switchToAcc.on('pointerout', () => {
+        switchToAcc.setFillStyle(0xffffff, 0); // Remove highlight
+    });
+
+    // Accessory Sub Category Button
+    // Body Acc
+    const switchToBodyAcc = scene.add.text(83, 90, "", {}).setInteractive().setScrollFactor(0).setDepth(3).setVisible(false);
+    switchToBodyAcc.text = "BODY";
+	switchToBodyAcc.setStyle({ "color": "#A8D8FC", "fontFamily": "VAGRounded", "fontSize": "12px" });
+    switchToBodyAcc.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation();
+        if (currentPage != "bodyacc"){
+            clothingSelection.destroy();
+            clothingSelection = new BodyAccSelection(scene, player, previewPlayer); // Store instance
+
+            currentPage = "bodyacc";
+            switchToBodyAcc.setStyle({"color": "#203E80"});
+            switchToFaceAcc.setStyle({"color": "#A8D8FC"});
+            switchToEarrings.setStyle({"color": "#A8D8FC"});
+            switchToMoodies.setStyle({"color": "#A8D8FC"});
+            switchToHairAcc.setStyle({"color": "#A8D8FC"});
+        } 
+    });
+    switchToBodyAcc.on('pointerover', () => {
+        switchToBodyAcc.setStyle({"color": "#203E80"}); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+    });
+    switchToBodyAcc.on('pointerout', () => {
+        if (currentPage != "bodyacc"){
+            switchToBodyAcc.setStyle({"color": "#A8D8FC"}); // Remove highlight
+        }
+    });
+
+    // Face Acc
+    const switchToFaceAcc = scene.add.text(155, 90, "", {}).setInteractive().setScrollFactor(0).setDepth(3).setVisible(false);
+    switchToFaceAcc.text = "FACE";
+	switchToFaceAcc.setStyle({ "color": "#A8D8FC", "fontFamily": "VAGRounded", "fontSize": "12px" });
+    switchToFaceAcc.on('pointerup', (pointer, localX, localY, event) => {
+        event.stopPropagation();
+        if (currentPage != "faceacc"){
+            clothingSelection.destroy();
+            clothingSelection = new FaceAccSelection(scene, player, previewPlayer); // Store instance
+
+            currentPage = "faceacc";
+            switchToFaceAcc.setStyle({"color": "#203E80"});
+            switchToBodyAcc.setStyle({"color": "#A8D8FC"});
+            switchToEarrings.setStyle({"color": "#A8D8FC"});
+            switchToMoodies.setStyle({"color": "#A8D8FC"});
+            switchToHairAcc.setStyle({"color": "#A8D8FC"});
+        } 
+    });
+    switchToFaceAcc.on('pointerover', () => {
+        switchToFaceAcc.setStyle({"color": "#203E80"}); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+      });
+      switchToFaceAcc.on('pointerout', () => {
+        if (currentPage != "faceacc"){
+            switchToFaceAcc.setStyle({"color": "#A8D8FC"}); // Remove highlight
+        }
+    });
+
+    // Hair Acc
+    const switchToHairAcc = scene.add.text(223, 90, "", {}).setInteractive().setScrollFactor(0).setDepth(3).setVisible(false);
+    switchToHairAcc.text = "HAIR";
+	switchToHairAcc.setStyle({ "color": "#A8D8FC", "fontFamily": "VAGRounded", "fontSize": "12px" });
+    switchToHairAcc.on('pointerover', () => {
+        switchToHairAcc.setStyle({"color": "#203E80"}); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+      });
+      switchToHairAcc.on('pointerout', () => {
+        switchToHairAcc.setStyle({"color": "#A8D8FC"}); // Remove highlight
+    });
+
+    // Moodies
+    const switchToMoodies = scene.add.text(278, 90, "", {}).setInteractive().setScrollFactor(0).setDepth(3).setVisible(false);
+    switchToMoodies.text = "MOODIES";
+	switchToMoodies.setStyle({ "color": "#A8D8FC", "fontFamily": "VAGRounded", "fontSize": "12px" });
+    switchToMoodies.on('pointerover', () => {
+        switchToMoodies.setStyle({"color": "#203E80"}); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+      });
+      switchToMoodies.on('pointerout', () => {
+        switchToMoodies.setStyle({"color": "#A8D8FC"}); // Remove highlight
+    });
+
+    // Earrings
+    const switchToEarrings = scene.add.text(360, 90, "", {}).setInteractive().setScrollFactor(0).setDepth(3).setVisible(false);
+    switchToEarrings.text = "EARRINGS";
+	switchToEarrings.setStyle({ "color": "#A8D8FC", "fontFamily": "VAGRounded", "fontSize": "12px" });
+    switchToEarrings.on('pointerover', () => {
+        switchToEarrings.setStyle({"color": "#203E80"}); // Highlight the area slightly 0x2D2D2D 0xaaaaaa
+      });
+      switchToEarrings.on('pointerout', () => {
+        switchToEarrings.setStyle({"color": "#A8D8FC"}); // Remove highlight
+    });
+
+
     // Start inventory at hairs
     let clothingSelection = new HairSelection(scene, player, previewPlayer);
     let currentPage = "hair";
-    let sideBar = scene.add.image(400, 96, 'clothSelectionSideBar').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(BASE_DEPTH+2).setVisible(false);
+    let sideBar = scene.add.image(400, 96, 'clothSelectionSideBar').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(2).setVisible(false);
+    let accSideBar = scene.add.image(400, 96, 'accSelectionSideBar').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(2).setVisible(false);
 }
 
 class HairSelection {
@@ -344,7 +617,7 @@ class HairSelection {
                 var hairSprite = this.scene.add.sprite(x+5, y, hairKey, 0).setInteractive().setScrollFactor(0).setScale(.8, .8);
             }
             this.container.add(hairSprite);
-            this.container.setDepth(BASE_DEPTH+2);
+            this.container.setDepth(2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -374,7 +647,7 @@ class HairSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -385,7 +658,7 @@ class HairSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -469,7 +742,7 @@ class TopSelection {
                 var topSprite = this.scene.add.sprite(x, y, topKey, 0).setInteractive().setScrollFactor(0).setScale(1, 1);
             }
             this.container.add(topSprite);
-            this.container.setDepth(BASE_DEPTH+2);
+            this.container.setDepth(2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -499,7 +772,7 @@ class TopSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -510,7 +783,7 @@ class TopSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -525,18 +798,30 @@ class TopSelection {
     selectTop(topKey) {
         console.log("Top selected:", topKey, "\nTop path is:\n", tops['top']?.["female"]?.[topKey]?.["path"]);
 
-        const topIndex = this.previewPlayer.getIndex(this.previewPlayer.top);
-        let topScale = 1;
-
-        if (tops['top']?.["female"]?.[topKey]?.["scale"]){
-            topScale = tops['top']?.["female"]?.[topKey]?.["scale"];
-            console.log("Top scale is:", topScale);
-        }
-    
-
+        let topIndex;
+        
         // Remove previous top sprite from preview player
-        if (this.previewPlayer.top) {
+        if (this.previewPlayer.top && this.previewPlayer.top.visible) {
+            topIndex = this.previewPlayer.getIndex(this.previewPlayer.top)
             this.previewPlayer.top.destroy();
+        } else if (this.previewPlayer.top){
+            topIndex = this.previewPlayer.getIndex(this.previewPlayer.top)
+
+            this.previewPlayer.outfit.setVisible(false);
+            this.previewPlayer.top.setVisible(true);
+            this.previewPlayer.bottom.setVisible(true);
+
+            this.previewPlayer.top.destroy();
+            this.previewPlayer.bottom.destroy();
+
+            this.previewPlayer.bottom = this.scene.add.sprite(
+                bottoms['bottom']?.["female"]?.["bottom0"]?.["fitX"], 
+                bottoms['bottom']?.["female"]?.["bottom0"]?.["fitY"], 
+                "bottom0",
+                0
+            ).setOrigin(0.5, 0.5);
+
+            this.previewPlayer.addAt(this.previewPlayer.bottom, topIndex-1)
         }
     
         // Create new top sprite
@@ -545,7 +830,7 @@ class TopSelection {
             tops['top']?.["female"]?.[topKey]?.["fitY"], 
             topKey,
             0
-        ).setOrigin(0.5, 0.5).setScale(topScale, topScale);
+        ).setOrigin(0.5, 0.5);
 
         
         // Add new hair to previewPlayer
@@ -604,7 +889,7 @@ class BottomSelection {
             }
 
             this.container.add(bottomSprite);
-            this.container.setDepth(BASE_DEPTH+2);
+            this.container.setDepth(2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -634,7 +919,7 @@ class BottomSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -645,7 +930,7 @@ class BottomSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -660,17 +945,30 @@ class BottomSelection {
     selectBottom(bottomKey) {
         console.log("Bottom selected:", bottomKey, "\nBottom path is:\n", bottoms['bottom']?.["female"]?.[bottomKey]?.["path"]);
 
-        const bottomIndex = this.previewPlayer.getIndex(this.previewPlayer.bottom);
-        let bottomScale = 1;
-
-        if (bottoms['bottom']?.["female"]?.[bottomKey]?.["scale"]) {
-            bottomScale = bottoms['bottom']?.["female"]?.[bottomKey]?.["scale"];
-            console.log("Bottom scale is:", bottomScale);
-        }
-    
+        let bottomIndex;
+        
         // Remove previous bottom sprite from preview player
-        if (this.previewPlayer.bottom) {
+        if (this.previewPlayer.bottom && this.previewPlayer.bottom.visible) {
+            bottomIndex = this.previewPlayer.getIndex(this.previewPlayer.bottom);
             this.previewPlayer.bottom.destroy();
+        } else if (this.previewPlayer.bottom){
+            bottomIndex = this.previewPlayer.getIndex(this.previewPlayer.bottom);
+
+            this.previewPlayer.outfit.setVisible(false);
+            this.previewPlayer.top.setVisible(true);
+            this.previewPlayer.bottom.setVisible(true);
+
+            this.previewPlayer.top.destroy();
+            this.previewPlayer.bottom.destroy();
+
+            this.previewPlayer.top= this.scene.add.sprite(
+                tops['top']?.["female"]?.["top0"]?.["fitX"], 
+                tops['top']?.["female"]?.["top0"]?.["fitY"], 
+                "top0",
+                0
+            ).setOrigin(0.5, 0.5);
+    
+            this.previewPlayer.addAt(this.previewPlayer.top, bottomIndex+1);
         }
     
         // Create new bottom sprite
@@ -679,7 +977,7 @@ class BottomSelection {
             bottoms['bottom']?.["female"]?.[bottomKey]?.["fitY"], 
             bottomKey,
             0
-        ).setOrigin(0.5, 0.5).setScale(bottomScale, bottomScale);
+        ).setOrigin(0.5, 0.5);
 
         // Add new bottom to previewPlayer
         this.previewPlayer.addAt(this.previewPlayer.bottom, bottomIndex);
@@ -689,6 +987,147 @@ class BottomSelection {
         this.container.destroy(); // Remove all bottom images
         this.nextButton.destroy(); // Remove next page button
         this.prevButton.destroy(); // Remove previous page button
+    }
+}
+
+class OutfitSelection {
+    constructor(scene, player, previewPlayer) {
+        this.scene = scene;
+        this.player = player;
+        this.previewPlayer = previewPlayer;
+        this.hairKeys = Object.keys(outfits.female); // Store hair asset keys
+        this.page = 0;
+        this.hairsPerPage = 18;
+        this.columns = 6;
+        this.rows = 3;
+        this.container = this.scene.add.container(69, 210).setScrollFactor(0); // Adjust position as needed
+        this.displayHairs();
+        this.createNavigationButtons();
+        this.coordinatesText = this.scene.add.text(450, 100, `Outfit X: 0, Y: 0`, {
+            fontSize: '20px',
+            fill: '#ffffff'
+        });
+    }
+
+    displayHairs() {
+        // Clear previous hairs
+        this.container.removeAll(true);
+
+        // Get the current page's hair items
+        const startIndex = this.page * this.hairsPerPage;
+        const pageItems = this.hairKeys.slice(startIndex, startIndex + this.hairsPerPage);
+
+        let x = 0, y = 0;
+        let spacingX = 85; // Adjust spacing
+        let spacingY = 100;
+
+        pageItems.forEach((hairKey, index) => {
+            var hairSprite = this.scene.add.sprite(x, y, hairKey, 0).setInteractive().setScrollFactor(0);
+            this.container.add(hairSprite);
+            this.container.setDepth(2);
+
+            // Arrange in rows and columns
+            x += spacingX;
+            if ((index + 1) % this.columns === 0) {
+                x = 0;
+                y += spacingY;
+            }
+
+            // Handle click to select hair
+            hairSprite.on('pointerdown', () => {
+                this.selectHair(hairKey);
+            });
+            hairSprite.on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            });
+
+        });
+    }
+
+    createNavigationButtons() {
+        // Next Page Button (Down Arrow)
+        this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff', })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        // Previous Page Button (Up Arrow)
+        this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(-1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        this.scene.add.existing(this.nextButton);
+        this.scene.add.existing(this.prevButton);
+    }
+
+    changePage(direction) {
+        let maxPage = Math.ceil(this.hairKeys.length / this.hairsPerPage) - 1;
+        this.page = Phaser.Math.Clamp(this.page + direction, 0, maxPage);
+        this.displayHairs();
+    }
+
+    selectHair(hairKey) {
+        console.log("Outfit selected:", hairKey, "\nOutfit path is:\n", outfits?.["female"]?.[hairKey]?.["path"]);
+        
+        let outfitIndex;
+
+        // Remove previous hair sprite from preview player
+        if (this.previewPlayer.outfit && this.previewPlayer.outfit.visible) {
+            console.log("Outfit exists and is visible")
+            outfitIndex = this.previewPlayer.getIndex(this.previewPlayer.outfit);
+            this.previewPlayer.outfit.destroy();
+        } else if (this.previewPlayer.outfit) {
+            console.log("Outfit exists and is not visible, meaning player is wearing top")
+            this.previewPlayer.top.setVisible(false);
+            this.previewPlayer.bottom.setVisible(false);
+            this.previewPlayer.outfit.setVisible(true);
+            outfitIndex = this.previewPlayer.getIndex(this.previewPlayer.outfit);
+            this.previewPlayer.outfit.destroy();
+        }
+    
+        // Create new hair sprite
+        this.previewPlayer.outfit = this.scene.add.sprite(
+            outfits?.["female"]?.[hairKey]?.["fitX"], 
+            outfits?.["female"]?.[hairKey]?.["fitY"], 
+            hairKey, 0
+        ).setOrigin(0.5, 0.5);
+        
+        /*this.coordinatesText.setDepth(3);
+
+        this.previewPlayer.outfit.setInteractive();
+
+        this.scene.input.setDraggable(this.previewPlayer.outfit);
+
+        this.previewPlayer.outfit.on('drag', (pointer, dragX, dragY) => {
+            // Now `this` refers to the instance of HairSelection because of the arrow function
+            this.previewPlayer.outfit.setPosition(dragX, dragY);  // Move the hair sprite
+            // Update the coordinates text
+            this.coordinatesText.setText(`Outfit X: ${Math.round(dragX)}, Y: ${Math.round(dragY)}`);
+        });
+        */
+
+        
+        // Add new hair to previewPlayer
+        this.previewPlayer.addAt(this.previewPlayer.outfit, outfitIndex);
+    }
+    
+
+    destroy() {
+        this.container.destroy(); // Remove all hair images
+        this.nextButton.destroy(); // Remove next page button
+        this.prevButton.destroy(); // Remove previous page button
+        this.coordinatesText.destroy();
     }
 }
 
@@ -735,7 +1174,7 @@ class ShoeSelection {
             }
 
             this.container.add(shoeSprite);
-            this.container.setDepth(BASE_DEPTH+2);
+            this.container.setDepth(2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -765,7 +1204,7 @@ class ShoeSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -776,7 +1215,7 @@ class ShoeSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -855,7 +1294,7 @@ class BoardSelection {
                 var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0);
             }
             this.container.add(hairSprite);
-            this.container.setDepth(BASE_DEPTH+2);
+            this.container.setDepth(2);
 
             // Arrange in rows and columns
             x += spacingX;
@@ -885,7 +1324,7 @@ class BoardSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         // Previous Page Button (Up Arrow)
         this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
@@ -896,7 +1335,7 @@ class BoardSelection {
             .on('pointerup', (pointer, localX, localY, event) => {
                 event.stopPropagation();
             })
-            .setDepth(BASE_DEPTH+2);
+            .setDepth(2);
     
         this.scene.add.existing(this.nextButton);
         this.scene.add.existing(this.prevButton);
@@ -939,11 +1378,251 @@ class BoardSelection {
     }
 }
 
+class FaceAccSelection {
+    constructor(scene, player, previewPlayer) {
+        this.scene = scene;
+        this.player = player;
+        this.previewPlayer = previewPlayer;
+        this.hairKeys = Object.keys(face_acc.female); // Store hair asset keys
+        this.page = 0;
+        this.hairsPerPage = 12;
+        this.columns = 4;
+        this.rows = 3;
+        this.container = this.scene.add.container(100, 210).setScrollFactor(0); // Adjust position as needed
+        this.displayHairs();
+        this.createNavigationButtons();
+    }
+
+    displayHairs() {
+        // Clear previous hairs
+        this.container.removeAll(true);
+
+        // Get the current page's hair items
+        const startIndex = this.page * this.hairsPerPage;
+        const pageItems = this.hairKeys.slice(startIndex, startIndex + this.hairsPerPage);
+
+        let x = 0, y = 0;
+        let spacingX = 130; // Adjust spacing
+        let spacingY = 110;
+
+        pageItems.forEach((hairKey, index) => {
+            if (face_acc?.['female']?.[hairKey]?.["type"] == "image"){
+                var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0);
+            }
+            this.container.add(hairSprite);
+            this.container.setDepth(2);
+
+            // Arrange in rows and columns
+            x += spacingX;
+            if ((index + 1) % this.columns === 0) {
+                x = 0;
+                y += spacingY;
+            }
+
+            // Handle click to select hair
+            hairSprite.on('pointerdown', () => {
+                this.selectHair(hairKey);
+            });
+            hairSprite.on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            });
+
+        });
+    }
+
+    createNavigationButtons() {
+        // Next Page Button (Down Arrow)
+        this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff', })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        // Previous Page Button (Up Arrow)
+        this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(-1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        this.scene.add.existing(this.nextButton);
+        this.scene.add.existing(this.prevButton);
+    }
+
+    changePage(direction) {
+        let maxPage = Math.ceil(this.hairKeys.length / this.hairsPerPage) - 1;
+        this.page = Phaser.Math.Clamp(this.page + direction, 0, maxPage);
+        this.displayHairs();
+    }
+
+    selectHair(hairKey) {
+        console.log("Face acc selected:", hairKey, "\nFace acc path is:\n", face_acc['female']?.[hairKey]?.["path"]);
+        
+        const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.faceacc);
+
+        if (hairKey == this.previewPlayer.faceacc.texture.key){
+            this.previewPlayer.faceacc.destroy();
+            this.previewPlayer.faceacc = this.scene.add.image(0, 0, 'faccEmpty').setOrigin(0.5, 0.5);
+            this.previewPlayer.addAt(this.previewPlayer.faceacc, hairIndex)
+        } else {
+            // Remove previous hair sprite from preview player
+            if (this.previewPlayer.faceacc) {
+                this.previewPlayer.faceacc.destroy();
+            }
+        
+            // Create new hair sprite
+            this.previewPlayer.faceacc = this.scene.add.image(
+                face_acc['female']?.[hairKey]?.["fitX"], 
+                face_acc['female']?.[hairKey]?.["fitY"], 
+                hairKey
+            ).setOrigin(0.5, 0.5);
+
+            
+            // Add new hair to previewPlayer
+            this.previewPlayer.addAt(this.previewPlayer.faceacc, hairIndex);
+        }
+    }
+    
+    destroy() {
+        this.container.destroy(); // Remove all hair images
+        this.nextButton.destroy(); // Remove next page button
+        this.prevButton.destroy(); // Remove previous page button
+    }
+}
+
+class BodyAccSelection {
+    constructor(scene, player, previewPlayer) {
+        this.scene = scene;
+        this.player = player;
+        this.previewPlayer = previewPlayer;
+        this.hairKeys = Object.keys(body_acc.female); // Store hair asset keys
+        this.page = 0;
+        this.hairsPerPage = 12;
+        this.columns = 4;
+        this.rows = 3;
+        this.container = this.scene.add.container(80, 210).setScrollFactor(0); // Adjust position as needed
+        this.displayHairs();
+        this.createNavigationButtons();
+    }
+
+    displayHairs() {
+        // Clear previous hairs
+        this.container.removeAll(true);
+
+        // Get the current page's hair items
+        const startIndex = this.page * this.hairsPerPage;
+        const pageItems = this.hairKeys.slice(startIndex, startIndex + this.hairsPerPage);
+
+        let x = 0, y = 0;
+        let spacingX = 130; // Adjust spacing
+        let spacingY = 110;
+
+        pageItems.forEach((hairKey, index) => {
+            if (body_acc?.['female']?.[hairKey]?.["type"] == "image"){
+                var hairSprite = this.scene.add.sprite(x, y, hairKey, 0).setInteractive().setScrollFactor(0);
+            }
+            this.container.add(hairSprite);
+            this.container.setDepth(2);
+
+            // Arrange in rows and columns
+            x += spacingX;
+            if ((index + 1) % this.columns === 0) {
+                x = 0;
+                y += spacingY;
+            }
+
+            // Handle click to select hair
+            hairSprite.on('pointerdown', () => {
+                this.selectHair(hairKey);
+            });
+            hairSprite.on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            });
+
+        });
+    }
+
+    createNavigationButtons() {
+        // Next Page Button (Down Arrow)
+        this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff', })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        // Previous Page Button (Up Arrow)
+        this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
+            .setInteractive()
+            .setScrollFactor(0)
+            .setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(-1))
+            .on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            })
+            .setDepth(2);
+    
+        this.scene.add.existing(this.nextButton);
+        this.scene.add.existing(this.prevButton);
+    }
+
+    changePage(direction) {
+        let maxPage = Math.ceil(this.hairKeys.length / this.hairsPerPage) - 1;
+        this.page = Phaser.Math.Clamp(this.page + direction, 0, maxPage);
+        this.displayHairs();
+    }
+
+    selectHair(hairKey) {
+        console.log("Body acc selected:", hairKey, "\nBody acc path is:\n", body_acc['female']?.[hairKey]?.["path"]);
+        
+        const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.bodyacc);
+
+        if (hairKey == this.previewPlayer.bodyacc.texture.key){
+            this.previewPlayer.bodyacc.destroy();
+            this.previewPlayer.bodyacc = this.scene.add.image(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
+            this.previewPlayer.addAt(this.previewPlayer.bodyacc, hairIndex)
+        } else {
+            // Remove previous hair sprite from preview player
+            if (this.previewPlayer.bodyacc) {
+                this.previewPlayer.bodyacc.destroy();
+            }
+        
+            // Create new hair sprite
+            this.previewPlayer.bodyacc = this.scene.add.sprite(
+                body_acc['female']?.[hairKey]?.["fitX"], 
+                body_acc['female']?.[hairKey]?.["fitY"], 
+                hairKey,
+                0
+            ).setOrigin(0.5, 0.5);
+
+            
+            // Add new hair to previewPlayer
+            this.previewPlayer.addAt(this.previewPlayer.bodyacc, hairIndex);
+        }
+    }
+    
+    destroy() {
+        this.container.destroy(); // Remove all hair images
+        this.nextButton.destroy(); // Remove next page button
+        this.prevButton.destroy(); // Remove previous page button
+    }
+}
+
 
 export async function saveOutfitChangesToDB(updatedData) {
     try {
-        //const response = await fetch("https://c99a-98-14-219-221.ngrok-free.app/api/user/update", {
-        const response = await fetch("http://localhost:3000/api/user/update", {
+        const response = await fetch(publicURL+"/api/user/update", {
             
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -1,5 +1,5 @@
-import { stepMovementUpdates, setupMovement } from '../world/playerMovement.js';
-import { joinRoom } from '../network/socket.js';
+import { setupMovement } from '../world/playerMovement.js';
+import { joinRoom, sendPlayerMove } from '../network/socket.js';
 import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
@@ -56,7 +56,9 @@ export class Castle extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }
@@ -113,7 +115,9 @@ export class CastleYard extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -169,6 +173,8 @@ export class CastleInside extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }

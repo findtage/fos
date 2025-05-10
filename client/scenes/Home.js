@@ -1,5 +1,5 @@
-import { stepMovementUpdates, setupMovement } from '../world/playerMovement.js';
-import { joinRoom } from '../network/socket.js';
+import { setupMovement } from '../world/playerMovement.js';
+import { joinRoom, sendPlayerMove } from '../network/socket.js';
 import { preloadAvatar, createAvatar} from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
@@ -16,6 +16,7 @@ export class Home extends Phaser.Scene {
         this.playerXLocation = data.playerXLocation || 400;
         this.playerYLocation = data.playerYLocation || 450; 
         this.playerDirection = data.playerDirection || 'left';
+        this.playerHomeID = data.playerHomeID || getPlayerAvatarData().username;
     }
 
     preload() {
@@ -31,9 +32,8 @@ export class Home extends Phaser.Scene {
         performIdles(this.player);
         initializePlayerManager(this);
 
-        this.room = await joinRoom(this, 'home'); 
-        //this.room = await joinRoom(this, 'home', { homeId: getPlayerAvatarData().username });
-
+        this.room = await joinRoom(this, 'home', this.playerHomeID); 
+        console.log(getPlayerAvatarData().username, "is joining", this.playerHomeID+"'s home");
         createMenu(this, this.player, this.room);
         
         this.updateMovement = setupMovement(this, this.player, 200);
@@ -42,7 +42,9 @@ export class Home extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }

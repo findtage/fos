@@ -1,8 +1,7 @@
 import { mapTransition } from "./roomTransition.js";
 import { toggleEmotePopup } from "./animations.js";
 import { openInventory } from "./inventory.js";
-
-const BASE_DEPTH = 16535;
+import { getPlayerAvatarData } from "../game.js";
 
 export function createMenu(scene, player, room) {
   const { width, height } = scene.cameras.main;
@@ -20,7 +19,7 @@ export function createMenu(scene, player, room) {
   ];
 
   // Add the PNG as the background UI
-  const uiImage = scene.add.image(0, height, 'ui').setOrigin(0, 1).setScrollFactor(0).setDepth(BASE_DEPTH);
+  const uiImage = scene.add.image(0, height, 'ui').setOrigin(0, 1).setScrollFactor(0);
 
   // Add buttons using interactive rectangles over the specified areas
   buttonConfigs.forEach(({ name, x, y, screenX, screenY, boxWidth=39, boxHeight=37, callback }) => {
@@ -48,7 +47,7 @@ export function createMenu(scene, player, room) {
       }
 
       if (name == "home"){
-        scene.scene.start('Home')
+        scene.scene.start('Home', {playerHomeID: getPlayerAvatarData().username})
       }
 
       if (name == "inventory"){
@@ -79,7 +78,7 @@ export function createMenu(scene, player, room) {
 
   // CHAT UI
   const maxCharacters = 100;
-  const maxWidth = 270; // Maximum visible width of the input field
+  const maxWidth = 265; // Maximum visible width of the input field
   const placeholderText = 'Click to type...                                                       '
   
   const inputBackground = scene.add.rectangle(
@@ -89,7 +88,7 @@ export function createMenu(scene, player, room) {
     24, // Height of the text box
     'rgba(82, 81, 77, 0.3)', // Semi-transparent yellow
     0.5 // Full opacity
-  ).setOrigin(0, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH-2);
+  ).setOrigin(0, 0).setInteractive().setScrollFactor(0);
 
   inputBackground.on('pointerup', (pointer, localX, localY, event) => {
     event.stopPropagation();
@@ -102,7 +101,7 @@ export function createMenu(scene, player, room) {
     fontFamily: 'Arial',
     backgroundColor: 'rgba(82, 81, 77, 0.0)', // Semi-transparent yellow
     padding: { x: 8, y: 5 },
-  }).setOrigin(0, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH-1);
+  }).setOrigin(0, 0).setInteractive().setScrollFactor(0);
   
   let isTyping = false;
   let fullText = ''; // The full input text
@@ -154,6 +153,7 @@ export function preloadMenu(scene) {
   scene.load.image('actionmenu', '../assets/ui/actions_menu.png')
   scene.load.image('inventorybg', '../assets/ui/inventory_2018.png')
   scene.load.image('clothSelectionSideBar', '../assets/ui/clothing_selections.png');
+  scene.load.image('accSelectionSideBar', '../assets/ui/acc_selection.png');
 }
 
 function openMapPopup(scene) {
@@ -171,7 +171,7 @@ function openMapPopup(scene) {
 
   // Add the map image at the center of the screen
   const map = scene.add.image(mapX, mapY, 'map').setOrigin(0.5, 0.5).setScrollFactor(0).setInteractive();
-  map.setDepth(BASE_DEPTH);
+  map.setDepth(2);
   map.on('pointerup', (pointer, localX, localY, event) => {
     event.stopPropagation();
 });
@@ -207,7 +207,7 @@ function openMapPopup(scene) {
       .setInteractive()
       .setScrollFactor(0); // Fix to the camera view
 
-    button.setDepth(BASE_DEPTH)
+    button.setDepth(2)
 
       // Add pointerdown event
     button.on('pointerdown', (pointer, localX, localY, event) => {
@@ -305,8 +305,8 @@ export function displayChatBubble(scene, player, message) {
   const updateBubblePosition = () => {
     bubbleContainer.setPosition(player.x, player.y - 130);
     bubble.setPosition(player.x, player.y - 140);
-    bubble.setDepth(player.depth+1); // Ensure text is rendered above the graphics
-    bubbleContainer.setDepth(player.depth); // Ensure graphics are below the text
+    bubble.setDepth(1); // Ensure text is rendered above the graphics
+    bubbleContainer.setDepth(0); // Ensure graphics are below the text
   };
   scene.events.on('update', updateBubblePosition);
 

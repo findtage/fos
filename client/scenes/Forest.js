@@ -1,10 +1,11 @@
-import { stepMovementUpdates, setupMovement } from '../world/playerMovement.js';
-import { joinRoom } from '../network/socket.js';
+import { setupMovement } from '../world/playerMovement.js';
+import { joinRoom, sendPlayerMove } from '../network/socket.js';
 import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
 import { performIdles } from '../world/animations.js';
+import { createPlayGameMessage } from '../minigames/startMiniGame.js';
 
 export class Forest extends Phaser.Scene {
     constructor() {
@@ -57,7 +58,9 @@ export class Forest extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -100,7 +103,9 @@ export class Wizard extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }
@@ -141,7 +146,9 @@ export class Grotto extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }
@@ -189,7 +196,9 @@ export class GrottoSecretOne extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -235,7 +244,9 @@ export class GrottoSecretTwo extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -254,6 +265,7 @@ export class CreatureArea extends Phaser.Scene {
         this.sound.stopAll(); 
         preloadMenu(this);
         preloadAvatar(this); // Preload the player's avatar
+        this.load.image('mouseOut_popup', '../assets/mini_games/MouseOut/mouseOut_popup.png')
     }
 
     async create() {
@@ -276,6 +288,7 @@ export class CreatureArea extends Phaser.Scene {
         createRoomTransitionUI(this, this.player, 'CreatureShop', "Creature Shop", 434, 204, 122, 135);
         createRoomTransitionUI(this, this.player, 'School', 'Fantage School', 917, 115, 205, 171);
         //createRoomTransitionUI(this, this.player, 'CreatureArena', 'Arena Portal', 1832, 234, 264, 302);
+        createPlayGameMessage(this, "Bubble Bug", 1173, 317, 150, 150, 'mouseOut_popup', 'BubbleBug');
 
         createMenu(this, this.player, this.room);
 
@@ -288,7 +301,9 @@ export class CreatureArea extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -327,7 +342,9 @@ export class CreatureShop extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }

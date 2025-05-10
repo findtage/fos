@@ -1,3 +1,4 @@
+import { incrementStarsInDB } from "./startMiniGame.js";
 export class MouseOut extends Phaser.Scene {
     constructor() {
         super({ key: "MouseOut" });
@@ -530,6 +531,8 @@ export class MouseOut extends Phaser.Scene {
 		const stars_earned = this.add.text(541, 173, "", {}).setDepth(600);
 		stars_earned.text = stars+" Stars";
 		stars_earned.setStyle({ "align": "right", "fontFamily": "Arial", "fontStyle": "bold" });
+
+        incrementStarsInDB(stars);
 
         const exit_button = this.add.rectangle(400, 308, 84, 27, 0xffffff, 0).setInteractive().setDepth(600);
         

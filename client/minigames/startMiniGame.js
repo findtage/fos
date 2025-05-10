@@ -9,9 +9,11 @@
  */
 
 import { joinRoom } from '../network/socket.js';
+import { getPlayerAvatarData, updateLocalAvatarData } from '../game.js';
+import { publicURL } from '../env.js';
 
 
-export function createPlayGameMessage(scene, gameName, x, y, width, height, texture_Name) {
+export function createPlayGameMessage(scene, gameName, x, y, width, height, texture_Name, fileName = "") {
     const container = scene.add.ellipse(x, y, width, height, 0xaaaaaa).setInteractive();
     container.setOrigin(0.5);
     container.setFillStyle(0xaaaaaa, 0);
@@ -105,8 +107,34 @@ export function createPlayGameMessage(scene, gameName, x, y, width, height, text
                 scene.scene.start('MouseOut');
             } else if (gameName == 'Type Boo'){
                 scene.scene.start('TypeBoo');
+            } else {
+                scene.scene.start('RuffleScene', {gameName: fileName});
             }
         });
 
     });
+}
+
+export async function incrementStarsInDB(starsToAdd) {
+    const updatedData = {stars: starsToAdd+getPlayerAvatarData().stars}
+    try {
+            const response = await fetch(publicURL+"/api/user/update", {
+                
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(updatedData)
+            });
+    
+            const data = await response.json();
+            if (data.success) {
+                console.log("✅ Changes saved successfully!");
+                updateLocalAvatarData(updatedData); // ✅ Also update locally so changes persist between scenes
+                console.log("Updated local data:", getPlayerAvatarData())
+            } else {
+                console.error("❌ Failed to save changes:", data.message);
+            }
+        } catch (error) {
+            console.error("❌ Error saving changes:", error);
+        }
 }

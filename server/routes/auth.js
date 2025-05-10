@@ -124,9 +124,11 @@ router.post("/signup", async (req, res) => {
             hair_acc: "none",
             head: "head0",
             home: "home0",
+            idfone: {level: 0},
             outfit: "none",
             shoes: "shoe0",
-            top: "top0"
+            stars: 2500,
+            top: "top0",
         });
 
         res.status(201).json({ success: true, message: "User created successfully." });

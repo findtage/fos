@@ -42,6 +42,10 @@ function sunBlockMenu(scene, player, room){
                 previewParts.push(clonedPart);
                 previewPlayer.add(clonedPart);
             }
+            
+            if (!part.visible){
+                clonedPart.setVisible(false);
+            }
 
             if (part === player.eyes) {
                 previewEyes = clonedPart;

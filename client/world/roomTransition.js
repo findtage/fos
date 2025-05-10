@@ -13,7 +13,7 @@
 
 export function createRoomTransitionUI(scene, player, targetScene, roomName, x, y, width, height, entranceMessage="Go to\n") {
     const container = scene.add.rectangle(x, y, width, height, 0xaaaaaa).setInteractive();
-    container.setOrigin(0.5);
+    container.setOrigin(0.5, 1);
     container.setFillStyle(0xaaaaaa, 0);
     //container.setAlpha(0)
 

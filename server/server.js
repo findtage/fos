@@ -2,7 +2,7 @@ const { Server } = require('colyseus');
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const { GameRoom } = require('./rooms/GameRoom');
+const { GameRoom, HomeRoom } = require('./rooms/GameRoom');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
@@ -13,7 +13,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-//app.use(cors({ origin: "https://c99a-98-14-219-221.ngrok-free.app", credentials: true }));
+//app.use(cors({ origin: "https://dark-otters-show.loca.lt", credentials: true }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/auth", authRoutes);
@@ -102,7 +102,8 @@ gameServer.define('oasis', GameRoom).enableRealtimeListing();
 
 gameServer.define('minigame', GameRoom).enableRealtimeListing();
 
-gameServer.define('home', GameRoom).enableRealtimeListing();
+//gameServer.define('home', GameRoom).enableRealtimeListing();
+gameServer.define('home', HomeRoom).filterBy(["homeID"]).enableRealtimeListing();
 
 
 // Start the server

@@ -16,13 +16,14 @@ import { Home } from './scenes/Home.js';
 
 import { MouseOut } from './minigames/mouseOut.js';
 import { TypeBoo } from './minigames/typeBoo.js';
+import { RuffleScene } from './minigames/ruffleGame.js';
+import { publicURL } from './env.js';
 
 let playerAvatarData = null; // Store user avatar data globally
 
 async function checkAuth() {
     try {
-        //const response = await fetch("https://c99a-98-14-219-221.ngrok-free.app/api/user/me", {
-        const response = await fetch("http://localhost:3000/api/user/me", {
+        const response = await fetch(publicURL+"/api/user/me", {
             method: "GET",
             credentials: "include"
         });
@@ -47,7 +48,7 @@ async function checkAuth() {
 
 // Logout function
 async function logout() {
-    await fetch("https://localhost:3000/api/auth/logout", { method: "POST", credentials: "include" });
+    await fetch(publicURL+"/api/auth/logout", { method: "POST", credentials: "include" });
     console.log("✅ Logged out.");
     window.location.href = "index.html";
 }
@@ -71,6 +72,8 @@ const config = {
     parent: 'game-container',
     width: 800,
     height: 520,
+    "transparent": true,
+    antialias: false,
     // All scenes
     scene: [
         Preloader, // Load every asset here
@@ -89,6 +92,7 @@ const config = {
         Oasis, Dock,
         MouseOut, TypeBoo,
         Home,
+        RuffleScene
     ],
 };
 
@@ -144,8 +148,7 @@ export function resetConnectionCheck() {
 let reconnectAttempts = 0;
 
 function checkServerConnection() {
-    //fetch("https://c99a-98-14-219-221.ngrok-free.app/api/ping", { method: "GET", credentials: "include" })
-    fetch("http://localhost:3000/api/ping", { method: "GET", credentials: "include" })
+    fetch(publicURL+"/api/ping", { method: "GET", credentials: "include" })
         .then(response => {
             if (!response.ok) throw new Error("Server unreachable");
             if (connectionLost) {

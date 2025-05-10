@@ -1,6 +1,4 @@
-import { assets } from "../assets/data.js";
-
-const BASE_DEPTH = 16535;
+import { assets, outfits } from "../assets/data.js";
 
 export function createAvatarAnimations(scene, player) {
     // Function to create animations dynamically per player
@@ -17,6 +15,7 @@ export function createAvatarAnimations(scene, player) {
         }
     }
 
+    // Hair Idles
     if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
         const hairanimationKey = `idle-${player.hair.texture.key}`;
 
@@ -27,7 +26,33 @@ export function createAvatarAnimations(scene, player) {
                 frameRate: 2.5,
                 repeat: -1,
             });
+        } 
+    }  
+
+    // Outfit Idles
+    if (outfits?.["female"]?.[player.outfit.texture.key]?.["type"] == "sprite"){
+        const outfitanimationKey = `idle-${player.outfit.texture.key}`;
+
+        if (outfits?.['female']?.[player.outfit.texture.key]?.['frames'] == 8){
+            if (!scene.anims.exists(outfitanimationKey)) { // Prevent duplicate animations
+                scene.anims.create({
+                    key: outfitanimationKey,
+                    frames: scene.anims.generateFrameNumbers(player.outfit.texture.key, { frames: [0, 6, 7] }),
+                    frameRate: 2.5,
+                    repeat: -1,
+                });
+            }
+        } else {
+            if (!scene.anims.exists(outfitanimationKey)) { // Prevent duplicate animations
+                scene.anims.create({
+                    key: outfitanimationKey,
+                    frames: scene.anims.generateFrameNumbers(player.outfit.texture.key, { frames: [0, 6] }),
+                    frameRate: 2.5,
+                    repeat: -1,
+                });
+            }
         }
+        
     }  
 
     // Get unique asset names for this player
@@ -38,22 +63,34 @@ export function createAvatarAnimations(scene, player) {
     const eyesTexture = player.eyes.texture.key;
     const browsTexture = player.brows.texture.key;
     const lipsTexture = player.lips.texture.key;
+    const outfitTexture = player.outfit.texture.key;
+    
 
-    // Define animations for this player only
+    if (player.bodyacc.texture.key != "baccEmpty"){
+        const bodyAccTexture = player.bodyacc.texture.key;
+        createAnimation("wave", bodyAccTexture, [1, 2, 1, 2, 1, 0]);
+        createAnimation("jump", bodyAccTexture, [0, 5, 0, 5, 0]);
+        createAnimation("cry", bodyAccTexture, [3, 4, 3, 4, 3, 4, 0]);
+    }
+
+    // Define animations for this texture only
     createAnimation("wave", bodyTexture, [1, 2, 1, 2, 1, 0]);
     createAnimation("wave", topTexture, [1, 2, 1, 2, 1, 0]);
     createAnimation("wave", lipsTexture, [1, 1, 1, 1, 1, 0]);
+    createAnimation("wave", outfitTexture, [1, 2, 1, 2, 1, 0]);
 
     createAnimation("jump", bodyTexture, [0, 5, 0, 5, 0]);
     createAnimation("jump", topTexture, [0, 5, 0, 5, 0]);
     createAnimation("jump", bottomTexture, [0, 1, 0, 1, 0]);
     createAnimation("jump", shoeTexture, [0, 1, 0, 1, 0]);
     createAnimation("jump", lipsTexture, [0, 1, 1, 1, 0]);
+    createAnimation("jump", outfitTexture, [0, 5, 0, 5, 0]);
 
     createAnimation("cry", bodyTexture, [3, 4, 3, 4, 3, 4, 0]);
     createAnimation("cry", topTexture, [3, 4, 3, 4, 3, 4, 0]);
     createAnimation("cry", browsTexture, [1, 1, 1, 1, 1, 1, 0]);
     createAnimation("cry", eyesTexture, [1, 1, 1, 1, 1, 1, 0]);
+    createAnimation("cry", outfitTexture, [3, 4, 3, 4, 3, 4, 0]);
 
     createAnimation("wink", eyesTexture, [1, 0, 1, 0, 2, 0]);
     createAnimation("wink", lipsTexture, [0, 0, 0, 0, 1, 0]);
@@ -72,7 +109,8 @@ export function toggleEmotePopup(scene, player, room) {
            
     } else {
         // Create the popup image
-        emotePopup = scene.add.image(257, 376, 'actionmenu').setOrigin(0.5, 0.5).setScrollFactor(0).setDepth(BASE_DEPTH);
+        emotePopup = scene.add.image(257, 376, 'actionmenu').setOrigin(0.5, 0.5).setScrollFactor(0);
+        emotePopup.setDepth(2); // Ensure it's above other UI elements
 
         const buttonConfigs = [
             { name: 'wave', x: 238, y: 301, width: 30, height: 30 },
@@ -94,7 +132,7 @@ export function toggleEmotePopup(scene, player, room) {
             .setInteractive()
             .setScrollFactor(0); // Fix to the camera view
         
-            button.setDepth(BASE_DEPTH)
+            button.setDepth(2)
         
             // Add pointerdown event
             button.on('pointerdown', (pointer, x, y, event) => {
@@ -162,6 +200,16 @@ export function performWave(player){
     player.base.play(`wave-${player.base.texture.key}`);
     player.lips.play(`wave-${player.lips.texture.key}`);
     player.top.play(`wave-${player.top.texture.key}`);
+    player.outfit.play(`wave-${player.outfit.texture.key}`);
+
+    if (player.bodyacc.texture.key != "baccEmpty"){
+        player.bodyacc.play(`wave-${player.bodyacc.texture.key}`);
+    }
+
+    player.base.once('animationcomplete', () => {
+        performIdles(player);
+    });
+    
 }
 
 export function performJump(player) {
@@ -175,11 +223,17 @@ export function performJump(player) {
             if (frame.index === 2 || frame.index === 4) {
                 if (!jumped[frame.index + 2]) {
                     player.y -= 5;
+                    player.tag.y += 5;
+                    player.nameTag.y += 5;
+                    player.board.y +=5;
                     jumped[frame.index + 2] = true;
                 }
             } else if (frame.index === 3 || frame.index === 5) {
                 if (!jumped[frame.index + 2]) {
                     player.y += 5;
+                    player.tag.y -= 5;
+                    player.nameTag.y -= 5;
+                    player.board.y -=5;
                     jumped[frame.index + 2] = true;
                 }
             }
@@ -190,17 +244,28 @@ export function performJump(player) {
     player.top.play(`jump-${player.top.texture.key}`);
     player.bottom.play(`jump-${player.bottom.texture.key}`);
     player.shoes.play(`jump-${player.shoes.texture.key}`);
+    player.outfit.play(`jump-${player.outfit.texture.key}`);
+
+    if (player.bodyacc.texture.key != "baccEmpty"){
+        player.bodyacc.play(`jump-${player.bodyacc.texture.key}`);
+    }
 
     player.base.once('animationcomplete', () => {
         player.isJumping = false; // Re-enable movement when jump animation finishes
+        performIdles(player);
     });
 }
 
 export function performCry(player) {
     player.base.play(`cry-${player.base.texture.key}`);
     player.top.play(`cry-${player.top.texture.key}`);
+    player.outfit.play(`cry-${player.outfit.texture.key}`);
     player.brows.play(`cry-${player.brows.texture.key}`);
     player.eyes.play(`cry-${player.eyes.texture.key}`);
+
+    if (player.bodyacc.texture.key != "baccEmpty"){
+        player.bodyacc.play(`cry-${player.bodyacc.texture.key}`);
+    }
 
     let bopped = [false, false, false, false, false, false];
     player.isCrying = true;
@@ -213,11 +278,13 @@ export function performCry(player) {
                     player.hair.y += 1;
                     player.brows.y += 1;
                     player.eyes.y += 1;
+                    player.faceacc.y += 1;
 
                     player.head.x -= 1;
                     player.hair.x -= 1;
                     player.brows.x -= 1;
                     player.eyes.x -= 1;
+                    player.faceacc.x -= 1;
 
                     bopped[frame.index + 2] = true;
                 }
@@ -227,11 +294,13 @@ export function performCry(player) {
                     player.hair.y -= 1;
                     player.brows.y -= 1;
                     player.eyes.y -= 1;
+                    player.faceacc.y -= 1;
 
                     player.head.x += 1;
                     player.hair.x += 1;
                     player.brows.x += 1;
                     player.eyes.x += 1;
+                    player.faceacc.x += 1;
 
                     bopped[frame.index + 2] = true;
                 }
@@ -241,6 +310,7 @@ export function performCry(player) {
 
     player.base.once('animationcomplete', () => {
         player.isCrying = false; // Re-enable movement when cry animation finishes
+        performIdles(player);
     });
 }
 
@@ -252,5 +322,9 @@ export function performWink(player) {
 export function performIdles(player) {
     if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
         player.hair.play(`idle-${player.hair.texture.key}`);
+    }
+
+    if (outfits?.["female"]?.[player.outfit.texture.key]?.["type"] == "sprite"){
+        player.outfit.play(`idle-${player.outfit.texture.key}`);
     }
 }

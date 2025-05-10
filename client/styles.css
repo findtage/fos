@@ -24,6 +24,14 @@ body, html {
     overflow: hidden; /* Prevent canvas from spilling out */
 }
 
+#swf-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 800px;
+    height: 520px;
+    z-index: 2; 
+}
 
 /* Canvas Styling */
 canvas {
@@ -32,4 +40,19 @@ canvas {
     position: absolute; /* Align canvas within container */
     top: 0;
     left: 0;
+    z-index: 3;
+}
+
+@font-face {
+    font-family: 'AnimeAce';
+    src: url('assets/fonts/AnimeAce.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'VAGRounded';
+    src: url('assets/fonts/VAGRounded.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

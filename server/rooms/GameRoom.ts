@@ -1,5 +1,5 @@
 import { Room, Client } from 'colyseus';
-import { RoomState } from '../schema/RoomState';
+import { RoomState, HomeRoomState } from '../schema/RoomState';
 import { PlayerState } from '../schema/PlayerState';
 
 export class GameRoom extends Room<RoomState> {
@@ -10,24 +10,22 @@ export class GameRoom extends Room<RoomState> {
         this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
-                //TODO: update so it tracks player lerping. Not a high priority for now.
                 player.x = data.x;
                 player.y = data.y;
-                player.direction = data.direction;
+                player.direction = data.direction || 'left';
 
                 // Broadcast movement updates only to players in the same room
                 this.broadcastToRoom(player.room, 'playerMoved', { id: client.sessionId, x: player.x, y: player.y, direction: player.direction }, client);
-                //console.log("Player movement detected, new coords x: "+player.x+", y: "+player.y)
             }
         });
 
         this.onMessage("chat", (client, message) => {
             console.log(`Received chat message from ${client.sessionId}: ${message.message}`);
-    
+      
             // Broadcast the chat message to all players in the room
             this.broadcast("chat", {
-                id: client.sessionId,
-                message: message.message,
+              id: client.sessionId,
+              message: message.message,
             });
         });
 
@@ -54,7 +52,10 @@ export class GameRoom extends Room<RoomState> {
                     topKey: data.topKey,
                     bottomKey: data.bottomKey,
                     shoeKey: data.shoeKey,
-                    boardKey: data.boardKey
+                    boardKey: data.boardKey,
+                    outfitKey: data.outfitKey,
+                    faceAccKey: data.faceAccKey,
+                    bodyAccKey: data.bodyAccKey
                 });
             }
         });
@@ -76,9 +77,6 @@ export class GameRoom extends Room<RoomState> {
     onJoin(client: Client, options: any): void {
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.roomName || 'default'; // Assign the room from options or default
-        newPlayer.x = options.x;
-        newPlayer.y = options.y;
-        newPlayer.direction = options.playerDirection;
         this.state.players.set(client.sessionId, newPlayer);
 
         console.log(`Player ${client.sessionId} joined room: ${newPlayer.room}`);
@@ -90,6 +88,7 @@ export class GameRoom extends Room<RoomState> {
                 ...player
         }));
         
+
         client.send('currentPlayers', playersInRoom);
 
         // Notify other players in the same room about the new player
@@ -118,5 +117,94 @@ export class GameRoom extends Room<RoomState> {
                     c.send(type, message);
                 }
             });
+    }
+}
+
+export class HomeRoom extends Room<RoomState> {
+    onCreate(options: any): void {
+        this.setState(new RoomState());
+        console.log(`Home room created for: ${options.homeID}`);
+
+        // Handle player movement
+        this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
+            const player = this.state.players.get(client.sessionId);
+            if (player) {
+                player.x = data.x;
+                player.y = data.y;
+                player.direction = data.direction || 'left';
+
+                this.broadcast("playerMoved", { id: client.sessionId, x: player.x, y: player.y, direction: player.direction }, { except: client });
+            }
+        });
+
+        this.onMessage("chat", (client, message) => {
+            console.log(`Chat from ${client.sessionId}: ${message.message}`);
+            this.broadcast("chat", { id: client.sessionId, message: message.message });
+        });
+
+        this.onMessage("playAnimation", (client, data) => {
+            const { animationKey } = data;
+            const player = this.state.players.get(client.sessionId);
+            if (player) {
+                this.broadcast("playAnimation", { id: client.sessionId, animationKey }, { except: client });
+            }
+        });
+
+        this.onMessage("outfitChange", (client, data) => {
+            const player = this.state.players.get(client.sessionId);
+            if (player) {
+                this.broadcast("outfitChange", {
+                    playerId: client.sessionId,
+                    hairKey: data.hairKey,
+                    topKey: data.topKey,
+                    bottomKey: data.bottomKey,
+                    shoeKey: data.shoeKey,
+                    boardKey: data.boardKey,
+                    outfitKey: data.outfitKey,
+                    faceAccKey: data.faceAccKey,
+                    bodyAccKey: data.bodyAccKey
+                });
+            }
+        });
+
+        this.onMessage("appearanceChange", (client, data) => {
+            const player = this.state.players.get(client.sessionId);
+            if (player) {
+                this.broadcast("appearanceChange", {
+                    playerId: client.sessionId,
+                    eyesKey: data.eyesKey,
+                    bodyKey: data.bodyKey,
+                    headKey: data.headKey
+                });
+            }
+        });
+    }
+
+    onJoin(client: Client, options: any): void {
+        const homeOwner = options.homeID;
+        const newPlayer = new PlayerState(options);
+        newPlayer.room = homeOwner; // Home is identified by the owner's username
+        this.state.players.set(client.sessionId, newPlayer);
+
+        console.log(`Player ${client.sessionId} joined home: ${homeOwner}`);
+
+        const playersInHome = Array.from(this.state.players.entries()).map(([id, player]) => ({
+            id,
+            ...player
+        }));
+
+        client.send('currentPlayers', playersInHome);
+
+        // Notify other players in the home
+        this.broadcast("newPlayer", { id: client.sessionId, ...options }, { except: client });
+    }
+
+    onLeave(client: Client): void {
+        const player = this.state.players.get(client.sessionId);
+        if (player) {
+            console.log(`Player ${client.sessionId} left home: ${player.room}`);
+            this.broadcast("playerLeft", { id: client.sessionId });
+        }
+        this.state.players.delete(client.sessionId);
     }
 }

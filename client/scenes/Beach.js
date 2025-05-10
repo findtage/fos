@@ -1,5 +1,5 @@
-import { stepMovementUpdates, setupMovement } from '../world/playerMovement.js';
-import { joinRoom } from '../network/socket.js';
+import { setupMovement } from '../world/playerMovement.js';
+import { joinRoom, sendPlayerMove } from '../network/socket.js';
 import { preloadAvatar, createAvatar } from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
@@ -45,7 +45,7 @@ export class Beach extends Phaser.Scene {
         createRoomTransitionUI(this, this.player, 'Ship', '', 628, 130, 290, 142, "Board the Sea Breeze");
         createRoomTransitionUI(this, this.player, 'Carnival', 'Carnival', 1045, 130, 119, 100);
         createRoomTransitionUI(this, this.player, 'DanceClub', '', 1649, 163, 126, 104, "Enter the Palm");
-        createRoomTransitionUI(this, this.player, 'TanStore', 'SunBlock', 2092, 205, 205, 164);
+        createRoomTransitionUI(this, this.player, 'TanStore', 'Sun Block', 2092, 205, 205, 164);
         createRoomTransitionUI(this, this.player, 'Downtown', 'Downtown', 2370, 421, 60, 196);
 
         createMenu(this, this.player, this.room);
@@ -59,7 +59,9 @@ export class Beach extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 }
 
@@ -102,7 +104,9 @@ export class DanceClub extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }
@@ -149,7 +153,9 @@ export class TanStore extends Phaser.Scene {
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
         
-        stepMovementUpdates(this, delta);
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
     }
 
 }

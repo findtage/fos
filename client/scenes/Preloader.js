@@ -1,4 +1,4 @@
-import { assets, tops, body, heads, avatar_parts, bottoms, shoes, boards, homes } from '../assets/data.js';
+import { assets, tops, body, heads, avatar_parts, bottoms, outfits, shoes, boards, homes, face_acc, body_acc } from '../assets/data.js';
 
 export class Preloader extends Phaser.Scene {
     constructor() {
@@ -51,10 +51,25 @@ export class Preloader extends Phaser.Scene {
 
     loadAssets() {
         // UI Related assets
-        this.load.image('shopIcon', '../assets/ui/shop_icon.png')
+        this.load.image('shopIcon', '../assets/ui/shop_icon.png');
+        this.load.image('idfoneBase', '../assets/ui/idfone_base.png');
+        this.load.image('closeButton', '../assets/ui/close_button.png');
+        this.load.image('starIcon', '../assets/ui/star.png');
+        const font1 = new FontFace('AnimeAce', 'url(assets/fonts/AnimeAce.ttf)');
+        const font2 = new FontFace('VAGRounded', 'url(assets/fonts/VAGRounded.ttf)');
+        
+
+        this.load.image('castleCatalog0', '../assets/homes/castleCatalogue0.png');
+        this.load.image('castleCatalog1', '../assets/homes/castleCatalogue1.png');
+        this.load.image('castleCatalog2', '../assets/homes/castleCatalogue2.png');
+        this.load.image('castleCatalog3', '../assets/homes/castleCatalogue3.png');
+
+        Promise.all([font1.load(), font2.load()]).then((loadedFonts) => {
+            loadedFonts.forEach((font) => document.fonts.add(font));
+        });
 
         // Load all Downtown related Assets
-        this.load.image('downtown', '../assets/backgrounds/Downtown/downtown_winter.png');
+        this.load.image('downtown', '../assets/backgrounds/Downtown/downtown.png');
         this.load.image('starcafe', '../assets/backgrounds/Downtown/star_cafe_winter.png');
         this.load.image('leshop', '../assets/backgrounds/Downtown/leshop_old.png');
         this.load.image('salon', '../assets/backgrounds/Downtown/stellar_salon.png');
@@ -221,6 +236,21 @@ export class Preloader extends Phaser.Scene {
             index++;
         });
 
+        // Loading all outfits
+        index = 0;
+        Object.keys(outfits.female).forEach((outfitKey) => {
+            const outfitPath = outfits.female[outfitKey].path;
+            this.load.spritesheet(
+                `outfit${index}`, "assets/closet/outfits/female/"+outfitPath,
+                    {
+                        frameWidth: outfits?.["female"]?.[outfitKey]?.["frameWidth"], 
+                        frameHeight: outfits?.["female"]?.[outfitKey]?.["frameHeight"]
+                    }
+                );
+            
+            index++;
+        });
+
         // Loading all shoes
         index = 0;
         Object.keys(shoes.shoe.female).forEach((shoeKey) => {
@@ -328,6 +358,7 @@ export class Preloader extends Phaser.Scene {
             index++;
         });
 
+        // All homes
         Object.entries(homes).forEach(([key, home]) => {
             const { path, rooms } = home;
             const homeKey = path.split('/').pop();
@@ -341,9 +372,34 @@ export class Preloader extends Phaser.Scene {
             }
         });
 
+        // All face acc
+        index = 0;
+        this.load.image('faccEmpty', 'assets/closet/acc/female/face/empty.png');
+        Object.keys(face_acc.female).forEach((faceAccKey) => {
+            const accPath = face_acc.female[faceAccKey].path;
+            // Load static bottoms
+            if (face_acc?.["female"]?.[faceAccKey]?.["type"] == "image") {
+                this.load.image(`facc${index}`, 'assets/closet/acc/female/face/'+accPath);
+            }
+            index++;
+        });
+
+        // Loading all body acc
+        index = 0;
+        this.load.image('baccEmpty', 'assets/closet/acc/female/face/empty.png');
+        Object.keys(body_acc.female).forEach((bodyAccKey) => {
+            const accPath = body_acc.female[bodyAccKey].path;
+            this.load.spritesheet(
+                `bacc${index}`, "assets/closet/acc/female/body/"+accPath,
+                    {
+                        frameWidth: body_acc?.["female"]?.[bodyAccKey]?.["splitX"], 
+                        frameHeight: body_acc?.["female"]?.[bodyAccKey]?.["splitY"]
+                    }
+                );
+            
+            index++;
+        });
     }
     
     create() {}
 }
-
-    
