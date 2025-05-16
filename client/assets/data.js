@@ -4231,6 +4231,16 @@ export const assets = {
                 "splitX": 136,
                 "splitY": 105
             }
+        },
+
+        "male": {
+            "mhair0": {
+                "path": "assets/closet/hairs/male/singleframe/boy-hair-01_sheet.png",
+                "properties": {},
+                "fitX": -2,
+                "fitY": -106,
+                "type": "image"
+            },
         }
     },
     // END TOO MANY ASSETS LOOK AWAY
@@ -7695,6 +7705,17 @@ export const tops = {
                 "splitX": 53,
                 "splitY": 72
             }
+        },
+        "male": {
+            "mtop0": {
+                "path": "assets/closet/tops/male/boy-top-brownsweater_sheet.png",
+                "properties": {},
+                "fitX": 2,
+                "fitY": -65,
+                "type": "sprite",
+                "splitX": 54,
+                "splitY": 76
+            },
         }
     }
 };
@@ -7753,7 +7774,54 @@ export const body = {
         },
 
         "male": {
-
+            "mbody0": {
+                "path": "avatars/male/mbody-0.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "mbody1": {
+                "path": "avatars/male/mbody-1.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "mbody2": {
+                "path": "avatars/male/mbody-2.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "mbody3": {
+                "path": "avatars/male/mbody-3.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "mbody4": {
+                "path": "avatars/male/mbody-4.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
+            "mbody5": {
+                "path": "avatars/male/mbody-5.png",
+                "fitX": 3,
+                "fitY": -76,
+                "type": "sprite",
+                "splitX": 62,
+                "splitY": 96
+            },
         }
     }
 }
@@ -7800,7 +7868,42 @@ export const heads = {
         },
 
         "male": {
-
+            "mhead0": {
+                "path": "avatars/male/mface-0.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "mhead1": {
+                "path": "avatars/male/mface-1.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "mhead2": {
+                "path": "avatars/male/mface-2.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "mhead3": {
+                "path": "avatars/male/mface-3.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "mhead4": {
+                "path": "avatars/male/mface-4.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
+            "mhead5": {
+                "path": "avatars/male/mface-5.png",
+                "type": "image",
+                "fitX": 1,
+                "fitY": -100
+            },
         }
     }
 }
@@ -7940,7 +8043,136 @@ export const avatar_parts = {
     },
 
     "male": {
-
+        "mlips": {
+            "path": "avatars/male/lips-0_orig.png",
+            "fitX": 1,
+            "fitY": -100,
+            "type": "sprite",
+            "splitX": 47,
+            "splitY": 48
+        },
+        "mbrows": {
+            "path": "avatars/male/mbrow-0.png",
+            "fitX": 1,
+            "fitY": -98,
+            "type": "sprite",
+            "splitX": 47,
+            "splitY": 48
+        },
+        "eyes": {
+            "meyes0": {
+                "path": "avatars/male/mnew-eyes-0.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes1": {
+                "path": "avatars/male/mnew-eyes-1.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes2": {
+                "path": "avatars/male/mnew-eyes-2.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes3": {
+                "path": "avatars/male/mnew-eyes-3.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes4": {
+                "path": "avatars/male/mnew-eyes-4.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes5": {
+                "path": "avatars/male/mnew-eyes-5.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes6": {
+                "path": "avatars/male/mnew-eyes-6.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes7": {
+                "path": "avatars/male/mnew-eyes-7.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes8": {
+                "path": "avatars/male/mnew-eyes-8.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes9": {
+                "path": "avatars/male/mnew-eyes-9.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes10": {
+                "path": "avatars/male/mnew-eyes-10.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes11": {
+                "path": "avatars/male/mnew-eyes-11.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes12": {
+                "path": "avatars/male/mnew-eyes-12.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            },
+            "meyes13": {
+                "path": "avatars/male/mnew-eyes-13.png",
+                "fitX": 1,
+                "fitY": -100,
+                "type": "sprite",
+                "splitX": 47,
+                "splitY": 48
+            }
+        }
     },
 
     "shadow": {
@@ -9546,6 +9778,17 @@ export const bottoms = {
                 "splitX": 44,
                 "splitY": 32
             }
+        },
+        "male": {
+            "mbottom0": {
+                "path": "assets/closet/bottoms/male/boy-bot-plainjeans_sheet.png",
+                "properties": {},
+                "fitX": -2,
+                "fitY": -44,
+                "type": "sprite",
+                "splitX": 42,
+                "splitY": 38
+            },
         }
     }
 };
@@ -12964,6 +13207,18 @@ export const shoes = {
                 "splitX": 42,
                 "splitY": 34
             }
+        },
+
+        "male": {
+            "mshoe0": {
+                "path": "assets/closet/shoes/male/boy-shoes-whitesneaker_sheet.png",
+                "properties": {},
+                "fitX": -4,
+                "fitY": -43,
+                "type": "sprite",
+                "splitX": 46,
+                "splitY": 36
+            },
         }
     }
 };
@@ -16116,6 +16371,18 @@ export const outfits = {
             'frameWidth': 90,
             'frameHeight': 100
         }
+    },
+
+    'male': {
+        'moutfit0': {
+            'path': 'boy-suit-schooluniform_sheet.png',
+            'type': 'image',
+            'properties': {},
+            'fitX': 3,
+            'fitY': -63,
+            'frameWidth': 56,
+            'frameHeight': 76
+        },
     }
 };
 
@@ -17018,7 +17285,15 @@ export const face_acc = {
             "fitY": -94
         }
     },
-    'male' : {},
+    'male' : {
+         'mfacc0': {
+            "path": "male_accf_sheriffmustache_03_2014_sheet.png",
+            "type": "image",
+            "properties": {},
+            "fitX": 4,
+            "fitY": -92
+        },
+    },
 };
 
 export const body_acc = {
@@ -20390,5 +20665,15 @@ export const body_acc = {
             "splitY": 162
         }
     },
-    male: {},
+    male: {
+        'mbacc0': {
+            "path": "boy-accb-glove-12-2010_sheet.png",
+            "type": "image",
+            "properties": {},
+            "fitX": -12,
+            "fitY": -64,
+            "splitX": 100,
+            "splitY": 180
+        },
+    },
 };

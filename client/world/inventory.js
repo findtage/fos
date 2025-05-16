@@ -6,6 +6,7 @@ import { publicURL } from '../env.js';
 export function openInventory(scene, player, room){
     //const { width, height } = scene.cameras.main;
     const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(2);
+    let gender = getPlayerAvatarData().gender;
 
     // Store initial outfit for comparison
     const initialAvatarData = { 
@@ -15,8 +16,8 @@ export function openInventory(scene, player, room){
         shoes: player.shoes.texture.key,
         board: player.board.texture.key,
         outfit: player.outfit.visible ? player.outfit.texture.key : "none",
-        face_acc: player.faceacc.texture.key,
-        body_acc: player.bodyacc.texture.key
+        face_acc: player.faceacc.texture.key === 'faccEmpty' ? 'none' : player.faceacc.texture.key,
+        body_acc: player.bodyacc.texture.key === 'baccEmpty' ? 'none' : player.bodyacc.texture.key
     };
 
     inventory.on('pointerup', (pointer, localX, localY, event) => {
@@ -92,8 +93,8 @@ export function openInventory(scene, player, room){
         let hairIndex = player.getIndex(player.hair); // Get the layer index of the hair
         player.hair.destroy();
         player.hair = scene.add.sprite(
-        assets['hair']?.["female"]?.[previewPlayer.hair.texture.key]?.["fitX"], 
-        assets['hair']?.["female"]?.[previewPlayer.hair.texture.key]?.["fitY"], 
+        assets['hair']?.[gender]?.[previewPlayer.hair.texture.key]?.["fitX"], 
+        assets['hair']?.[gender]?.[previewPlayer.hair.texture.key]?.["fitY"], 
         previewPlayer.hair.texture.key, 0).setOrigin(0.5, 0.5);
         player.addAt(player.hair, hairIndex);
 
@@ -103,8 +104,8 @@ export function openInventory(scene, player, room){
             let topIndex = player.getIndex(player.top); // Get the layer index of the top
             player.top.destroy();
             player.top = scene.add.sprite(
-            tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitX"], 
-            tops['top']?.["female"]?.[previewPlayer.top.texture.key]?.["fitY"],
+            tops['top']?.[gender]?.[previewPlayer.top.texture.key]?.["fitX"], 
+            tops['top']?.[gender]?.[previewPlayer.top.texture.key]?.["fitY"],
             previewPlayer.top.texture.key,
             0).setOrigin(0.5, 0.5);
             player.addAt(player.top, topIndex);
@@ -113,8 +114,8 @@ export function openInventory(scene, player, room){
             let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
             player.bottom.destroy();
             player.bottom = scene.add.sprite(
-            bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitX"], 
-            bottoms['bottom']?.["female"]?.[previewPlayer.bottom.texture.key]?.["fitY"],
+            bottoms['bottom']?.[gender]?.[previewPlayer.bottom.texture.key]?.["fitX"], 
+            bottoms['bottom']?.[gender]?.[previewPlayer.bottom.texture.key]?.["fitY"],
             previewPlayer.bottom.texture.key,
             0).setOrigin(0.5, 0.5);
             player.addAt(player.bottom, bottomIndex);
@@ -123,8 +124,8 @@ export function openInventory(scene, player, room){
             let outfitIndex = player.getIndex(player.outfit);
             player.outfit.destroy();
             player.outfit = scene.add.sprite(
-                outfits?.["female"]?.["outfit0"]?.["fitX"], 
-                outfits?.["female"]?.["outfit0"]?.["fitY"],
+                outfits?.[gender]?.["outfit0"]?.["fitX"], 
+                outfits?.[gender]?.["outfit0"]?.["fitY"],
                 "outfit0",
                 0).setOrigin(0.5, 0.5).setVisible(false);
             player.addAt(player.outfit, outfitIndex);
@@ -133,8 +134,8 @@ export function openInventory(scene, player, room){
             let outfitIndex = player.getIndex(player.outfit);
             player.outfit.destroy();
             player.outfit = scene.add.sprite(
-                outfits?.["female"]?.[previewPlayer.outfit.texture.key]?.["fitX"], 
-                outfits?.["female"]?.[previewPlayer.outfit.texture.key]?.["fitY"],
+                outfits?.[gender]?.[previewPlayer.outfit.texture.key]?.["fitX"], 
+                outfits?.[gender]?.[previewPlayer.outfit.texture.key]?.["fitY"],
                 previewPlayer.outfit.texture.key,
                 0).setOrigin(0.5, 0.5);
             player.addAt(player.outfit, outfitIndex);
@@ -143,8 +144,8 @@ export function openInventory(scene, player, room){
             let topIndex = player.getIndex(player.top); // Get the layer index of the top
             player.top.destroy();
             player.top = scene.add.sprite(
-            tops['top']?.["female"]?.["top0"]?.["fitX"], 
-            tops['top']?.["female"]?.["top0"]?.["fitY"],
+            tops['top']?.[gender]?.["top0"]?.["fitX"], 
+            tops['top']?.[gender]?.["top0"]?.["fitY"],
             "top0",
             0).setOrigin(0.5, 0.5).setVisible(false);
             player.addAt(player.top, topIndex);
@@ -153,8 +154,8 @@ export function openInventory(scene, player, room){
             let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
             player.bottom.destroy();
             player.bottom = scene.add.sprite(
-            bottoms['bottom']?.["female"]?.["bottom0"]?.["fitX"], 
-            bottoms['bottom']?.["female"]?.["bottom0"]?.["fitY"],
+            bottoms['bottom']?.[gender]?.["bottom0"]?.["fitX"], 
+            bottoms['bottom']?.[gender]?.["bottom0"]?.["fitY"],
             previewPlayer.bottom.texture.key,
             0).setOrigin(0.5, 0.5).setVisible(false);
             player.addAt(player.bottom, bottomIndex);
@@ -164,8 +165,8 @@ export function openInventory(scene, player, room){
         let shoeIndex = player.getIndex(player.shoes); // Get the layer index of the shoes
         player.shoes.destroy();
         player.shoes = scene.add.sprite(
-        shoes['shoe']?.["female"]?.[previewPlayer.shoes.texture.key]?.["fitX"], 
-        shoes['shoe']?.["female"]?.[previewPlayer.shoes.texture.key]?.["fitY"],
+        shoes['shoe']?.[gender]?.[previewPlayer.shoes.texture.key]?.["fitX"], 
+        shoes['shoe']?.[gender]?.[previewPlayer.shoes.texture.key]?.["fitY"],
         previewPlayer.shoes.texture.key,
         0).setOrigin(0.5, 0.5);
         player.addAt(player.shoes, shoeIndex);
@@ -184,8 +185,8 @@ export function openInventory(scene, player, room){
         let faceAccIndex = player.getIndex(player.faceacc);
         player.faceacc.destroy();
         player.faceacc = scene.add.image(
-            face_acc['female']?.[previewPlayer.faceacc.texture.key]?.["fitX"], 
-            face_acc['female']?.[previewPlayer.faceacc.texture.key]?.["fitY"], 
+            face_acc[gender]?.[previewPlayer.faceacc.texture.key]?.["fitX"], 
+            face_acc[gender]?.[previewPlayer.faceacc.texture.key]?.["fitY"], 
             previewPlayer.faceacc.texture.key,
         0).setOrigin(0.5, 0.5);
         player.addAt(player.faceacc, faceAccIndex);
@@ -195,8 +196,8 @@ export function openInventory(scene, player, room){
         player.bodyacc.destroy();
         if (previewPlayer.bodyacc.texture.key != "baccEmpty"){
             player.bodyacc = scene.add.sprite(
-                body_acc['female']?.[previewPlayer.bodyacc.texture.key]?.["fitX"], 
-                body_acc['female']?.[previewPlayer.bodyacc.texture.key]?.["fitY"],
+                body_acc[gender]?.[previewPlayer.bodyacc.texture.key]?.["fitX"], 
+                body_acc[gender]?.[previewPlayer.bodyacc.texture.key]?.["fitY"],
                 previewPlayer.bodyacc.texture.key,
             0).setOrigin(0.5, 0.5);
             player.addAt(player.bodyacc, bodyAccIndex);
@@ -208,8 +209,9 @@ export function openInventory(scene, player, room){
         }
         
 
-        // Notify other players about outfit change
-        room.send("outfitChange", {playerId: player.id, 
+        // Notify other players about outfit change IF ANY CHANGES FIX LATER
+        room.send("outfitChange", {playerId: player.id,
+            playerGender: gender,
             hairKey: player.hair.texture.key, 
             topKey: player.top.visible ? player.top.texture.key : "none",
             bottomKey: player.bottom.visible ? player.bottom.texture.key : "none",
@@ -587,8 +589,9 @@ class HairSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.hairKeys = Object.keys(assets.hair.female); // Store hair asset keys
+        this.hairKeys = Object.keys(assets.hair[this.gender]);
         this.page = 0;
         this.hairsPerPage = 24;
         this.columns = 8;
@@ -611,9 +614,9 @@ class HairSelection {
         let spacingY = 100;
 
         pageItems.forEach((hairKey, index) => {
-            if (assets['hair']?.["female"]?.[hairKey]?.["type"] == "image"){
+            if (assets['hair']?.[this.gender]?.[hairKey]?.["type"] == "image"){
                 var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0).setScale(.9, .9);
-            } else if (assets['hair']?.["female"]?.[hairKey]?.["type"] == "sprite") {
+            } else if (assets['hair']?.[this.gender]?.[hairKey]?.["type"] == "sprite") {
                 var hairSprite = this.scene.add.sprite(x+5, y, hairKey, 0).setInteractive().setScrollFactor(0).setScale(.8, .8);
             }
             this.container.add(hairSprite);
@@ -671,13 +674,13 @@ class HairSelection {
     }
 
     selectHair(hairKey) {
-        console.log("Hair selected:", hairKey, "\nHair path is:\n", assets['hair']?.["female"]?.[hairKey]?.["path"]);
+        console.log("Hair selected:", hairKey, "\nHair path is:\n", assets['hair']?.[this.gender]?.[hairKey]?.["path"]);
         
         const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.hair);
         let hairScale = 1;
 
-        if (assets['hair']?.["female"]?.[hairKey]?.["scale"]){
-            hairScale = assets['hair']?.["female"]?.[hairKey]?.["scale"];
+        if (assets['hair']?.[this.gender]?.[hairKey]?.["scale"]){
+            hairScale = assets['hair']?.[this.gender]?.[hairKey]?.["scale"];
             console.log("Hair scale is:", hairScale);
         }
     
@@ -689,8 +692,8 @@ class HairSelection {
     
         // Create new hair sprite
         this.previewPlayer.hair = this.scene.add.image(
-            assets['hair']?.["female"]?.[hairKey]?.["fitX"], 
-            assets['hair']?.["female"]?.[hairKey]?.["fitY"], 
+            assets['hair']?.[this.gender]?.[hairKey]?.["fitX"], 
+            assets['hair']?.[this.gender]?.[hairKey]?.["fitY"], 
             hairKey
         ).setOrigin(0.5, 0.5).setScale(hairScale, hairScale);
 
@@ -711,8 +714,9 @@ class TopSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.topKeys = Object.keys(tops.top.female); // Store hair asset keys
+        this.topKeys = Object.keys(tops.top[this.gender]); // Store hair asset keys
         this.page = 0;
         this.topsPerPage = 40;
         this.columns = 8;
@@ -736,9 +740,9 @@ class TopSelection {
 
         pageItems.forEach((topKey, index) => {
             
-            if (tops['top']?.["female"]?.[topKey]?.["type"] == "image"){
+            if (tops['top']?.[this.gender]?.[topKey]?.["type"] == "image"){
                 var topSprite = this.scene.add.image(x, y, topKey).setInteractive().setScrollFactor(0).setScale(1, 1);
-            } else if (tops['top']?.["female"]?.[topKey]?.["type"] == "sprite") {
+            } else if (tops['top']?.[this.gender]?.[topKey]?.["type"] == "sprite") {
                 var topSprite = this.scene.add.sprite(x, y, topKey, 0).setInteractive().setScrollFactor(0).setScale(1, 1);
             }
             this.container.add(topSprite);
@@ -796,7 +800,7 @@ class TopSelection {
     }
 
     selectTop(topKey) {
-        console.log("Top selected:", topKey, "\nTop path is:\n", tops['top']?.["female"]?.[topKey]?.["path"]);
+        console.log("Top selected:", topKey, "\nTop path is:\n", tops['top']?.[this.gender]?.[topKey]?.["path"]);
 
         let topIndex;
         
@@ -815,8 +819,8 @@ class TopSelection {
             this.previewPlayer.bottom.destroy();
 
             this.previewPlayer.bottom = this.scene.add.sprite(
-                bottoms['bottom']?.["female"]?.["bottom0"]?.["fitX"], 
-                bottoms['bottom']?.["female"]?.["bottom0"]?.["fitY"], 
+                bottoms['bottom']?.[this.gender]?.["bottom0"]?.["fitX"], 
+                bottoms['bottom']?.[this.gender]?.["bottom0"]?.["fitY"], 
                 "bottom0",
                 0
             ).setOrigin(0.5, 0.5);
@@ -826,8 +830,8 @@ class TopSelection {
     
         // Create new top sprite
         this.previewPlayer.top = this.scene.add.sprite(
-            tops['top']?.["female"]?.[topKey]?.["fitX"], 
-            tops['top']?.["female"]?.[topKey]?.["fitY"], 
+            tops['top']?.[this.gender]?.[topKey]?.["fitX"], 
+            tops['top']?.[this.gender]?.[topKey]?.["fitY"], 
             topKey,
             0
         ).setOrigin(0.5, 0.5);
@@ -850,8 +854,9 @@ class BottomSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.bottomKeys = Object.keys(bottoms.bottom.female); // Store bottom asset keys
+        this.bottomKeys = Object.keys(bottoms.bottom[this.gender]); // Store bottom asset keys
         this.page = 0;
         this.bottomsPerPage = 40;
         this.columns = 8;
@@ -876,12 +881,12 @@ class BottomSelection {
         pageItems.forEach((bottomKey, index) => {
             
             let bottomSprite;
-            if (bottoms['bottom']?.["female"]?.[bottomKey]?.["type"] == "image") {
+            if (bottoms['bottom']?.[this.gender]?.[bottomKey]?.["type"] == "image") {
                 bottomSprite = this.scene.add.image(x, y, bottomKey)
                     .setInteractive()
                     .setScrollFactor(0)
                     .setScale(1, 1);
-            } else if (bottoms['bottom']?.["female"]?.[bottomKey]?.["type"] == "sprite") {
+            } else if (bottoms['bottom']?.[this.gender]?.[bottomKey]?.["type"] == "sprite") {
                 bottomSprite = this.scene.add.sprite(x, y, bottomKey, 0)
                     .setInteractive()
                     .setScrollFactor(0)
@@ -943,7 +948,7 @@ class BottomSelection {
     }
 
     selectBottom(bottomKey) {
-        console.log("Bottom selected:", bottomKey, "\nBottom path is:\n", bottoms['bottom']?.["female"]?.[bottomKey]?.["path"]);
+        console.log("Bottom selected:", bottomKey, "\nBottom path is:\n", bottoms['bottom']?.[this.gender]?.[bottomKey]?.["path"]);
 
         let bottomIndex;
         
@@ -962,8 +967,8 @@ class BottomSelection {
             this.previewPlayer.bottom.destroy();
 
             this.previewPlayer.top= this.scene.add.sprite(
-                tops['top']?.["female"]?.["top0"]?.["fitX"], 
-                tops['top']?.["female"]?.["top0"]?.["fitY"], 
+                tops['top']?.[this.gender]?.["top0"]?.["fitX"], 
+                tops['top']?.[this.gender]?.["top0"]?.["fitY"], 
                 "top0",
                 0
             ).setOrigin(0.5, 0.5);
@@ -973,8 +978,8 @@ class BottomSelection {
     
         // Create new bottom sprite
         this.previewPlayer.bottom = this.scene.add.sprite(
-            bottoms['bottom']?.["female"]?.[bottomKey]?.["fitX"], 
-            bottoms['bottom']?.["female"]?.[bottomKey]?.["fitY"], 
+            bottoms['bottom']?.[this.gender]?.[bottomKey]?.["fitX"], 
+            bottoms['bottom']?.[this.gender]?.[bottomKey]?.["fitY"], 
             bottomKey,
             0
         ).setOrigin(0.5, 0.5);
@@ -994,8 +999,9 @@ class OutfitSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.hairKeys = Object.keys(outfits.female); // Store hair asset keys
+        this.hairKeys = Object.keys(outfits[this.gender]); // Store hair asset keys
         this.page = 0;
         this.hairsPerPage = 18;
         this.columns = 6;
@@ -1078,7 +1084,7 @@ class OutfitSelection {
     }
 
     selectHair(hairKey) {
-        console.log("Outfit selected:", hairKey, "\nOutfit path is:\n", outfits?.["female"]?.[hairKey]?.["path"]);
+        console.log("Outfit selected:", hairKey, "\nOutfit path is:\n", outfits?.[this.gender]?.[hairKey]?.["path"]);
         
         let outfitIndex;
 
@@ -1098,8 +1104,8 @@ class OutfitSelection {
     
         // Create new hair sprite
         this.previewPlayer.outfit = this.scene.add.sprite(
-            outfits?.["female"]?.[hairKey]?.["fitX"], 
-            outfits?.["female"]?.[hairKey]?.["fitY"], 
+            outfits?.[this.gender]?.[hairKey]?.["fitX"], 
+            outfits?.[this.gender]?.[hairKey]?.["fitY"], 
             hairKey, 0
         ).setOrigin(0.5, 0.5);
         
@@ -1135,8 +1141,9 @@ class ShoeSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.shoeKeys = Object.keys(shoes.shoe.female); // Store shoe asset keys
+        this.shoeKeys = Object.keys(shoes.shoe[this.gender]); // Store shoe asset keys
         this.page = 0;
         this.shoesPerPage = 40;
         this.columns = 8;
@@ -1161,12 +1168,12 @@ class ShoeSelection {
         pageItems.forEach((shoeKey, index) => {
             
             let shoeSprite;
-            if (shoes['shoe']?.["female"]?.[shoeKey]?.["type"] == "image") {
+            if (shoes['shoe']?.[this.gender]?.[shoeKey]?.["type"] == "image") {
                 shoeSprite = this.scene.add.image(x, y, shoeKey)
                     .setInteractive()
                     .setScrollFactor(0)
                     .setScale(1, 1);
-            } else if (shoes['shoe']?.["female"]?.[shoeKey]?.["type"] == "sprite") {
+            } else if (shoes['shoe']?.[this.gender]?.[shoeKey]?.["type"] == "sprite") {
                 shoeSprite = this.scene.add.sprite(x, y, shoeKey, 0)
                     .setInteractive()
                     .setScrollFactor(0)
@@ -1228,13 +1235,13 @@ class ShoeSelection {
     }
 
     selectShoe(shoeKey) {
-        console.log("Shoe selected:", shoeKey, "\nShoe path is:\n", shoes['shoe']?.["female"]?.[shoeKey]?.["path"]);
+        console.log("Shoe selected:", shoeKey, "\nShoe path is:\n", shoes['shoe']?.[this.gender]?.[shoeKey]?.["path"]);
 
         const shoeIndex = this.previewPlayer.getIndex(this.previewPlayer.shoes);
         let shoeScale = 1;
 
-        if (shoes['shoe']?.["female"]?.[shoeKey]?.["scale"]) {
-            shoeScale = shoes['shoe']?.["female"]?.[shoeKey]?.["scale"];
+        if (shoes['shoe']?.[this.gender]?.[shoeKey]?.["scale"]) {
+            shoeScale = shoes['shoe']?.[this.gender]?.[shoeKey]?.["scale"];
             console.log("Shoe scale is:", shoeScale);
         }
     
@@ -1245,8 +1252,8 @@ class ShoeSelection {
     
         // Create new shoe sprite
         this.previewPlayer.shoes = this.scene.add.sprite(
-            shoes['shoe']?.["female"]?.[shoeKey]?.["fitX"], 
-            shoes['shoe']?.["female"]?.[shoeKey]?.["fitY"], 
+            shoes['shoe']?.[this.gender]?.[shoeKey]?.["fitX"], 
+            shoes['shoe']?.[this.gender]?.[shoeKey]?.["fitY"], 
             shoeKey,
             0
         ).setOrigin(0.5, 0.5).setScale(shoeScale, shoeScale);
@@ -1382,8 +1389,9 @@ class FaceAccSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender;
         this.previewPlayer = previewPlayer;
-        this.hairKeys = Object.keys(face_acc.female); // Store hair asset keys
+        this.hairKeys = Object.keys(face_acc[this.gender]); // Store hair asset keys
         this.page = 0;
         this.hairsPerPage = 12;
         this.columns = 4;
@@ -1406,7 +1414,7 @@ class FaceAccSelection {
         let spacingY = 110;
 
         pageItems.forEach((hairKey, index) => {
-            if (face_acc?.['female']?.[hairKey]?.["type"] == "image"){
+            if (face_acc?.[this.gender]?.[hairKey]?.["type"] == "image"){
                 var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0);
             }
             this.container.add(hairSprite);
@@ -1464,7 +1472,7 @@ class FaceAccSelection {
     }
 
     selectHair(hairKey) {
-        console.log("Face acc selected:", hairKey, "\nFace acc path is:\n", face_acc['female']?.[hairKey]?.["path"]);
+        console.log("Face acc selected:", hairKey, "\nFace acc path is:\n", face_acc[this.gender]?.[hairKey]?.["path"]);
         
         const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.faceacc);
 
@@ -1480,8 +1488,8 @@ class FaceAccSelection {
         
             // Create new hair sprite
             this.previewPlayer.faceacc = this.scene.add.image(
-                face_acc['female']?.[hairKey]?.["fitX"], 
-                face_acc['female']?.[hairKey]?.["fitY"], 
+                face_acc[this.gender]?.[hairKey]?.["fitX"], 
+                face_acc[this.gender]?.[hairKey]?.["fitY"], 
                 hairKey
             ).setOrigin(0.5, 0.5);
 
@@ -1502,8 +1510,9 @@ class BodyAccSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
         this.player = player;
+        this.gender = getPlayerAvatarData().gender
         this.previewPlayer = previewPlayer;
-        this.hairKeys = Object.keys(body_acc.female); // Store hair asset keys
+        this.hairKeys = Object.keys(body_acc[this.gender]); // Store hair asset keys
         this.page = 0;
         this.hairsPerPage = 12;
         this.columns = 4;
@@ -1526,7 +1535,7 @@ class BodyAccSelection {
         let spacingY = 110;
 
         pageItems.forEach((hairKey, index) => {
-            if (body_acc?.['female']?.[hairKey]?.["type"] == "image"){
+            if (body_acc?.[this.gender]?.[hairKey]?.["type"] == "image"){
                 var hairSprite = this.scene.add.sprite(x, y, hairKey, 0).setInteractive().setScrollFactor(0);
             }
             this.container.add(hairSprite);
@@ -1584,7 +1593,7 @@ class BodyAccSelection {
     }
 
     selectHair(hairKey) {
-        console.log("Body acc selected:", hairKey, "\nBody acc path is:\n", body_acc['female']?.[hairKey]?.["path"]);
+        console.log("Body acc selected:", hairKey, "\nBody acc path is:\n", body_acc[this.gender]?.[hairKey]?.["path"]);
         
         const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.bodyacc);
 
@@ -1600,8 +1609,8 @@ class BodyAccSelection {
         
             // Create new hair sprite
             this.previewPlayer.bodyacc = this.scene.add.sprite(
-                body_acc['female']?.[hairKey]?.["fitX"], 
-                body_acc['female']?.[hairKey]?.["fitY"], 
+                body_acc[this.gender]?.[hairKey]?.["fitX"], 
+                body_acc[this.gender]?.[hairKey]?.["fitY"], 
                 hairKey,
                 0
             ).setOrigin(0.5, 0.5);

@@ -48,6 +48,7 @@ export class GameRoom extends Room<RoomState> {
                 // Broadcast the hair update to all clients
                 this.broadcast("outfitChange", {
                     playerId: client.sessionId,
+                    playerGender: data.playerGender,
                     hairKey: data.hairKey,
                     topKey: data.topKey,
                     bottomKey: data.bottomKey,
@@ -66,6 +67,7 @@ export class GameRoom extends Room<RoomState> {
                 // Broadcast the hair update to all clients
                 this.broadcast("appearanceChange", {
                     playerId: client.sessionId,
+                    playerGender: data.playerGender,
                     eyesKey: data.eyesKey,
                     bodyKey: data.bodyKey,
                     headKey: data.headKey
@@ -155,6 +157,7 @@ export class HomeRoom extends Room<RoomState> {
             if (player) {
                 this.broadcast("outfitChange", {
                     playerId: client.sessionId,
+                    playerGender: data.playerGender,
                     hairKey: data.hairKey,
                     topKey: data.topKey,
                     bottomKey: data.bottomKey,

@@ -1,4 +1,4 @@
-import { assets, tops, bottoms, shoes, boards, outfits, face_acc, body_acc } from '../assets/data.js';
+import { assets, body, tops, bottoms, shoes, boards, outfits, face_acc, body_acc, avatar_parts, heads } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
 import { openIdfone } from './idfone.js';
 
@@ -13,6 +13,7 @@ export function initializePlayerManager(scene) {
             }
 
             const tag = scene.add.image(-1, -64, 'shadow').setOrigin(0.5, 0.5);
+
             const nameTag = scene.add.text(0, 0, playerData.username, { 
                 fontSize: '14px', 
                 fontFamily: 'Arial', 
@@ -21,12 +22,42 @@ export function initializePlayerManager(scene) {
                 strokeThickness: 2, // Adjust thickness as needed
                 align: 'center'
             }).setOrigin(0.5, 0.5);
+            
+            const base = scene.add.sprite(
+                body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"],
+                body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
+                playerData.body,
+                0
+            ).setOrigin(0.5, 0.5);
+            
+            const eyes = scene.add.sprite(
+                avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitX"],
+                avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitY"],
+                playerData.eyes,
+                0
+            ).setOrigin(0.5, 0.5);
 
-            const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
-            const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);
-            const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
-            const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
-            const brows = scene.add.sprite(1, -100, 'brows', 0).setOrigin(0.5, 0.5);
+            const lipKey = playerData.gender === 'male' ? 'mlips' : 'lips';
+            const lips = scene.add.sprite(
+                avatar_parts[playerData.gender]?.[lipKey]?.fitX,
+                avatar_parts[playerData.gender]?.[lipKey]?.fitY,
+                lipKey,
+                0
+            ).setOrigin(0.5, 0.5);
+
+            const browsKey = playerData.gender === 'male' ? 'mbrows' : 'brows';
+            const brows = scene.add.sprite(
+                avatar_parts[playerData.gender]?.[browsKey]?.fitX,
+                avatar_parts[playerData.gender]?.[browsKey]?.fitY,
+                browsKey,
+                0
+            ).setOrigin(0.5, 0.5);
+
+            const head = scene.add.image(
+                heads['head']?.[playerData.gender]?.[playerData.head]?.fitX,
+                heads['head']?.[playerData.gender]?.[playerData.head]?.fitY,
+                playerData.head
+            ).setOrigin(0.5, 0.5);
 
             const hair = scene.add.sprite(
                 assets['hair']?.[playerData.gender]?.[playerData.hair]?.["fitX"],
@@ -97,8 +128,8 @@ export function initializePlayerManager(scene) {
                 faceacc = scene.add.image(0, 0, 'faccEmpty').setOrigin(0.5, 0.5);
             } else {
                 faceacc = scene.add.image(
-                    face_acc['female']?.[playerData.face_acc]?.["fitX"], 
-                    face_acc['female']?.[playerData.face_acc]?.["fitY"], 
+                    face_acc[playerData.gender]?.[playerData.face_acc]?.["fitX"], 
+                    face_acc[playerData.gender]?.[playerData.face_acc]?.["fitY"], 
                 playerData.face_acc).setOrigin(0.5, 0.5);
             }
 
@@ -107,8 +138,8 @@ export function initializePlayerManager(scene) {
                 bodyacc = scene.add.image(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
             } else {
                 bodyacc = scene.add.sprite(
-                    body_acc['female']?.[playerData.body_acc]?.["fitX"],
-                    body_acc['female']?.[playerData.body_acc]?.["fitY"],
+                    body_acc[playerData.gender]?.[playerData.body_acc]?.["fitX"],
+                    body_acc[playerData.gender]?.[playerData.body_acc]?.["fitY"],
                 playerData.body_acc, 0).setOrigin(0.5, 0.5);
 
             }
@@ -119,6 +150,7 @@ export function initializePlayerManager(scene) {
 
             avatar.base = base; // Store reference to the base
             avatar.tag = tag;
+            avatar.board = board;
             avatar.nameTag = nameTag;
             avatar.top = top;
             avatar.lips = lips;

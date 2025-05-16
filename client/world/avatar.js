@@ -1,6 +1,6 @@
 
 import { assets } from '../assets/data.js';
-import { tops, bottoms, shoes, boards, outfits, face_acc, body_acc } from '../assets/data.js';
+import { body, avatar_parts, heads, tops, bottoms, shoes, boards, outfits, face_acc, body_acc } from '../assets/data.js';
 import { getPlayerAvatarData } from '../game.js';
 import { openIdfone } from './idfone.js';
 
@@ -31,21 +31,47 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     }).setOrigin(0.5, 0.5);
 
     // Player Body
-    const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
+    const base = scene.add.sprite(
+        body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"],
+        body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
+        playerData.body,
+        0
+    ).setOrigin(0.5, 0.5);
     
     base.setData('direction', playerDirection); // Add direction data to track facing
 
     // Player Eyes
-    const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
+    const eyes = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitX"],
+        avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitY"],
+        playerData.eyes,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Lips
-    const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
+    const lipKey = playerData.gender === 'male' ? 'mlips' : 'lips';
+    const lips = scene.add.sprite(
+        avatar_parts[playerData.gender]?.[lipKey]?.fitX,
+        avatar_parts[playerData.gender]?.[lipKey]?.fitY,
+        lipKey,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Brows
-    const brows = scene.add.sprite(1, -100, 'brows', 0).setOrigin(0.5, 0.5);
+    const browsKey = playerData.gender === 'male' ? 'mbrows' : 'brows';
+    const brows = scene.add.sprite(
+        avatar_parts[playerData.gender]?.[browsKey]?.fitX,
+        avatar_parts[playerData.gender]?.[browsKey]?.fitY,
+        browsKey,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Head
-    const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);
+    const head = scene.add.image(
+        heads['head']?.[playerData.gender]?.[playerData.head]?.['fitX'],
+        heads['head']?.[playerData.gender]?.[playerData.head]?.['fitY'],
+        playerData.head
+    ).setOrigin(0.5, 0.5);
     
     // Player Hair
     const hair = scene.add.sprite(
@@ -119,8 +145,8 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
         faceacc = scene.add.image(0, 0, 'faccEmpty').setOrigin(0.5, 0.5);
     } else {
         faceacc = scene.add.image(
-            face_acc['female']?.[playerData.face_acc]?.["fitX"], 
-            face_acc['female']?.[playerData.face_acc]?.["fitY"], 
+            face_acc[playerData.gender]?.[playerData.face_acc]?.["fitX"], 
+            face_acc[playerData.gender]?.[playerData.face_acc]?.["fitY"], 
         playerData.face_acc).setOrigin(0.5, 0.5);
     }
 
@@ -131,8 +157,8 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
         bodyacc = scene.add.image(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
     } else {
         bodyacc = scene.add.sprite(
-            body_acc['female']?.[playerData.body_acc]?.["fitX"], 
-            body_acc['female']?.[playerData.body_acc]?.["fitY"], 
+            body_acc[playerData.gender]?.[playerData.body_acc]?.["fitX"], 
+            body_acc[playerData.gender]?.[playerData.body_acc]?.["fitY"], 
             playerData.body_acc, 0
         ).setOrigin(0.5, 0.5);
     }

@@ -80,6 +80,7 @@
             visibility: visible;
             opacity: 1;
         }
+       
         button {
             padding: 10px 20px;
             font-size: 1rem;
@@ -121,6 +122,14 @@
             <span class="tooltip" id="password-tooltip"></span>
         </div>
 
+        <div class="input-container">
+            <select id="signup-gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </div>
+
         <div style="margin-bottom: 15px;">
             <p>By signing up you have agreed to the</p>
             <p style="align-items: center;"><a href="/terms.html">Terms and Conditions</a></p>
@@ -156,7 +165,7 @@
         usernameInput.addEventListener("input", async () => {
             const username = usernameInput.value.trim();
             if (!usernameRegex.test(username)) {
-                showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 letters, numbers, _ only.");
+                showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 lowercase letters, numbers, _ only.");
                 return;
             }
 
@@ -198,6 +207,7 @@
             const username = usernameInput.value.trim();
             const email = emailInput.value.trim();
             const password = passwordInput.value;
+            const gender = document.getElementById("signup-gender").value;
 
             if (!usernameRegex.test(username)) {
                 showWarning(usernameInput, usernameTooltip, "Invalid format: 3-14 letters, numbers, _ only.");
@@ -220,7 +230,7 @@
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ username, email, password }),
+                    body: JSON.stringify({ username, email, password, gender }),
                 });
 
                 const result = await response.json();

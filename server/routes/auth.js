@@ -66,7 +66,7 @@ router.post("/signup", async (req, res) => {
         return res.status(400).json({ success: false, message: "Sign-ups are currently closed. Maximum number of accounts reached." });
     }
 
-    const { username, email, password } = req.body;
+    const { username, email, password, gender } = req.body;
 
     if (!username || !email || !password) {
         return res.status(400).json({ success: false, message: "Username, email, and password are required." });
@@ -109,9 +109,30 @@ router.post("/signup", async (req, res) => {
         // 🔹 Store username → email mapping
         await usernameRef.set(email);
 
-        // 🔹 Store user details under UID
-        await db.ref(`users/${uid}`).set({
-            username: username,
+        console.log("Creating new account, gender is", gender)
+        const defaultData = gender === "male"
+        ? {
+            username,
+            board: "board0",
+            body: "mbody0",
+            body_acc: "none",
+            bottom: "mbottom0",
+            costume: "none",
+            eyes: "meyes0",
+            face_acc: "none",
+            gender: "male",
+            hair: "mhair0",
+            hair_acc: "none",
+            head: "mhead0",
+            home: "home0",
+            idfone: { level: 0 },
+            outfit: "none",
+            shoes: "mshoe0",
+            stars: 2500,
+            top: "mtop0"
+        }
+        : {
+            username,
             board: "board0",
             body: "body0",
             body_acc: "none",
@@ -124,12 +145,14 @@ router.post("/signup", async (req, res) => {
             hair_acc: "none",
             head: "head0",
             home: "home0",
-            idfone: {level: 0},
+            idfone: { level: 0 },
             outfit: "none",
             shoes: "shoe0",
             stars: 2500,
-            top: "top0",
-        });
+            top: "top0"
+        };
+
+        await db.ref(`users/${uid}`).set(defaultData);
 
         res.status(201).json({ success: true, message: "User created successfully." });
 

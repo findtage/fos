@@ -1,6 +1,6 @@
 import { getPlayerAvatarData } from "../game.js";
 import { assets } from '../assets/data.js';
-import { tops, bottoms, shoes, boards, outfits, face_acc } from '../assets/data.js';
+import { body, avatar_parts, heads, tops, bottoms, shoes, boards, outfits, face_acc, body_acc } from '../assets/data.js';
 import { performIdles } from "./animations.js";
 
 export function openIdfone(scene, idFoneData){
@@ -71,23 +71,54 @@ export function openIdfone(scene, idFoneData){
     let base;
     // Player Body
     if (playerData.base){
-        base = scene.add.sprite(7, -72, playerData.base, 0).setOrigin(0.5, 0.5);
+        base = scene.add.sprite(
+            body['body']?.[playerData.gender]?.[playerData.base]?.["fitX"],
+            body['body']?.[playerData.gender]?.[playerData.base]?.["fitY"],
+            playerData.base,
+            0
+        ).setOrigin(0.5, 0.5);
     } else if (playerData.body){
-        base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
+        base = scene.add.sprite(
+            body['body']?.[playerData.gender]?.[playerData.body]?.["fitX"],
+            body['body']?.[playerData.gender]?.[playerData.body]?.["fitY"],
+            playerData.body,
+            0
+        ).setOrigin(0.5, 0.5);
     }
     
 
     // Player Eyes
-    const eyes = scene.add.sprite(1, -101, playerData.eyes, 0).setOrigin(0.5, 0.5);
+    const eyes = scene.add.sprite(
+        avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitX"],
+        avatar_parts[playerData.gender]?.['eyes']?.[playerData.eyes]?.["fitY"],
+        playerData.eyes,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Lips
-    const lips = scene.add.sprite(2, -100, 'lips', 0).setOrigin(0.5, 0.5);
+    const lipKey = playerData.gender === 'male' ? 'mlips' : 'lips';
+    const lips = scene.add.sprite(
+        avatar_parts[playerData.gender]?.[lipKey]?.fitX,
+        avatar_parts[playerData.gender]?.[lipKey]?.fitY,
+        lipKey,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Brows
-    const brows = scene.add.sprite(1, -100, 'brows', 0).setOrigin(0.5, 0.5);
+    const browsKey = playerData.gender === 'male' ? 'mbrows' : 'brows';
+    const brows = scene.add.sprite(
+        avatar_parts[playerData.gender]?.[browsKey]?.fitX,
+        avatar_parts[playerData.gender]?.[browsKey]?.fitY,
+        browsKey,
+        0
+    ).setOrigin(0.5, 0.5);
 
     // Player Head
-    const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);
+    const head = scene.add.image(
+        heads['head']?.[playerData.gender]?.[playerData.head]?.fitX,
+        heads['head']?.[playerData.gender]?.[playerData.head]?.fitY,
+        playerData.head
+    ).setOrigin(0.5, 0.5);
     
     // Player Hair
     const hair = scene.add.sprite(
@@ -160,8 +191,8 @@ export function openIdfone(scene, idFoneData){
         faceacc = scene.add.image(0, 0, "faccEmpty").setOrigin(0.5, 0.5);
     } else {
         faceacc = scene.add.image(
-            face_acc['female']?.[playerData.face_acc]?.["fitX"],
-            face_acc['female']?.[playerData.face_acc]?.["fitY"],
+            face_acc[playerData.gender]?.[playerData.face_acc]?.["fitX"],
+            face_acc[playerData.gender]?.[playerData.face_acc]?.["fitY"],
         playerData.face_acc).setOrigin(0.5, 0.5);
     }
     

@@ -1,6 +1,8 @@
 import { assets, outfits } from "../assets/data.js";
 
 export function createAvatarAnimations(scene, player) {
+    const gender = player.head.texture.key.startsWith('m') ? 'male' : 'female';
+
     // Function to create animations dynamically per player
     function createAnimation(key, texture, frames, frameRate = 2.5) {
         const animationKey = `${key}-${texture}`;
@@ -16,7 +18,7 @@ export function createAvatarAnimations(scene, player) {
     }
 
     // Hair Idles
-    if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
+    if (assets['hair']?.[gender]?.[player.hair.texture.key]?.["type"] == "sprite"){
         const hairanimationKey = `idle-${player.hair.texture.key}`;
 
         if (!scene.anims.exists(hairanimationKey)) { // Prevent duplicate animations
@@ -30,10 +32,10 @@ export function createAvatarAnimations(scene, player) {
     }  
 
     // Outfit Idles
-    if (outfits?.["female"]?.[player.outfit.texture.key]?.["type"] == "sprite"){
+    if (outfits?.[gender]?.[player.outfit.texture.key]?.["type"] == "sprite"){
         const outfitanimationKey = `idle-${player.outfit.texture.key}`;
 
-        if (outfits?.['female']?.[player.outfit.texture.key]?.['frames'] == 8){
+        if (outfits?.[gender]?.[player.outfit.texture.key]?.['frames'] == 8){
             if (!scene.anims.exists(outfitanimationKey)) { // Prevent duplicate animations
                 scene.anims.create({
                     key: outfitanimationKey,
@@ -320,11 +322,12 @@ export function performWink(player) {
 }
 
 export function performIdles(player) {
-    if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
+    const gender = player.hair.texture.key.startsWith('m') ? 'male' : 'female';
+    if (assets['hair']?.[gender]?.[player.hair.texture.key]?.["type"] == "sprite"){
         player.hair.play(`idle-${player.hair.texture.key}`);
     }
 
-    if (outfits?.["female"]?.[player.outfit.texture.key]?.["type"] == "sprite"){
+    if (outfits?.[gender]?.[player.outfit.texture.key]?.["type"] == "sprite"){
         player.outfit.play(`idle-${player.outfit.texture.key}`);
     }
 }

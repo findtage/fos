@@ -1,4 +1,4 @@
-import { assets, tops, bottoms, shoes, boards, outfits, face_acc, body_acc } from "../assets/data.js";
+import { assets, tops, bottoms, shoes, boards, outfits, face_acc, body_acc, avatar_parts, heads, body } from "../assets/data.js";
 import { getPlayerAvatarData, showConnectionLostMessage, resetConnectionCheck } from "../game.js";
 import { webSocketURL } from "../env.js";
 
@@ -125,6 +125,7 @@ export async function joinRoom(scene, roomName, targetHome=null) {
         });
 
         currentRoom.onMessage("outfitChange", (data) => {
+            console.log(data);
             const otherPlayer = scene.otherPlayers[data.playerId]; // Get the affected player
 
             if (otherPlayer) {
@@ -137,8 +138,8 @@ export async function joinRoom(scene, roomName, targetHome=null) {
         
                 // Add new hair in the correct layer
                 otherPlayer.hair = scene.add.sprite(
-                    assets['hair']?.["female"]?.[data.hairKey]?.["fitX"], 
-                    assets['hair']?.["female"]?.[data.hairKey]?.["fitY"], 
+                    assets['hair']?.[data.playerGender]?.[data.hairKey]?.["fitX"], 
+                    assets['hair']?.[data.playerGender]?.[data.hairKey]?.["fitY"], 
                     data.hairKey, 0
                 ).setOrigin(0.5, 0.5);
                 
@@ -153,14 +154,14 @@ export async function joinRoom(scene, roomName, targetHome=null) {
 
                 if (data.topKey != "none"){
                     otherPlayer.top = scene.add.sprite(
-                        tops['top']?.["female"]?.[data.topKey]?.["fitX"], 
-                        tops['top']?.["female"]?.[data.topKey]?.["fitY"], 
+                        tops['top']?.[data.playerGender]?.[data.topKey]?.["fitX"], 
+                        tops['top']?.[data.playerGender]?.[data.topKey]?.["fitY"], 
                         data.topKey, 0
                     ).setOrigin(0.5, 0.5);
                 } else {
                     otherPlayer.top = scene.add.sprite(
-                        tops['top']?.["female"]?.["top0"]?.["fitX"], 
-                        tops['top']?.["female"]?.["top0"]?.["fitY"], 
+                        tops['top']?.[data.playerGender]?.["top0"]?.["fitX"], 
+                        tops['top']?.[data.playerGender]?.["top0"]?.["fitY"], 
                         "top0", 0
                     ).setOrigin(0.5, 0.5).setVisible(false);
                 }
@@ -177,14 +178,14 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 
                 if (data.bottomKey != "none"){
                     otherPlayer.bottom = scene.add.sprite(
-                        bottoms['bottom']?.["female"]?.[data.bottomKey]?.["fitX"], 
-                        bottoms['bottom']?.["female"]?.[data.bottomKey]?.["fitY"], 
+                        bottoms['bottom']?.[data.playerGender]?.[data.bottomKey]?.["fitX"], 
+                        bottoms['bottom']?.[data.playerGender]?.[data.bottomKey]?.["fitY"], 
                         data.bottomKey, 0
                     ).setOrigin(0.5, 0.5);
                 } else {
                     otherPlayer.bottom = scene.add.sprite(
-                        bottoms['bottom']?.["female"]?.["bottom0"]?.["fitX"], 
-                        bottoms['bottom']?.["female"]?.["bottom0"]?.["fitY"], 
+                        bottoms['bottom']?.[data.playerGender]?.["bottom0"]?.["fitX"], 
+                        bottoms['bottom']?.[data.playerGender]?.["bottom0"]?.["fitY"], 
                         "bottom0", 0
                     ).setOrigin(0.5, 0.5).setVisible(false);
                 }
@@ -202,14 +203,14 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 
                 if (data.outfitKey != "none"){
                     otherPlayer.outfit = scene.add.sprite(
-                        outfits?.["female"]?.[data.outfitKey]?.["fitX"], 
-                        outfits?.["female"]?.[data.outfitKey]?.["fitY"], 
+                        outfits?.[data.playerGender]?.[data.outfitKey]?.["fitX"], 
+                        outfits?.[data.playerGender]?.[data.outfitKey]?.["fitY"], 
                         data.outfitKey, 0
                     ).setOrigin(0.5, 0.5);
                 } else {
                     otherPlayer.outfit = scene.add.sprite(
-                        outfits?.["female"]?.["outfit0"]?.["fitX"], 
-                        outfits?.["female"]?.["outfit0"]?.["fitY"], 
+                        outfits?.[data.playerGender]?.["outfit0"]?.["fitX"], 
+                        outfits?.[data.playerGender]?.["outfit0"]?.["fitY"], 
                         "outfit0", 0
                     ).setOrigin(0.5, 0.5).setVisible(false);
                 }
@@ -227,8 +228,8 @@ export async function joinRoom(scene, roomName, targetHome=null) {
             
                 // Add new top in the correct layer
                 otherPlayer.shoes = scene.add.sprite(
-                    shoes['shoe']?.["female"]?.[data.shoeKey]?.["fitX"], 
-                    shoes['shoe']?.["female"]?.[data.shoeKey]?.["fitY"], 
+                    shoes['shoe']?.[data.playerGender]?.[data.shoeKey]?.["fitX"], 
+                    shoes['shoe']?.[data.playerGender]?.[data.shoeKey]?.["fitY"], 
                     data.shoeKey, 0
                 ).setOrigin(0.5, 0.5);
                 
@@ -259,8 +260,8 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                     otherPlayer.faceacc = scene.add.image(0, 0, "faccEmpty").setOrigin(0.5, 0.5);
                 } else {
                     otherPlayer.faceacc = scene.add.image(
-                        face_acc['female']?.[data.faceAccKey]?.["fitX"], 
-                        face_acc['female']?.[data.faceAccKey]?.["fitY"], 
+                        face_acc[data.playerGender]?.[data.faceAccKey]?.["fitX"], 
+                        face_acc[data.playerGender]?.[data.faceAccKey]?.["fitY"], 
                         data.faceAccKey
                     ).setOrigin(0.5, 0.5);
                 }
@@ -275,8 +276,8 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                     otherPlayer.bodyacc = scene.add.image(0, 0, "baccEmpty").setOrigin(0.5, 0.5);
                 } else {
                     otherPlayer.bodyacc = scene.add.sprite(
-                        body_acc['female']?.[data.bodyAccKey]?.["fitX"], 
-                        body_acc['female']?.[data.bodyAccKey]?.["fitY"], 
+                        body_acc[data.playerGender]?.[data.bodyAccKey]?.["fitX"], 
+                        body_acc[data.playerGender]?.[data.bodyAccKey]?.["fitY"], 
                         data.bodyAccKey, 0
                     ).setOrigin(0.5, 0.5);
                 }
@@ -296,8 +297,10 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 if (otherPlayer.eyes) {
                     otherPlayer.eyes.destroy();
                 }
-                otherPlayer.eyes = scene.add.sprite(1, -101,
-                data.eyesKey, 0
+                otherPlayer.eyes = scene.add.sprite(
+                    avatar_parts[data.playerGender]?.['eyes']?.[data.eyesKey]?.["fitX"],
+                    avatar_parts[data.playerGender]?.['eyes']?.[data.eyesKey]?.["fitY"],
+                    data.eyesKey, 0
                 ).setOrigin(0.5, 0.5);
                 otherPlayer.addAt(otherPlayer.eyes, eyesIndex);
 
@@ -305,8 +308,10 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 if (otherPlayer.head) {
                     otherPlayer.head.destroy();
                 }
-                otherPlayer.head = scene.add.image(1, -100,
-                data.headKey,
+                otherPlayer.head = scene.add.image(
+                    heads['head']?.[data.playerGender]?.[data.headKey]?.['fitX'],
+                    heads['head']?.[data.playerGender]?.[data.headKey]?.['fitY'],
+                    data.headKey,
                 ).setOrigin(0.5, 0.5);
                 otherPlayer.addAt(otherPlayer.head, headIndex);
 
@@ -315,8 +320,10 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 if (otherPlayer.base) {
                     otherPlayer.base.destroy();
                 }
-                otherPlayer.base = scene.add.sprite(7, -72,
-                data.bodyKey, 0
+                otherPlayer.base = scene.add.sprite(
+                    body['body']?.[data.playerGender]?.[data.bodyKey]?.["fitX"],
+                    body['body']?.[data.playerGender]?.[data.bodyKey]?.["fitY"],
+                    data.bodyKey, 0
                 ).setOrigin(0.5, 0.5);
                 otherPlayer.base.setData('direction', playerDirection);
                 otherPlayer.addAt(otherPlayer.base, bodyIndex);
