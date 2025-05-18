@@ -818,10 +818,12 @@ class TopSelection {
             this.previewPlayer.top.destroy();
             this.previewPlayer.bottom.destroy();
 
+            const defaultBottomKey = this.gender === 'male' ? 'mbottom0' : 'bottom0';
+
             this.previewPlayer.bottom = this.scene.add.sprite(
-                bottoms['bottom']?.[this.gender]?.["bottom0"]?.["fitX"], 
-                bottoms['bottom']?.[this.gender]?.["bottom0"]?.["fitY"], 
-                "bottom0",
+                bottoms['bottom']?.[this.gender]?.[defaultBottomKey]?.["fitX"], 
+                bottoms['bottom']?.[this.gender]?.[defaultBottomKey]?.["fitY"], 
+                defaultBottomKey,
                 0
             ).setOrigin(0.5, 0.5);
 
@@ -966,10 +968,12 @@ class BottomSelection {
             this.previewPlayer.top.destroy();
             this.previewPlayer.bottom.destroy();
 
+            const defaultTopKey = this.gender === 'male' ? 'mtop0' : 'top0';
+
             this.previewPlayer.top= this.scene.add.sprite(
-                tops['top']?.[this.gender]?.["top0"]?.["fitX"], 
-                tops['top']?.[this.gender]?.["top0"]?.["fitY"], 
-                "top0",
+                tops['top']?.[this.gender]?.[defaultTopKey]?.["fitX"], 
+                tops['top']?.[this.gender]?.[defaultTopKey]?.["fitY"], 
+                defaultTopKey,
                 0
             ).setOrigin(0.5, 0.5);
     

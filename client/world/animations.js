@@ -76,11 +76,13 @@ export function createAvatarAnimations(scene, player) {
     }
 
     // Define animations for this texture only
+    // Create wave animations
     createAnimation("wave", bodyTexture, [1, 2, 1, 2, 1, 0]);
     createAnimation("wave", topTexture, [1, 2, 1, 2, 1, 0]);
     createAnimation("wave", lipsTexture, [1, 1, 1, 1, 1, 0]);
     createAnimation("wave", outfitTexture, [1, 2, 1, 2, 1, 0]);
 
+    // Create jump animations
     createAnimation("jump", bodyTexture, [0, 5, 0, 5, 0]);
     createAnimation("jump", topTexture, [0, 5, 0, 5, 0]);
     createAnimation("jump", bottomTexture, [0, 1, 0, 1, 0]);
@@ -88,13 +90,22 @@ export function createAvatarAnimations(scene, player) {
     createAnimation("jump", lipsTexture, [0, 1, 1, 1, 0]);
     createAnimation("jump", outfitTexture, [0, 5, 0, 5, 0]);
 
+    // Create cry animations
     createAnimation("cry", bodyTexture, [3, 4, 3, 4, 3, 4, 0]);
     createAnimation("cry", topTexture, [3, 4, 3, 4, 3, 4, 0]);
     createAnimation("cry", browsTexture, [1, 1, 1, 1, 1, 1, 0]);
     createAnimation("cry", eyesTexture, [1, 1, 1, 1, 1, 1, 0]);
     createAnimation("cry", outfitTexture, [3, 4, 3, 4, 3, 4, 0]);
+    if (gender == 'male'){
+        createAnimation("cry", lipsTexture, [2, 3, 2, 3, 2, 3, 0]);
+    }
 
-    createAnimation("wink", eyesTexture, [1, 0, 1, 0, 2, 0]);
+    // Create wink animations
+    if (gender == 'female'){
+        createAnimation("wink", eyesTexture, [1, 0, 1, 0, 2, 0]);
+    } else {
+        createAnimation("wink", eyesTexture, [1, 0, 1, 0, 3, 0]);
+    }
     createAnimation("wink", lipsTexture, [0, 0, 0, 0, 1, 0]);
 }
 
@@ -264,6 +275,9 @@ export function performCry(player) {
     player.outfit.play(`cry-${player.outfit.texture.key}`);
     player.brows.play(`cry-${player.brows.texture.key}`);
     player.eyes.play(`cry-${player.eyes.texture.key}`);
+    if (player.head.texture.key.startsWith('m')){
+        player.lips.play(`cry-${player.lips.texture.key}`);
+    };
 
     if (player.bodyacc.texture.key != "baccEmpty"){
         player.bodyacc.play(`cry-${player.bodyacc.texture.key}`);
