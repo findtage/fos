@@ -13,7 +13,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-//app.use(cors({ origin: "http://10.0.0.9:3000", credentials: true }));
+//app.use(cors({ origin: "https://bitter-pears-relate.loca.lt", credentials: true }));
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use("/api/auth", authRoutes);
@@ -34,6 +34,7 @@ const gameServer = new Server({
 
 // Define a Colyseus room
 gameServer.define('downtown', GameRoom).enableRealtimeListing();
+gameServer.define('qblast', GameRoom).enableRealtimeListing();
 gameServer.define('starcafe', GameRoom).enableRealtimeListing();
 gameServer.define('leshop', GameRoom).enableRealtimeListing();
 gameServer.define('salon', GameRoom).enableRealtimeListing();

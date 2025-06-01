@@ -42,6 +42,7 @@ export class Downtown extends Phaser.Scene {
         performIdles(this.player);
 
         this.cameras.main.startFollow(this.player);
+        //this.cameras.main.setDeadzone(400, 200); 
 
         initializePlayerManager(this);
 
@@ -50,8 +51,8 @@ export class Downtown extends Phaser.Scene {
 
         // Create Room Transitions X,Y and Width, Height
         createTransUIDT(this, this.player, 'School', 'Fantage School', 2295, 345, 75, 90);
-        createTransUIDT(this, this.player, 'StarCafe', 'Star Cafe', 460, 262, 128, 128, "Enter the "); //Enter the Star Cafe
-        //createRoomTransitionUI(this, this.player, 'QBlast', 'Q-Blast', 368, 247, 82, 123); Go to Gizmo's Q-Blast 177, 199
+        createTransUIDT(this, this.player, 'StarCafe', 'Star Cafe', 460, 262, 128, 128, "Enter the ");
+        createTransUIDT(this, this.player, 'QBlast', '', 304, 296, 128, 128, "Go to Gizmo's Q-Blast"); 
         createTransUIDT(this, this.player, 'Beach', 'Beach', 91, 240, 128, 128, "Go to the ");
         createTransUIDT(this, this.player, 'Uptown', 'Uptown', 897, 209, 128, 128);
         createTransUIDT(this, this.player, 'Leshop', 'Le Shop', 1232, 254, 128, 128);
@@ -77,91 +78,6 @@ export class Downtown extends Phaser.Scene {
 
 }
 
-/*
-function createTransUIDT(scene, player, targetScene, roomName, x, y, width, height, entranceMessage="Go to\n") {
-    const container = scene.add.ellipse(x, y, width, height, 0xaaaaaa).setInteractive();
-    container.setOrigin(0.5, 1);
-    container.setFillStyle(0xaaaaaa, 0);
-    //container.setAlpha(0)
-
-    const popup = scene.add.text(x, y - 75, `${entranceMessage}${roomName}`, {
-        fontSize: '12.5px',
-        color: '#000000',
-        backgroundColor: '#FFFDCD',
-        fontFamily: 'Verdana',
-        padding: { left: 5, right: 5, top: 2, bottom: 2 },
-    }).setOrigin(0.5).setVisible(false);
-
-    popup.setAlign('center');
-
-    // Calculate text bounds to size the background
-    const textBounds = popup.getBounds();
-    const backgroundWidth = textBounds.width;
-    const backgroundHeight = textBounds.height;
-
-    // Add a graphics object for the border rectangle
-    const popupBg = scene.add.graphics();
-    popupBg.fillStyle('#FFFDCD', 1); 
-    popupBg.lineStyle(0.5, '#000000', 1); // Thin black border
-    popupBg.fillRect(
-        textBounds.x, // Position adjusted for padding
-        textBounds.y,
-        backgroundWidth,
-        backgroundHeight,
-    );
-    
-    popupBg.strokeRect(
-        textBounds.x, // Position adjusted for padding
-        textBounds.y,
-        backgroundWidth,
-        backgroundHeight,
-    );
-    
-    
-    // Ensure the text appears above the background
-    scene.children.bringToTop(popup);
-
-    // Initially hide both the text and background
-    popupBg.setVisible(false);
-
-
-    // Show popup when hovering
-    container.on('pointerover', () => popup.setVisible(true));
-    container.on('pointerover', () => popupBg.setVisible(true));
-    container.on('pointerout', () => popup.setVisible(false));
-    container.on('pointerout', () => popupBg.setVisible(false));
-
-    let isTransitioning = false;
-
-    // Handle click
-    container.on('pointerup', () => {
-        if (isTransitioning) return; // Ignore clicks if already transitioning
-        isTransitioning = true; // Set flag to prevent further clicks
-        // Set the player's destination
-        player.targetX = x;
-        player.targetY = y;
-
-        // Monitor player position in the update loop
-        const checkArrival = scene.time.addEvent({
-            loop: true,
-            delay: 50, // Check every 50ms
-            callback: () => {
-                // Check if the player has reached the target
-                if (
-                    Phaser.Math.Distance.Between(player.x, player.y, x, y) <= 25
-                ) {
-                    // Stop checking
-                    checkArrival.remove(false);
-
-                    // Transition to the target scene
-                    console.log(`Transitioning to scene: ${targetScene}`);
-                    scene.scene.start(targetScene);
-                }
-            },
-        });
-    });
-}
-*/
 function createTransUIDT(scene, player, targetScene, roomName, x, y, width, height, entranceMessage = "Go to ") {
     const container = scene.add.ellipse(x, y, width, height, 0xaaaaaa).setInteractive();
     container.setOrigin(0.5, 1);
@@ -173,7 +89,7 @@ function createTransUIDT(scene, player, targetScene, roomName, x, y, width, heig
 
 
     const popup = scene.add.text(x, y - 75, `${entranceMessage}${roomName}`, {
-        fontSize: '12.5px',
+        fontSize: '11.5px',
         color: '#000000',
         backgroundColor: null,
         fontFamily: 'Verdana',
@@ -197,7 +113,7 @@ function createTransUIDT(scene, player, targetScene, roomName, x, y, width, heig
     // Move popup with cursor, accounting for camera scroll
     container.on('pointermove', (pointer) => {
         const worldPoint = scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
-        const padding = 4;
+        const padding = 2;
 
         popup.setPosition(worldPoint.x, worldPoint.y - 20);
 
@@ -243,7 +159,51 @@ function createTransUIDT(scene, player, targetScene, roomName, x, y, width, heig
     });
 }
 
+export class QBlast extends Phaser.Scene {
+    constructor() {
+        super({ key: 'QBlast' });
+    }
 
+    init(data) {
+        this.playerXLocation = data.playerXLocation || 532;
+        this.playerYLocation = data.playerYLocation || 426; 
+        this.playerDirection = data.playerDirection || 'left';
+    }
+
+    preload() {
+        this.sound.stopAll(); 
+        preloadMenu(this);
+        preloadAvatar(this);
+    }
+
+    async create() {
+        this.add.image(0, 0, 'qblast-bg').setOrigin(0, 0);
+
+        this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
+        performIdles(this.player);
+        initializePlayerManager(this);
+
+        this.room = await joinRoom(this, 'qblast'); 
+
+        createRoomTransitionUI(this, this.player, 'Downtown', 'Downtown', 629, 159, 93, 151);
+
+        createMenu(this, this.player, this.room);
+        
+        this.updateMovement = setupMovement(this, this.player, 200);
+
+        //this.qblast_music = this.sound.add('qblast_music', { loop: true, volume: 0.5 });
+        //this.qblast_music.play();
+    }
+    
+    update(time, delta) {
+        if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
+        
+        if (this.room && this.player && this.room.connection.isOpen) {
+            sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
+        }
+    }
+
+}
 
 // Enter the Star Cafe
 export class StarCafe extends Phaser.Scene {

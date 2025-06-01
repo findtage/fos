@@ -517,6 +517,7 @@ export class Preloader extends Phaser.Scene {
         this.load.image('salon', '../assets/backgrounds/Downtown/stellar_salon.png');
         this.load.image('topmodel', '../assets/backgrounds/Downtown/top_models.png');
         this.load.image('topmodelvip', '../assets/backgrounds/Downtown/top_models_vip.png');
+        this.load.image('qblast-bg', 'assets/backgrounds/Downtown/qblast.png')
 
         this.load.audio('downtown_music', 'assets/sounds/Downtown/Downtown.mp3');
         this.load.audio('star_cafe_music', 'assets/sounds/Downtown/Star-Cafe.mp3');

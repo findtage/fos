@@ -1,4 +1,4 @@
-import { Downtown, LeShop, Salon, StarCafe, TopModel, TopModelVIP } from './scenes/Downtown.js';
+import { Downtown, LeShop, QBlast, Salon, StarCafe, TopModel, TopModelVIP } from './scenes/Downtown.js';
 import { BoardShop, Botique, CostumeShop, FurnitureShop, IDfoneShop, MissionCenter, MyMall, Uptown } from './scenes/Uptown.js';
 import { CreatureArea, CreatureShop, Forest, Grotto, GrottoSecretOne, GrottoSecretTwo, Wizard } from './scenes/Forest.js';
 import { Beach, DanceClub, TanStore } from './scenes/Beach.js';
@@ -73,11 +73,12 @@ const config = {
     width: 800,
     height: 520,
     "transparent": true,
-    antialias: false,
+    //antialias: false,
+    pixelArt: true,
     // All scenes
     scene: [
         Preloader, // Load every asset here
-        Downtown, StarCafe, LeShop, Salon, TopModel, TopModelVIP, MissionCenter,
+        Downtown, StarCafe, LeShop, Salon, TopModel, TopModelVIP, MissionCenter, QBlast,
         Uptown, FurnitureShop, MyMall, IDfoneShop, CostumeShop, BoardShop, Botique,
         Carnival, Arcade,
         PetTown, PetShop, PetClass, PetSchool,
@@ -92,7 +93,7 @@ const config = {
         Oasis, Dock,
         MouseOut, TypeBoo,
         Home,
-        RuffleScene
+        RuffleScene,
     ],
 };
 

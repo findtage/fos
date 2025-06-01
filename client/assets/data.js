@@ -18057,7 +18057,8 @@ export const homes = {
         "rooms": 2,
         "name": 'Simple Cottage',
         "cost": 1500,
-    }
+        "transitions": [[498, 305, 100, 100], [44, 322, 150, 150]]
+    },
 };
 
 export const outfits = {

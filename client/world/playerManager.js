@@ -163,6 +163,7 @@ export function initializePlayerManager(scene) {
             avatar.outfit = outfit;
             avatar.faceacc = faceacc;
             avatar.bodyacc = bodyacc;
+            avatar.username = playerData.username;
 
             avatar.base.setInteractive();
             avatar.head.setInteractive();

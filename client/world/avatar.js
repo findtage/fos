@@ -183,6 +183,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     avatar.outfit = outfit;
     avatar.faceacc = faceacc;
     avatar.bodyacc = bodyacc;
+    avatar.username = playerData.username;
     
     // Make body clickable for IDfone
     avatar.base.setInteractive();

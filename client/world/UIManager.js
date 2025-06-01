@@ -2,6 +2,7 @@ import { mapTransition } from "./roomTransition.js";
 import { toggleEmotePopup } from "./animations.js";
 import { openInventory } from "./inventory.js";
 import { getPlayerAvatarData } from "../game.js";
+import { createChatWindow, setActiveInput, isInputActive, getChatWindowStatus, addToChatLog, getChatLog  } from "./components.js";
 
 export function createMenu(scene, player, room) {
   const { width, height } = scene.cameras.main;
@@ -65,6 +66,12 @@ export function createMenu(scene, player, room) {
         }
       }
 
+      if (name == 'buddies'){
+        if (getChatWindowStatus() != 'active'){
+          createChatWindow(scene, player, room);
+        }  
+      }
+
     });
 
     // Optional hover effect
@@ -110,14 +117,17 @@ export function createMenu(scene, player, room) {
   // Focus on the input field when clicked
   inputField.on('pointerup', (pointer, localX, localY, event) => {
     event.stopPropagation();
+    setActiveInput("bottomInput");
     isTyping = true;
     if (fullText === '') {
-      inputField.setText(''); 
+      inputField.setText('');
     }
   });
+
   
   // Capture keyboard input
   scene.input.keyboard.on('keydown', (event) => {
+    if (!isInputActive("bottomInput")) return;
     if (isTyping) {
       if (event.key === 'Enter') {
         if (fullText.trim()) {
@@ -258,7 +268,9 @@ export function displayChatBubble(scene, player, message) {
     player.chatBubbleContainer.destroy();
   }
 
-    const bubble = scene.add.text(player.x, player.y - 140, message, {
+  addToChatLog(player.username, message);
+
+  const bubble = scene.add.text(player.x, player.y - 140, message, {
     fontSize: '14px',
     fontFamily: 'Arial',
     color: '#000000',

@@ -125,7 +125,6 @@ export async function joinRoom(scene, roomName, targetHome=null) {
         });
 
         currentRoom.onMessage("outfitChange", (data) => {
-            console.log(data);
             const otherPlayer = scene.otherPlayers[data.playerId]; // Get the affected player
 
             if (otherPlayer) {
