@@ -1,15 +1,29 @@
-import { displayChatBubble } from "./UIManager.js";
+import { sendChatMessage } from "./UIManager.js";
 
 let chatContainerInstance = null;
 let chatWindowInstanceStatus = null;
 let chatWindowKeyHandler = null;
 let activeInputSource = null;
+let visibleChatIndexStart = 0;
+let chatTextObjects = [];
+const visibleCount = 3;
 let sessionChatLog = []; // stores { sender, message, timestamp }
 
 export function createChatWindow(scene, player, room) {
-	const container = scene.add.container(0, 0);
+	//const container = scene.add.container(0, 0);
+	const camera = scene.cameras.main;
+	const spawnY = -25;
+	const windowWidth = 320;
+	const spawnX = camera.scrollX + (camera.width / 2) - (windowWidth / 2) - 350;
+	const container = scene.add.container(spawnX, spawnY);
+
+
 	setChatWindowStatus("active");
 	setActiveInput("chatWindow");
+	const scrollTrackTop = 259 + 13; 
+	const scrollTrackBottom = 319 - 13;
+	const scrollTrackHeight = scrollTrackBottom - scrollTrackTop;
+
 
 	const createRoundedRect = (x, y, width, height, fillColor, strokeColor = null, lineWidth = 2, radius = 8) => {
 		const graphics = scene.add.graphics();
@@ -61,7 +75,7 @@ export function createChatWindow(scene, player, room) {
 
 	const chatInputContainer = createRoundedRect(389, 363, 308, 38, 9159881);
 
-        // Input state
+    // Input state
     let inputBuffer = "";
     const maxCharacters = 100;
 
@@ -75,7 +89,6 @@ export function createChatWindow(scene, player, room) {
     });
     chatInputText.setOrigin(0, 0);
     chatInputText.setScrollFactor(1);
-
 
     // Add blinking cursor
     const cursor = scene.add.text(chatInputText.x, chatInputText.y, "|", {
@@ -105,8 +118,7 @@ export function createChatWindow(scene, player, room) {
 
 		if (event.key === "Enter") {
 			if (inputBuffer.trim().length > 0) {
-				room.send('chat', { id: player.id, inputBuffer });
-				displayChatBubble(scene, player, inputBuffer);
+				sendChatMessage(scene, player, room, inputBuffer);
 
 				inputBuffer = "";
 				chatInputText.setText("");
@@ -152,8 +164,44 @@ export function createChatWindow(scene, player, room) {
 	const scrollUpButton = createRoundedRect(535, 259, 15, 12, 932202, 932202, 1, 4);
 	const scrollDownButton = createRoundedRect(535, 319, 15, 12, 932202, 932202, 1, 4);
 
+	scrollUpButton.setInteractive().on("pointerup", (pointer, localX, localY, event) => {
+		event.stopPropagation();
+		if (visibleChatIndexStart > 0) {
+			visibleChatIndexStart--;
+			renderChatLog();
+		}
+	});
+
+	scrollDownButton.setInteractive().on("pointerup", (pointer, localX, localY, event) => {
+		event.stopPropagation();
+		const maxStart = Math.max(0, getChatLog().length - visibleCount);
+		if (visibleChatIndexStart < maxStart) {
+			visibleChatIndexStart++;
+			renderChatLog();
+		}
+	});
+
 	const scrollDrag = scene.add.rectangle(535, 306, 15, 12, 932202);
 	scrollDrag.setScrollFactor(1);
+	scrollDrag.setInteractive({ draggable: true });
+
+	scrollDrag.on('drag', (pointer, dragX, dragY) => {
+		const clampedY = Phaser.Math.Clamp(dragY, scrollTrackTop, scrollTrackBottom);
+		scrollDrag.y = clampedY;
+
+		const totalLines = getChatLog().length;
+		const maxStart = Math.max(0, totalLines - visibleCount);
+
+		if (maxStart > 0) {
+			const progress = (clampedY - scrollTrackTop) / scrollTrackHeight;
+			visibleChatIndexStart = Math.round(progress * maxStart);
+			renderChatLog();
+		}
+	});
+
+	scrollDrag.on("pointerup", (pointer, localX, localY, event) => {
+        event.stopPropagation();
+	});
 
 	const exitButton = scene.add.ellipse(532, 174, 22, 22, 0xffffff);
 	exitButton.setScrollFactor(1);
@@ -257,8 +305,66 @@ export function createChatWindow(scene, player, room) {
 	});
 	scrollDownButtonLabel.setScrollFactor(1);
 
+	function updateScrollDragPosition() {
+		const totalLines = getChatLog().length;
+		const maxStart = Math.max(0, totalLines - visibleCount);
+
+		const progress = maxStart === 0 ? 0 : visibleChatIndexStart / maxStart;
+		const newY = scrollTrackTop + progress * scrollTrackHeight;
+		scrollDrag.y = Phaser.Math.Clamp(newY, scrollTrackTop, scrollTrackBottom);
+	}
+
+	function renderChatLog() {
+		chatTextObjects.forEach(obj => obj.destroy());
+		chatTextObjects = [];
+
+		const fullLog = getChatLog();
+		const totalMessages = fullLog.length;
+
+		let currentY = chatWindowBody.y - 30;
+		let lineHeight = 12;
+		let linesUsed = 0;
+		const maxLines = 5;
+
+		for (let i = visibleChatIndexStart; i < totalMessages && linesUsed < maxLines; i++) {
+			const entry = fullLog[i];
+			const tempText = scene.add.text(0, 0, `${entry.sender}: ${entry.message}`, {
+			fontFamily: "Arial",
+			fontSize: "11px",
+			wordWrap: { width: 280, useAdvancedWrap: true },
+			resolution: 2
+			}).setVisible(false);
+
+			const wrapped = tempText.getWrappedText();
+			const lineCount = wrapped.length;
+			tempText.destroy();
+
+			if (linesUsed + lineCount > maxLines) break;
+
+			const text = scene.add.text(
+			chatWindowBody.x - 145,
+			currentY,
+			`${entry.sender}: ${entry.message}`,
+			{
+				fontFamily: "Arial",
+				fontSize: "11px",
+				color: "#000",
+				wordWrap: { width: 280, useAdvancedWrap: true },
+				resolution: 2
+			}
+			).setOrigin(0, 0).setScrollFactor(1);
+
+			chatTextObjects.push(text);
+			container.add(text);
+
+			currentY += lineHeight * lineCount;
+			linesUsed += lineCount;
+		}
+
+		updateScrollDragPosition();
+	}
+
 	// ADD TO CONTAINER (preserving original order)
-    
 	container.add([
 		chatWindow,
 		chatWindowHeader,
@@ -283,7 +389,9 @@ export function createChatWindow(scene, player, room) {
         chatInputText,
         cursor
 	]);
+
     chatContainerInstance = container;
+	renderChatLog();
 
 	return container;
     

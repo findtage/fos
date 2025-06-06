@@ -2,7 +2,7 @@ import { mapTransition } from "./roomTransition.js";
 import { toggleEmotePopup } from "./animations.js";
 import { openInventory } from "./inventory.js";
 import { getPlayerAvatarData } from "../game.js";
-import { createChatWindow, setActiveInput, isInputActive, getChatWindowStatus, addToChatLog, getChatLog  } from "./components.js";
+import { createChatWindow, setActiveInput, isInputActive, getChatWindowStatus, addToChatLog } from "./components.js";
 
 export function createMenu(scene, player, room) {
   const { width, height } = scene.cameras.main;
@@ -254,7 +254,7 @@ function openMapPopup(scene) {
 }
 
 // Function to send a chat message
-function sendChatMessage(scene, player, room, message) {
+export function sendChatMessage(scene, player, room, message) {
   room.send('chat', { id: player.id, message });
   displayChatBubble(scene, player, message);
 }
