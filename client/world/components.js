@@ -330,7 +330,7 @@ export function createChatWindow(scene, player, room) {
 			const entry = fullLog[i];
 			const tempText = scene.add.text(0, 0, `${entry.sender}: ${entry.message}`, {
 			fontFamily: "Arial",
-			fontSize: "11px",
+			fontSize: "11.5px",
 			wordWrap: { width: 280, useAdvancedWrap: true },
 			resolution: 2
 			}).setVisible(false);
@@ -347,7 +347,7 @@ export function createChatWindow(scene, player, room) {
 			`${entry.sender}: ${entry.message}`,
 			{
 				fontFamily: "Arial",
-				fontSize: "11px",
+				fontSize: "11.5px",
 				color: "#000",
 				wordWrap: { width: 280, useAdvancedWrap: true },
 				resolution: 2
