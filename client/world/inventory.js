@@ -1272,7 +1272,7 @@ class ShoeSelection {
         this.prevButton.destroy(); // Remove previous page button
     }
 }
-
+/*
 class BoardSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
@@ -1388,6 +1388,221 @@ class BoardSelection {
         this.prevButton.destroy(); // Remove previous page button
     }
 }
+*/
+class BoardSelection {
+    constructor(scene, player, previewPlayer) {
+        this.scene = scene;
+        this.player = player;
+        this.previewPlayer = previewPlayer;
+
+        // Load the JSON metadata from Phaser's cache
+        this.metadata = this.scene.cache.json.get("boards_metadata");
+
+        // Get all the keys for the boards
+        this.boardKeys = Object.keys(this.metadata);
+
+        // Pagination setup
+        this.page = 0;
+        this.boardsPerPage = 12;
+        this.columns = 4;
+        this.rows = 3;
+
+        // Display container
+        this.container = this.scene.add.container(0, 0).setScrollFactor(0);
+
+        // Create board previews and UI buttons
+        this.displayBoards();
+        this.createNavigationButtons();
+    }
+
+    /*
+    displayBoards() {
+        this.container.removeAll(true); // Clear previous previews
+
+        const startIndex = this.page * this.boardsPerPage;
+        const pageItems = this.boardKeys.slice(startIndex, startIndex + this.boardsPerPage);
+
+        let x = 0, y = 0;
+        const spacingX = 130;
+        const spacingY = 110;
+
+        pageItems.forEach((boardKey, index) => {
+            if (!this.scene.textures.exists(boardKey)) {
+                console.warn(`Texture ${boardKey} does not exist`);
+                return;
+            }
+    
+            const meta = this.metadata[boardKey];
+            if (!this.scene.textures.exists(boardKey)) return;
+
+            const baseX = x;
+            const baseY = y;
+
+            let sprite1 = null;
+            let sprite2 = null;
+
+            if (meta.middleEffect && meta.frames >= 2) {
+                console.log(meta.middleEffect === true ? `${boardKey} has middle effect` : `${boardKey} does not have middle effect`);
+                const firstFrame = meta.layerAbove ? 0 : meta.frames - 1;
+                const lastFrame = meta.layerAbove ? meta.frames - 1 : 0;
+
+                sprite1 = this.scene.add.sprite(baseX, baseY, boardKey, firstFrame).setOrigin(0).setScrollFactor(0);
+                sprite2 = this.scene.add.sprite(baseX, baseY, boardKey, lastFrame).setOrigin(0).setScrollFactor(0);
+
+                this.container.add(sprite1);
+                this.container.add(sprite2);
+            } else {
+                sprite1 = this.scene.add.sprite(baseX, baseY, boardKey, 0).setOrigin(0).setScrollFactor(0);
+                this.container.add(sprite1);
+            }
+
+            const clickTarget = sprite2 || sprite1;
+            clickTarget.setInteractive();
+
+            // Placeholder for selection handling
+            clickTarget.on('pointerdown', () => {
+                this.selectBoard(boardKey);
+            });
+
+            clickTarget.on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            });
+
+            x += spacingX;
+            if ((index + 1) % this.columns === 0) {
+                x = 0;
+                y += spacingY;
+            }
+        });
+
+        this.container.setDepth(2);
+    }
+    */
+    displayBoards() {
+        this.container.removeAll(true); // Clear previous previews
+
+        const bounds = {
+            x: 286,
+            y: 330,
+            width: 500,
+            height: 325
+        };
+
+        const itemsPerPage = this.boardsPerPage;
+        const columns = this.columns; // Assume already set (e.g. 4)
+        const rows = Math.ceil(itemsPerPage / columns);
+        const cellWidth = bounds.width / columns;
+        const cellHeight = bounds.height / rows;
+
+        const startX = bounds.x - bounds.width / 2 + cellWidth / 2;
+        const startY = bounds.y - bounds.height / 2 + cellHeight / 2;
+
+        const startIndex = this.page * itemsPerPage;
+        const pageItems = this.boardKeys.slice(startIndex, startIndex + itemsPerPage);
+
+        pageItems.forEach((boardKey, index) => {
+            if (!this.scene.textures.exists(boardKey)) {
+                console.warn(`Texture ${boardKey} does not exist`);
+                return;
+            }
+
+            const meta = this.metadata[boardKey];
+            const col = index % columns;
+            const row = Math.floor(index / columns);
+
+            const containerX = startX + col * cellWidth;
+            const containerY = startY + row * cellHeight;
+            const boardContainer = this.scene.add.container(containerX, containerY);
+            boardContainer.setScrollFactor(0);
+
+            const firstFrame = meta.middleEffect && meta.frames >= 2
+                ? (meta.layerAbove ? 0 : meta.frames - 1)
+                : 0;
+
+            const lastFrame = meta.middleEffect && meta.frames >= 2
+                ? (meta.layerAbove ? meta.frames - 1 : 0)
+                : null;
+
+            let sprite1 = this.scene.add.sprite(0, 0, boardKey, firstFrame).setOrigin(0.5).setScrollFactor(0);
+            let sprite2 = null;
+
+            if (lastFrame !== null) {
+                sprite2 = this.scene.add.sprite(0, 0, boardKey, lastFrame).setOrigin(0.5).setScrollFactor(0);
+                boardContainer.add(sprite2);
+            }
+
+            boardContainer.add(sprite1);
+
+            // === Apply metadata-based positioning ===
+            if (meta.offsetX) sprite1.x += meta.offsetX;
+            if (meta.offsetY) sprite1.y += meta.offsetY;
+            if (sprite2) {
+                if (meta.offsetX) sprite2.x += meta.offsetX;
+                if (meta.offsetY) sprite2.y += meta.offsetY;
+            }
+
+            // === Scale to fit in the cell ===
+            const baseWidth = sprite1.width || meta.splitX;
+            const baseHeight = sprite1.height || meta.splitY;
+            const scaleX = cellWidth / baseWidth;
+            const scaleY = cellHeight / baseHeight;
+            const scale = Math.min(1, scaleX, scaleY); // Clamp to max 1x
+
+            boardContainer.setScale(scale);
+
+            // === Click interactions ===
+            const clickTarget = sprite2 || sprite1;
+            clickTarget.setInteractive();
+
+            clickTarget.on('pointerdown', () => {
+                this.selectBoard(boardKey);
+            });
+
+            clickTarget.on('pointerup', (pointer, localX, localY, event) => {
+                event.stopPropagation();
+            });
+
+            this.container.add(boardContainer);
+        });
+
+        this.container.setDepth(2);
+    }
+
+
+    createNavigationButtons() {
+        this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff' })
+            .setInteractive().setScrollFactor(0).setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(1))
+            .on('pointerup', (pointer, localX, localY, event) => event.stopPropagation())
+            .setDepth(2);
+
+        this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
+            .setInteractive().setScrollFactor(0).setAlpha(0.00001)
+            .on('pointerdown', () => this.changePage(-1))
+            .on('pointerup', (pointer, localX, localY, event) => event.stopPropagation())
+            .setDepth(2);
+
+        this.scene.add.existing(this.nextButton);
+        this.scene.add.existing(this.prevButton);
+    }
+
+    changePage(direction) {
+        const maxPage = Math.ceil(this.boardKeys.length / this.boardsPerPage) - 1;
+        this.page = Phaser.Math.Clamp(this.page + direction, 0, maxPage);
+        this.displayBoards();
+    }
+
+    selectBoard(boardKey) {
+        // Empty for now as per your instruction
+    }
+
+    destroy() {
+        this.container.destroy();
+        this.nextButton.destroy();
+        this.prevButton.destroy();
+    }
+}
+
 
 class FaceAccSelection {
     constructor(scene, player, previewPlayer) {

@@ -59,6 +59,8 @@ export class Preloader extends Phaser.Scene {
         this.loadForestAssets();
         this.loadIslandAssets();
         this.loadNorthAssets();
+
+        this.load.json("boards_metadata", "assets/boards_metadata.json");
         
 
         // Load all assets for the avatar
@@ -486,6 +488,8 @@ export class Preloader extends Phaser.Scene {
             index++;
         });
 
+        this.loadBoardsFromMetadata();
+
     }
 
     loadUIAssets(){
@@ -618,6 +622,48 @@ export class Preloader extends Phaser.Scene {
         this.load.audio('mtfantage_music', 'assets/sounds/Mt-Fantage.mp3');
         this.load.audio('pet_town_music', 'assets/sounds/Pet-Town.mp3');
     }
-    
+
+
+    loadBoardsFromMetadata() {
+        fetch("assets/boards_metadata.json")
+            .then((res) => res.json())
+            .then((metadata) => {
+                this.boardMetadata = metadata; // Optional: store it for later use
+
+                Object.entries(metadata).forEach(([key, data]) => {
+                    if (!data.path || !data.splitX || !data.splitY) {
+                        console.warn(`⚠️ Skipping "${key}" (missing path/splitX/splitY)`);
+                        return;
+                    }
+
+                    let imgFrameWidth = data.splitX;
+                    let imgFrameHeight = data.splitY;
+                    
+                    if (data.middleEffect == true && data.frames == 2){
+                        imgFrameWidth = imgFrameWidth / 2;
+                    }
+
+                    this.load.spritesheet(key, data.path, {
+                        frameWidth: imgFrameWidth,
+                        frameHeight: imgFrameHeight,
+                    });
+                });
+
+                // Register completion check
+                this.load.once("complete", () => {
+                    Object.keys(metadata).forEach((key) => {
+                        if (this.textures.exists(key)) {
+                            //
+                        } else {
+                            console.warn(`❌ Texture not found: ${key}`);
+                        }
+                    });
+                });
+        })
+        .catch((err) => {
+            console.error("Failed to load board metadata:", err);
+        });
+    }
+ 
     create() {}
 }
