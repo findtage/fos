@@ -1415,78 +1415,20 @@ class BoardSelection {
         this.createNavigationButtons();
     }
 
-    /*
-    displayBoards() {
-        this.container.removeAll(true); // Clear previous previews
-
-        const startIndex = this.page * this.boardsPerPage;
-        const pageItems = this.boardKeys.slice(startIndex, startIndex + this.boardsPerPage);
-
-        let x = 0, y = 0;
-        const spacingX = 130;
-        const spacingY = 110;
-
-        pageItems.forEach((boardKey, index) => {
-            if (!this.scene.textures.exists(boardKey)) {
-                console.warn(`Texture ${boardKey} does not exist`);
-                return;
-            }
-    
-            const meta = this.metadata[boardKey];
-            if (!this.scene.textures.exists(boardKey)) return;
-
-            const baseX = x;
-            const baseY = y;
-
-            let sprite1 = null;
-            let sprite2 = null;
-
-            if (meta.middleEffect && meta.frames >= 2) {
-                console.log(meta.middleEffect === true ? `${boardKey} has middle effect` : `${boardKey} does not have middle effect`);
-                const firstFrame = meta.layerAbove ? 0 : meta.frames - 1;
-                const lastFrame = meta.layerAbove ? meta.frames - 1 : 0;
-
-                sprite1 = this.scene.add.sprite(baseX, baseY, boardKey, firstFrame).setOrigin(0).setScrollFactor(0);
-                sprite2 = this.scene.add.sprite(baseX, baseY, boardKey, lastFrame).setOrigin(0).setScrollFactor(0);
-
-                this.container.add(sprite1);
-                this.container.add(sprite2);
-            } else {
-                sprite1 = this.scene.add.sprite(baseX, baseY, boardKey, 0).setOrigin(0).setScrollFactor(0);
-                this.container.add(sprite1);
-            }
-
-            const clickTarget = sprite2 || sprite1;
-            clickTarget.setInteractive();
-
-            // Placeholder for selection handling
-            clickTarget.on('pointerdown', () => {
-                this.selectBoard(boardKey);
-            });
-
-            clickTarget.on('pointerup', (pointer, localX, localY, event) => {
-                event.stopPropagation();
-            });
-
-            x += spacingX;
-            if ((index + 1) % this.columns === 0) {
-                x = 0;
-                y += spacingY;
-            }
-        });
-
-        this.container.setDepth(2);
-    }
-    */
     displayBoards() {
         this.container.removeAll(true); // Clear previous previews
 
         const bounds = {
             x: 286,
-            y: 330,
+            y: 345,
             width: 500,
             height: 325
         };
+
+        // mid and not layerabove = first frame top layer, last frame bottom layer
+        // mid and layerabove = last frame top layer, first frame bottom layer
+        // not mid and layerabove = first frame top layer (only one sprite)
+        // not mid and not layerabove = first frame bottom layer (only one sprite)
 
         const itemsPerPage = this.boardsPerPage;
         const columns = this.columns; // Assume already set (e.g. 4)
@@ -1515,13 +1457,9 @@ class BoardSelection {
             const boardContainer = this.scene.add.container(containerX, containerY);
             boardContainer.setScrollFactor(0);
 
-            const firstFrame = meta.middleEffect && meta.frames >= 2
-                ? (meta.layerAbove ? 0 : meta.frames - 1)
-                : 0;
+            const firstFrame = meta.middleEffect ? (meta.layerAbove ? meta.frames - 1 : 0) : 0;
 
-            const lastFrame = meta.middleEffect && meta.frames >= 2
-                ? (meta.layerAbove ? meta.frames - 1 : 0)
-                : null;
+            const lastFrame = meta.middleEffect ? (meta.layerAbove ? 0 : meta.frames - 1) : null;
 
             let sprite1 = this.scene.add.sprite(0, 0, boardKey, firstFrame).setOrigin(0.5).setScrollFactor(0);
             let sprite2 = null;
@@ -1568,7 +1506,6 @@ class BoardSelection {
         this.container.setDepth(2);
     }
 
-
     createNavigationButtons() {
         this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff' })
             .setInteractive().setScrollFactor(0).setAlpha(0.00001)
@@ -1592,9 +1529,92 @@ class BoardSelection {
         this.displayBoards();
     }
 
+    /*
     selectBoard(boardKey) {
-        // Empty for now as per your instruction
+        // mid and not layerabove = first frame top layer, last frame bottom layer
+        // mid and layerabove = last frame top layer, first frame bottom layer
+        // not mid and layerabove = first frame top layer (only one sprite)
+        // not mid and not layerabove = first frame bottom layer (only one sprite)
+
+        const meta = this.metadata[boardKey];
+        console.log("Board selected:", boardKey, "\nBoard path is:\n", meta.path);
+
+        // Get board bottom layer index (previewPlayer.board)
+
+        // If there is a bottom board layer destroy it (previewPlayer.board)
+
+        // If there is a top board layer destroy it (previewPlayer.boardTop)
+
+        // Add the sprite image(s) to the scene (is it possible to have a null image and add to the container just for consistency?)
+
+        // Add bottom layer at board bottom layer index 
+        // Add top layer normally like previewPlayer.add() 
+    
     }
+    */
+    selectBoard(boardKey) {
+    const meta = this.metadata[boardKey];
+    console.log("Board selected:", boardKey, "\nBoard path is:\n", meta.path);
+
+    // Get current index of the bottom board sprite in the previewPlayer
+    const boardIndex = this.previewPlayer.getIndex(this.previewPlayer.board);
+    console.log("Board index is " + boardIndex);
+
+    // Remove old bottom layer board sprite (if any)
+    if (this.previewPlayer.board) {
+        this.previewPlayer.board.destroy();
+        this.previewPlayer.board = null;
+    }
+
+    // Remove old top layer board sprite (if any)
+    if (this.previewPlayer.boardTop) {
+        this.previewPlayer.boardTop.destroy();
+        this.previewPlayer.boardTop = null;
+    }
+
+    // === MIDDLE EFFECT BOARDS ===
+    if (meta.middleEffect && meta.frames >= 2) {
+        // Determine frame order
+        
+        const bottomFrame = meta.layerAbove ? 0 : meta.frames - 1;
+        const topFrame = meta.layerAbove ? meta.frames - 1 : 0;
+        // Bottom sprite
+        const bottomSprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, bottomFrame).setOrigin(0.5);
+        if (meta.offsetX) bottomSprite.x += meta.offsetX;
+        if (meta.offsetY) bottomSprite.y += meta.offsetY;
+        this.previewPlayer.board = bottomSprite;
+        this.previewPlayer.addAt(bottomSprite, boardIndex);
+
+        // Top sprite
+        const topSprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, topFrame).setOrigin(0.5);
+        if (meta.offsetX) topSprite.x += meta.offsetX;
+        if (meta.offsetY) topSprite.y += meta.offsetY;
+        this.previewPlayer.boardTop = topSprite;
+        this.previewPlayer.add(topSprite); // Add normally (on top)
+    
+    // === SIMPLE ONE-LAYER BOARDS ===
+    } else {
+        const sprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, 0).setOrigin(0.5);
+        if (meta.offsetX) sprite.x += meta.offsetX;
+        if (meta.offsetY) sprite.y += meta.offsetY;
+
+        if (meta.layerAbove) {
+            // Add top-only board
+            this.previewPlayer.boardTop = sprite;
+            this.previewPlayer.add(sprite);
+        } else {
+            // Add bottom-only board at correct index
+            this.previewPlayer.board = sprite;
+            this.previewPlayer.addAt(sprite, boardIndex);
+        }
+    }
+
+    // Save selected key
+    this.previewPlayer.selectedBoardKey = boardKey;
+    }
+
+
+
 
     destroy() {
         this.container.destroy();
@@ -1602,7 +1622,6 @@ class BoardSelection {
         this.prevButton.destroy();
     }
 }
-
 
 class FaceAccSelection {
     constructor(scene, player, previewPlayer) {

@@ -8,12 +8,16 @@ import { openIdfone } from './idfone.js';
 export function preloadAvatar(scene) {}
 
 export function createAvatar(scene, startX=300, startY=400, playerDirection = 'left') {
+    const metadata = scene.cache.json.get("boards_metadata");
+
     // Get the player's avatar data from db
     const playerData = getPlayerAvatarData();
     if (!playerData) {
         console.error("❌ No avatar data found!");
         return;
     }
+
+    const boardData = metadata[playerData.board];
     
     const avatar = scene.add.container(startX, startY); // Create a container for layering
 
@@ -133,11 +137,33 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
         playerData.shoes, 0
     ).setOrigin(0.5, 0.5);
 
-    // Player Board
+    /*
+    // Player Board 
     const board = scene.add.image(
         boards['board']?.[playerData.board]?.["fitX"], 
         boards['board']?.[playerData.board]?.["fitY"], 
     playerData.board).setOrigin(0.5, 0.5);
+    */
+
+    let boardBottomFrame;
+    let boardTopFrame;
+
+    let board0, board1;
+
+    if (boardData.middleEffect) {
+        // If the board has a middle effect, determine the frame based on the layer
+        boardBottomFrame = boardData.layerAbove ? 0 : boardData.frames - 1;
+        boardTopFrame = boardData.layerAbove ? boardData.frames - 1 : 0;
+
+        board0 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, boardBottomFrame).setOrigin(0.5, 0.5);
+        board1 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, boardTopFrame).setOrigin(0.5, 0.5);
+    } else {
+        if (boardData.layerAbove) {
+            board1 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+        } else { 
+            board0 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+        }       
+    }
     
     // Player Face Accessory
     let faceacc;
@@ -165,7 +191,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     
     
     // Add the avatar to the center of the scene
-    avatar.add([tag, board, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, nameTag]);
+    avatar.add([tag, board0, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, board1, nameTag]);
 
     // Store references to each body part
     avatar.base = base;
@@ -177,7 +203,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     avatar.eyes = eyes;
     avatar.head = head;
     avatar.hair = hair;
-    avatar.board = board;
+    avatar.board = board0 || board1; // Use either board0 or board1 based on the board data
     avatar.top = top;
     avatar.bottom = bottom;
     avatar.outfit = outfit;

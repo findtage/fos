@@ -75,7 +75,7 @@
     "splitY": 160,
     "frames": 2,
     "middleEffect": false,
-    "layerAbove": false,
+    "layerAbove": true,
     "offsetX": 8,
     "offsetY": -60
   },
@@ -115,7 +115,7 @@
     "splitY": 146,
     "frames": 2,
     "middleEffect": false,
-    "layerAbove": false,
+    "layerAbove": true,
     "offsetX": -2,
     "offsetY": -66
   },
@@ -155,7 +155,7 @@
     "splitY": 105,
     "frames": 2,
     "middleEffect": false,
-    "layerAbove": false,
+    "layerAbove": true,
     "offsetX": -5,
     "offsetY": -59
   },
@@ -205,7 +205,7 @@
     "splitY": 59,
     "frames": 2,
     "middleEffect": false,
-    "layerAbove": false,
+    "layerAbove": true,
     "offsetX": -9,
     "offsetY": -28
   },
@@ -6369,6 +6369,16 @@
     "offsetX": 2,
     "offsetY": -44
   },
+  "download": {
+    "path": "assets/boards/download.png",
+    "splitX": 119,
+    "splitY": 150,
+    "frames": 5,
+    "middleEffect": true,
+    "layerAbove": false,
+    "offsetX": 2,
+    "offsetY": -44
+  },
   "board-treasurechest-08-2011": {
     "path": "assets/boards/board-treasurechest-08-2011.png",
     "splitX": 120,
@@ -6548,16 +6558,6 @@
     "layerAbove": false,
     "offsetX": -1,
     "offsetY": -45
-  },
-  "download": {
-    "path": "assets/boards/download.png",
-    "splitX": 119,
-    "splitY": 150,
-    "frames": 5,
-    "middleEffect": true,
-    "layerAbove": false,
-    "offsetX": 2,
-    "offsetY": -44
   },
   "board-baseballfield-03-2012": {
     "path": "assets/boards/board-baseballfield-03-2012.png",
