@@ -16,7 +16,7 @@ export function openInventory(scene, player, room){
         top: player.top.visible ? player.top.texture.key : "none",
         bottom: player.bottom.visible ? player.bottom.texture.key : "none",
         shoes: player.shoes.texture.key,
-        board: player.board.texture.key,
+        board: (player.board.texture.key === "baccEmpty") ? player.boardTop.texture.key : player.board.texture.key,
         outfit: player.outfit.visible ? player.outfit.texture.key : "none",
         face_acc: player.faceacc.texture.key === 'faccEmpty' ? 'none' : player.faceacc.texture.key,
         body_acc: player.bodyacc.texture.key === 'baccEmpty' ? 'none' : player.bodyacc.texture.key
@@ -34,150 +34,30 @@ export function openInventory(scene, player, room){
     const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2);
 
     closeInventory.on('pointerup', async (pointer, localX, localY, event) => {
-        // Save hair
-        let hairIndex = player.getIndex(player.hair); // Get the layer index of the hair
-        player.hair.destroy();
-        player.hair = scene.add.sprite(
-        assets['hair']?.[gender]?.[previewPlayer.hair.texture.key]?.["fitX"], 
-        assets['hair']?.[gender]?.[previewPlayer.hair.texture.key]?.["fitY"], 
-        previewPlayer.hair.texture.key, 0).setOrigin(0.5, 0.5);
-        player.addAt(player.hair, hairIndex);
-
-        
-        if (previewPlayer.top && previewPlayer.top.visible){
-            // Save top
-            let topIndex = player.getIndex(player.top); // Get the layer index of the top
-            player.top.destroy();
-            player.top = scene.add.sprite(
-            tops['top']?.[gender]?.[previewPlayer.top.texture.key]?.["fitX"], 
-            tops['top']?.[gender]?.[previewPlayer.top.texture.key]?.["fitY"],
-            previewPlayer.top.texture.key,
-            0).setOrigin(0.5, 0.5);
-            player.addAt(player.top, topIndex);
-
-            // Save bottom
-            let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
-            player.bottom.destroy();
-            player.bottom = scene.add.sprite(
-            bottoms['bottom']?.[gender]?.[previewPlayer.bottom.texture.key]?.["fitX"], 
-            bottoms['bottom']?.[gender]?.[previewPlayer.bottom.texture.key]?.["fitY"],
-            previewPlayer.bottom.texture.key,
-            0).setOrigin(0.5, 0.5);
-            player.addAt(player.bottom, bottomIndex);
-            
-            // Invisible Outfit
-            let outfitIndex = player.getIndex(player.outfit);
-            player.outfit.destroy();
-            player.outfit = scene.add.sprite(
-                outfits?.[gender]?.["outfit0"]?.["fitX"], 
-                outfits?.[gender]?.["outfit0"]?.["fitY"],
-                "outfit0",
-                0).setOrigin(0.5, 0.5).setVisible(false);
-            player.addAt(player.outfit, outfitIndex);
-        } else {
-            // Save Outfit
-            let outfitIndex = player.getIndex(player.outfit);
-            player.outfit.destroy();
-            player.outfit = scene.add.sprite(
-                outfits?.[gender]?.[previewPlayer.outfit.texture.key]?.["fitX"], 
-                outfits?.[gender]?.[previewPlayer.outfit.texture.key]?.["fitY"],
-                previewPlayer.outfit.texture.key,
-                0).setOrigin(0.5, 0.5);
-            player.addAt(player.outfit, outfitIndex);
-
-            // Invisible Top / Bottom
-            let topIndex = player.getIndex(player.top); // Get the layer index of the top
-            player.top.destroy();
-            player.top = scene.add.sprite(
-            tops['top']?.[gender]?.["top0"]?.["fitX"], 
-            tops['top']?.[gender]?.["top0"]?.["fitY"],
-            "top0",
-            0).setOrigin(0.5, 0.5).setVisible(false);
-            player.addAt(player.top, topIndex);
-
-            // Save bottom
-            let bottomIndex = player.getIndex(player.bottom); // Get the layer index of the bottom
-            player.bottom.destroy();
-            player.bottom = scene.add.sprite(
-            bottoms['bottom']?.[gender]?.["bottom0"]?.["fitX"], 
-            bottoms['bottom']?.[gender]?.["bottom0"]?.["fitY"],
-            previewPlayer.bottom.texture.key,
-            0).setOrigin(0.5, 0.5).setVisible(false);
-            player.addAt(player.bottom, bottomIndex);
-        }
-
-        // Save shoes
-        let shoeIndex = player.getIndex(player.shoes); // Get the layer index of the shoes
-        player.shoes.destroy();
-        player.shoes = scene.add.sprite(
-        shoes['shoe']?.[gender]?.[previewPlayer.shoes.texture.key]?.["fitX"], 
-        shoes['shoe']?.[gender]?.[previewPlayer.shoes.texture.key]?.["fitY"],
-        previewPlayer.shoes.texture.key,
-        0).setOrigin(0.5, 0.5);
-        player.addAt(player.shoes, shoeIndex);
-
-        // Save board
-        // Fix tmrw
-        let boardIndex = player.getIndex(player.board); // Get the layer index of the board
-        player.board.destroy();
-        player.board = scene.add.image(
-        boards['board']?.[previewPlayer.board.texture.key]?.["fitX"], 
-        boards['board']?.[previewPlayer.board.texture.key]?.["fitY"], 
-        previewPlayer.board.texture.key,
-        0).setOrigin(0.5, 0.5);
-        player.addAt(player.board, boardIndex);
-
-        // Save face acc
-        let faceAccIndex = player.getIndex(player.faceacc);
-        player.faceacc.destroy();
-        player.faceacc = scene.add.image(
-            face_acc[gender]?.[previewPlayer.faceacc.texture.key]?.["fitX"], 
-            face_acc[gender]?.[previewPlayer.faceacc.texture.key]?.["fitY"], 
-            previewPlayer.faceacc.texture.key,
-        0).setOrigin(0.5, 0.5);
-        player.addAt(player.faceacc, faceAccIndex);
-
-        // Save body acc
-        let bodyAccIndex = player.getIndex(player.bodyacc);
-        player.bodyacc.destroy();
-        if (previewPlayer.bodyacc.texture.key != "baccEmpty"){
-            player.bodyacc = scene.add.sprite(
-                body_acc[gender]?.[previewPlayer.bodyacc.texture.key]?.["fitX"], 
-                body_acc[gender]?.[previewPlayer.bodyacc.texture.key]?.["fitY"],
-                previewPlayer.bodyacc.texture.key,
-            0).setOrigin(0.5, 0.5);
-            player.addAt(player.bodyacc, bodyAccIndex);
-        } else {
-            player.bodyacc = scene.add.image(
-                0, 0,
-                previewPlayer.bodyacc.texture.key).setOrigin(0.5, 0.5);
-            player.addAt(player.bodyacc, bodyAccIndex);
-        }
-        
-
+    
         // Notify other players about outfit change IF ANY CHANGES FIX LATER
         room.send("outfitChange", {playerId: player.id,
             playerGender: gender,
-            hairKey: player.hair.texture.key, 
-            topKey: player.top.visible ? player.top.texture.key : "none",
-            bottomKey: player.bottom.visible ? player.bottom.texture.key : "none",
-            outfitKey: player.outfit.visible ? player.outfit.texture.key : "none",
-            shoeKey: player.shoes.texture.key,
-            boardKey: player.board.texture.key,
-            faceAccKey: player.faceacc.texture.key,
-            bodyAccKey: player.bodyacc.texture.key
+            hairKey: previewPlayer.hair.texture.key, 
+            topKey: previewPlayer.top.visible ? player.top.texture.key : "none",
+            bottomKey: previewPlayer.bottom.visible ? previewPlayer.bottom.texture.key : "none",
+            outfitKey: previewPlayer.outfit.visible ? previewPlayer.outfit.texture.key : "none",
+            shoeKey: previewPlayer.shoes.texture.key,
+            boardKey: (previewPlayer.board.texture.key === "baccEmpty") ? previewPlayer.boardTop.texture.key : previewPlayer.board.texture.key,
+            faceAccKey: previewPlayer.faceacc.texture.key,
+            bodyAccKey: previewPlayer.bodyacc.texture.key
         });
         event.stopPropagation();
 
         let updatedData = { 
-            hair: player.hair.texture.key, 
-            top: player.top.visible ? player.top.texture.key : "none",
-            bottom: player.bottom.visible ? player.bottom.texture.key : "none",
-            shoes: player.shoes.texture.key,
-            board: player.board.texture.key,
-            outfit: player.outfit.visible ? player.outfit.texture.key : "none",
-            face_acc: player.faceacc.texture.key != "faccEmpty" ? player.faceacc.texture.key : "none",
-            body_acc: player.bodyacc.texture.key != "baccEmpty" ? player.bodyacc.texture.key : "none"
+            hair: previewPlayer.hair.texture.key, 
+            top: previewPlayer.top.visible ? previewPlayer.top.texture.key : "none",
+            bottom: previewPlayer.bottom.visible ? previewPlayer.bottom.texture.key : "none",
+            shoes: previewPlayer.shoes.texture.key,
+            board: (previewPlayer.board.texture.key === "baccEmpty") ? previewPlayer.boardTop.texture.key : previewPlayer.board.texture.key,
+            outfit: previewPlayer.outfit.visible ? previewPlayer.outfit.texture.key : "none",
+            face_acc: previewPlayer.faceacc.texture.key != "faccEmpty" ? previewPlayer.faceacc.texture.key : "none",
+            body_acc: previewPlayer.bodyacc.texture.key != "baccEmpty" ? previewPlayer.bodyacc.texture.key : "none"
         };
         
         // ✅ Check if the outfit was changed before saving

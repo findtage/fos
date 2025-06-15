@@ -160,8 +160,10 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     } else {
         if (boardData.layerAbove) {
             board1 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+            board0 = scene.add.sprite(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
         } else { 
             board0 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+            board1 = scene.add.sprite(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
         }       
     }
     
