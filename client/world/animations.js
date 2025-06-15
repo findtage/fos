@@ -239,6 +239,7 @@ export function performJump(player) {
                     player.tag.y += 5;
                     player.nameTag.y += 5;
                     player.board.y +=5;
+                    player.boardTop.y +=5;
                     jumped[frame.index + 2] = true;
                 }
             } else if (frame.index === 3 || frame.index === 5) {
@@ -247,6 +248,7 @@ export function performJump(player) {
                     player.tag.y -= 5;
                     player.nameTag.y -= 5;
                     player.board.y -=5;
+                    player.boardTop.y -=5;
                     jumped[frame.index + 2] = true;
                 }
             }

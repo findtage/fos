@@ -203,7 +203,8 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     avatar.eyes = eyes;
     avatar.head = head;
     avatar.hair = hair;
-    avatar.board = board0 || board1; // Use either board0 or board1 based on the board data
+    avatar.board = board0; // Use either board0 or board1 based on the board data
+    avatar.boardTop = board1; // Use either board0 or board1 based on the board data
     avatar.top = top;
     avatar.bottom = bottom;
     avatar.outfit = outfit;

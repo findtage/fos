@@ -2,11 +2,13 @@ import { assets, tops, bottoms, shoes, outfits, boards, face_acc, body_acc } fro
 import { createAvatarAnimations, performIdles } from './animations.js';
 import { getPlayerAvatarData, updateLocalAvatarData } from "../game.js";
 import { publicURL } from '../env.js';
+import { createAvatar } from './avatar.js';
 
 export function openInventory(scene, player, room){
     //const { width, height } = scene.cameras.main;
     const inventory = scene.add.image(0, 0, 'inventorybg').setOrigin(0, 0).setScrollFactor(0).setInteractive().setDepth(2);
-    let gender = getPlayerAvatarData().gender;
+    const avatarData = getPlayerAvatarData();
+    let gender = avatarData.gender;
 
     // Store initial outfit for comparison
     const initialAvatarData = { 
@@ -25,65 +27,8 @@ export function openInventory(scene, player, room){
     });
 
     // Create closet avatar
-    const previewPlayer = scene.add.container(694, 350).setDepth(2).setScrollFactor(0);
-
-    let previewParts = [];
-    let previewHair = null; // Store hair separately
-    let previewTop = null; // Store top separately
-    let previewBottom = null; // Store bottom separately
-    let previewShoes = null; // Store shoes separately
-    let previewBoard = null; // Store board separately
-    let previewOutfit = null; // Store outfit separately
-    let previewFaceAcc = null; // Store face_acc separately
-    let previewBodyAcc = null; // Store body_acc seperately
-
-    // Make a preview character for inventory
-    player.list.forEach(part => {
-        if (part.texture.key != null) {  // Ensure it's a visible part
-            let clonedPart = scene.add.image(part.x, part.y, part.texture.key)
-                .setOrigin(part.originX, part.originY)
-                .setScale(part.scaleX, part.scaleY)
-                .setDepth(3);
-                
-            if (clonedPart) {
-                previewParts.push(clonedPart);
-                previewPlayer.add(clonedPart);
-            }
-
-            if (!part.visible){
-
-                clonedPart.setVisible(false);
-            }
-
-            // If this part is the hair, store it separately
-            if (part === player.hair) {
-                previewHair = clonedPart;
-            } else if (part == player.top) {
-                previewTop = clonedPart;
-            } else if (part == player.bottom){
-                previewBottom = clonedPart;
-            } else if (part == player.shoes){
-                previewShoes = clonedPart;
-            } else if (part == player.board){
-                previewBoard = clonedPart;
-            } else if (part == player.outfit){
-                previewOutfit = clonedPart;
-            } else if (part == player.faceacc){
-                previewFaceAcc = clonedPart;
-            } else if (part == player.bodyacc){
-                previewBodyAcc = clonedPart;
-            }
-        }
-    });
-
-    previewPlayer.hair = previewHair; // Store reference to initial hair
-    previewPlayer.top = previewTop; // Store reference to initial top
-    previewPlayer.bottom = previewBottom; // Store reference to initial bottom
-    previewPlayer.shoes = previewShoes; // Store reference to initial shoes
-    previewPlayer.board = previewBoard; // Store reference to initial board
-    previewPlayer.outfit = previewOutfit; // Store reference to initial outfit
-    previewPlayer.faceacc = previewFaceAcc; // Store reference to initial faceacc
-    previewPlayer.bodyacc = previewBodyAcc; // Store reference to initial bodyacc
+    const previewPlayer = createAvatar(scene, 694, 350).setDepth(2).setScrollFactor(0);
+    
     
     // Create a close button
     const closeInventory = scene.add.ellipse(778, 21, 30, 30, 0xffffff, 0).setInteractive().setScrollFactor(0).setDepth(2);
@@ -172,6 +117,7 @@ export function openInventory(scene, player, room){
         player.addAt(player.shoes, shoeIndex);
 
         // Save board
+        // Fix tmrw
         let boardIndex = player.getIndex(player.board); // Get the layer index of the board
         player.board.destroy();
         player.board = scene.add.image(
@@ -1272,123 +1218,7 @@ class ShoeSelection {
         this.prevButton.destroy(); // Remove previous page button
     }
 }
-/*
-class BoardSelection {
-    constructor(scene, player, previewPlayer) {
-        this.scene = scene;
-        this.player = player;
-        this.previewPlayer = previewPlayer;
-        this.hairKeys = Object.keys(boards.board); // Store hair asset keys
-        this.page = 0;
-        this.hairsPerPage = 12;
-        this.columns = 4;
-        this.rows = 3;
-        this.container = this.scene.add.container(100, 210).setScrollFactor(0); // Adjust position as needed
-        this.displayHairs();
-        this.createNavigationButtons();
-    }
 
-    displayHairs() {
-        // Clear previous hairs
-        this.container.removeAll(true);
-
-        // Get the current page's hair items
-        const startIndex = this.page * this.hairsPerPage;
-        const pageItems = this.hairKeys.slice(startIndex, startIndex + this.hairsPerPage);
-
-        let x = 0, y = 0;
-        let spacingX = 130; // Adjust spacing
-        let spacingY = 110;
-
-        pageItems.forEach((hairKey, index) => {
-            if (boards['board']?.[hairKey]?.["type"] == "image"){
-                var hairSprite = this.scene.add.image(x, y, hairKey).setInteractive().setScrollFactor(0);
-            }
-            this.container.add(hairSprite);
-            this.container.setDepth(2);
-
-            // Arrange in rows and columns
-            x += spacingX;
-            if ((index + 1) % this.columns === 0) {
-                x = 0;
-                y += spacingY;
-            }
-
-            // Handle click to select hair
-            hairSprite.on('pointerdown', () => {
-                this.selectHair(hairKey);
-            });
-            hairSprite.on('pointerup', (pointer, localX, localY, event) => {
-                event.stopPropagation();
-            });
-
-        });
-    }
-
-    createNavigationButtons() {
-        // Next Page Button (Down Arrow)
-        this.nextButton = this.scene.add.text(546, 452, '▼', { fontSize: '32px', fill: '#fff', })
-            .setInteractive()
-            .setScrollFactor(0)
-            .setAlpha(0.00001)
-            .on('pointerdown', () => this.changePage(1))
-            .on('pointerup', (pointer, localX, localY, event) => {
-                event.stopPropagation();
-            })
-            .setDepth(2);
-    
-        // Previous Page Button (Up Arrow)
-        this.prevButton = this.scene.add.text(546, 154, '▲', { fontSize: '32px', fill: '#fff' })
-            .setInteractive()
-            .setScrollFactor(0)
-            .setAlpha(0.00001)
-            .on('pointerdown', () => this.changePage(-1))
-            .on('pointerup', (pointer, localX, localY, event) => {
-                event.stopPropagation();
-            })
-            .setDepth(2);
-    
-        this.scene.add.existing(this.nextButton);
-        this.scene.add.existing(this.prevButton);
-    }
-
-    changePage(direction) {
-        let maxPage = Math.ceil(this.hairKeys.length / this.hairsPerPage) - 1;
-        this.page = Phaser.Math.Clamp(this.page + direction, 0, maxPage);
-        this.displayHairs();
-    }
-
-    selectHair(hairKey) {
-        console.log("Board selected:", hairKey, "\nBoard path is:\n", boards['board']?.[hairKey]?.["path"]);
-        
-        const hairIndex = this.previewPlayer.getIndex(this.previewPlayer.board);
-        console.log("Board index is "+hairIndex);
-    
-        // Remove previous hair sprite from preview player
-        if (this.previewPlayer.board) {
-            this.previewPlayer.board.destroy();
-        }
-    
-        // Create new hair sprite
-        this.previewPlayer.board = this.scene.add.image(
-            boards['board']?.[hairKey]?.["fitX"], 
-            boards['board']?.[hairKey]?.["fitY"], 
-            hairKey
-        ).setOrigin(0.5, 0.5);
-
-        
-        // Add new hair to previewPlayer
-        this.previewPlayer.addAt(this.previewPlayer.board, hairIndex);
-    }
-    
-
-    destroy() {
-        this.container.destroy(); // Remove all hair images
-        this.nextButton.destroy(); // Remove next page button
-        this.prevButton.destroy(); // Remove previous page button
-    }
-}
-*/
 class BoardSelection {
     constructor(scene, player, previewPlayer) {
         this.scene = scene;
@@ -1529,92 +1359,63 @@ class BoardSelection {
         this.displayBoards();
     }
 
-    /*
-    selectBoard(boardKey) {
-        // mid and not layerabove = first frame top layer, last frame bottom layer
-        // mid and layerabove = last frame top layer, first frame bottom layer
-        // not mid and layerabove = first frame top layer (only one sprite)
-        // not mid and not layerabove = first frame bottom layer (only one sprite)
-
+        selectBoard(boardKey) {
         const meta = this.metadata[boardKey];
         console.log("Board selected:", boardKey, "\nBoard path is:\n", meta.path);
 
-        // Get board bottom layer index (previewPlayer.board)
+        // Get current index of the bottom board sprite in the previewPlayer
+        const boardIndex = this.previewPlayer.getIndex(this.previewPlayer.board);
+        const boardTopIndex = this.previewPlayer.getIndex(this.previewPlayer.boardTop);
 
-        // If there is a bottom board layer destroy it (previewPlayer.board)
-
-        // If there is a top board layer destroy it (previewPlayer.boardTop)
-
-        // Add the sprite image(s) to the scene (is it possible to have a null image and add to the container just for consistency?)
-
-        // Add bottom layer at board bottom layer index 
-        // Add top layer normally like previewPlayer.add() 
-    
-    }
-    */
-    selectBoard(boardKey) {
-    const meta = this.metadata[boardKey];
-    console.log("Board selected:", boardKey, "\nBoard path is:\n", meta.path);
-
-    // Get current index of the bottom board sprite in the previewPlayer
-    const boardIndex = this.previewPlayer.getIndex(this.previewPlayer.board);
-    console.log("Board index is " + boardIndex);
-
-    // Remove old bottom layer board sprite (if any)
-    if (this.previewPlayer.board) {
-        this.previewPlayer.board.destroy();
-        this.previewPlayer.board = null;
-    }
-
-    // Remove old top layer board sprite (if any)
-    if (this.previewPlayer.boardTop) {
-        this.previewPlayer.boardTop.destroy();
-        this.previewPlayer.boardTop = null;
-    }
-
-    // === MIDDLE EFFECT BOARDS ===
-    if (meta.middleEffect && meta.frames >= 2) {
-        // Determine frame order
-        
-        const bottomFrame = meta.layerAbove ? 0 : meta.frames - 1;
-        const topFrame = meta.layerAbove ? meta.frames - 1 : 0;
-        // Bottom sprite
-        const bottomSprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, bottomFrame).setOrigin(0.5);
-        if (meta.offsetX) bottomSprite.x += meta.offsetX;
-        if (meta.offsetY) bottomSprite.y += meta.offsetY;
-        this.previewPlayer.board = bottomSprite;
-        this.previewPlayer.addAt(bottomSprite, boardIndex);
-
-        // Top sprite
-        const topSprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, topFrame).setOrigin(0.5);
-        if (meta.offsetX) topSprite.x += meta.offsetX;
-        if (meta.offsetY) topSprite.y += meta.offsetY;
-        this.previewPlayer.boardTop = topSprite;
-        this.previewPlayer.add(topSprite); // Add normally (on top)
-    
-    // === SIMPLE ONE-LAYER BOARDS ===
-    } else {
-        const sprite = this.scene.add.image(meta.fitX, meta.fitY, boardKey, 0).setOrigin(0.5);
-        if (meta.offsetX) sprite.x += meta.offsetX;
-        if (meta.offsetY) sprite.y += meta.offsetY;
-
-        if (meta.layerAbove) {
-            // Add top-only board
-            this.previewPlayer.boardTop = sprite;
-            this.previewPlayer.add(sprite);
-        } else {
-            // Add bottom-only board at correct index
-            this.previewPlayer.board = sprite;
-            this.previewPlayer.addAt(sprite, boardIndex);
+        // Remove old bottom layer board sprite (if any)
+        if (this.previewPlayer.board) {
+            this.previewPlayer.board.destroy();
+            this.previewPlayer.board = null;
         }
+
+        // Remove old top layer board sprite (if any)
+        if (this.previewPlayer.boardTop) {
+            this.previewPlayer.boardTop.destroy();
+            this.previewPlayer.boardTop = null;
+        }
+
+        if (meta.middleEffect) {
+            // Determine frame order
+            
+            const bottomFrame = meta.layerAbove ? 0 : meta.frames - 1;
+            const topFrame = meta.layerAbove ? meta.frames - 1 : 0;
+
+            // Bottom sprite
+            const bottomSprite = this.scene.add.image(meta.offsetX, meta.offsetY, boardKey, bottomFrame).setOrigin(0.5);
+            this.previewPlayer.board = bottomSprite;
+            this.previewPlayer.addAt(bottomSprite, boardIndex);
+
+            // Top sprite
+            const topSprite = this.scene.add.image(meta.offsetX, meta.offsetY, boardKey, topFrame).setOrigin(0.5);
+            this.previewPlayer.boardTop = topSprite;
+            this.previewPlayer.addAt(topSprite, boardTopIndex);
+        
+        } else {
+            const sprite = this.scene.add.image(meta.offsetX, meta.offsetY, boardKey, 0).setOrigin(0.5);
+            let boardFakeSprite = this.scene.add.image(meta.offsetX, meta.offsetY, 'baccEmpty', 0).setOrigin(0.5);
+            if (meta.layerAbove) {
+                // Add top-only board
+                this.previewPlayer.boardTop = sprite;
+                this.previewPlayer.board = boardFakeSprite;
+                this.previewPlayer.addAt(sprite, boardTopIndex);
+                this.previewPlayer.addAt(boardFakeSprite, boardIndex)
+            } else {
+                // Add bottom-only board at correct index
+                this.previewPlayer.board = sprite;
+                this.previewPlayer.boardTop = boardFakeSprite;
+                this.previewPlayer.addAt(sprite, boardIndex);
+                this.previewPlayer.addAt(boardFakeSprite, boardTopIndex)
+            }
+        }
+
+        // Save selected key
+        this.previewPlayer.selectedBoardKey = boardKey;
     }
-
-    // Save selected key
-    this.previewPlayer.selectedBoardKey = boardKey;
-    }
-
-
-
 
     destroy() {
         this.container.destroy();
@@ -1865,7 +1666,6 @@ class BodyAccSelection {
         this.prevButton.destroy(); // Remove previous page button
     }
 }
-
 
 export async function saveOutfitChangesToDB(updatedData) {
     try {
