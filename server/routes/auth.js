@@ -113,7 +113,7 @@ router.post("/signup", async (req, res) => {
         const defaultData = gender === "male"
         ? {
             username,
-            board: "board0",
+            board: "board_whiteorange2",
             body: "mbody0",
             body_acc: "none",
             bottom: "mbottom0",
@@ -133,7 +133,7 @@ router.post("/signup", async (req, res) => {
         }
         : {
             username,
-            board: "board0",
+            board: "board_whiteorange2",
             body: "body0",
             body_acc: "none",
             bottom: "bottom0",

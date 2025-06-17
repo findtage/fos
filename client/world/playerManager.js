@@ -6,6 +6,9 @@ export function initializePlayerManager(scene) {
     scene.otherPlayers = {}; // Store other players
 
     scene.addOtherPlayer = (id, playerData, direction) => {
+        const metadata = scene.cache.json.get("boards_metadata");
+        const boardData = metadata[playerData.board];
+        
         if (!scene.otherPlayers[id]) {
             const avatar = scene.add.container(playerData.x || 400, playerData.y || 300); // Create a container for layering
             if (direction != 'right' && direction != 'left'){
@@ -116,11 +119,28 @@ export function initializePlayerManager(scene) {
                 shoes['shoe']?.[playerData.gender]?.[playerData.shoes]?.["fitY"], 
                 playerData.shoes, 0
             ).setOrigin(0.5, 0.5);
-        
-            const board = scene.add.image(
-                boards['board']?.[playerData.board]?.["fitX"], 
-                boards['board']?.[playerData.board]?.["fitY"], 
-            playerData.board).setOrigin(0.5, 0.5);
+
+            let boardBottomFrame;
+            let boardTopFrame;
+
+            let board0, board1;
+
+            if (boardData.middleEffect) {
+                // If the board has a middle effect, determine the frame based on the layer
+                boardBottomFrame = boardData.layerAbove ? 0 : boardData.frames - 1;
+                boardTopFrame = boardData.layerAbove ? boardData.frames - 1 : 0;
+
+                board0 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, boardBottomFrame).setOrigin(0.5, 0.5);
+                board1 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, boardTopFrame).setOrigin(0.5, 0.5);
+            } else {
+                if (boardData.layerAbove) {
+                    board1 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+                    board0 = scene.add.sprite(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
+                } else { 
+                    board0 = scene.add.sprite(boardData.offsetX, boardData.offsetY, playerData.board, 0).setOrigin(0.5, 0.5);
+                    board1 = scene.add.sprite(0, 0, 'baccEmpty').setOrigin(0.5, 0.5);
+                }       
+            }
 
             // Player Face Accessory
             let faceacc;
@@ -144,13 +164,14 @@ export function initializePlayerManager(scene) {
 
             }
 
-            avatar.add([tag, board, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, nameTag]);
+            avatar.add([tag, board0, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, board1, nameTag]);
 
             avatar.setData('direction', direction);
 
             avatar.base = base; // Store reference to the base
             avatar.tag = tag;
-            avatar.board = board;
+            avatar.board = board0;
+            avatar.boardTop = board1;
             avatar.nameTag = nameTag;
             avatar.top = top;
             avatar.lips = lips;

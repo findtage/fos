@@ -36,6 +36,7 @@ export function openInventory(scene, player, room){
     closeInventory.on('pointerup', async (pointer, localX, localY, event) => {
     
         // Notify other players about outfit change IF ANY CHANGES FIX LATER
+        /*
         room.send("outfitChange", {playerId: player.id,
             playerGender: gender,
             hairKey: previewPlayer.hair.texture.key, 
@@ -47,6 +48,7 @@ export function openInventory(scene, player, room){
             faceAccKey: previewPlayer.faceacc.texture.key,
             bodyAccKey: previewPlayer.bodyacc.texture.key
         });
+        */
         event.stopPropagation();
 
         let updatedData = { 

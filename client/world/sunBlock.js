@@ -1,5 +1,6 @@
 import { saveOutfitChangesToDB } from "./inventory.js";
 import { body, heads, avatar_parts } from '../assets/data.js';
+import { createAvatar } from "./avatar.js";
 
 export function sunBlockLogic(scene, player, room){
     // Store Logic
@@ -25,44 +26,8 @@ function sunBlockMenu(scene, player, room){
     };
 
     // Create closet avatar
-    const previewPlayer = scene.add.container(670, 385).setDepth(2).setScrollFactor(0);
-
-    let previewParts = [];
-    let previewEyes = null; 
-    let previewHead = null; 
-    let previewBase = null;
-
+    const previewPlayer = createAvatar(scene, 670, 385).setDepth(2).setScrollFactor(0);
     let gender = player.head.texture.key.startsWith('m') ? 'male' : 'female';
-
-    // Make a preview character for inventory
-    player.list.forEach(part => {
-        if (part.texture.key != null) {  // Ensure it's a visible part
-            let clonedPart = scene.add.image(part.x, part.y, part.texture.key)
-                .setOrigin(part.originX, part.originY)
-                .setScale(part.scaleX, part.scaleY)
-                .setDepth(3);
-            if (clonedPart) {
-                previewParts.push(clonedPart);
-                previewPlayer.add(clonedPart);
-            }
-            
-            if (!part.visible){
-                clonedPart.setVisible(false);
-            }
-
-            if (part === player.eyes) {
-                previewEyes = clonedPart;
-            } else if (part == player.head) {
-                previewHead = clonedPart;
-            } else if (part == player.base){
-                previewBase = clonedPart;
-            } 
-        }
-    });
-
-    previewPlayer.eyes = previewEyes; 
-    previewPlayer.head = previewHead;
-    previewPlayer.base = previewBase; 
 
     storeMenu.on('pointerup', (pointer, localX, localY, event) => {
         event.stopPropagation();

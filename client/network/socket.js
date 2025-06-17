@@ -124,9 +124,17 @@ export async function joinRoom(scene, roomName, targetHome=null) {
             }
         });
 
+        /*
         currentRoom.onMessage("outfitChange", (data) => {
             const otherPlayer = scene.otherPlayers[data.playerId]; // Get the affected player
+            console.log(otherPlayer);
+            if (otherPlayer){
+                scene.removeOtherPlayer(otherPlayer.id); // Remove the player first
+                scene.addOtherPlayer(otherPlayer.id, otherPlayer, 'left'); // or left
+            }
+            
 
+            
             if (otherPlayer) {
                 let hairIndex = otherPlayer.getIndex(otherPlayer.hair); // Get the layer index
 
@@ -237,6 +245,7 @@ export async function joinRoom(scene, roomName, targetHome=null) {
 
                 let boardIndex = otherPlayer.getIndex(otherPlayer.board); // Get the layer index
 
+
                 // Remove old board
                 if (otherPlayer.board) {
                     otherPlayer.board.destroy();
@@ -285,8 +294,11 @@ export async function joinRoom(scene, roomName, targetHome=null) {
                 // Create animations for the new avatar
                 createAvatarAnimations(scene, otherPlayer);
                 performIdles(otherPlayer);
+                
             }
+                
         });
+        */
 
         currentRoom.onMessage("appearanceChange", (data) => {
             const otherPlayer = scene.otherPlayers[data.playerId]; // Get the affected player

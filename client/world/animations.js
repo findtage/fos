@@ -1,6 +1,9 @@
 import { assets, outfits } from "../assets/data.js";
+let saveScene = null;
 
 export function createAvatarAnimations(scene, player) {
+    const metadata = scene.cache.json.get("boards_metadata");
+    helperSaveScene(scene);
     const gender = player.head.texture.key.startsWith('m') ? 'male' : 'female';
 
     // Function to create animations dynamically per player
@@ -55,7 +58,15 @@ export function createAvatarAnimations(scene, player) {
             }
         }
         
-    }  
+    } 
+
+    // Board Idles
+    const boardTextureKey = player.board.texture.key === "baccEmpty" ? player.boardTop.texture.key : player.board.texture.key;
+    const boardData = metadata[boardTextureKey];
+
+    if ((boardData.frames > 2 && boardData.middleEffect) || (boardData.frames >= 2 && !boardData.middleEffect)) {
+        createBoardIdleAnimations(scene, player, boardData);
+    }
 
     // Get unique asset names for this player
     const bodyTexture = player.base.texture.key;
@@ -337,13 +348,89 @@ export function performWink(player) {
     player.eyes.play(`wink-${player.eyes.texture.key}`);
 }
 
+function createBoardIdleAnimations(scene, player, boardData) {
+    const totalFrames = boardData.frames;
+    const key = player.board.texture.key;
+    const topKey = player.boardTop.texture.key;
+
+    // middleEffect present
+    if (boardData.middleEffect) {
+        if (boardData.layerAbove) {
+            // Use board sprite with frames 0 to n-2
+            scene.anims.create({
+                key: `idle-${key}`,
+                frames: scene.anims.generateFrameNumbers(key, { start: 0, end: totalFrames - 2 }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        } else {
+            // Use boardTop sprite with frames 0 to n-2
+            scene.anims.create({
+                key: `idle-${topKey}`,
+                frames: scene.anims.generateFrameNumbers(topKey, { start: 0, end: totalFrames - 2 }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        }
+    }
+    // no middleEffect
+    else {
+        if (boardData.layerAbove) {
+            // Use boardTop sprite with frames 0 to n-1
+            scene.anims.create({
+                key: `idle-${topKey}`,
+                frames: scene.anims.generateFrameNumbers(topKey, { start: 0, end: totalFrames - 1 }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        } else {
+            // Use board sprite with frames 0 to n-1
+            scene.anims.create({
+                key: `idle-${key}`,
+                frames: scene.anims.generateFrameNumbers(key, { start: 0, end: totalFrames - 1 }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        }
+    }
+}
+
+function helperSaveScene(scene){
+    saveScene = scene;
+}
+
+function getScene(){
+    return saveScene;
+}
+
 export function performIdles(player) {
+    const scene = getScene();
+    const metadata = scene.cache.json.get("boards_metadata");
     const gender = player.hair.texture.key.startsWith('m') ? 'male' : 'female';
+    const boardTextureKey = player.board.texture.key === "baccEmpty" ? player.boardTop.texture.key : player.board.texture.key;
+    const boardData = metadata[boardTextureKey];
+
     if (assets['hair']?.[gender]?.[player.hair.texture.key]?.["type"] == "sprite"){
         player.hair.play(`idle-${player.hair.texture.key}`);
     }
 
     if (outfits?.[gender]?.[player.outfit.texture.key]?.["type"] == "sprite"){
         player.outfit.play(`idle-${player.outfit.texture.key}`);
+    }
+
+    if ((boardData.frames > 2 && boardData.middleEffect) || (boardData.frames >= 2 && !boardData.middleEffect)) {
+        if (boardData.middleEffect) {
+            if (boardData.layerAbove) {
+                player.board.play(`idle-${player.board.texture.key}`);
+            } else {
+                player.boardTop.play(`idle-${player.boardTop.texture.key}`);
+            }
+        } else {
+            if (boardData.layerAbove) {
+                player.boardTop.play(`idle-${player.boardTop.texture.key}`);
+            } else {
+                player.board.play(`idle-${player.board.texture.key}`);
+            }
+        }
     }
 }
