@@ -13,6 +13,7 @@ import { Dock, Oasis } from './scenes/Oasis.js';
 import { Cafeteria, EnglishRoom, Gym, MathRoom, School, SchoolInside, SchoolUpstairs } from './scenes/School.js';
 import { Preloader } from './scenes/Preloader.js';
 import { Home } from './scenes/Home.js';
+import { FashionShowScene } from './fashionShow/FashionShow.js';
 
 import { MouseOut } from './minigames/mouseOut.js';
 import { TypeBoo } from './minigames/typeBoo.js';
@@ -92,7 +93,7 @@ const config = {
         Island, Spa, Resort, IslandStore,
         Oasis, Dock,
         MouseOut, TypeBoo,
-        Home,
+        Home, FashionShowScene,
         RuffleScene,
     ],
 };

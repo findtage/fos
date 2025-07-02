@@ -231,6 +231,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
 }
 
 export function createStaticAvatar(scene, startX=300, startY=400, playerDirection = 'left', playerData = getPlayerAvatarData()) {
+    console.log(startX, startY, playerData.username);
     const metadata = scene.cache.json.get("boards_metadata");
 
     const boardData = metadata[playerData.board];
@@ -422,21 +423,6 @@ export function createStaticAvatar(scene, startX=300, startY=400, playerDirectio
     avatar.faceacc = faceacc;
     avatar.bodyacc = bodyacc;
     avatar.username = playerData.username;
-    
-    // Make body clickable for IDfone
-    avatar.base.setInteractive();
-    avatar.head.setInteractive();
-    
-    // Open Idfone if clicked
-    avatar.base.on('pointerup', (pointer, localX, localY, event) => {
-        event.stopPropagation(); 
-        openIdfone(scene, playerData);
-    });
-
-    avatar.head.on('pointerup', (pointer, localX, localY, event) => {
-        event.stopPropagation(); 
-        openIdfone(scene, playerData);
-    });
 
     // Set player direction
     if (playerDirection == 'right'){

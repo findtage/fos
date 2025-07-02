@@ -105,6 +105,7 @@ gameServer.define('minigame', GameRoom).enableRealtimeListing();
 
 //gameServer.define('home', GameRoom).enableRealtimeListing();
 gameServer.define('home', HomeRoom).filterBy(["homeID"]).enableRealtimeListing();
+gameServer.define('fashionShow', HomeRoom).filterBy(["homeID"]).enableRealtimeListing();
 
 
 // Start the server

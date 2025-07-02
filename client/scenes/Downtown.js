@@ -350,6 +350,7 @@ export class TopModel extends Phaser.Scene {
         this.sound.stopAll(); 
         preloadMenu(this);
         preloadAvatar(this);
+        this.load.image('playButton', '../assets/ui/playButton.png');
     }
 
     init(data) {
@@ -369,6 +370,14 @@ export class TopModel extends Phaser.Scene {
 
         createRoomTransitionUI(this, this.player, 'Downtown', 'Downtown', 214, 181, 123, 186);
         createRoomTransitionUI(this, this.player, 'TopModelVIP', 'V.I.P Lounge', 488, 147, 155, 193);
+
+        const playFashionShowButton = this.add.image(766, 36, 'playButton').setOrigin(0.5, 0.5).setDepth(1.5).setInteractive();
+        playFashionShowButton.on('pointerup', (pointer, localX, localY, event) => {
+            event.stopPropagation();
+            this.scene.start("FashionShowScene");
+            console.log("Starting Fashion Show...");
+        });
+        
 
         createMenu(this, this.player, this.room);
         
