@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const { GameRoom, HomeRoom } = require('./rooms/GameRoom');
+const { FashionShowRoom } = require('./rooms/FashionShowRoom');
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
@@ -105,7 +106,7 @@ gameServer.define('minigame', GameRoom).enableRealtimeListing();
 
 //gameServer.define('home', GameRoom).enableRealtimeListing();
 gameServer.define('home', HomeRoom).filterBy(["homeID"]).enableRealtimeListing();
-gameServer.define('fashionShow', HomeRoom).filterBy(["homeID"]).enableRealtimeListing();
+gameServer.define('fashionShow', FashionShowRoom).filterBy(["fashionShowID"]).enableRealtimeListing();
 
 
 // Start the server

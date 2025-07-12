@@ -42,7 +42,6 @@ export class GameRoom extends Room<RoomState> {
             }
         });
 
-        /*
         this.onMessage("outfitChange", (client, data) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
@@ -61,7 +60,6 @@ export class GameRoom extends Room<RoomState> {
                 });
             }
         });
-        */
 
         this.onMessage("appearanceChange", (client, data) => {
             const player = this.state.players.get(client.sessionId);
@@ -213,3 +211,4 @@ export class HomeRoom extends Room<RoomState> {
         this.state.players.delete(client.sessionId);
     }
 }
+

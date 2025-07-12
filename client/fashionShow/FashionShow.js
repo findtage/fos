@@ -1,10 +1,9 @@
-import { joinRoom, sendPlayerMove } from '../network/socket.js';
+import { joinRoom, sendPlayerMove } from './roomHandler.js';
 import { preloadAvatar, createAvatar, createStaticAvatar} from '../world/avatar.js';
 import { initializePlayerManager } from '../world/playerManager.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
 import { createAvatarAnimations, performIdles } from '../world/animations.js';
 import { getPlayerAvatarData } from '../game.js';
-//import Phaser from 'phaser';
 
 // Waiting for players
 // Host is selecting theme, 10 seconds
@@ -28,6 +27,8 @@ import { getPlayerAvatarData } from '../game.js';
 // Show round results after posing, final winner (20 seconds)
 // Show full results and stars earned
 
+// MOVED TO SERVER SIDE
+/*
 const boyNames = ['noah','liam','jacob','william','mason','ethan','michael','alexander','james','elijah','benjamin','daniel','aiden','logan','jayden','matthew','lucas','david','jackson','joseph','anthony','samuel','joshua','gabriel','andrew','john','christopher','oliver','dylan','carter','isaac','luke','henry','owen','ryan','nathan','wyatt','caleb','sebastian','jack','christian','jonathan','julian','landon','levi','isaiah','hunter','aaron','thomas','charles'];
 const girlNames = ['emma', 'mila', 'olivia','sophia','isabella','ava','mia','abigail','emily','charlotte','madison','elizabeth','amelia','evelyn','ella','chloe','harper','avery','sofia','grace','victoria','addison','lily','natalie','aubrey','zoey','lillian','hannah','layla','brooklyn','scarlett','zoe','camila','samantha','riley','leah','aria','savannah','audrey','anna','allison','gabriella','hailey','claire','penelope','aaliyah','sarah','nevaeh','kaylee','stella'];
 const categoriesByGender = {
@@ -54,6 +55,7 @@ const categoriesByGender = {
     eyes:     13,
   }
 };
+*/
 
 export const MAX_PLAYERS = 10;
 export const ROUND_TIMERS = {
@@ -79,8 +81,13 @@ export class FashionShowScene extends Phaser.Scene {
         this.playerXLocation = data.playerXLocation || 400;
         this.playerYLocation = data.playerYLocation || 450; 
         this.playerDirection = data.playerDirection || 'left';
-        this.roomID = data.roomID || 'any';
         this.isHost = data.isHost || true;
+
+        if (this.isHost) {
+            this.roomID = data.roomID || getPlayerAvatarData().username; // Default to a unique room ID based on username
+        } else {
+            this.roomID = data.roomID || 'any'; // Fallback
+        }
     }
 
     preload() {
@@ -104,6 +111,7 @@ export class FashionShowScene extends Phaser.Scene {
 
         createAvatarAnimations(this, this.player);
         performIdles(this.player);
+        initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'fashionShow', 'fashionShow'+this.roomID); // Ensure your server supports this room
 
@@ -111,8 +119,6 @@ export class FashionShowScene extends Phaser.Scene {
 
         const movementZones = this.isHost ? [ HOST_ZONE ] : RUNWAY_ZONES;
         this.updateMovement = setupMovement(this, this.player, 275, movementZones);
-
-        this.spawnPlayerBots();
     }
 
 
@@ -140,6 +146,8 @@ export class FashionShowScene extends Phaser.Scene {
         this.player.setPosition(pt.x, pt.y);
     }
 
+    // MOVED TO SERVER SIDE
+    /* 
     spawnPlayerBots(){
         for (let i = 0; i <= 4; i++) {
             const botData = generateRandomCharacter(this);
@@ -148,6 +156,7 @@ export class FashionShowScene extends Phaser.Scene {
             console.log('Spawning bot: ', botData.username, 'with data:', botData);
         }
     }
+    */
     
 
 }
@@ -236,6 +245,8 @@ function insideZones(x, y, zones) {
     });
 }
 
+// MOVED TO SERVER SIDE
+/*
 function generateRandomUsername(gender) {
   const names = gender == 'male' ? boyNames : girlNames;
   
@@ -311,3 +322,4 @@ function generateRandomCharacter(scene) {
 
   return result;
 }
+*/
