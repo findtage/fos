@@ -15,7 +15,7 @@ import { displayChatBubble } from "../world/UIManager.js";
  * @param {string} roomName - The name of the Colyseus room to join.
  * @returns {Promise} - The joined room.
  */
-export async function joinRoom(scene, roomName, fashionShowID=null) {
+export async function joinRoom(scene, roomName, fashionShowID=null, callbacks={}) {
     if (currentRoom) {
         console.log(`Leaving room: ${currentRoom.name}`);
         switchingRooms = true;
@@ -121,6 +121,22 @@ export async function joinRoom(scene, roomName, fashionShowID=null) {
                 if (animationKey == 'wink'){
                     performWink(otherPlayer);
                 }
+            }
+        });
+
+        currentRoom.onMessage("readyToStart", () => {
+            if (callbacks.readyToStart) {
+                callbacks.readyToStart();
+            }
+        });
+
+        currentRoom.onMessage("notReadyToStart", () => {
+            
+        });
+
+        currentRoom.onMessage("startRoundOne", (themes) => {
+            if (callbacks.startRoundOne) {
+                callbacks.startRoundOne(themes);
             }
         });
 
