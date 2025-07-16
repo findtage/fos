@@ -2,12 +2,77 @@ import { Room, Client } from 'colyseus';
 import { RoomState, HomeRoomState } from '../schema/RoomState';
 import { PlayerState } from '../schema/PlayerState';
 
+// Interface for movement data
+interface MoveData {
+    x: number;
+    y: number;
+    direction: string;
+}
+
+// Interface for chat message data
+interface ChatMessageData {
+    message: string;
+}
+
+// Interface for animation data
+interface AnimationData {
+    animationKey: string;
+}
+
+// Interface for outfit change data
+interface OutfitChangeData {
+    playerGender: string;
+    hairKey: string;
+    topKey: string;
+    bottomKey: string;
+    shoeKey: string;
+    boardKey: string;
+    outfitKey: string;
+    faceAccKey: string;
+    bodyAccKey: string;
+}
+
+// Interface for appearance change data
+interface AppearanceChangeData {
+    playerGender: string;
+    eyesKey: string;
+    bodyKey: string;
+    headKey: string;
+}
+
+// Interface for join options
+interface JoinOptions {
+    username: string;
+    gender: string;
+    hair: string;
+    top: string;
+    bottom: string;
+    shoes: string;
+    board: string;
+    face_acc?: string;
+    body_acc?: string;
+    outfit?: string;
+    roomName?: string;
+    x?: number;
+    y?: number;
+    direction?: string;
+    // Additional appearance properties
+    eyes?: string;
+    body?: string;
+    head?: string;
+}
+
+// Interface for home room options
+interface HomeJoinOptions extends JoinOptions {
+    homeID: string;
+}
+
 export class GameRoom extends Room<RoomState> {
     onCreate(options: any): void {
         this.setState(new RoomState());
 
         // Handle player movement
-        this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
+        this.onMessage('move', (client: Client, data: MoveData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 player.x = data.x;
@@ -19,7 +84,7 @@ export class GameRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("chat", (client, message) => {
+        this.onMessage("chat", (client: Client, message: ChatMessageData) => {
             console.log(`Received chat message from ${client.sessionId}: ${message.message}`);
       
             // Broadcast the chat message to all players in the room
@@ -29,7 +94,7 @@ export class GameRoom extends Room<RoomState> {
             });
         });
 
-        this.onMessage("playAnimation", (client, data) => {
+        this.onMessage("playAnimation", (client: Client, data: AnimationData) => {
             const { animationKey } = data;
             const player = this.state.players.get(client.sessionId);
         
@@ -42,7 +107,7 @@ export class GameRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("outfitChange", (client, data) => {
+        this.onMessage("outfitChange", (client: Client, data: OutfitChangeData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 // Broadcast the hair update to all clients
@@ -61,7 +126,7 @@ export class GameRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("appearanceChange", (client, data) => {
+        this.onMessage("appearanceChange", (client: Client, data: AppearanceChangeData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 // Broadcast the hair update to all clients
@@ -76,7 +141,7 @@ export class GameRoom extends Room<RoomState> {
         });
     }
 
-    onJoin(client: Client, options: any): void {
+    onJoin(client: Client, options: JoinOptions): void {
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.roomName || 'default'; // Assign the room from options or default
         this.state.players.set(client.sessionId, newPlayer);
@@ -99,7 +164,7 @@ export class GameRoom extends Room<RoomState> {
 
     }
 
-    onLeave(client: Client): void {
+    onLeave(client: Client, consented?: boolean): void {
         const player = this.state.players.get(client.sessionId);
         if (player) {
             console.log(`Player ${client.sessionId} left room: ${player.room}`);
@@ -128,7 +193,7 @@ export class HomeRoom extends Room<RoomState> {
         console.log(`Home room created for: ${options.homeID}`);
 
         // Handle player movement
-        this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
+        this.onMessage('move', (client: Client, data: MoveData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 player.x = data.x;
@@ -139,12 +204,12 @@ export class HomeRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("chat", (client, message) => {
+        this.onMessage("chat", (client: Client, message: ChatMessageData) => {
             console.log(`Chat from ${client.sessionId}: ${message.message}`);
             this.broadcast("chat", { id: client.sessionId, message: message.message });
         });
 
-        this.onMessage("playAnimation", (client, data) => {
+        this.onMessage("playAnimation", (client: Client, data: AnimationData) => {
             const { animationKey } = data;
             const player = this.state.players.get(client.sessionId);
             if (player) {
@@ -152,7 +217,7 @@ export class HomeRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("outfitChange", (client, data) => {
+        this.onMessage("outfitChange", (client: Client, data: OutfitChangeData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 this.broadcast("outfitChange", {
@@ -170,7 +235,7 @@ export class HomeRoom extends Room<RoomState> {
             }
         });
 
-        this.onMessage("appearanceChange", (client, data) => {
+        this.onMessage("appearanceChange", (client: Client, data: AppearanceChangeData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 this.broadcast("appearanceChange", {
@@ -183,7 +248,7 @@ export class HomeRoom extends Room<RoomState> {
         });
     }
 
-    onJoin(client: Client, options: any): void {
+    onJoin(client: Client, options: HomeJoinOptions): void {
         const homeOwner = options.homeID;
         const newPlayer = new PlayerState(options);
         newPlayer.room = homeOwner; // Home is identified by the owner's username
@@ -202,7 +267,7 @@ export class HomeRoom extends Room<RoomState> {
         this.broadcast("newPlayer", { id: client.sessionId, ...options }, { except: client });
     }
 
-    onLeave(client: Client): void {
+    onLeave(client: Client, consented?: boolean): void {
         const player = this.state.players.get(client.sessionId);
         if (player) {
             console.log(`Player ${client.sessionId} left home: ${player.room}`);
