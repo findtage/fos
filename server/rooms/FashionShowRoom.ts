@@ -3,6 +3,88 @@ import { RoomState, HomeRoomState } from '../schema/RoomState';
 import { PlayerState } from '../schema/PlayerState';
 import boardsMetadata from '../data/boards_metadata.json';
 
+// Interface for movement data
+interface MoveData {
+    x: number;
+    y: number;
+    direction: string;
+}
+
+// Interface for fashion show join options
+interface FashionShowJoinOptions {
+    username: string;
+    gender: string;
+    hair: string;
+    top: string;
+    bottom: string;
+    shoes: string;
+    board: string;
+    face_acc?: string;
+    body_acc?: string;
+    outfit?: string;
+    fashionShowID: string;
+    x?: number;
+    y?: number;
+    direction?: string;
+    eyes?: string;
+    body?: string;
+    head?: string;
+}
+
+// Interface for runway zone
+interface RunwayZone {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    ellipse?: boolean;
+}
+
+// Interface for categories by gender
+interface CategoriesByGender {
+    female: {
+        hair: number;
+        top: number;
+        bottom: number;
+        shoe: number;
+        outfit: number;
+        facc: number;
+        bacc: number;
+    };
+    male: {
+        mhair: number;
+        mtop: number;
+        mbottom: number;
+        mshoe: number;
+        moutfit: number;
+        mfacc: number;
+        mbacc: number;
+    };
+    shared: {
+        body: number;
+        eyes: number;
+    };
+}
+
+// Interface for bot character data
+interface BotCharacterData {
+    username: string;
+    gender: string;
+    board: string;
+    body: string;
+    head: string;
+    eyes: string;
+    hair: string;
+    outfit: string;
+    top: string;
+    bottom: string;
+    shoes: string;
+    face_acc: string;
+    body_acc: string;
+    x?: number;
+    y?: number;
+}
+
 export class FashionShowRoom extends Room<RoomState> {
     private botCount = 0;
     private botInterval: NodeJS.Timeout | null = null;
@@ -33,8 +115,7 @@ export class FashionShowRoom extends Room<RoomState> {
             this.botCount++;
         }, 5000);
 
-        this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
-            console.log('Moving player to', data.x, data.y);
+        this.onMessage('move', (client: Client, data: MoveData) => {
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 player.x = data.x;
@@ -76,7 +157,7 @@ export class FashionShowRoom extends Room<RoomState> {
         });
     }
 
-    onJoin(client: Client, options: any): void {
+    onJoin(client: Client, options: FashionShowJoinOptions): void {
         const fashionShowID = options.fashionShowID;
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.fashionShowID;
@@ -104,15 +185,18 @@ export class FashionShowRoom extends Room<RoomState> {
         }
     }
 
-    onLeave(client: Client): void {
-        const player : any = this.state.players.get(client.sessionId);
-
-        console.log(player);
+    onLeave(client: Client, consented?: boolean): void {
+        const player = this.state.players.get(client.sessionId);
         if (player) {
             console.log(`Player ${client.sessionId} left home: ${player.room}`);
             this.broadcast("playerLeft", { id: client.sessionId });
         }
         this.state.players.delete(client.sessionId);
+
+        if (!player) {
+            console.warn(`Player ${client.sessionId} not found in room state.`);
+            return;
+        }
 
         if (player.username != this.host) {
             const index = this.contestants.indexOf(player.username);
@@ -135,13 +219,13 @@ export class FashionShowRoom extends Room<RoomState> {
         }
     }
 
-    private spawnBotPlayer(index: number) {
-        const botData = generateRandomCharacter();
-        const pt = getRandomPointInRunwayZone(index);
+    private spawnBotPlayer(index: number): void {
+        const botData: BotCharacterData = generateRandomCharacter();
+        const pt: { x: number; y: number } = getRandomPointInRunwayZone(index);
 
-        const sessionId = `bot_${botData.username}_${Date.now()}`;
+        const sessionId: string = `bot_${botData.username}_${Date.now()}`;
 
-        const fakeOptions = botData;
+        const fakeOptions = { ...botData };
         fakeOptions.x = pt.x;
         fakeOptions.y = pt.y;
 
@@ -150,7 +234,6 @@ export class FashionShowRoom extends Room<RoomState> {
         newPlayer.x = pt.x;
         newPlayer.y = pt.y;
         newPlayer.direction = 'left'; // Default direction for bots
-        //newPlayer.room = 'default'; // or whatever logic you use for assigning rooms
 
         this.state.players.set(sessionId, newPlayer);
 
@@ -166,11 +249,11 @@ export class FashionShowRoom extends Room<RoomState> {
     }
 }
 
-const boyNames = ['noah','liam','jacob','william','mason','ethan','michael','alexander','james','elijah','benjamin','daniel','aiden','logan','jayden','matthew','lucas','david','jackson','joseph','anthony','samuel','joshua','gabriel','andrew','john','christopher','oliver','dylan','carter','isaac','luke','henry','owen','ryan','nathan','wyatt','caleb','sebastian','jack','christian','jonathan','julian','landon','levi','isaiah','hunter','aaron','thomas','charles'];
+const boyNames: string[] = ['noah','liam','jacob','william','mason','ethan','michael','alexander','james','elijah','benjamin','daniel','aiden','logan','jayden','matthew','lucas','david','jackson','joseph','anthony','samuel','joshua','gabriel','andrew','john','christopher','oliver','dylan','carter','isaac','luke','henry','owen','ryan','nathan','wyatt','caleb','sebastian','jack','christian','jonathan','julian','landon','levi','isaiah','hunter','aaron','thomas','charles'];
 
-const girlNames = ['emma', 'mila', 'olivia','sophia','isabella','ava','mia','abigail','emily','charlotte','madison','elizabeth','amelia','evelyn','ella','chloe','harper','avery','sofia','grace','victoria','addison','lily','natalie','aubrey','zoey','lillian','hannah','layla','brooklyn','scarlett','zoe','camila','samantha','riley','leah','aria','savannah','audrey','anna','allison','gabriella','hailey','claire','penelope','aaliyah','sarah','nevaeh','kaylee','stella'];
+const girlNames: string[] = ['emma', 'mila', 'olivia','sophia','isabella','ava','mia','abigail','emily','charlotte','madison','elizabeth','amelia','evelyn','ella','chloe','harper','avery','sofia','grace','victoria','addison','lily','natalie','aubrey','zoey','lillian','hannah','layla','brooklyn','scarlett','zoe','camila','samantha','riley','leah','aria','savannah','audrey','anna','allison','gabriella','hailey','claire','penelope','aaliyah','sarah','nevaeh','kaylee','stella'];
 
-const categoriesByGender = {
+const categoriesByGender: CategoriesByGender = {
   female: {
     hair:    530,
     top:     383,
@@ -195,7 +278,7 @@ const categoriesByGender = {
   }
 };
 
-const RUNWAY_ZONES = [
+const RUNWAY_ZONES: RunwayZone[] = [
   { x: 395, y: 407, w: 650, h: 95 },
   { x: 124, y: 351, w: 90, h: 180 },
   { x: 676, y: 351, w: 90, h: 180 },
@@ -219,55 +302,55 @@ function pickRandomBoard(): string {
   return boardIds[Math.floor(Math.random() * boardIds.length)];
 }
 
-function generateRandomCharacter(): any {
-  const gender = Math.random() < 0.5 ? 'male' : 'female';
-  const username = generateRandomUsername(gender);
-  const board = pickRandomBoard();
-  const useOutfit = Math.random() < 0.5;
+function generateRandomCharacter(): BotCharacterData {
+  const gender: string = Math.random() < 0.5 ? 'male' : 'female';
+  const username: string = generateRandomUsername(gender);
+  const board: string = pickRandomBoard();
+  const useOutfit: boolean = Math.random() < 0.5;
 
   const result: any = { username, gender, board };
 
-  const bodyMax = categoriesByGender.shared.body;
-  const eyesMax = categoriesByGender.shared.eyes;
-  const bodyIdx = randInt(bodyMax);
-  const eyesIdx = randInt(eyesMax);
-  const bodyPrefix = gender === 'male' ? 'mbody' : 'body';
-  const headPrefix = gender === 'male' ? 'mhead' : 'head';
-  const eyesPrefix = gender === 'male' ? 'meyes' : 'eyes';
+  const bodyMax: number = categoriesByGender.shared.body;
+  const eyesMax: number = categoriesByGender.shared.eyes;
+  const bodyIdx: number = randInt(bodyMax);
+  const eyesIdx: number = randInt(eyesMax);
+  const bodyPrefix: string = gender === 'male' ? 'mbody' : 'body';
+  const headPrefix: string = gender === 'male' ? 'mhead' : 'head';
+  const eyesPrefix: string = gender === 'male' ? 'meyes' : 'eyes';
   result.body = `${bodyPrefix}${bodyIdx}`;
   result.head = `${headPrefix}${bodyIdx}`;
   result.eyes = `${eyesPrefix}${eyesIdx}`;
 
-  const hairKey = gender === 'male' ? 'mhair' : 'hair';
-  result.hair = `${hairKey}${randInt((categoriesByGender[gender] as any)[hairKey])}`;
+  const hairKey: string = gender === 'male' ? 'mhair' : 'hair';
+  result.hair = `${hairKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[hairKey])}`;
 
   if (useOutfit) {
-    const outfitKey = gender === 'male' ? 'moutfit' : 'outfit';
-    result.outfit = `${outfitKey}${randInt((categoriesByGender[gender] as any)[outfitKey])}`;
+    const outfitKey: string = gender === 'male' ? 'moutfit' : 'outfit';
+    result.outfit = `${outfitKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[outfitKey])}`;
     result.top = 'none';
     result.bottom = 'none';
   } else {
-    const topKey = gender === 'male' ? 'mtop' : 'top';
-    const bottomKey = gender === 'male' ? 'mbottom' : 'bottom';
+    const topKey: string = gender === 'male' ? 'mtop' : 'top';
+    const bottomKey: string = gender === 'male' ? 'mbottom' : 'bottom';
     result.outfit = 'none';
-    result.top = `${topKey}${randInt((categoriesByGender[gender] as any)[topKey])}`;
-    result.bottom = `${bottomKey}${randInt((categoriesByGender[gender] as any)[bottomKey])}`;
+    result.top = `${topKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[topKey])}`;
+    result.bottom = `${bottomKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[bottomKey])}`;
   }
 
-  const shoeKey = gender === 'male' ? 'mshoe' : 'shoe';
-  result.shoes = `${shoeKey}${randInt((categoriesByGender[gender] as any)[shoeKey])}`;
+  const shoeKey: string = gender === 'male' ? 'mshoe' : 'shoe';
+  result.shoes = `${shoeKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[shoeKey])}`;
 
-  const faccKey = gender === 'male' ? 'mfacc' : 'facc';
+  const faccKey: string = gender === 'male' ? 'mfacc' : 'facc';
   result.face_acc = Math.random() < 0.3
-    ? `${faccKey}${randInt((categoriesByGender[gender] as any)[faccKey])}`
+    ? `${faccKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[faccKey])}`
     : 'none';
 
-  const baccKey = gender === 'male' ? 'mbacc' : 'bacc';
+  const baccKey: string = gender === 'male' ? 'mbacc' : 'bacc';
   result.body_acc = Math.random() < 0.4
-    ? `${baccKey}${randInt((categoriesByGender[gender] as any)[baccKey])}`
+    ? `${baccKey}${randInt((categoriesByGender[gender as keyof CategoriesByGender] as any)[baccKey])}`
     : 'none';
 
-  return result;
+  return result as BotCharacterData;
 }
 
 function getRandomPointInRunwayZone(index: number): { x: number; y: number } {

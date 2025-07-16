@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String   // hashed password
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Game data
+  board     String @default("board_whiteorange2")
+  body      String @default("body0")
+  body_acc  String @default("none")
+  bottom    String @default("bottom0")
+  costume   String @default("none")
+  eyes      String @default("eyes0")
+  face_acc  String @default("none")
+  gender    String @default("female")
+  hair      String @default("hair0")
+  hair_acc  String @default("none")
+  head      String @default("head0")
+  home      String @default("home0")
+  outfit    String @default("none")
+  shoes     String @default("shoe0")
+  stars     Int    @default(2500)
+  top       String @default("top0")
+  
+  // Idfone data
+  idfone_level Int @default(0)
+
+  @@map("users")
+}
