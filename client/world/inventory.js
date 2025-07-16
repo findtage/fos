@@ -1,6 +1,7 @@
 import { assets, tops, bottoms, shoes, boards } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
 import { getPlayerAvatarData, updateLocalAvatarData } from "../game.js";
+import config from '../config.js';
 
 const BASE_DEPTH = 16535;
 
@@ -317,10 +318,19 @@ class HairSelection {
         this.previewPlayer = previewPlayer;
         this.hairKeys = Object.keys(assets.hair.female); // Store hair asset keys
         this.page = 0;
-        this.hairsPerPage = 24;
-        this.columns = 8;
-        this.rows = 3;
-        this.container = this.scene.add.container(69, 210).setScrollFactor(0); // Adjust position as needed
+        
+        // Get configuration values
+        const hairConfig = config.getInventory('pagination.hair');
+        this.hairsPerPage = hairConfig?.itemsPerPage || 24;
+        this.columns = hairConfig?.columns || 8;
+        this.rows = hairConfig?.rows || 3;
+        
+        const containerPos = config.getInventory('container.hair');
+        this.container = this.scene.add.container(
+            containerPos?.x || 69, 
+            containerPos?.y || 210
+        ).setScrollFactor(0);
+        
         this.displayHairs();
         this.createNavigationButtons();
     }
@@ -441,10 +451,19 @@ class TopSelection {
         this.previewPlayer = previewPlayer;
         this.topKeys = Object.keys(tops.top.female); // Store hair asset keys
         this.page = 0;
-        this.topsPerPage = 40;
-        this.columns = 8;
-        this.rows = 5;
-        this.container = this.scene.add.container(65, 260).setScrollFactor(0); // Adjust position as needed
+        
+        // Get configuration values
+        const topConfig = config.getInventory('pagination.tops');
+        this.topsPerPage = topConfig?.itemsPerPage || 40;
+        this.columns = topConfig?.columns || 8;
+        this.rows = topConfig?.rows || 5;
+        
+        const containerPos = config.getInventory('container.clothing');
+        this.container = this.scene.add.container(
+            containerPos?.x || 65, 
+            containerPos?.y || 260
+        ).setScrollFactor(0);
+        
         this.displayTops();
         this.createNavigationButtons();
     }
@@ -568,10 +587,19 @@ class BottomSelection {
         this.previewPlayer = previewPlayer;
         this.bottomKeys = Object.keys(bottoms.bottom.female); // Store bottom asset keys
         this.page = 0;
-        this.bottomsPerPage = 40;
-        this.columns = 8;
-        this.rows = 5;
-        this.container = this.scene.add.container(65, 260).setScrollFactor(0); // Adjust position as needed
+        
+        // Get configuration values
+        const bottomConfig = config.getInventory('pagination.bottoms');
+        this.bottomsPerPage = bottomConfig?.itemsPerPage || 40;
+        this.columns = bottomConfig?.columns || 8;
+        this.rows = bottomConfig?.rows || 5;
+        
+        const containerPos = config.getInventory('container.clothing');
+        this.container = this.scene.add.container(
+            containerPos?.x || 65, 
+            containerPos?.y || 260
+        ).setScrollFactor(0);
+        
         this.displayBottoms();
         this.createNavigationButtons();
     }
@@ -699,10 +727,19 @@ class ShoeSelection {
         this.previewPlayer = previewPlayer;
         this.shoeKeys = Object.keys(shoes.shoe.female); // Store shoe asset keys
         this.page = 0;
-        this.shoesPerPage = 40;
-        this.columns = 8;
-        this.rows = 5;
-        this.container = this.scene.add.container(65, 260).setScrollFactor(0); // Adjust position as needed
+        
+        // Get configuration values
+        const shoeConfig = config.getInventory('pagination.shoes');
+        this.shoesPerPage = shoeConfig?.itemsPerPage || 40;
+        this.columns = shoeConfig?.columns || 8;
+        this.rows = shoeConfig?.rows || 5;
+        
+        const containerPos = config.getInventory('container.clothing');
+        this.container = this.scene.add.container(
+            containerPos?.x || 65, 
+            containerPos?.y || 260
+        ).setScrollFactor(0);
+        
         this.displayShoes();
         this.createNavigationButtons();
     }
@@ -830,10 +867,19 @@ class BoardSelection {
         this.previewPlayer = previewPlayer;
         this.hairKeys = Object.keys(boards.board); // Store hair asset keys
         this.page = 0;
-        this.hairsPerPage = 12;
-        this.columns = 4;
-        this.rows = 3;
-        this.container = this.scene.add.container(100, 210).setScrollFactor(0); // Adjust position as needed
+        
+        // Get configuration values
+        const boardConfig = config.getInventory('pagination.boards');
+        this.hairsPerPage = boardConfig?.itemsPerPage || 12;
+        this.columns = boardConfig?.columns || 4;
+        this.rows = boardConfig?.rows || 3;
+        
+        const containerPos = config.getInventory('container.boards');
+        this.container = this.scene.add.container(
+            containerPos?.x || 100, 
+            containerPos?.y || 210
+        ).setScrollFactor(0);
+        
         this.displayHairs();
         this.createNavigationButtons();
     }
@@ -942,9 +988,8 @@ class BoardSelection {
 
 export async function saveOutfitChangesToDB(updatedData) {
     try {
-        //const response = await fetch("https://c99a-98-14-219-221.ngrok-free.app/api/user/update", {
-        const response = await fetch("http://localhost:3000/api/user/update", {
-            
+        await config.load(); // Ensure config is loaded
+        const response = await fetch(config.getApiUrl('user.update'), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

@@ -1,0 +1,154 @@
+{
+  "api": {
+    "baseUrl": "http://localhost:3000",
+    "endpoints": {
+      "auth": {
+        "login": "/api/auth/login",
+        "logout": "/api/auth/logout",
+        "signup": "/api/auth/signup",
+        "checkUsername": "/api/auth/check-username",
+        "me": "/api/user/me"
+      },
+      "user": {
+        "update": "/api/user/update",
+        "ping": "/api/ping"
+      }
+    }
+  },
+  "websocket": {
+    "url": "ws://localhost:3000",
+    "alternativeUrl": "wss://c99a-98-14-219-221.ngrok-free.app"
+  },
+  "game": {
+    "canvas": {
+      "width": 800,
+      "height": 520
+    },
+    "ui": {
+      "depths": {
+        "base": 16535,
+        "inventory": 16537,
+        "menu": 16535
+      },
+      "fonts": {
+        "default": {
+          "family": "Arial",
+          "size": "14px"
+        },
+        "chat": {
+          "family": "Arial",
+          "size": "12.5px"
+        },
+        "loading": {
+          "family": "Arial",
+          "size": "32px"
+        }
+      },
+      "colors": {
+        "text": {
+          "default": "#000000",
+          "stroke": "#EEEEEE",
+          "loading": "#ffffff"
+        }
+      }
+    },
+    "player": {
+      "defaultPositions": {
+        "x": 400,
+        "y": 400
+      },
+      "nameTag": {
+        "offsetX": 0,
+        "offsetY": 0,
+        "strokeThickness": 1
+      }
+    },
+    "inventory": {
+      "pagination": {
+        "hair": {
+          "itemsPerPage": 24,
+          "columns": 8,
+          "rows": 3
+        },
+        "tops": {
+          "itemsPerPage": 40,
+          "columns": 8,
+          "rows": 5
+        },
+        "bottoms": {
+          "itemsPerPage": 40,
+          "columns": 8,
+          "rows": 5
+        },
+        "shoes": {
+          "itemsPerPage": 40,
+          "columns": 8,
+          "rows": 5
+        },
+        "boards": {
+          "itemsPerPage": 12,
+          "columns": 4,
+          "rows": 3
+        }
+      },
+      "container": {
+        "hair": {
+          "x": 69,
+          "y": 210
+        },
+        "clothing": {
+          "x": 65,
+          "y": 260
+        },
+        "boards": {
+          "x": 100,
+          "y": 210
+        }
+      }
+    },
+    "menu": {
+      "buttons": [
+        { "name": "home", "x": 13, "y": 9, "width": 39, "height": 37 },
+        { "name": "map", "x": 72, "y": 9, "width": 39, "height": 37 },
+        { "name": "inventory", "x": 130, "y": 9, "width": 39, "height": 37 },
+        { "name": "buddies", "x": 631, "y": 9, "width": 39, "height": 37 },
+        { "name": "email", "x": 689, "y": 9, "width": 39, "height": 37 },
+        { "name": "settings", "x": 750, "y": 9, "width": 39, "height": 37 },
+        { "name": "emote", "x": 257, "y": 14, "width": 31, "height": 30 },
+        { "name": "enterButton", "x": 567, "y": 14, "width": 40, "height": 30 }
+      ]
+    },
+    "scenes": {
+      "startingScenes": ["Downtown"],
+      "defaultPlayerPositions": {
+        "School": { "x": 400, "y": 400 },
+        "SchoolInside": { "x": 364, "y": 426 },
+        "MathRoom": { "x": 449, "y": 416 },
+        "EnglishRoom": { "x": 365, "y": 412 },
+        "Cafeteria": { "x": 333, "y": 409 },
+        "Mountain": { "x": 955, "y": 402 },
+        "Island": { "x": 206, "y": 334 },
+        "Spa": { "x": 229, "y": 407 },
+        "IslandStore": { "x": 400, "y": 368 },
+        "PetTown": { "x": 308, "y": 410 },
+        "PetSchool": { "x": 234, "y": 392 },
+        "PetClass": { "x": 653, "y": 269 }
+      }
+    }
+  },
+  "assets": {
+    "paths": {
+      "ui": "../assets/ui/",
+      "backgrounds": "../assets/backgrounds/",
+      "sounds": "../assets/sounds/",
+      "avatars": "../assets/avatars/"
+    }
+  },
+  "connection": {
+    "timeouts": {
+      "connectionCheck": 15000,
+      "connectionLost": 30000
+    },
+    "reconnectAttempts": 3
+  }
+}

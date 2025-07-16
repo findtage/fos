@@ -1,11 +1,22 @@
 import { assets, tops, bottoms, shoes, boards } from "../assets/data.js";
 import { getPlayerAvatarData, showConnectionLostMessage, resetConnectionCheck } from "../game.js";
+import config from "../config.js";
 
 const { Client } = window.Colyseus;
-const client = new Client('ws://localhost:3000'); // Ensure this matches your server address
 
-// Private hosting
-//const client = new Client("wss://c99a-98-14-219-221.ngrok-free.app");
+// Initialize client after config is loaded
+let client = null;
+
+async function initializeClient() {
+    await config.load();
+    const wsUrl = config.getWebSocketUrl();
+    client = new Client(wsUrl);
+    console.log(`🔌 WebSocket client initialized: ${wsUrl}`);
+    return client;
+}
+
+// Initialize client
+initializeClient();
 
 let currentRoom = null;
 let switchingRooms = false;
@@ -18,6 +29,11 @@ import { displayChatBubble } from "../world/UIManager.js";
  * @returns {Promise} - The joined room.
  */
 export async function joinRoom(scene, roomName) {
+    // Ensure client is initialized
+    if (!client) {
+        await initializeClient();
+    }
+    
     if (currentRoom) {
         console.log(`Leaving room: ${currentRoom.name}`);
         switchingRooms = true;

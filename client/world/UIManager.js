@@ -1,29 +1,43 @@
 import { mapTransition } from "./roomTransition.js";
 import { toggleEmotePopup } from "./animations.js";
 import { openInventory } from "./inventory.js";
+import config from '../config.js';
 
 const BASE_DEPTH = 16535;
 
 export function createMenu(scene, player, room) {
   const { width, height } = scene.cameras.main;
 
-  // Define button configurations
-  const buttonConfigs = [
-    { name: 'home', x: 13, y: 9, screenX: 13, screenY: height - 50, callback: () => console.log('Go to Home') },
-    { name: 'map', x: 72, y: 9, screenX: 72, screenY: height - 50, callback: () => console.log('Open map') },
-    { name: 'inventory', x: 130, y: 9, screenX: 130, screenY: height - 50, callback: () => console.log('Open Inventory') },
-    { name: 'buddies', x: 631, y: 9, screenX: 631, screenY: height - 50, callback: () => console.log('Open Buddies') },
-    { name: 'email', x: 689, y: 9, screenX: 689, screenY: height - 50, callback: () => console.log('Open Email') },
-    { name: 'settings', x: 750, y: 9, screenX: 750, screenY: height - 50, callback: () => console.log('Open Settings') },
-    { name: 'emote', x: 257, y: 14, screenX: 257, screenY: height - 45, boxWidth: 31, boxHeight: 30, callback: () => console.log('Click animations') },
-    { name: 'enterButton', x: 567, y: 14, screenX: 567, screenY: height - 45, boxWidth: 40, boxHeight: 30, callback: () => console.log("Clicked send chat")}
-  ];
+  // Get button configurations from config
+  const configButtons = config.getMenuButtons();
+  
+  // Define button configurations with callbacks
+  const buttonConfigs = configButtons.map(btn => ({
+    ...btn,
+    screenX: btn.x,
+    screenY: height - (height - btn.y) - (btn.name === 'emote' || btn.name === 'enterButton' ? 45 : 50),
+    boxWidth: btn.width,
+    boxHeight: btn.height,
+    callback: () => {
+      switch(btn.name) {
+        case 'home': console.log('Go to Home'); break;
+        case 'map': console.log('Open map'); break;
+        case 'inventory': console.log('Open Inventory'); break;
+        case 'buddies': console.log('Open Buddies'); break;
+        case 'email': console.log('Open Email'); break;
+        case 'settings': console.log('Open Settings'); break;
+        case 'emote': console.log('Click animations'); break;
+        case 'enterButton': console.log("Clicked send chat"); break;
+        default: console.log(`Clicked ${btn.name}`);
+      }
+    }
+  }));
 
   // Add the PNG as the background UI
   const uiImage = scene.add.image(0, height, 'ui').setOrigin(0, 1).setScrollFactor(0).setDepth(BASE_DEPTH);
 
   // Add buttons using interactive rectangles over the specified areas
-  buttonConfigs.forEach(({ name, x, y, screenX, screenY, boxWidth=39, boxHeight=37, callback }) => {
+  buttonConfigs.forEach(({ name, x, y, screenX, screenY, boxWidth, boxHeight, callback }) => {
     const button = scene.add
       .rectangle(screenX, screenY, boxWidth, boxHeight, 0xffffff, 0) // Invisible interactive rectangle
       .setOrigin(0, 0)
@@ -96,10 +110,11 @@ export function createMenu(scene, player, room) {
   });
 
   // Create the input field as a Phaser.Text object
+  const defaultFont = config.getUI('fonts.default');
   const inputField = scene.add.text(width / 2 - 110, height - 40, placeholderText, {
-    fontSize: '14px',
+    fontSize: defaultFont?.size || '14px',
     color: '#FFFFFF',
-    fontFamily: 'Arial',
+    fontFamily: defaultFont?.family || 'Arial',
     backgroundColor: 'rgba(82, 81, 77, 0.0)', // Semi-transparent yellow
     padding: { x: 8, y: 5 },
   }).setOrigin(0, 0).setInteractive().setScrollFactor(0).setDepth(BASE_DEPTH-1);

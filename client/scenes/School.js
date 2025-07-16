@@ -5,6 +5,7 @@ import { initializePlayerManager } from '../world/playerManager.js';
 import { createRoomTransitionUI } from '../world/roomTransition.js';
 import { createMenu, preloadMenu } from '../world/UIManager.js';
 import { performIdles } from '../world/animations.js';
+import config from '../config.js';
 
 export class School extends Phaser.Scene {
     constructor() {
@@ -12,8 +13,9 @@ export class School extends Phaser.Scene {
     }
 
     init(data) {
-        this.playerXLocation = data.playerXLocation || 400;
-        this.playerYLocation = data.playerYLocation || 400; 
+        const defaultPos = config.getPlayerDefaultPosition('School');
+        this.playerXLocation = data.playerXLocation || defaultPos.x;
+        this.playerYLocation = data.playerYLocation || defaultPos.y; 
         this.playerDirection = data.playerDirection || 'left';
     }
 

@@ -1,4 +1,5 @@
 import { assets, tops, body, heads, avatar_parts, bottoms, shoes, boards, homes } from '../assets/data.js';
+import config from '../config.js';
 
 export class Preloader extends Phaser.Scene {
     constructor() {
@@ -22,9 +23,13 @@ export class Preloader extends Phaser.Scene {
         // Display the custom loading background
         this.add.image(0, 0, "loading_bg").setOrigin(0);
 
+        // Get loading font configuration
+        const loadingFont = config.getUI('fonts.loading');
+        const textColors = config.getUI('colors.text');
+        
         this.loadingText = this.add.text(400, 500, "Loading... 0%", {
-            fontSize: "32px",
-            fill: "#ffffff",
+            fontSize: loadingFont?.size || "32px",
+            fill: textColors?.loading || "#ffffff",
         }).setOrigin(0.5);
 
         // Now load all other assets
@@ -36,13 +41,12 @@ export class Preloader extends Phaser.Scene {
             this.loadingText.setText(`Loading... ${Math.floor(value * 100)}%`);
         });
 
-        // When all assets are loaded, start the next scene, randomly selects a screen to start with / for now Downtown
+        // When all assets are loaded, start the next scene
         this.load.on("complete", () => {
-            //const places = ["Uptown", "Downtown", "Beach", "Forest", "Carnival", "Island", "Oasis"];
-            const places = ["Downtown"];
-            const random = Math.floor(Math.random() * places.length);
-            console.log("All assets loaded. Switching to " + places[random]);
-            this.scene.start(places[random]);
+            const startingScenes = config.get('game.scenes.startingScenes', ["Downtown"]);
+            const random = Math.floor(Math.random() * startingScenes.length);
+            console.log("All assets loaded. Switching to " + startingScenes[random]);
+            this.scene.start(startingScenes[random]);
         });
 
         // Start loading all assets

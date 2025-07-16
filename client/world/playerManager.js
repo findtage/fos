@@ -1,5 +1,6 @@
 import { assets, tops, bottoms, shoes, boards } from '../assets/data.js';
 import { createAvatarAnimations, performIdles } from './animations.js';
+import config from '../config.js';
 
 export function initializePlayerManager(scene) {
     scene.otherPlayers = {}; // Store other players
@@ -13,14 +14,25 @@ export function initializePlayerManager(scene) {
             }
 
             const tag = scene.add.image(-1, -64, 'shadow').setOrigin(0.5, 0.5);
-            const nameTag = scene.add.text(0, 0, playerData.username, { 
-                fontSize: '12.5px', 
-                fontFamily: 'Arial', 
-                color: '#000000', // Black fill color
-                stroke: '#EEEEEE', // White outline color
-                strokeThickness: 1, // Adjust thickness as needed
-                align: 'center'
-            }).setOrigin(0.5, 0.5);
+            
+            // Get font configuration for chat/name tags
+            const chatFont = config.getUI('fonts.chat');
+            const textColors = config.getUI('colors.text');
+            const nameTagConfig = config.get('game.player.nameTag');
+            
+            const nameTag = scene.add.text(
+                nameTagConfig?.offsetX || 0, 
+                nameTagConfig?.offsetY || 0, 
+                playerData.username, 
+                { 
+                    fontSize: chatFont?.size || '12.5px', 
+                    fontFamily: chatFont?.family || 'Arial', 
+                    color: textColors?.default || '#000000', // Black fill color
+                    stroke: textColors?.stroke || '#EEEEEE', // White outline color
+                    strokeThickness: nameTagConfig?.strokeThickness || 1, // Adjust thickness as needed
+                    align: 'center'
+                }
+            ).setOrigin(0.5, 0.5);
 
             const base = scene.add.sprite(7, -72, playerData.body, 0).setOrigin(0.5, 0.5);
             const head = scene.add.image(1, -100, playerData.head).setOrigin(0.5, 0.5);

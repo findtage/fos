@@ -16,13 +16,16 @@ import { Home } from './scenes/Home.js';
 
 import { MouseOut } from './minigames/mouseOut.js';
 import { TypeBoo } from './minigames/typeBoo.js';
+import config from './config.js';
 
 let playerAvatarData = null; // Store user avatar data globally
 
 async function checkAuth() {
     try {
-        //const response = await fetch("https://c99a-98-14-219-221.ngrok-free.app/api/user/me", {
-        const response = await fetch("http://localhost:3000/api/user/me", {
+        // Ensure config is loaded
+        await config.load();
+        
+        const response = await fetch(config.getApiUrl('auth.me'), {
             method: "GET",
             credentials: "include"
         });
@@ -47,7 +50,7 @@ async function checkAuth() {
 
 // Logout function
 async function logout() {
-    await fetch("https://localhost:3000/api/auth/logout", { method: "POST", credentials: "include" });
+    await fetch(config.getApiUrl('auth.logout'), { method: "POST", credentials: "include" });
     console.log("✅ Logged out.");
     window.location.href = "index.html";
 }
@@ -66,36 +69,48 @@ checkAuth();
 
 //export const username = userData.username;//getUsernameFromURL();
 
-const config = {
-    type: Phaser.AUTO,
-    parent: 'game-container',
-    width: 800,
-    height: 520,
-    // All scenes
-    scene: [
-        Preloader, // Load every asset here
-        Downtown, StarCafe, LeShop, Salon, TopModel, TopModelVIP, MissionCenter,
-        Uptown, FurnitureShop, MyMall, IDfoneShop, CostumeShop, BoardShop, Botique,
-        Carnival, Arcade,
-        PetTown, PetShop, PetClass, PetSchool,
-        Forest, Wizard, Grotto, GrottoSecretOne, GrottoSecretTwo, CreatureArea, CreatureShop,
-        School, SchoolInside, SchoolUpstairs, MathRoom, EnglishRoom, Cafeteria, Gym,
-        Beach, TanStore, DanceClub,
-        Ship, Restaurant,
-        Mountain, Cabin,
-        Lighthouse, LighthouseInside, LighthouseRoof,
-        Castle, CastleInside, CastleYard,
-        Island, Spa, Resort, IslandStore,
-        Oasis, Dock,
-        MouseOut, TypeBoo,
-        Home,
-    ],
-};
+// Initialize configuration and create game config
+async function initializeGame() {
+    await config.load();
+    
+    const dimensions = config.getCanvasDimensions();
+    
+    const gameConfig = {
+        type: Phaser.AUTO,
+        parent: 'game-container',
+        width: dimensions.width,
+        height: dimensions.height,
+        // All scenes
+        scene: [
+            Preloader, // Load every asset here
+            Downtown, StarCafe, LeShop, Salon, TopModel, TopModelVIP, MissionCenter,
+            Uptown, FurnitureShop, MyMall, IDfoneShop, CostumeShop, BoardShop, Botique,
+            Carnival, Arcade,
+            PetTown, PetShop, PetClass, PetSchool,
+            Forest, Wizard, Grotto, GrottoSecretOne, GrottoSecretTwo, CreatureArea, CreatureShop,
+            School, SchoolInside, SchoolUpstairs, MathRoom, EnglishRoom, Cafeteria, Gym,
+            Beach, TanStore, DanceClub,
+            Ship, Restaurant,
+            Mountain, Cabin,
+            Lighthouse, LighthouseInside, LighthouseRoof,
+            Castle, CastleInside, CastleYard,
+            Island, Spa, Resort, IslandStore,
+            Oasis, Dock,
+            MouseOut, TypeBoo,
+            Home,
+        ],
+    };
 
-const game = new Phaser.Game(config);
+    const game = new Phaser.Game(gameConfig);
 
-const canvas = game.canvas;
-const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const canvas = game.canvas;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    
+    return game;
+}
+
+// Initialize the game
+initializeGame();
 
 
 // Some Notes
@@ -144,8 +159,7 @@ export function resetConnectionCheck() {
 let reconnectAttempts = 0;
 
 function checkServerConnection() {
-    //fetch("https://c99a-98-14-219-221.ngrok-free.app/api/ping", { method: "GET", credentials: "include" })
-    fetch("http://localhost:3000/api/ping", { method: "GET", credentials: "include" })
+    fetch(config.getApiUrl('user.ping'), { method: "GET", credentials: "include" })
         .then(response => {
             if (!response.ok) throw new Error("Server unreachable");
             if (connectionLost) {
@@ -162,11 +176,16 @@ function checkServerConnection() {
             }
 
             reconnectAttempts++;
-            if (reconnectAttempts >= 2) { // 2 failed attempts (30 seconds)
+            const maxAttempts = config.get('connection.reconnectAttempts', 2);
+            if (reconnectAttempts >= maxAttempts) { 
                 console.error("🚨 Could not reconnect. Redirecting...");
                 window.location.href = "index.html"; // Redirect to login
             }
         });
 }
 
-setInterval(checkServerConnection, 15000);
+// Start connection check after config is loaded
+config.load().then(() => {
+    const checkInterval = config.getConnection('timeouts.connectionCheck') || 15000;
+    setInterval(checkServerConnection, checkInterval);
+});

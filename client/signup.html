@@ -133,6 +133,7 @@
     <p>Already have an account? <a href="/index.html">Log In</a></p>
     <p>*Currently only female avatars are supported</p>
 
+    <script src="config-html.js"></script>
     <script>
         const usernameInput = document.getElementById("signup-username");
         const usernameTooltip = document.getElementById("username-tooltip");
@@ -143,6 +144,17 @@
         const signupMessage = document.getElementById("signup-message");
 
         const usernameRegex = /^[a-z0-9_]{3,14}$/;
+
+        // Load configuration when page loads
+        let configLoaded = false;
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await window.configLoader.load();
+                configLoaded = true;
+            } catch (error) {
+                console.error('Failed to load configuration:', error);
+            }
+        });
 
         // ✅ Remove Errors on Input Change
         document.querySelectorAll("input").forEach(input => {
@@ -160,8 +172,14 @@
                 return;
             }
 
+            if (!configLoaded) {
+                console.warn('Configuration not loaded yet');
+                return;
+            }
+
             try {
-                const response = await fetch(`/api/auth/check-username/${username}`);
+                const checkUsernameUrl = window.configLoader.getApiUrl('auth.checkUsername') + '/' + encodeURIComponent(username);
+                const response = await fetch(checkUsernameUrl);
                 const result = await response.json();
 
                 if (result.available) {
@@ -195,6 +213,11 @@
         document.getElementById("signup-form").addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            if (!configLoaded) {
+                signupMessage.innerText = "Configuration not loaded. Please try again.";
+                return;
+            }
+
             const username = usernameInput.value.trim();
             const email = emailInput.value.trim();
             const password = passwordInput.value;
@@ -215,7 +238,8 @@
             }
 
             try {
-                const response = await fetch("/api/auth/signup", {
+                const signupUrl = window.configLoader.getApiUrl('auth.signup');
+                const response = await fetch(signupUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
