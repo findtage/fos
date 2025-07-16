@@ -158,7 +158,7 @@ export class FashionShowRoom extends Room<RoomState> {
     }
 
     onJoin(client: Client, options: FashionShowJoinOptions): void {
-        const homeOwner = options.fashionShowID;
+        const fashionShowID = options.fashionShowID;
         const newPlayer = new PlayerState(options);
         newPlayer.room = options.fashionShowID;
         this.state.players.set(client.sessionId, newPlayer);
@@ -192,6 +192,11 @@ export class FashionShowRoom extends Room<RoomState> {
             this.broadcast("playerLeft", { id: client.sessionId });
         }
         this.state.players.delete(client.sessionId);
+
+        if (!player) {
+            console.warn(`Player ${client.sessionId} not found in room state.`);
+            return;
+        }
 
         if (player.username != this.host) {
             const index = this.contestants.indexOf(player.username);
