@@ -84,7 +84,7 @@ export class FashionShowScene extends Phaser.Scene {
         this.isHost = data.isHost || true;
 
         if (this.isHost) {
-            this.roomID = data.roomID || getPlayerAvatarData().username; // Default to a unique room ID based on username
+            this.roomID = data.roomID || 'rafi'//getPlayerAvatarData().username; // Default to a unique room ID based on username
         } else {
             this.roomID = data.roomID || 'any'; // Fallback
         }
@@ -104,7 +104,26 @@ export class FashionShowScene extends Phaser.Scene {
     async create() {
         // add the pre-loaded background
         this.add.image(427, 283, 'fashionShowBg').setOrigin(0.5, 0.5);
+        this.showIntro = this.add.text(219, 12, "Top Models Inc Fashion Show", {}).setStyle({ "fontFamily": "Arial", "fontSize": "25px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 1, "shadow.offsetX": 1, "shadow.offsetY": 2, "shadow.stroke": true, "shadow.fill": true });
+        if (this.isHost) {
+            this.hostStatus = this.add.text(287, 110, "", {});
+		    this.hostStatus.text = "Waiting for more players to join...";
+		    this.hostStatus.setStyle({ "fontFamily": "Arial", "stroke": "#000", "strokeThickness": 1, "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+            
+            this.start_Button = this.add.rectangle(397, 147, 80, 25);
+		    this.start_Button.isFilled = true;
+		    this.start_Button.fillColor = 11184810;
+		    this.start_Button.lineWidth = 2;
 
+            this.start_Text = this.add.text(375, 139, "", {});
+		    this.start_Text.text = "START";
+		    this.start_Text.setStyle({ "fontFamily": "Arial", "fontSize": "14px", "fontStyle": "bold", "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+		
+        } else {
+            this.contestantStatus = this.add.text(287, 84, "", {});
+		    this.contestantStatus.text = "Waiting for more players to join...";
+		    this.contestantStatus.setStyle({ "fontFamily": "Arial", "stroke": "#000", "strokeThickness": 1, "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+        }
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
 
         this.spawnSelf();
@@ -113,7 +132,62 @@ export class FashionShowScene extends Phaser.Scene {
         performIdles(this.player);
         initializePlayerManager(this);
 
-        this.room = await joinRoom(this, 'fashionShow', 'fashionShow'+this.roomID); // Ensure your server supports this room
+        this.room = await joinRoom(this, 'fashionShow', 'fashionShow'+this.roomID, {
+            readyToStart: () => {
+                console.log("Ready to start the fashion show!");
+
+                if (this.hostStatus){
+                    this.hostStatus.destroy();
+                    this.hostStatus = this.add.text(283, 110, "", {});
+		            this.hostStatus.text = "Ready to start the fashion show!";
+		            this.hostStatus.setStyle({ "align": "center", "fontFamily": "Arial", "stroke": "#000", "strokeThickness": 1, "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+                }
+
+                if (this.start_Button){
+                    this.start_Button.destroy();
+                    this.start_Button = this.add.rectangle(397, 147, 80, 25);
+		            this.start_Button.isFilled = true;
+		            this.start_Button.fillColor = 181508;
+		            this.start_Button.lineWidth = 2;
+                    this.start_Button.setInteractive();
+
+                    if (this.start_Text) {
+                        this.start_Text.destroy();
+                        this.start_Text = this.add.text(375, 139, "", {});
+		                this.start_Text.text = "START";
+		                this.start_Text.setStyle({ "fontFamily": "Arial", "fontSize": "14px", "fontStyle": "bold", "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+                    }
+
+                    this.start_Button.on('pointerdown', () => {
+                        console.log("Start button clicked, sending startFashionShow signal to server.");
+                        this.room.send('hostStartFashionShow');
+                    });
+                }
+
+                if (this.contestantStatus){
+                    this.contestantStatus.destroy();
+                    this.contestantStatus = this.add.text(287, 84, "", {});
+		            this.contestantStatus.text = "   Waiting for host to start...   ";
+		            this.contestantStatus.setStyle({ "fontFamily": "Arial", "stroke": "#000", "strokeThickness": 1, "shadow.offsetX": 1, "shadow.offsetY": 1, "shadow.stroke": true, "shadow.fill": true });
+                }
+            },
+
+            startRoundOne(themes){
+                if (this.isHost){
+                    console.log(themes);
+                    // UI to show themes
+                    // Timer 10 sec
+                    // Buttons to select theme
+                    // Send theme back
+                    const theme = 'Black'
+                    this.room.send('roundOneThemeSelected', theme);
+
+                } else {
+                    // Wipe Screen
+                    // Show Host is selecting theme
+                }
+            }
+        });
 
         createMenu(this, this.player, this.room);
 

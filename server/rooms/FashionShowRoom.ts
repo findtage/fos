@@ -89,13 +89,21 @@ export class FashionShowRoom extends Room<RoomState> {
     private botCount = 0;
     private botInterval: NodeJS.Timeout | null = null;
 
-    contestants: string[] = [];
-    eliminated: string[] = [];
     host: string | null = null;
+    contestants: string[] = [];
+    bots: string[] = [];
+    eliminated: string[] = [];
+    roomID: string | null = null;
+    totalPlayers: number = 0;
+    readyToStart: boolean = false;
+    colorThemes: string[] = ['Black', 'Red', 'White'];
 
     onCreate(options: any): void {
         this.setState(new RoomState());
         console.log(`Fashion show room created by ID: ${options.fashionShowID}`);
+
+        this.roomID = options.fashionShowID;
+        this.host = options.fashionShowID.substring('fashionShow'.length);
 
         this.botInterval = setInterval(() => {
             if (this.botCount >= 5) {
@@ -131,27 +139,50 @@ export class FashionShowRoom extends Room<RoomState> {
             }
         });
 
-        
+        this.onMessage("hostStartFashionShow", (client) => {
+          const player : any = this.state.players.get(client.sessionId);
+          if (player.username === this.host) {
+            console.log(`Host ${player.username} is starting the fashion show.`);
+            this.broadcast("startRoundOne", this.colorThemes); // Random 3
+            // Start 10 sec timer, if no theme is sent back, randomly selected theme and relay theme
+          }
+        });
 
+        this.onMessage("roundOneThemeSelected", (client, data) => {
+          const player : any = this.state.players.get(client.sessionId);
+          if (player.username === this.host) {
+            console.log(`Host ${player.username} selected ${data}.`);
+            this.broadcast("relayRoundOneTheme", data);
+          }
+        });
     }
 
     onJoin(client: Client, options: FashionShowJoinOptions): void {
         const homeOwner = options.fashionShowID;
         const newPlayer = new PlayerState(options);
-        newPlayer.room = homeOwner; // Home is identified by the owner's username
+        newPlayer.room = options.fashionShowID;
         this.state.players.set(client.sessionId, newPlayer);
 
-        console.log(`Player ${client.sessionId} joined home: ${homeOwner}`);
+        console.log(`Player ${client.sessionId} joined show: ${fashionShowID}`);
 
-        const playersInHome = Array.from(this.state.players.entries()).map(([id, player]) => ({
+        const playersInShow = Array.from(this.state.players.entries()).map(([id, player]) => ({
             id,
             ...player
         }));
 
-        client.send('currentPlayers', playersInHome);
+        client.send('currentPlayers', playersInShow);
 
-        // Notify other players in the home
         this.broadcast("newPlayer", { id: client.sessionId, ...options }, { except: client });
+
+        if (options.username != this.host) {
+            this.contestants.push(options.username);
+            console.log(`Contestant ${options.username} added to show: ${fashionShowID}`);
+            this.totalPlayers++;
+        }
+
+        if (this.totalPlayers >= 5 && !this.readyToStart) {
+          this.broadcast("readyToStart");
+        }
     }
 
     onLeave(client: Client, consented?: boolean): void {
@@ -162,9 +193,24 @@ export class FashionShowRoom extends Room<RoomState> {
         }
         this.state.players.delete(client.sessionId);
 
+        if (player.username != this.host) {
+            const index = this.contestants.indexOf(player.username);
+            if (index !== -1) {
+                this.contestants.splice(index, 1);
+                console.log(`Contestant ${player.username} removed from show: ${player.room}`);
+                this.totalPlayers--;
+            }
+        } else {
+          // If the host leaves, bot host will take over
+        }
+
         if (this.botInterval) {
             clearInterval(this.botInterval);
             this.botInterval = null;
+        }
+
+        if (this.totalPlayers < 5 && this.readyToStart) {
+          this.broadcast("notReadyToStart");
         }
     }
 
@@ -188,6 +234,13 @@ export class FashionShowRoom extends Room<RoomState> {
 
         this.broadcast("newPlayer", { id: sessionId, ...fakeOptions });
         console.log(`🤖 Spawned bot ${botData.username} at (${pt.x.toFixed(1)}, ${pt.y.toFixed(1)})`);
+
+        this.bots.push(botData.username);
+        this.totalPlayers++;
+
+        if (this.totalPlayers >= 5 && !this.readyToStart) {
+          this.broadcast("readyToStart");
+        }
     }
 }
 
