@@ -3,8 +3,16 @@ server/firebase/firebaseServiceAccount.json
 .env
 package-lock.json
 
+<<<<<<< HEAD
 # Build output
 dist
 
 # IDEs
 .vscode
+=======
+# Dependencies
+node_modules
+
+# Build output
+dist
+>>>>>>> 41eae8e (Update server to use TypeScript Fully)
