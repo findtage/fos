@@ -15,7 +15,7 @@ export function createMenu(scene, player, room) {
   const buttonConfigs = configButtons.map(btn => ({
     ...btn,
     screenX: btn.x,
-    screenY: height - (height - btn.y) - (btn.name === 'emote' || btn.name === 'enterButton' ? 45 : 50),
+    screenY: btn.name === 'emote' || btn.name === 'enterButton' ? height - 45 : height - 50,
     boxWidth: btn.width,
     boxHeight: btn.height,
     callback: () => {
