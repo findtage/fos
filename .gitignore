@@ -2,3 +2,9 @@
 server/firebase/firebaseServiceAccount.json
 .env
 package-lock.json
+
+# Build output
+dist
+
+# IDEs
+.vscode
