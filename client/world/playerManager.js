@@ -164,7 +164,7 @@ export function initializePlayerManager(scene) {
 
             }
 
-            avatar.add([tag, board0, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, board1, nameTag]);
+            avatar.add([tag, board0, head, eyes, lips, brows, hair, base, bottom, shoe, top, outfit, bodyacc, faceacc, board1, nameTag]);
 
             avatar.setData('direction', direction);
 

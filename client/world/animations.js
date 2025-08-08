@@ -1,4 +1,4 @@
-import { assets, outfits } from "../assets/data.js";
+import { assets, outfits, tops } from "../assets/data.js";
 let saveScene = null;
 
 export function createAvatarAnimations(scene, player) {
@@ -58,7 +58,7 @@ export function createAvatarAnimations(scene, player) {
             }
         }
         
-    } 
+    }
 
     // Board Idles
     const boardTextureKey = player.board.texture.key === "baccEmpty" ? player.boardTop.texture.key : player.board.texture.key;
@@ -66,6 +66,20 @@ export function createAvatarAnimations(scene, player) {
 
     if ((boardData.frames > 2 && boardData.middleEffect) || (boardData.frames >= 2 && !boardData.middleEffect)) {
         createBoardIdleAnimations(scene, player, boardData);
+    }
+
+    // Top Idles
+    if (tops?.top?.female?.[player.top.texture.key]?.["frames"] == 7){
+        const topanimationKey = `idle-${player.top.texture.key}`;
+
+        if (!scene.anims.exists(topanimationKey)) { // Prevent duplicate animations
+            scene.anims.create({
+                key: topanimationKey,
+                frames: scene.anims.generateFrameNumbers(player.top.texture.key, { frames: [0, 6] }),
+                frameRate: 2.5,
+                repeat: -1,
+            });
+        } 
     }
 
     // Get unique asset names for this player
@@ -113,11 +127,13 @@ export function createAvatarAnimations(scene, player) {
 
     // Create wink animations
     if (gender == 'female'){
-        createAnimation("wink", eyesTexture, [1, 0, 1, 0, 2, 0]);
+        createAnimation("wink", eyesTexture, [1, 0, 1, 0, 2, 0, 3, 0]);
+        createAnimation("wink", lipsTexture, [0, 0, 0, 0, 1, 0]);
     } else {
-        createAnimation("wink", eyesTexture, [1, 0, 1, 0, 3, 0]);
-    }
-    createAnimation("wink", lipsTexture, [0, 0, 0, 0, 1, 0]);
+        createAnimation("wink", eyesTexture, [0, 1, 0, 2, 0, 3, 0]);
+        createAnimation("wink", lipsTexture, [0, 0, 0, 1, 0, 0, 0]);
+    } 
+    
 }
 
 let emotePopup = null;
@@ -416,6 +432,10 @@ export function performIdles(player) {
 
     if (outfits?.[gender]?.[player.outfit.texture.key]?.["type"] == "sprite"){
         player.outfit.play(`idle-${player.outfit.texture.key}`);
+    }
+
+    if (tops?.top?.[gender]?.[player.top.texture.key]?.["frames"] == 7){
+        player.top.play(`idle-${player.top.texture.key}`);
     }
 
     if ((boardData.frames > 2 && boardData.middleEffect) || (boardData.frames >= 2 && !boardData.middleEffect)) {

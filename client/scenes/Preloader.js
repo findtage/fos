@@ -397,29 +397,6 @@ export class Preloader extends Phaser.Scene {
             index++;
         });
 
-        // Loading all boards
-        index = 0;
-        Object.keys(boards.board).forEach((boardKey) => {
-            const boardPath = boards.board[boardKey].path;
-            // Load static boards
-            if (boards['board']?.[boardKey]?.["type"] == "image") {
-                this.load.image(`board${index}`, 'assets/'+boardPath);
-            // Load boards with actions
-            } /*else if (boards['board']?.[boardKey]?.["type"] == "sprite") {
-                console.log("Loading board as sprite");
-                this.load.spritesheet(
-                    `board${index}`, 
-                    'assets/'+boardPath,
-                    {
-                        frameWidth: boards['board']?.[boardKey]?.["splitX"], 
-                        frameHeight: boards['board']?.[boardKey]?.["splitY"]
-                    }
-                );
-            }*/
-            
-            index++;
-        });
-
         // All homes
         Object.entries(homes).forEach(([key, home]) => {
             const { path, rooms } = home;

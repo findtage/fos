@@ -185,7 +185,7 @@ export function createAvatar(scene, startX=300, startY=400, playerDirection = 'l
     }
     
     // Add the avatar to the center of the scene
-    avatar.add([tag, board0, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, board1, nameTag]);
+    avatar.add([tag, board0, head, eyes, lips, brows, hair, base, bottom, shoe, top, outfit, bodyacc, faceacc, board1, nameTag]);
 
     // Store references to each body part
     avatar.base = base;
@@ -403,7 +403,7 @@ export function createStaticAvatar(scene, startX=300, startY=400, playerDirectio
     
     
     // Add the avatar to the center of the scene
-    avatar.add([tag, board0, head, eyes, lips, brows, hair, faceacc, base, bottom, shoe, top, outfit, bodyacc, board1, nameTag]);
+    avatar.add([tag, board0, head, eyes, lips, brows, hair, base, bottom, shoe, top, outfit, bodyacc, faceacc, board1, nameTag]);
 
     // Store references to each body part
     avatar.base = base;

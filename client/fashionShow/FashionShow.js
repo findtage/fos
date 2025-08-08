@@ -172,13 +172,9 @@ export class FashionShowScene extends Phaser.Scene {
                 }
             },
 
-            startRoundOne(themes){
+            startRoundOne: (themes) => {
+                console.log("Round 1 theme choices ", themes);
                 if (this.isHost){
-                    console.log(themes);
-                    // UI to show themes
-                    // Timer 10 sec
-                    // Buttons to select theme
-                    // Send theme back
                     const theme = 'Black'
                     this.room.send('roundOneThemeSelected', theme);
 
@@ -186,7 +182,42 @@ export class FashionShowScene extends Phaser.Scene {
                     // Wipe Screen
                     // Show Host is selecting theme
                 }
+            },
+
+            relayRoundOneTheme: (theme) => {
+                console.log("Round 1 theme selected:", theme);
+
+                this.showIntro.destroy();
+
+                if (this.isHost){
+                    this.hostStatus.destroy();
+                    this.start_Button.destroy();
+                    this.start_Text.destroy();
+
+                } else {
+                    this.contestantStatus.destroy();
+                }
+
+                // Add theme text to screen
+
+                // Create a full-screen dark rectangle (the dim effect)
+                this.stageLightsOff = this.add.graphics();
+                this.stageLightsOff.fillStyle(0x000000, 0.4);
+                this.stageLightsOff.fillRect(0, 0, 800, 520);
+
+                // Create a spotlight shape (rectangle_6 area)
+                const spotlight = this.make.graphics({}, false); // temp graphics object for mask
+                spotlight.fillStyle(0xffffff);
+                spotlight.fillRect(400 - 415 / 2, 92 - 175 / 2, 415, 175); // centered spotlight
+
+                // Create and invert the mask
+                const mask = spotlight.createGeometryMask();
+                mask.invertAlpha = true;
+
+                // Apply the inverted mask to the darkness overlay
+                this.stageLightsOff.setMask(mask);
             }
+        
         });
 
         createMenu(this, this.player, this.room);
@@ -198,6 +229,7 @@ export class FashionShowScene extends Phaser.Scene {
 
     update(time, delta) {
         if (this.updateMovement && this.room.connection.isOpen) this.updateMovement(delta);
+        
         if (this.room && this.player && this.room.connection.isOpen) {
             sendPlayerMove(this.room, this.player.x, this.player.y, this.player.direction);
         }

@@ -14,7 +14,26 @@ export class FashionShowRoom extends Room<RoomState> {
     roomID: string | null = null;
     totalPlayers: number = 0;
     readyToStart: boolean = false;
-    colorThemes: string[] = ['Black', 'Red', 'White'];
+    contestantsChanging: boolean = false;
+    contestantScores: Map<string, number> = new Map();
+    colorThemes: string[] = ['Black', 'Red', 'White', 'Orange', 'Pink', 'Purple', 'Blue', 'Green', 'Yellow', 'Brown', 'Bright', 'Dark'];
+    categoryThemes: string[] = [
+      "Animal",
+      "Beach",
+      "Earthy",
+      "Fantasy/Magical",
+      "Food",
+      "Formal/Prom",
+      "Goofy",
+      "Holiday",
+      "Patterned/Star",
+      "Professional",
+      "Retro",
+      "Preppy/School",
+      "Spooky",
+      "Sporty",
+      "Winter"
+    ];
 
     onCreate(options: any): void {
         this.setState(new RoomState());
@@ -31,10 +50,10 @@ export class FashionShowRoom extends Room<RoomState> {
 
             this.spawnBotPlayer(this.botCount);
             this.botCount++;
-        }, 5000);
+        }, 1000);
 
         this.onMessage('move', (client: Client, data: { x: number; y: number; direction: string }) => {
-            console.log('Moving player to', data.x, data.y);
+            //console.log('Moving player to', data.x, data.y);
             const player = this.state.players.get(client.sessionId);
             if (player) {
                 player.x = data.x;
@@ -62,7 +81,7 @@ export class FashionShowRoom extends Room<RoomState> {
           const player : any = this.state.players.get(client.sessionId);
           if (player.username === this.host) {
             console.log(`Host ${player.username} is starting the fashion show.`);
-            this.broadcast("startRoundOne", this.colorThemes); // Random 3
+            this.broadcast("startRoundOne", [...this.colorThemes].sort(() => Math.random() - 0.5).slice(0, 3)); // Random 3
             // Start 10 sec timer, if no theme is sent back, randomly selected theme and relay theme
           }
         });
@@ -72,8 +91,26 @@ export class FashionShowRoom extends Room<RoomState> {
           if (player.username === this.host) {
             console.log(`Host ${player.username} selected ${data}.`);
             this.broadcast("relayRoundOneTheme", data);
+
+            setTimeout(() => {
+              this.contestantsChanging = true;
+              console.log("70 seconds are up. Ending round one.");
+              this.broadcast("roundOneChangingOver", this.contestantScores);
+              this.contestantsChanging = false;
+              this.contestantScores.clear();
+            }, 70000);
           }
         });
+
+        this.onMessage("sendOutfit", (client, data) => {
+            const player : any = this.state.players.get(client.sessionId);
+            const outfitScore = getOutfitScore(data);
+            this.contestantScores.set(player.username, outfitScore);
+            client.send("individualOutfitScore", {
+              score: outfitScore
+            });
+        });
+        
     }
 
     onJoin(client: Client, options: any): void {
@@ -91,7 +128,7 @@ export class FashionShowRoom extends Room<RoomState> {
 
         client.send('currentPlayers', playersInShow);
 
-        this.broadcast("newPlayer", { id: client.sessionId, ...options }, { except: client });
+        this.broadcast("newPlayer", { id: options.username, ...options }, { except: client }); // temp fix
 
         if (options.username != this.host) {
             this.contestants.push(options.username);
@@ -286,4 +323,9 @@ function getRandomPointInRunwayZone(index: number): { x: number; y: number } {
       y: zone.y - zone.h / 2 + Math.random() * zone.h
     };
   }
+}
+
+function getOutfitScore(outfit: any): number {
+  let score = 0;
+  return score;
 }

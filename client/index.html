@@ -1,130 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/colyseus.js/dist/colyseus.js"></script>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>2D Virtual World</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f9;
-            margin: 0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: white;
-            padding: 20px;  /* Reduced padding to match sign-up */
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 300px; /* Reduced width to match sign-up */
-            text-align: center;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        input {
-            padding: 10px;
-            width: 100%; /* Ensures they stay inside the container */
-            max-width: 280px; /* Matches sign-up page */
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: 15px;
-            transition: border 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fantage Open Source</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    @font-face {
+      font-family: 'VAGRounded';
+      src: url('assets/fonts/VAGRounded.ttf') format('truetype');
+    }
 
-        input:focus {
-            border-color: #007BFF;
-        }
-        button {
-            padding: 8px 15px;  /* Smaller padding */
-            font-size: 0.9rem;   /* Slightly smaller text */
-            width: auto;         /* No full-width stretching */
-            min-width: 100px;    /* Ensures it doesn’t shrink too much */
-            cursor: pointer;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        p {
-            font-size: 1rem;
-            margin-top: 10px;
-            color: #555;
-        }
-    </style>
+    body {
+      font-family: 'VAGRounded', sans-serif;
+      background: url('town-bg.png') no-repeat center top;
+      background-size: 1400px auto;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .top-pill-bar {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      background: linear-gradient(to bottom, #57aaff, #2d94ff);
+      border: 2px solid #005ca9;
+      border-radius: 40px;
+      box-shadow: inset 0 3px 6px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(255,255,255,0.6), 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 2;
+      padding: 0 10px;
+    }
+
+    .pill-half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 25px;
+      font-size: 18px;
+      color: white;
+      text-decoration: none;
+      height: 60px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .separator {
+      width: 1px;
+      background-color: black;
+      height: 40px;
+      align-self: center;
+      margin: 0 5px;
+    }
+
+    .logo-side img {
+      height: 55px;
+      border-radius: 5px;
+      transition: transform 0.2s;
+      
+    }
+
+    .logo-side:hover img {
+      transform: scale(1.05);
+    }
+
+    .text-side:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+    }
+
+    .login-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(to right, #57aaff, #2d94ff);
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+      width: 280px;
+      text-align: center;
+      z-index: 2;
+      color: white;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      font-family: 'VAGRounded', sans-serif;
+    }
+
+    .login-container input::placeholder {
+      font-family: 'VAGRounded', sans-serif;
+    }
+
+    .login-container input:focus,
+    .login-container input:hover {
+      border-color: #ffffff;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #f8d84a;
+      color: #5a3b00;
+      border: 2px solid #e0b700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+      outline: none;
+      font-family: 'VAGRounded', sans-serif;
+    }
+
+    .login-container button:hover {
+      background-color: #ffe96a;
+    }
+
+    .login-container p {
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .login-container a {
+      color: #5a3b00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-container a:hover {
+      text-decoration: underline;
+    }
+
+    .bottom-ui {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      font-size: 14px;
+      color: #444;
+      font-family: Arial, sans-serif;
+    }
+
+    .bottom-ui a {
+      color: #333;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .bottom-ui a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-icons {
+      margin-top: 15px;
+    }
+
+    .footer-icons a {
+      margin: 0 8px;
+      vertical-align: middle;
+      font-weight: bold;
+      color: #005ca9;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-icons img {
+      height: 28px;
+      vertical-align: middle;
+    }
+
+    .fade-bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, white 100%);
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .login-container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .top-pill-bar {
+        flex-direction: column;
+        border-radius: 20px;
+      }
+
+      .pill-half {
+        width: 100%;
+        padding: 12px 0;
+        height: auto;
+      }
+
+      .separator {
+        display: none;
+      }
+    }
+  </style>
+  
 </head>
 <body>
-    <div class="container">
-        <h1>Login</h1>
-        <input type="text" id="username" placeholder="Enter your username or email">
-        <input type="password" id="password" placeholder="Enter your password">
-        <button onclick="login()">Login</button>
-        <p>Don't have an account? <a href="/signup.html">Sign Up</a></p>
+  <div class="top-pill-bar">
+    <a href="/" class="pill-half logo-side">
+      <img src="fos-logo.png" alt="Fantage Logo" />
+    </a>
+    <div class="separator"></div>
+    <a href="about.html" class="pill-half text-side">What is Fantage OS?</a>
+    <div class="separator"></div>
+    <a href="/signup.html" class="pill-half text-side">Join Now</a>
+    <div class="separator"></div>
+    <a href="/single.html" class="pill-half text-side">Single Player</a>
+  </div>
+
+  <form class="login-container" onsubmit="login(); return false;">
+    <input type="text" id="username" placeholder="Username" aria-label="Username" required>
+    <input type="password" id="password" placeholder="Password" aria-label="Password" required>
+    <button type="submit">Login</button>
+    <p>Forgot your password? <a href="/reset.html">Reset</a></p>
+  </form>
+
+  <div class="bottom-ui">
+    <div>
+      <a href="/terms.html">Terms and Conditions</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/chatcode.html">Chat and Behavior Code</a>
+      <a href="/contact.html">Contact Us</a>
     </div>
+    <div class="footer-icons">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384067.png" alt="Reddit"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram"></a>
+    </div>
+  </div>
 
-    <script type="module" src="env.js"></script>
-    <script type="module">
-        import {
-            publicURL
-        } from './env.js';
-        async function login() {
-            const identifier = document.getElementById("username").value; // Can be username or email
-            const password = document.getElementById("password").value;
+  <div class="fade-bottom"></div>
 
-            try {
-                const response = await fetch(publicURL+"/api/auth/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ identifier, password }),
-                    credentials: "include" // ✅ Ensures authentication cookies are stored
-                });
+  <script type="module" src="env.js"></script>
+  <script type="module">
+    import { publicURL } from './env.js';
 
-                const data = await response.json();
-                if (data.success) {
-                    console.log(`✅ Logged in as: ${data.username}`);
-                    window.location.href = "game.html"; // ✅ Redirect to game
-                } else {
-                    console.error("❌ Invalid login", data.message);
-                    alert(data.message); // ✅ Show an alert for login failure
-                }
-            } catch (error) {
-                console.error("❌ Login failed:", error);
-            }
+    async function login() {
+      const identifier = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch(publicURL + "/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ identifier, password }),
+          credentials: "include"
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          console.log(`✅ Logged in as: ${data.username}`);
+          window.location.href = "game.html";
+        } else {
+          console.error("❌ Invalid login", data.message);
+          alert(data.message);
         }
+      } catch (error) {
+        console.error("❌ Login failed:", error);
+        alert("Login failed. Please check your connection or try again.");
+      }
+    }
 
-        window.login = login; // ✅ Make `login()` accessible from HTML
-    </script>
-
+    window.login = login;
+  </script>
 </body>
 </html>
-
-<!--
-All Artists that Contributed 
-Zsa/Zeed
-Fario
-DMJ
-Cresteva
-Nicani
-Angelremains / Angelfiction
-Harmony
--->

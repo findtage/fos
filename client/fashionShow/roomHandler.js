@@ -140,6 +140,18 @@ export async function joinRoom(scene, roomName, fashionShowID=null, callbacks={}
             }
         });
 
+        currentRoom.onMessage("relayRoundOneTheme", (theme) => {
+            if (callbacks.relayRoundOneTheme) {
+                callbacks.relayRoundOneTheme(theme);
+            }
+        })
+
+        currentRoom.onMessage("roundOneChangingOver", () => {
+            if (callbacks.roundOneChangingOver) {
+                callbacks.roundOneChangingOver();
+            }
+        });
+
         return currentRoom;
     } catch (error) {
         console.error(`Failed to join room: ${roomName}`, error);
