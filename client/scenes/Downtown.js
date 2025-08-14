@@ -40,7 +40,7 @@ export class Downtown extends Phaser.Scene {
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
         
         createAvatarAnimations(this, this.player);
-        performIdles(this, this.player);
+        performIdles(this.player);
 
         this.cameras.main.startFollow(this.player);
 
@@ -98,7 +98,7 @@ export class StarCafe extends Phaser.Scene {
         this.add.image(0, 0, 'starcafe').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'starcafe'); 
@@ -142,7 +142,7 @@ export class LeShop extends Phaser.Scene {
         this.add.image(0, 0, 'leshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'leshop'); 
@@ -183,7 +183,7 @@ export class Salon extends Phaser.Scene {
         this.add.image(0, 0, 'salon').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'salon'); 
@@ -224,7 +224,7 @@ export class TopModel extends Phaser.Scene {
         this.add.image(0, 0, 'topmodel').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'topmodel'); 
@@ -272,7 +272,7 @@ export class TopModelVIP extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);

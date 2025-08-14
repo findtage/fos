@@ -162,7 +162,7 @@ export function openInventory(scene, player, room){
         previewPlayer.destroy();
 
         createAvatarAnimations(scene, player);
-        performIdles(scene, player);
+        performIdles(player);
     });
 
     closeInventory.on('pointerover', () => {

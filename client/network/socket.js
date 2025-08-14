@@ -213,7 +213,7 @@ export async function joinRoom(scene, roomName) {
 
                 // Create animations for the new avatar
                 createAvatarAnimations(scene, otherPlayer);
-                performIdles(scene, otherPlayer);
+                performIdles(otherPlayer);
             }
         });
 
@@ -252,7 +252,7 @@ export async function joinRoom(scene, roomName) {
 
                 // Create animations for the new avatar
                 createAvatarAnimations(scene, otherPlayer);
-                performIdles(scene, otherPlayer);
+                performIdles(otherPlayer);
             }
         });
         
