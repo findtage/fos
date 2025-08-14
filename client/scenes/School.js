@@ -27,7 +27,7 @@ export class School extends Phaser.Scene {
         this.add.image(0, 0, 'school_outside').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -74,7 +74,7 @@ export class SchoolInside extends Phaser.Scene {
         this.add.image(0, 0, 'school_inside').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -121,7 +121,7 @@ export class MathRoom extends Phaser.Scene {
         this.add.image(0, 0, 'mathroom').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -161,7 +161,7 @@ export class EnglishRoom extends Phaser.Scene {
         this.add.image(0, 0, 'englishroom').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -201,7 +201,7 @@ export class SchoolUpstairs extends Phaser.Scene {
         this.add.image(0, 0, 'school_upstairs').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -244,7 +244,7 @@ export class Cafeteria extends Phaser.Scene {
         this.add.image(0, 0, 'cafeteria').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room
@@ -284,7 +284,7 @@ export class Gym extends Phaser.Scene {
         this.add.image(0, 0, 'gym').setOrigin(0, 0);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         initializePlayerManager(this); // Initialize multiplayer logic for this scene
         
         // Join the networked room

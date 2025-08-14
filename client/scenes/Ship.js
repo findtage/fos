@@ -30,7 +30,7 @@ export class Ship extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -82,7 +82,7 @@ export class Restaurant extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this, this.player);
+        performIdles(this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
