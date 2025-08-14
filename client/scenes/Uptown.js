@@ -30,7 +30,7 @@ export class Uptown extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -85,7 +85,7 @@ export class FurnitureShop extends Phaser.Scene {
         this.add.image(0, 0, 'furnitureshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'furnitureshop'); 
@@ -126,7 +126,7 @@ export class MyMall extends Phaser.Scene {
         this.add.image(0, 0, 'mymall').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'mymall'); 
@@ -170,7 +170,7 @@ export class IDfoneShop extends Phaser.Scene {
         this.add.image(0, 0, 'idfoneshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'idfoneshop'); 
@@ -214,7 +214,7 @@ export class Botique extends Phaser.Scene {
         this.add.image(0, 0, 'botique').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'botique'); 
@@ -257,7 +257,7 @@ export class CostumeShop extends Phaser.Scene {
         this.add.image(0, 0, 'costumeshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'costumeshop'); 
@@ -297,7 +297,7 @@ export class BoardShop extends Phaser.Scene {
         this.add.image(0, 0, 'boardshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'boardshop'); 
@@ -341,7 +341,7 @@ export class MissionCenter extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);

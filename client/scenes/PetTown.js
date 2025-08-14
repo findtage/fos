@@ -30,7 +30,7 @@ export class PetTown extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -79,7 +79,7 @@ export class PetShop extends Phaser.Scene {
         this.add.image(0, 0, 'petshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petshop');
@@ -118,7 +118,7 @@ export class PetSchool extends Phaser.Scene {
         this.add.image(0, 0, 'petschool').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petschool');
@@ -158,7 +158,7 @@ export class PetClass extends Phaser.Scene {
         this.add.image(0, 0, 'petclass').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'petclass');

@@ -249,8 +249,18 @@ export function performWink(player) {
     player.eyes.play(`wink-${player.eyes.texture.key}`);
 }
 
-export function performIdles(player) {
-    if (assets['hair']?.["female"]?.[player.hair.texture.key]?.["type"] == "sprite"){
+export function performIdles(scene, player) {
+    const boardsMetadata = scene.cache.json.get('boards_metadata');
+
+    if (
+        boardsMetadata &&
+        player.board &&
+        boardsMetadata[player.board.texture.key]?.type === 'sprite'
+    ) {
+        player.board.play(`idle-${player.board.texture.key}`);
+    }
+
+    if (assets['hair']?.['female']?.[player.hair.texture.key]?.['type'] === 'sprite') {
         player.hair.play(`idle-${player.hair.texture.key}`);
     }
 }

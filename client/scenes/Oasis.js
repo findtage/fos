@@ -30,7 +30,7 @@ export class Oasis extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -74,7 +74,7 @@ export class Dock extends Phaser.Scene {
         this.add.image(0, 0, 'dock').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'dock'); 
