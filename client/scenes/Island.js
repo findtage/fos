@@ -30,7 +30,7 @@ export class Island extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -82,7 +82,7 @@ export class Spa extends Phaser.Scene {
         this.add.image(0, 0, 'spa').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'spa'); 
@@ -126,7 +126,7 @@ export class Resort extends Phaser.Scene {
         this.add.image(0, 0, 'resort').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'resort'); 
@@ -170,7 +170,7 @@ export class IslandStore extends Phaser.Scene {
         this.add.image(0, 0, 'islandstore').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'islandstore'); 

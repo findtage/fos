@@ -83,7 +83,7 @@ export function initializePlayerManager(scene) {
             otherPlayer.depth = otherPlayer.y;
             scene.otherPlayers[id] = otherPlayer;
             createAvatarAnimations(scene, otherPlayer);
-            performIdles(otherPlayer);
+            performIdles(scene, otherPlayer);
         }
     };
 

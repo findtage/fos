@@ -30,7 +30,7 @@ export class Forest extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -82,7 +82,7 @@ export class Wizard extends Phaser.Scene {
         this.add.image(0, 0, 'wizard').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'wizard'); 
@@ -125,7 +125,7 @@ export class Grotto extends Phaser.Scene {
         this.add.image(0, 0, 'grotto').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'grotto'); 
@@ -169,7 +169,7 @@ export class GrottoSecretOne extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -216,7 +216,7 @@ export class GrottoSecretTwo extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -263,7 +263,7 @@ export class CreatureArea extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, bg.width, this.scale.height);
 
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         this.cameras.main.startFollow(this.player);
 
         initializePlayerManager(this);
@@ -312,7 +312,7 @@ export class CreatureShop extends Phaser.Scene {
         this.add.image(0, 0, 'creatureshop').setOrigin(0, 0);
         
         this.player = createAvatar(this, this.playerXLocation, this.playerYLocation, this.playerDirection);
-        performIdles(this.player);
+        performIdles(this, this.player);
         initializePlayerManager(this);
 
         this.room = await joinRoom(this, 'creatureshop'); 
