@@ -1,3 +1,5 @@
+THIS REPOSITORY IS NO LONGER MAINTAINED.
+
 HOW TO RUN:
 - install node.js (remember to add it into path)
 - install node modules (packages) run in project folder: `npm install`
@@ -42,6 +44,7 @@ missing features to work on soon:
 - currency
 - buddies
 - proper time out / log out 
+
 
 
 
